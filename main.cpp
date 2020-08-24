@@ -1,5 +1,5 @@
 /*
- * NombreProg : 
+ * NombreProg :InsertarPos  editarxValor  buscarPorNombre
  * Descripcion: 
  *             
  *    
@@ -51,23 +51,46 @@ struct EXFINAL{
 };
 
 void crearVector(int *dx);
+
+//INSERTAR
+void insertarporPosicion(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin [MAX],int *dx,int aux, int posi, int cod);
+void insertarporValor(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin [MAX],int *dx, int aux);
+
+//ELIMINAR
+void eliminaporPosicion(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin [MAX],int *dx);
+
+//Ordenar
+void ordenarporCodigo(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin [MAX],int dx);
+
+//BUSCAR
+void buscarporCodigo(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[MAX],int dx);
+//EDITAR
+void editarporCodigoAlu(ALUMNO x[MAX], int dx);
+
+//ALUMNO
 void leerVectorAlu(ALUMNO x[MAX], int *dx);
 void mostrarVectorAlu(ALUMNO x[MAX], int dx);
+
+
+//FECHA
+
+//PRACTICA
 void leerVectorPc(ALUMNO x[MAX],PRACTICA p[MAX],int dx);
 void mostrarVectorPc(PRACTICA p[MAX],int dx);
+void editarporCodigoPc(PRACTICA p[MAX], int dx);
+
+//EXPARCIAL
 void leerVectorParcial(ALUMNO x[MAX],EXPARCIAL par[MAX], int dx);
 void mostrarVectorParcial(EXPARCIAL par[MAX],int dx);
+void editarporCodigoParcial(EXPARCIAL par[MAX], int dx);
+
+
+//EXFINAL
 void leerVectorFinal(ALUMNO x[MAX],EXFINAL fin[MAX], int dx);
 void mostrarVectorFinal(EXFINAL fin[MAX],int dx);
-void buscarporCodigo(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[MAX],int dx);
-void editarporCodigoAlu(ALUMNO x[MAX], int dx);
-void editarporCodigoPc(PRACTICA p[MAX], int dx);
-void editarporCodigoParcial(EXPARCIAL par[MAX], int dx);
 void editarporCodigoFinal(EXFINAL fin[MAX], int dx);
-void insertarporPosicion(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin [MAX],int *dx,int aux, int posi, int cod);
-void eliminaporPosicion(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin [MAX],int *dx);
-void ordenarporCodigo(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin [MAX],int dx);
-void insertarporValor(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin [MAX],int *dx, int aux);
+
+
 
 void encabezado1();
 void encabezado2(char title[]);
