@@ -71,6 +71,9 @@ void insertarporValor(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL f
 void mostrarVectorCurso(CURSO x[MAX],int dx);
 void mostrarVectorDoc(Docente x[MAX],int dx);
 void mostrarCursosxDoc(Docente x,int dx);
+void ordenarxCodigoDoc(Docente x[MAX],int dx);
+void ordenarxCodigoCur(CURSO x[MAX],int dx);
+void ordenarxCodigoCurDoc(Docente x,int dx);
 
 void encabezado1();
 void encabezado2(char title[]);
@@ -799,6 +802,15 @@ void Menu2(int op,ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[M
    }
 }
 
+void raya2Doc()
+{
+   printf("==================================================\n");
+}
+void raya1Doc()
+{
+   printf("--------------------------------------------------\n");
+}
+
 void encabezado3()
 {
    system("cls");
@@ -828,15 +840,6 @@ void mostrarVectorDoc(Docente x[MAX], int dx)
    else{
       printf("Vector vaciooo...\n\n");
    }
-}
-
-void raya2Doc()
-{
-   printf("==================================================\n");
-}
-void raya1Doc()
-{
-   printf("--------------------------------------------------\n");
 }
 
 void encabezado4(Docente doc)
@@ -908,5 +911,70 @@ void mostrarVectorCurso(CURSO x[MAX],int dx){
    }
    else{
       printf("Vector vaciooo...\n\n");
+   }
+}
+void ordenarxCodigoDoc(Docente x[MAX],int dx){
+   int i, j;
+   Docente aux;
+   if(dx>0){
+      for(i=0; i<dx-1;){
+         for(j=i+1; j<dx;){
+            if(x[i].codDoc>x[j].codDoc){
+               aux=x[j];
+               x[j]=x[i];
+               x[i]=aux;
+            }
+            j=j+1;
+         }
+         i=i+1;
+      }
+      mostrarVectorDoc(x,dx); //muestra el resultado
+   }
+   else{
+      printf("Vector vacioooo...!\n");
+   }
+}
+
+void ordenarxCodigoCur(CURSO x[MAX],int dx){
+   int i, j;
+   CURSO aux;
+   if(dx>0){
+      for(i=0; i<dx-1;){
+         for(j=i+1; j<dx;){
+            if(x[i].codCur>x[j].codCur){
+               aux=x[j];
+               x[j]=x[i];
+               x[i]=aux;
+            }
+            j=j+1;
+         }
+         i=i+1;
+      }
+      mostrarVectorCurso(x,dx); //muestra el resultado
+   }
+   else{
+      printf("Vector vacioooo...!\n");
+   }
+}
+
+void ordenarxCodigoCurDoc(Docente x,int dx){
+   int i, j;
+   CURSO aux;
+   if(dx>0){
+      for(i=0; i<dx-1;){
+         for(j=i+1; j<dx;){
+            if(x.c[i].codCur>x.c[j].codCur){
+               aux=x.c[j];
+               x.c[j]=x.c[i];
+               x.c[i]=aux;
+            }
+            j=j+1;
+         }
+         i=i+1;
+      }
+      mostrarCursosxDoc(x,dx); //muestra el resultado
+   }
+   else{
+      printf("Vector vacioooo...!\n");
    }
 }
