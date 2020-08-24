@@ -68,13 +68,23 @@ void insertarporPosicion(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINA
 void eliminaporPosicion(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin [MAX],int *dx);
 void ordenarporCodigo(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin [MAX],int dx);
 void insertarporValor(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin [MAX],int *dx, int aux);
+void mostrarVectorCurso(CURSO x[MAX],int dx);
+void mostrarVectorDoc(Docente x[MAX],int dx);
+void mostrarCursosxDoc(Docente x,int dx);
 
 void encabezado1();
 void encabezado2(char title[]);
+void encabezado3();
+void encabezado4(Docente doc);
+void encabezado5();
 void raya1();
 void raya2();
 void raya3();
 void raya4();
+void raya1Doc();
+void raya2Doc();
+void raya1Cur();
+void raya2Cur();
 
 int Menu(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[MAX],int *dx);
 void Menu2(int op,ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[MAX],int dx);
@@ -786,5 +796,117 @@ void Menu2(int op,ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[M
             }
             break;
       }
+   }
+}
+
+void encabezado3()
+{
+   system("cls");
+   char title[]="\n\n\tREPORTE GENERAL DE DOCENTES";
+   char num[]="NUMERO";
+   char cod[]="CODIGO";
+   char nom[]="APELLIDOS, Nombres";
+
+   printf("\t\t%s\n\n",title);
+   raya2Doc();
+   printf("%-7s\t%-12s%-32s\n",num,cod,nom);
+   raya1Doc();
+}
+
+void mostrarVectorDoc(Docente x[MAX], int dx)
+{
+   int i;
+   if(dx>0){
+      encabezado3();
+      for(i=0;i<dx;i++){
+         printf("%3d\t%-12d%-32s\n",i+1,x[i].codDoc,x[i].nomDoc);
+      }
+      raya1Doc();
+      cout <<"\n\n";
+      system("pause");
+   }
+   else{
+      printf("Vector vaciooo...\n\n");
+   }
+}
+
+void raya2Doc()
+{
+   printf("==================================================\n");
+}
+void raya1Doc()
+{
+   printf("--------------------------------------------------\n");
+}
+
+void encabezado4(Docente doc)
+{
+   system("cls");
+   char nombre[]=" ";
+   strcpy(nombre,doc.nomDoc);
+   char num[]="NUMERO";
+   char cod[]="CODIGO";
+   char nom[]="CURSO";
+   char escuela[]="ESCUELA";
+
+   printf("\t\t\n\n\tREPORTE CURSOS %s\n\n",nombre);
+   raya2Doc();
+   printf("%-7s\t%-12s%-32s\n",num,cod,nom,escuela);
+   raya1Doc();
+}
+
+void mostrarCursosxDoc(Docente x,int dx){
+   int i;
+   if(dx>0){
+      encabezado4(x);
+      for(i=0;i<dx;i++){
+         printf("%3d\t%-12d%-32s\n",i+1,x.c[i].codCur,x.c[i].nomCur,x.c[i].scal);
+      }
+      raya1Doc();
+      cout <<"\n\n";
+      system("pause");
+   }
+   else{
+      printf("Vector vaciooo...\n\n");
+   }
+}
+
+void raya2Cur()
+{
+   printf("===============================================================\n");
+}
+void raya1Cur()
+{
+   printf("---------------------------------------------------------------\n");
+}
+
+void encabezado5()
+{
+   system("cls");
+   char title[]="\n\n\tREPORTE GENERAL DE CURSOS";
+   char num[]="NUMERO";
+   char cod[]="CODIGO";
+   char nom[]="CURSO";
+   char escuela[]="ESCUELA";
+
+   printf("\t\t%s\n\n",title);
+   raya2Cur();
+   printf("%-7s\t%-12s%-32s%-18s\n",num,cod,nom,escuela);
+   raya1Cur();
+}
+
+void mostrarVectorCurso(CURSO x[MAX],int dx){
+   int i;
+   if(dx>0){
+      encabezado5();
+      for(i=0;i<dx;i++){
+         printf("%3d\t%-12d%-32s%-18s\n",i+1,x[i].codCur,x[i].nomCur,x[i].scal);
+      }
+      raya1Cur();
+      cout <<"\n\n";
+      system("pause");
+   }
+   else{
+      printf("Vector vaciooo...\n\n");
    }
 }
