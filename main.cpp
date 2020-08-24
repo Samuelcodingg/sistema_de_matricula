@@ -17,6 +17,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <conio.h>
+#include <string.h>
+
 const int MAX=100;
 using namespace std;
 
@@ -48,6 +50,18 @@ struct EXPARCIAL{
 struct EXFINAL{
 	int  codAlu=0;
 	float exfin=0;
+};
+
+struct CURSO{
+	int codCur;
+	char nomCur[40];
+	char scal;
+};
+
+struct Docente{
+	int codDoc;
+	int nomDoc;
+	CURSO c[10];
 };
 
 void crearVector(int *dx);
