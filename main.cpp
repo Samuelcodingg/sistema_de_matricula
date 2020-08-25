@@ -972,13 +972,19 @@ void Menu2(int op,ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[M
                   mostrarVectorAlu(x,*dx);
                   break;
                case 2:
-                  mostrarVectorPc(p,*dx);
+                    mostrarVectorCurso(curs,*dcursos);
                   break;
                case 3:
-                  mostrarVectorParcial(par,*dx);
+                  mostrarVectorPc(p,*dx);
                   break;
                case 4:
+                  mostrarVectorParcial(par,*dx);
+                  break;
+                case 5:
                   mostrarVectorFinal(fin,*dx);
+                  break;
+                case 6:
+                  mostrarVectorDoc(doc,*ddoc);
                   break;
             }
             break;
@@ -989,15 +995,23 @@ void Menu2(int op,ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[M
                   system("pause");
                   break;
                case 2:
-                  editarporCodigoPc(p,*dx);
+                  editarCurso(curs,*dcursos);
                   system("pause");
                   break;
                case 3:
-                  editarporCodigoParcial(par,*dx);
+                  editarporCodigoPc(p,*dx);
                   system("pause");
                   break;
                case 4:
+                  editarporCodigoParcial(par,*dx);
+                  system("pause");
+                  break;
+                case 5:
                   editarporCodigoFinal(fin,*dx);
+                  system("pause");
+                  break;
+                case 6:
+                  editarDocente(doc,*ddoc);
                   system("pause");
                   break;
             }
