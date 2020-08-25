@@ -144,17 +144,12 @@ int main()
    CURSO curs[MAX];
    Docente doc[MAX];
    crearVector(&na,&nc,&nd);
-   printf("\n\n**Llenado del registro ALUMNOS:\n\n");
-   leerVectorAlu(a,&na);
+
    do{
       op=Menu(a,p,par,fin,curs,doc,&na,&nc,&nd);
       if(op!=0&&op==5||op==2||op==1){
-         if(na>0){
-            Menu2(op,a,p,par,fin,curs,doc,&na,&nc,&nd);
-         }else{
-            printf("\nRegistro ALUMNOS vacio...");
-         }
-      }
+           Menu2(op,a,p,par,fin,curs,doc,&na,&nc,&nd);
+       }
    }while(op>=1&&op<=8);
    printf("\n\nPrograma finalizado...\n\n");
    system("pause");
@@ -171,6 +166,7 @@ void crearVector(int *dx,int *dcursos, int *ddoc)
 void leerVectorAlu(ALUMNO x[MAX], int *dx)
 {
    int i=0, n, val;
+   printf("\n\n**Llenado del registro ALUMNOS:\n\n");
    printf("\n\nNumero de ALUMNOS ---> ");
    scanf("%d", &n);
    if(n < MAX){
@@ -200,6 +196,7 @@ void leerVectorAlu(ALUMNO x[MAX], int *dx)
       system("pause");
       exit(1);
    }
+   system("pause");
 }
 void mostrarVectorAlu(ALUMNO x[MAX], int dx)
 {
@@ -852,8 +849,7 @@ void Menu2(int op,ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[M
          case 1://ingreso de datos
             switch(op2){
                case 1:
-                  printf("\n\nEl registro ALUMNOS ya ha sido llenado\n\n");
-                  system("pause");
+                  leerVectorAlu(x,&*dx);
                   break;
                case 2:
                   leerVectorPc(x,p,*dx);
