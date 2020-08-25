@@ -231,7 +231,7 @@ void leerVectorPc(ALUMNO x[MAX],PRACTICA p[MAX], int dx,CURSO curs[MAX], int dcu
                do{
                   cout <<"\n\tCodigo: ";
                   cin >>p[i].codCur;
-                  for(j=0;j<dx;j++){//compara si el codigo digitado se encuentra en el de CURSOS
+                  for(j=0;j<dcursos;j++){//compara si el codigo digitado se encuentra en el de CURSOS
                      if(curs[j].codCur==p[i].codCur){
                         comp=1;
                      }
@@ -247,7 +247,7 @@ void leerVectorPc(ALUMNO x[MAX],PRACTICA p[MAX], int dx,CURSO curs[MAX], int dcu
             do{
                cout <<"\n\tCodigo "<<i+1<<" ---> ";
                cin >>p[i].codAlu;
-               for(j=0;j<dcursos;j++){//compara si el codigo digitado se encuentra en el registro ALUMMNOS
+               for(j=0;j<dx;j++){//compara si el codigo digitado se encuentra en el registro ALUMMNOS
                   if(x[j].codAlu==p[i].codAlu){
                      comp=1;
                   }
