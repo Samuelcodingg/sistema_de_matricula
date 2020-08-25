@@ -209,11 +209,11 @@ void mostrarVectorAlu(ALUMNO x[MAX], int dx)
       }
       raya1();
       cout <<"\n\n";
-      system("pause");
    }
    else{
       printf("Vector vaciooo...\n\n");
    }
+   system("pause");
 }
 
 void leerVectorPc(ALUMNO x[MAX],PRACTICA p[MAX], int dx){
