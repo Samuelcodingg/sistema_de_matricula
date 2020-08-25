@@ -38,8 +38,8 @@ struct ALUMNO{
 
 struct PRACTICA{
  	int codAlu=0;
-   int prac[10];
-   int promedio;
+   	int prac[10];
+   	int promedio;
 };
 
 struct EXPARCIAL{
@@ -890,15 +890,6 @@ void mostrarCursosxDoc(Docente x,int dx){
    else{
       printf("Vector vaciooo...\n\n");
    }
-}
-
-void raya2Cur()
-{
-   printf("===============================================================\n");
-}
-void raya1Cur()
-{
-   printf("---------------------------------------------------------------\n");
 }
 
 void encabezado5()
