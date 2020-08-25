@@ -963,11 +963,11 @@ void encabezado4(Docente doc)
    char num[]="NUMERO";
    char cod[]="CODIGO";
    char nom[]="CURSO";
-   char escuela[]="ESCUELA";
+   char scal[]="SISTEMA CALIF";
 
    printf("\t\t\n\n\tREPORTE CURSOS %s\n\n",nombre);
    raya2Doc();
-   printf("%-7s\t%-12s%-32s\n",num,cod,nom,escuela);
+   printf("%-7s\t%-12s%-32s\n",num,cod,nom,scal);
    raya1Doc();
 }
 
@@ -1008,7 +1008,7 @@ void mostrarVectorCurso(CURSO x[MAX],int dx){
    if(dx>0){
       encabezado5();
       for(i=0;i<dx;i++){
-         printf("%3d\t%-12d%-32s%-18d%-18c\n",i+1,x[i].codCur,x[i].nomCur,x[i].creditosCur,x[i].sistema);
+         printf("%3d\t%-12d%-32s%-18d%-18c\n",i+1,x[i].codCur,x[i].nomCur,x[i].creditosCur,x[i].scal);
       }
       raya1();
       cout <<"\n\n";
@@ -1445,7 +1445,7 @@ void eliminarxValorCur(CURSO x[MAX],int *dx,CURSO dato){
                bandN=1;
             }
          }
-         //verifica escuela
+         //verifica scal
          if(bandN==1){
             for(int j=0;j<strlen(x[i].scal);j++){
                if(x[i].scal[j]!=dato.scal[j]){
