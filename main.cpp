@@ -73,11 +73,11 @@ struct Docente{
 void crearVector(int *dx,int *dcursos, int *ddoc);
 void leerVectorAlu(ALUMNO x[MAX], int *dx);
 void mostrarVectorAlu(ALUMNO x[MAX], int dx);
-void leerVectorPc(ALUMNO x[MAX],PRACTICA p[MAX],int dx);
+void leerVectorPc(ALUMNO x[MAX],PRACTICA p[MAX],int dx,CURSO curs[MAX], int dcursos);
 void mostrarVectorPc(PRACTICA p[MAX],int dx);
-void leerVectorParcial(ALUMNO x[MAX],EXPARCIAL par[MAX], int dx);
+void leerVectorParcial(ALUMNO x[MAX],EXPARCIAL par[MAX], int dx,CURSO curs[MAX], int dcursos);
 void mostrarVectorParcial(EXPARCIAL par[MAX],int dx);
-void leerVectorFinal(ALUMNO x[MAX],EXFINAL fin[MAX], int dx);
+void leerVectorFinal(ALUMNO x[MAX],EXFINAL fin[MAX], int dx,CURSO curs[MAX], int dcursos);
 void mostrarVectorFinal(EXFINAL fin[MAX],int dx);
 void leerVectorCursos(CURSO curs[MAX], int *dcursos);
 void leerVectorDocente(CURSO curs[MAX],Docente doc[MAX], int dcursos,int *ddoc);
@@ -219,7 +219,7 @@ void mostrarVectorAlu(ALUMNO x[MAX], int dx)
    system("pause");
 }
 
-void leerVectorPc(ALUMNO x[MAX],PRACTICA p[MAX], int dx){
+void leerVectorPc(ALUMNO x[MAX],PRACTICA p[MAX], int dx,CURSO curs[MAX], int dcursos){
    int i=0,j=0,k=0,comp,suma;
    if(dx>0){
      for(i=0;i<dx;i++){
@@ -285,7 +285,7 @@ void mostrarVectorPc(PRACTICA p[MAX],int dx){
    }
 }
 
-void leerVectorParcial(ALUMNO x[MAX],EXPARCIAL par[MAX], int dx){
+void leerVectorParcial(ALUMNO x[MAX],EXPARCIAL par[MAX], int dx,CURSO curs[MAX], int dcursos){
    int i=0,j=0,comp;
    if(dx>0){
       for(i=0;i<dx;i++){
@@ -343,7 +343,7 @@ void mostrarVectorParcial(EXPARCIAL par[MAX],int dx){
    }
 }
 
-void leerVectorFinal(ALUMNO x[MAX],EXFINAL fin[MAX], int dx){
+void leerVectorFinal(ALUMNO x[MAX],EXFINAL fin[MAX], int dx,CURSO curs[MAX], int dcursos){
    int i=0,j=0,comp;
    if(dx>0){
       for(i=0;i<dx;i++){
@@ -869,7 +869,7 @@ void Menu2(int op,ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[M
                   break;
                case 3:
                   if(*dcursos>0){
-                     leerVectorPc(x,p,*dx);
+                     leerVectorPc(x,p,*dx,curs,*dcursos);
                   }else{
                      printf("\n\nEl registro de CURSOS aun no ha sido llenado.\n\n");
                      system("pause");
@@ -877,7 +877,7 @@ void Menu2(int op,ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[M
                   break;
                case 4:
                   if(*dcursos>0){
-                     leerVectorParcial(x,par,*dx);
+                     leerVectorParcial(x,par,*dx,curs,*dcursos;
                   }else{
                      printf("\n\nEl registro de CURSOS aun no ha sido llenado.\n\n");
                      system("pause");
@@ -885,7 +885,7 @@ void Menu2(int op,ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[M
                   break;
                case 5:
                   if(*dcursos>0){
-                     leerVectorFinal(x,fin,*dx);
+                     leerVectorFinal(x,fin,*dx,curs,*dcursos);
                   }else{
                      printf("\n\nEl registro de CURSOS aun no ha sido llenado.\n\n");
                      system("pause");
