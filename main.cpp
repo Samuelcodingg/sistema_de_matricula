@@ -108,6 +108,10 @@ void insertarPosCurso(CURSO x[MAX],int *dx,int pos,CURSO y);
 void editarDocente(Docente x[MAX],int dx);
 void buscarxCodigoDoc(Docente x[MAX],int dx,int cod);
 void insertarPosDocente(Docente x[MAx],int pos,Docente y);
+void eliminarxValorAlu(ALUMNO x[MAX],int *dx,ALUMNO dato,PRACTICA p[MAX], EXPARCIAL par[MAX],EXFINAL fin[MAX]);
+void eliminarxValorDoc(Docente x[MAX],int *dx,Docente dato);
+void eliminarxValorCur(CURSO x[MAX],int *dx,CURSO dato);
+
 
 void encabezado1();
 void encabezado2(char title[]);
@@ -1337,5 +1341,144 @@ void editarDocente(Docente x[MAX],int dx){
       cin>>x[edit].peso;
       cout<<endl;
       printf("\n**Datos del Docente guardados con exito...\n");
+   }
+}
+
+void eliminarxValorAlu(ALUMNO x[MAX],int *dx,ALUMNO dato,PRACTICA p[MAX], EXPARCIAL par[MAX],EXFINAL fin[MAX]){
+   int band=0, n=*dx,bandN=0;
+   if(*dx>0){
+      for(int i=0;i<n;i++){
+         for(int j=0;j<strlen(x[i].nomAlu);j++){
+            if(x[i].nomAlu[j]!=dato.nomAlu[j]){
+               j=strlen(x[i].nomAlu)+1;
+            }
+            else if(j==strlen(x[i].nomAlu)-1){
+               bandN=1;
+            }
+         }
+         if(x[i].codAlu==dato.codAlu && x[i].peso==dato.peso && x[i].fnac.anio==dato.fnac.anio && x[i].fnac.mes==x[i].fnac.mes && x[i].fnac.dia==x[i].fnac.dia && bandN==1){
+            for(int j=i;j<n;j++){
+               x[j]=x[j+1];
+               p[j]=p[j+1];
+               par[j]=par[j+1];
+               fin[j]=fin[j+1];
+            }
+            band=1;
+            i=*dx+1;
+         }
+      }
+      if(band==1){
+         printf("Dato eliminado...!\n");
+         *dx=n-1;
+         //muestra resultados
+         mostrarVectorAlu(x,*dx);
+         mostrarVectorFinal(fin,*dx);
+         mostrarVectorParcial(par,*dx);
+         mostrarVectorPc(p,*dx);
+      }
+      else{
+         printf("No existe ese dato...!\n");
+      }
+   }
+   else{
+      printf("Vacio...!\n");
+   }
+}
+
+void eliminarxValorDoc(Docente x[MAX],int *dx,Docente dato){
+   int band=0, n=*dx,bandN=0;
+   if(*dx>0){
+      for(int i=0;i<n;i++){
+         //verifica nombre
+         for(int j=0;j<strlen(x[i].nomDoc);j++){
+            if(x[i].nomDoc[j]!=dato.nomDoc[j]){
+               j=strlen(x[i].nomDoc)+1;
+            }
+            else if(j==strlen(x[i].nomDoc)-1){
+               bandN=1;
+            }
+         }
+         //verifica escuela
+         if(bandN==1){
+            for(int j=0;j<strlen(x[i].scal);j++){
+               if(x[i].scal[j]!=dato.scal[j]){
+                  bandN=0;
+                  j=strlen(x[i].scal)+1;
+               }
+               else if(j==strlen(x[i].scal)-1){
+                  bandN=1;
+               }
+            }
+         }
+         if(x[i].codDoc==dato.codDoc && x[i].peso==dato.peso && bandN==1){
+            for(int j=i;j<n;j++){
+               fflush(stdin);
+               x[j]=x[j+1];
+            }
+            band=1;
+            i=*dx+1;
+         }
+      }
+      if(band==1){
+         printf("Dato eliminado...!\n");
+         *dx=n-1;
+         //muestra resultados
+         mostrarVectorDoc(x,*dx);
+      }
+      else{
+         printf("No existe ese dato...!\n");
+      }
+   }
+   else{
+      printf("Vacio...!\n");
+   }
+}
+
+void eliminarxValorCur(CURSO x[MAX],int *dx,CURSO dato){
+   int band=0, n=*dx,bandN=0;
+   if(*dx>0){
+      for(int i=0;i<n;i++){
+         //verifica nombre
+         for(int j=0;j<strlen(x[i].nomCur);j++){
+            if(x[i].nomCur[j]!=dato.nomCur[j]){
+               j=strlen(x[i].nomCur)+1;
+            }
+            else if(j==strlen(x[i].nomCur)-1){
+               bandN=1;
+            }
+         }
+         //verifica escuela
+         if(bandN==1){
+            for(int j=0;j<strlen(x[i].scal);j++){
+               if(x[i].scal[j]!=dato.scal[j]){
+                  bandN=0;
+                  j=strlen(x[i].scal)+1;
+               }
+               else if(j==strlen(x[i].scal)-1){
+                  bandN=1;
+               }
+            }
+         }
+         if(x[i].codCur==dato.codCur && x[i].creditos==dato.creditos && bandN==1){
+            for(int j=i;j<n;j++){
+               fflush(stdin);
+               x[j]=x[j+1];
+            }
+            band=1;
+            i=*dx+1;
+         }
+      }
+      if(band==1){
+         printf("Dato eliminado...!\n");
+         *dx=n-1;
+         //muestra resultados
+         mostrarVectorCurso(x,*dx);
+      }
+      else{
+         printf("No existe ese dato...!\n");
+      }
+   }
+   else{
+      printf("Vacio...!\n");
    }
 }
