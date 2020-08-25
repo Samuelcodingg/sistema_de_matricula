@@ -110,7 +110,10 @@ void buscarxCodCur(CURSO x[MAX],int dx,int cod);
 void insertarPosCurso(CURSO x[MAX],int *dx,int pos,CURSO y);
 void editarDocente(Docente x[MAX],int dx);
 void buscarxCodigoDoc(Docente x[MAX],int dx,int cod);
-void insertarPosDocente(Docente x[MAX],int pos,Docente y);
+void insertarPosDocente(Docente x[MAX],int pos,Docente y
+void ordenarporNombreAlu(ALUMNO x[MAX],int dx);
+void ordenarPorNombreDoc(Docente x [MAX], int dx);
+void ordenarPorNombreCur(CURSO x [MAX], int dx);
 void eliminarxValorAlu(ALUMNO x[MAX],int *dx,ALUMNO dato,PRACTICA p[MAX], EXPARCIAL par[MAX],EXFINAL fin[MAX]);
 void eliminarxValorDoc(Docente x[MAX],int *dx,Docente dato);
 void eliminarxValorCur(CURSO x[MAX],int *dx,CURSO dato);
@@ -1079,6 +1082,73 @@ void ordenarxCodigoCurDoc(Docente x,int dx){
       printf("Vector vacioooo...!\n");
    }
 }
+void ordenarporNombreAlu(ALUMNO x[MAX],int dx)
+{
+   int i, j;
+   ALUMNO aux;
+   if(dx>-1){
+      for(i=0; i<dx-1;){
+         for(j=i+1; j<dx;){
+            if(strcmp(x[i].nomAlu,x[j].nomAlu)>0){
+               aux = x[j];
+               x[j]=x[i];
+               x[i]=aux;
+            }
+
+            j=j+1;
+         }
+         i=i+1;
+      }
+      mostrarVectorAlu (x,dx); //muestra el resultado
+   }
+   else{
+      printf("Vector vacioooo...!\n");
+   }
+}
+void ordenarPorNombreDoc(Docente x [MAX], int dx)
+{
+   int  i, j;
+   Docente aux;
+   if(dx>-1){
+      for(i=0; i<dx-1;i++){
+         for(j=i+1; j<dx;j++){
+            if(strcmp(x[i].nomDoc,x[j].nomDoc)>0){
+               aux = x[j];
+               x[j]=x[i];
+               x[i]=aux;
+            }
+            j=j+1;
+         }
+         i=i+1;
+      }
+      mostrarVectorDoc (x,dx); //muestra el resultado
+   }
+   else{
+      printf("Vector vacioooo...!\n");
+   }
+}
+void ordenarPorNombreCur(CURSO x [MAX], int dx)
+{
+   int  i, j;
+   CURSO aux;
+   if(dx>-1){
+      for(i=0; i<dx-1;i++){
+         for(j=i+1; j<dx;j++){
+            if(strcmp(x[i].nomCur,x[j].nomCur)>0){
+               aux=x[j];
+               x[j]=x[i];
+               x[i]=aux;
+            }
+            j=j+1;
+         }
+         i=i+1;
+      }
+      mostrarVectorCurso(x,dx); //muestra el resultado
+   }
+   else{
+      printf("Vector vacioooo...!\n");
+   }
+}			
 void insertarPosPc(PRACTICA p[MAX],int pos,int dx,int pc[10]){
    int i,n;
    int suma=0;
