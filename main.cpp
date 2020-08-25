@@ -231,7 +231,7 @@ void leerVectorPc(ALUMNO x[MAX],PRACTICA p[MAX], int dx,CURSO curs[MAX], int dcu
                do{
                   cout <<"\n\tCodigo: ";
                   cin >>p[i].codCur;
-                  for(j=0;j<dcursos;j++){//compara si el codigo digitado se encuentra en el de CURSOS
+                  for(j=0;j<dcursos;j++){//compara si el codigo digitado se encuentra en el registro de CURSOS
                      if(curs[j].codCur==p[i].codCur){
                         comp=1;
                      }
@@ -309,7 +309,7 @@ void leerVectorParcial(ALUMNO x[MAX],EXPARCIAL par[MAX], int dx,CURSO curs[MAX],
             do{
                cout <<"\n\tCodigo: ";
                cin >>par[i].codCur;
-               for(j=0;j<dcursos;j++){//compara si el codigo digitado se encuentra en el de CURSOS
+               for(j=0;j<dcursos;j++){//compara si el codigo digitado se encuentra en el registro de CURSOS
                   if(curs[j].codCur==par[i].codCur){
                      comp=1;
                   }
@@ -384,7 +384,7 @@ void leerVectorFinal(ALUMNO x[MAX],EXFINAL fin[MAX], int dx,CURSO curs[MAX], int
             do{
                cout <<"\n\tCodigo: ";
                cin >>fin[i].codCur;
-               for(j=0;j<dcursos;j++){//compara si el codigo digitado se encuentra en el de CURSOS
+               for(j=0;j<dcursos;j++){//compara si el codigo digitado se encuentra en el registro de CURSOS
                   if(curs[j].codCur==fin[i].codCur){
                      comp=1;
                   }
@@ -872,11 +872,6 @@ int Menu(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[MAX],CURSO
    scanf("%d",&op);
    }while(op<0 || op>8);
    switch(op){
-      case 3://buscar por codigo
-         buscarporCodigo(x,p,par,fin,*dx);
-         cout<<endl;
-         system("pause");
-         break;
       case 4://ordenar
          ordenarporCodigo(x,p,par,fin,*dx);
          printf("\nLos codigos de los registros han sido ordenados de forma ascendente...\n\n.");
@@ -890,9 +885,6 @@ int Menu(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[MAX],CURSO
       case 7://insertar por valor
          ordenarporCodigo(x,p,par,fin,*dx);
          insertarporValor(x,p,par,fin,&*dx,aux);
-         break;
-      case 8://eliminar por posicion
-         eliminaporPosicion(x,p,par,fin,&*dx);
          break;
    }
    return(op);
@@ -988,6 +980,34 @@ void Menu2(int op,ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[M
                   break;
             }
             break;
+	 case 3://buscar por codigo
+            switch(op2){
+               case 1:
+                  cout<<endl;
+                  system("pause");
+                  break;
+               case 2:
+                  cout<<endl;
+                  system("pause");
+                  break;
+               case 3:
+                  cout<<endl;
+                  system("pause");
+                  break;
+               case 4:
+                  cout<<endl;
+                  system("pause");
+                  break;
+               case 5:
+                  cout<<endl;
+                  system("pause");
+                  break;
+               case 6:
+                  cout<<endl;
+                  system("pause");
+                  break;
+            }
+            break;
          case 5://editar
             switch(op2){
                case 1:
@@ -1013,6 +1033,22 @@ void Menu2(int op,ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[M
                 case 6:
                   editarDocente(doc,*ddoc);
                   system("pause");
+                  break;
+            }
+            break;
+	case 8://eliminar por posicion
+            switch(op2){
+               case 1:
+                  break;
+               case 2:
+                  break;
+               case 3:
+                  break;
+               case 4:
+                  break;
+               case 5:
+                  break;
+               case 6:
                   break;
             }
             break;
@@ -1356,9 +1392,6 @@ void insertarPosParcial(EXPARCIAL par[MAX],int *dx,int pos,int expar){
       printf("Excede Dimension");
    }
 }
-
-
-
 
 int buscarxCodigoFinal(EXFINAL fin[MAX],int dx,int cod){
    int pos = 0,i;
