@@ -1445,19 +1445,8 @@ void eliminarxValorCur(CURSO x[MAX],int *dx,CURSO dato){
                bandN=1;
             }
          }
-         //verifica scal
-         if(bandN==1){
-            for(int j=0;j<strlen(x[i].scal);j++){
-               if(x[i].scal[j]!=dato.scal[j]){
-                  bandN=0;
-                  j=strlen(x[i].scal)+1;
-               }
-               else if(j==strlen(x[i].scal)-1){
-                  bandN=1;
-               }
-            }
-         }
-         if(x[i].codCur==dato.codCur && x[i].creditosCur==dato.creditosCur && bandN==1){
+         
+         if(x[i].codCur==dato.codCur && x[i].creditosCur==dato.creditosCur && bandN==1 && x[i].scal==dato.scal){
             for(int j=i;j<n;j++){
                fflush(stdin);
                x[j]=x[j+1];
