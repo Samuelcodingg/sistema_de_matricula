@@ -110,7 +110,7 @@ void buscarxCodCur(CURSO x[MAX],int dx,int cod);
 void insertarPosCurso(CURSO x[MAX],int *dx,int pos,CURSO y);
 void editarDocente(Docente x[MAX],int dx);
 void buscarxCodigoDoc(Docente x[MAX],int dx,int cod);
-void insertarPosDocente(Docente x[MAx],int pos,Docente y);
+void insertarPosDocente(Docente x[MAX],int pos,Docente y);
 void eliminarxValorAlu(ALUMNO x[MAX],int *dx,ALUMNO dato,PRACTICA p[MAX], EXPARCIAL par[MAX],EXFINAL fin[MAX]);
 void eliminarxValorDoc(Docente x[MAX],int *dx,Docente dato);
 void eliminarxValorCur(CURSO x[MAX],int *dx,CURSO dato);
