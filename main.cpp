@@ -23,7 +23,7 @@ const int MAX=100;
 using namespace std;
 
 struct FECHA{
-   	int dia=0;
+	int dia=0;
    	int mes=0;
 	int anio=0;
 };
@@ -106,11 +106,11 @@ void editarFinal(EXPARCIAL fin[MAX],int dx);
 int buscarxCodigoFinal(EXPARCIAL fin[MAX],int dx,int cod);
 void insertarPosFinal(EXPARCIAL fin[MAX],int *dx,int pos,int exfin);
 void editarCurso(CURSO x[MAX],int dx);
-void buscarxCodCur(CURSO x[MAX],int dx,int cod);
+int buscarxCodCur(CURSO x[MAX],int dx,int cod);
 void insertarPosCurso(CURSO x[MAX],int *dx,int pos,CURSO y);
 void editarDocente(Docente x[MAX],int dx);
-void buscarxCodigoDoc(Docente x[MAX],int dx,int cod);
-void insertarPosDocente(Docente x[MAX],int pos,Docente y
+int buscarxCodigoDoc(Docente x[MAX],int dx,int cod);
+void insertarPosDocente(Docente x[MAX],int pos,Docente y);
 void ordenarporNombreAlu(ALUMNO x[MAX],int dx);
 void ordenarPorNombreDoc(Docente x [MAX], int dx);
 void ordenarPorNombreCur(CURSO x [MAX], int dx);
@@ -1183,7 +1183,7 @@ void editarPc(PRACTICA p[MAX],int dx){
    printf("Digite el codigo del curso:");
    scanf("%d",&cod);
 
-   edit = buscarxCursoPc(p,dx,cod);
+   edit = buscarPcxCodCurso(p,dx,cod);
 
    if(edit == 0){
       printf("Practica no encontrada");
@@ -1210,7 +1210,7 @@ int buscarParcialxCodCurso(EXPARCIAL par[MAX],int dx,int cod){
    int pos = 0,i;
 
    for(i=0;i<dx;i++){
-      if(par[i].codCur==cod){
+      if(par[i].codCurso==cod){
          pos = i;
       }
    }
@@ -1222,7 +1222,7 @@ void editarParcial(EXPARCIAL par[MAX],int dx){
    printf("Digite el codigo del curso:");
    scanf("%d",&cod);
 
-   edit = buscarxCursoPc(par,dx,cod);
+   edit = buscarParcialxCodCurso(par,dx,cod);
 
    if(edit == 0){
       printf("Parcial no encontrado");
@@ -1236,8 +1236,8 @@ void editarParcial(EXPARCIAL par[MAX],int dx){
 }  
 void insertarPosParcial(EXPARCIAL par[MAX],int *dx,int pos,int expar){
    int i;
-   if(dx+1>MAX){
-      for(i=dx+1;i>pos+1;i--){
+   if(*dx+1>MAX){
+      for(i=*dx+1;i>pos+1;i--){
          par[i-1].expar=par[i].expar;
       }
       par[pos-1].expar = expar;
@@ -1247,6 +1247,7 @@ void insertarPosParcial(EXPARCIAL par[MAX],int *dx,int pos,int expar){
       printf("Excede Dimension");
    }
 }
+
 
 
 
@@ -1278,10 +1279,10 @@ void editarFinal(EXFINAL fin[MAX],int dx){
       printf("\n**Nota del examen Final guardada con exito...\n");
    }
 }
-void insertarPosFinal(EXPARCIAL fin[MAX],int *dx,int pos,int exfin){
+void insertarPosFinal(EXFINAL fin[MAX],int *dx,int pos,int exfin){
    int i;
-   if(dx+1>MAX){
-      for(i=dx+1;i>pos+1;i--){
+   if(*dx+1>MAX){
+      for(i=*dx+1;i>pos+1;i--){
          fin[i-1].exfin=fin[i].exfin;
       }
       fin[pos-1].exfin = exfin;
@@ -1293,7 +1294,7 @@ void insertarPosFinal(EXPARCIAL fin[MAX],int *dx,int pos,int exfin){
 }
 
 
-void buscarxCodCur(CURSO x[MAX],int dx,int cod){
+int buscarxCodCur(CURSO x[MAX],int dx,int cod){
    int pos = 0,i;
 
    for(i=0;i<dx;i++){
@@ -1323,24 +1324,24 @@ void editarCurso(CURSO x[MAX],int dx){
       printf("Sistema de Calificaciones: ");
       cin>>x[edit].scal;
       printf("Creditos: ");
-      cin>>x[edit].creditos;
+      cin>>x[edit].creditosCur;
       cout<<endl;
       printf("\n**Datos del Curso guardados con exito...\n");
    }
 }
 void insertarPosCurso(CURSO x[MAX],int *dx,int pos,CURSO y){
    int i;
-   if(dx+1>MAX){
-      for(i=dx+1;i>pos+1;i--){
+   if(*dx+1>MAX){
+      for(i=*dx+1;i>pos+1;i--){
          x[i-1].codCur=x[i].codCur;
-         strcpy(x[i-1].nomCur;x[i].nomCur);
+         strcpy(x[i-1].nomCur,x[i].nomCur);
          x[i-1].scal=x[i].scal;
-         x[i-1].creditos=x[i].creditos;
+         x[i-1].creditosCur=x[i].creditosCur;
       }
       x[pos-1].codCur = y.codCur;
-      strcpy(x[pos-1].nomCur;y.nomCur);
+      strcpy(x[pos-1].nomCur,y.nomCur);
       x[pos-1].scal = y.scal;
-      x[pos-1].creditos = y.creditos;
+      x[pos-1].creditosCur = y.creditosCur;
       dx +=1;
    }
    else{
@@ -1348,20 +1349,34 @@ void insertarPosCurso(CURSO x[MAX],int *dx,int pos,CURSO y){
    }
 }
 
+
 void insertarPosDocente(Docente x[MAX],int *dx,int pos,Docente y){
-   int i;
-   if(dx+1>MAX){
-      for(i=dx+1;i>pos+1;i--){
+   int i,j;
+   if(*dx+1>MAX){
+      for(i=*dx+1;i>pos+1;i--){
          x[i-1].codDoc=x[i].codDoc;
-         strcpy(x[i-1].nomDoc;x[i].nomDoc);
-         x[i-1].c=x[i].c;
-         x[i-1].scal=x[i].scal;
+         strcpy(x[i-1].nomDoc,x[i].nomDoc);
+         
+         for(j=0;j<10;j++){
+            x[i-1].c[j].codCur=x[i].c[j].codCur;
+            strcpy(x[i-1].c[j].nomCur,x[i].c[j].nomCur);
+            x[i-1].c[j].scal=x[i].c[j].scal;
+            x[i-1].c[j].creditosCur=x[i].c[j].creditosCur;
+         }
+         strcpy(x[i-1].escuela,x[i].escuela);
          x[i-1].peso=x[i].peso;
       }
       x[pos-1].codDoc = y.codDoc;
-      strcpy(x[pos-1].nomDoc;y.nomDoc);
-      x[pos-1].c = y.c;
-      x[pos-1].scal = y.scal;
+      strcpy(x[pos-1].nomDoc,y.nomDoc);
+      
+      for(j=0;j<10;j++){
+         x[pos-1].c[j].codCur=y.c[j].codCur;
+         strcpy(x[pos-1].c[j].nomCur,y.c[j].nomCur);
+         x[pos-1].c[j].scal=y.c[j].scal;
+         x[pos-1].c[j].creditosCur=y.c[j].creditosCur;
+      }
+
+      strcpy(x[pos-1].escuela,y.escuela);
       x[pos-1].peso = y.peso;
       dx +=1;
    }
@@ -1369,7 +1384,7 @@ void insertarPosDocente(Docente x[MAX],int *dx,int pos,Docente y){
       printf("Excede Dimension");
    }
 }
-void buscarxCodigoDoc(Docente x[MAX],int dx,int cod){
+int buscarxCodigoDoc(Docente x[MAX],int dx,int cod){
    int pos = 0,i;
 
    for(i=0;i<dx;i++){
@@ -1385,7 +1400,7 @@ void editarDocente(Docente x[MAX],int dx){
    printf("Digite el codigo del Docente:");
    scanf("%d",&cod);
 
-   edit = buscarxCodCur(x,dx,cod);
+   edit = buscarxCodigoDoc(x,dx,cod);
 
    if(edit == 0){
       printf("Docente no encontrado");
@@ -1396,10 +1411,7 @@ void editarDocente(Docente x[MAX],int dx){
       cin>>x[edit].codDoc;
       printf("Nombre: ");
       cin>>x[edit].codDoc;
-      printf("Curso: ");
-      cin>>x[edit].c;
-      printf("Sistema de Calificaciones: ");
-      cin>>x[edit].scal;
+      editarCurso(x[edit].c,10);
       printf("Peso: ");
       cin>>x[edit].peso;
       cout<<endl;
