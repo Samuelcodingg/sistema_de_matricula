@@ -38,14 +38,14 @@ struct ALUMNO{
 
 struct PRACTICA{
  	int codAlu=0;
-	int codCurso=0;
+	int codCur=0;
    	int prac[10];
    	int promedio;
 };
 
 struct EXPARCIAL{
 	int codAlu=0;
-	int codCurso=0;
+	int codCur=0;
 	float expar=0;
 };
 
