@@ -23,9 +23,9 @@ const int MAX=100;
 using namespace std;
 
 struct FECHA{
-   int dia=0;
-   int mes=0;
-   int anio=0;
+   	int dia=0;
+   	int mes=0;
+	int anio=0;
 };
 
 struct ALUMNO{
@@ -38,17 +38,20 @@ struct ALUMNO{
 
 struct PRACTICA{
  	int codAlu=0;
-   int prac[10];
-   int promedio;
+	int codCurso=0;
+   	int prac[10];
+   	int promedio;
 };
 
 struct EXPARCIAL{
-	int  codAlu=0;
+	int codAlu=0;
+	int codCurso=0;
 	float expar=0;
 };
 
 struct EXFINAL{
 	int  codAlu=0;
+	int codCur=0;
 	float exfin=0;
 };
 
@@ -112,7 +115,7 @@ void eliminarxValorAlu(ALUMNO x[MAX],int *dx,ALUMNO dato,PRACTICA p[MAX], EXPARC
 void eliminarxValorDoc(Docente x[MAX],int *dx,Docente dato);
 void eliminarxValorCur(CURSO x[MAX],int *dx,CURSO dato);
 
-
+//Menu
 void encabezado1();
 void encabezado2(char title[]);
 void encabezado3();
