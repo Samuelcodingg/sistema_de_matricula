@@ -2,7 +2,7 @@
  * NombreProg : 
  * Descripcion: 
  *             
- *    
+ *   
  *    
  *    
  *
@@ -23,107 +23,77 @@ const int MAX=100;
 using namespace std;
 
 struct FECHA{
-   int dia;
-   int mes;
-   int anio;
+   int dia=0;
+   int mes=0;
+   int anio=0;
 };
 
 struct ALUMNO{
-	int  codAlu;
+	int  codAlu=0;
 	char nomAlu[40];
-	char escuela[4];
+	char escuela[15];
 	FECHA fnac;
-	float peso;
+	float peso=0;
 };
 
 struct PRACTICA{
- 	int codAlu;
-   int codCurso;
+ 	int codAlu=0;
    int prac[10];
    int promedio;
 };
 
 struct EXPARCIAL{
-	int  codAlu;
-   int codCur;
-	float expar;
+	int  codAlu=0;
+	float expar=0;
 };
 
 struct EXFINAL{
-	int  codAlu;
-	float codCur;
-   float exfin;
+	int  codAlu=0;
+	float exfin=0;
 };
 
 struct CURSO{
 	int codCur;
 	char nomCur[40];
+	int creditosCur;
 	char scal;
-   int creditos;
-   char sistema;
 };
 
 struct Docente{
 	int codDoc;
-	int nomDoc;
+	char nomDoc[40];
 	CURSO c[10];
-   char scal[40];
-   float peso;
+	char escuela[4];
+	float peso=0;
 };
 
-void crearVector(int *dx);
-//ALUMNO
+void crearVector(int *dx,int *dcursos, int *ddoc);
 void leerVectorAlu(ALUMNO x[MAX], int *dx);
 void mostrarVectorAlu(ALUMNO x[MAX], int dx);
-void insertarporValor(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin [MAX],int *dx, int aux);
-void insertarporPosicion(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin [MAX],int *dx,int aux, int posi, int cod);
-void editarporCodigoAlu(ALUMNO x[MAX], int dx);
-void buscarporCodigo(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[MAX],int dx);
-void eliminaporPosicion(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin [MAX],int *dx);
-void ordenarporCodigo(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin [MAX],int dx);
-
-//PRACTICA
 void leerVectorPc(ALUMNO x[MAX],PRACTICA p[MAX],int dx);
 void mostrarVectorPc(PRACTICA p[MAX],int dx);
-void editarporCodigoPc(PRACTICA p[MAX], int dx);
-
-void editarPc();
-void buscarxCod();
-void insertarPosPc(PRACTICA p[MAX],int pos,int dx,int pc[10]);
-
-//EXPARCIAL
 void leerVectorParcial(ALUMNO x[MAX],EXPARCIAL par[MAX], int dx);
 void mostrarVectorParcial(EXPARCIAL par[MAX],int dx);
-void editarporCodigoParcial(EXPARCIAL par[MAX], int dx);
-
-void editarParcial();
-void buscarxCodParcial();
-void insertarPosParcial();
-//EXFINAL
 void leerVectorFinal(ALUMNO x[MAX],EXFINAL fin[MAX], int dx);
 void mostrarVectorFinal(EXFINAL fin[MAX],int dx);
+void leerVectorCursos(CURSO curs[MAX], int *dcursos);
+void leerVectorDocente(CURSO curs[MAX],Docente doc[MAX], int dcursos,int *ddoc);
+void buscarporCodigo(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[MAX],int dx);
+void editarporCodigoAlu(ALUMNO x[MAX], int dx);
+void editarporCodigoPc(PRACTICA p[MAX], int dx);
+void editarporCodigoParcial(EXPARCIAL par[MAX], int dx);
 void editarporCodigoFinal(EXFINAL fin[MAX], int dx);
-
-void buscarxCodigoFinal();
-void insertarPosFinal();
-//CURSO
+void insertarporPosicion(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin [MAX],int *dx,int aux, int posi, int cod);
+void eliminaporPosicion(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin [MAX],int *dx);
+void ordenarporCodigo(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin [MAX],int dx);
+void insertarporValor(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin [MAX],int *dx, int aux);
 void mostrarVectorCurso(CURSO x[MAX],int dx);
-void ordenarxCodigoCur(CURSO x[MAX],int dx);
-
-void buscarxCur();
-void insertarPosCurso();
-//DOCENTE
 void mostrarVectorDoc(Docente x[MAX],int dx);
 void mostrarCursosxDoc(Docente x,int dx);
 void ordenarxCodigoDoc(Docente x[MAX],int dx);
+void ordenarxCodigoCur(CURSO x[MAX],int dx);
 void ordenarxCodigoCurDoc(Docente x,int dx);
 
-void buscarxCodigoDoc();
-void insertarPosDocente();
-
-//MENU
-int Menu(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[MAX],int *dx);
-void Menu2(int op,ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[MAX],int dx);
 void encabezado1();
 void encabezado2(char title[]);
 void encabezado3();
@@ -133,46 +103,48 @@ void raya1();
 void raya2();
 void raya3();
 void raya4();
+void raya1Doc();
+void raya2Doc();
+void raya1Cur();
+void raya2Cur();
+
+int Menu(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[MAX],CURSO curs[],Docente doc[],int *dx,int *dcursos,int *ddoc);
+void Menu2(int op,ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[MAX],CURSO curs[],Docente doc[],int dx,int *dcursos,int *ddoc);
 
 int main()
 {
 
    ALUMNO a[MAX];
-   int na,op;
+   int na,nc,nd,op;
    PRACTICA p[MAX];
    EXPARCIAL par[MAX];
    EXFINAL fin[MAX];
-   
-
-   int prueba[] = {12,13,15,16,17,10,11,12,12,12};
-   
-   
-   
-   crearVector(&na);
+   CURSO curs[MAX];
+   Docente doc[MAX];
+   crearVector(&na,&nc,&nd);
    printf("\n\n**Llenado del registro ALUMNOS:\n\n");
    leerVectorAlu(a,&na);
    mostrarVectorAlu(a,na);
-   leerVectorPc(a,p,na);
-   /*
    do{
-      op=Menu(a,p,par,fin,&na);
+      op=Menu(a,p,par,fin,curs,doc,&na,&nc,&nd);
       if(op!=0&&op==5||op==2||op==1){
          if(na>0){
-            Menu2(op,a,p,par,fin,na);
+            Menu2(op,a,p,par,fin,curs,doc,na,&nc,&nd);
          }else{
             printf("\nRegistro ALUMNOS vacio...");
          }
       }
    }while(op>=1&&op<=8);
-   */
    printf("\n\nPrograma finalizado...\n\n");
    system("pause");
    return(0);
 }
 
-void crearVector(int *dx)
+void crearVector(int *dx,int *dcursos, int *ddoc)
 {
    *dx=-1;
+   *dcursos=-1;
+   *ddoc=-1;
 }
 
 void leerVectorAlu(ALUMNO x[MAX], int *dx)
@@ -185,11 +157,10 @@ void leerVectorAlu(ALUMNO x[MAX], int *dx)
          printf("\n\tAlumno:  %d\n", i+1);
          cout <<" Codigo ---> ";
          cin >>x[i].codAlu;
-         fflush(stdin);
          cout <<" Nombre ---> ";
-         cin.getline(x[i].nomAlu,40,'\n');
+         cin>>x[i].nomAlu;
          cout <<" Escuela ---> ";
-         cin.getline(x[i].escuela,4,'\n');
+         cin >>x[i].escuela;
          cout <<" Fecha de nacimiento(dd/mm/aaaa):"<<endl;
          cout<<"\tdd--->";
          cin >>x[i].fnac.dia;
@@ -409,6 +380,64 @@ void mostrarVectorFinal(EXFINAL fin[MAX],int dx){
       exit(1);
    }
 }
+void leerVectorCursos(CURSO curs[MAX], int *dcursos){
+   int i=-1, n, val;
+   printf("\n\tINGRESO DE LA LISTA DE CURSOS:\n\n");
+   if(n < MAX){
+      do{
+         i++;
+         printf("\n\tCurso:  %d\n", i+1);
+         cout <<" Codigo "<<i+1<<"('0' para terminar) ---> ";
+         cin >>curs[i].codCur;
+         if(curs[i].codCur!=0){
+            cout <<" Nombre ---> ";
+            cin>>curs[i].nomCur;
+            cout <<" Creditos ---> ";
+            cin >>curs[i].creditosCur;
+            cout <<" Sistema de calificacion ---> ";
+            cin >>curs[i].scal;
+         }
+         cout<<endl;
+      }
+      while(curs[i].codCur!=0);
+      *dcursos= i;
+   }
+   else{
+      printf(" %d dimension fuera de RANGO es mayor a Max = %d\n\n", n, MAX);
+      system("pause");
+      exit(1);
+   }
+}
+
+void leerVectorDocente(CURSO curs[MAX],Docente doc[MAX],int dcursos, int *ddoc){
+   int i=-1, n, val,comp;
+   printf("\n\tLLENADO DEl REGISTRO DE DOCENTES:\n\n");
+   if(n < MAX){
+      do{
+         i++;
+         printf("\n\tDocente:  %d\n", i+1);
+         cout <<" Codigo "<<i+1<<"('0' para terminar)---> ";
+         cin >>doc[i].codDoc;
+         if(doc[i].codDoc!=0){
+            cout <<" Nombre ---> ";
+            cin>>doc[i].nomDoc;
+            cout <<" Escuela ---> ";
+            cin >>doc[i].escuela;
+            cout <<" Peso(kg.)---> ";
+            cin >>doc[i].peso;
+         }
+         cout<<endl;
+      }
+      while(doc[i].codDoc!=0);
+      *ddoc= i;
+   }
+   else{
+      printf(" %d dimension fuera de RANGO es mayor a Max = %d\n\n", n, MAX);
+      system("pause");
+      exit(1);
+   }
+}
+
 void buscarporCodigo(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[MAX],int dx){
    int cd,i,comp=0;//comp es un valor bandera
    mostrarVectorAlu(x,dx);
@@ -449,11 +478,10 @@ void editarporCodigoAlu(ALUMNO x[MAX], int dx){
       if(x[i].codAlu==cod){
          comp=1;
          printf("\n\tAlumno:  %d\n", i+1);
-         fflush(stdin);
          cout <<" Nombre ---> ";
-         cin.getline(x[i].nomAlu,40,'\n');
+         cin>>x[i].nomAlu;
          cout <<" Escuela ---> ";
-         cin.getline(x[i].escuela,4,'\n');
+         cin >>x[i].escuela;
          cout <<" Fecha de nacimiento(dd/mm/aaaa):"<<endl;
          cout<<"\tdd--->";
          cin >>x[i].fnac.dia;
@@ -740,7 +768,7 @@ void raya3(){
 void raya4(){
    printf("-------------------------------\n");
 }
-int Menu(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[MAX],int *dx){
+int Menu(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[MAX],CURSO curs[],Docente doc[],int *dx,int *dcursos,int *ddoc){
    int op,aux=0,posi=0,cod=0;
    system("cls");
    printf(" \n\nOPERACIONES CON VECTORES \n\n");
@@ -783,7 +811,7 @@ int Menu(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[MAX],int *
    }
    return(op);
 }
-void Menu2(int op,ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[MAX],int dx){
+void Menu2(int op,ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[MAX],CURSO curs[],Docente doc[],int dx,int *dcursos,int *ddoc){
    int op2;
    system("cls");
    printf(" \n\nSOBRE QUE VECTOR DESEA REALIZAR LA OPERACION?: \n\n");
@@ -792,10 +820,12 @@ void Menu2(int op,ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[M
    printf("2. REGISTRO DE PRACTICAS \n");
    printf("3. REGISTRO DE EXAMENES PARCIALES \n");
    printf("4. REGISTRO DE EXAMENES FINALES \n");
+   printf("5. REGISTRO DE CURSOS \n");
+   printf("6. REGISTRO DE DOCENTES \n");
    do{
    printf("\nDigite su opcion ---> ");
    scanf("%d",&op2);
-   }while(op2<0 || op2>4);
+   }while(op2<0 || op2>6);
    if(op2!=0){
       switch(op){
          case 1://ingreso de datos
@@ -812,6 +842,12 @@ void Menu2(int op,ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[M
                   break;
                case 4:
                   leerVectorFinal(x,fin,dx);
+                  break;
+	       case 5:
+                  leerVectorCursos(curs,&*dcursos);
+                  break;
+               case 6:
+                  leerVectorDocente(curs,doc,*dcursos,&*ddoc);
                   break;
             }
             break;
@@ -855,6 +891,15 @@ void Menu2(int op,ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[M
    }
 }
 
+void raya2Doc()
+{
+   printf("==================================================\n");
+}
+void raya1Doc()
+{
+   printf("--------------------------------------------------\n");
+}
+
 void encabezado3()
 {
    system("cls");
@@ -862,13 +907,11 @@ void encabezado3()
    char num[]="NUMERO";
    char cod[]="CODIGO";
    char nom[]="APELLIDOS, Nombres";
-   char scal[]="ESCUELA";
-   char peso[]="PESO";
 
    printf("\t\t%s\n\n",title);
-   raya2();
-   printf("%-7s\t%-12s%-32s%-18s%-18s\n",num,cod,nom,scal,peso);
-   raya1();
+   raya2Doc();
+   printf("%-7s\t%-12s%-32s\n",num,cod,nom);
+   raya1Doc();
 }
 
 void mostrarVectorDoc(Docente x[MAX], int dx)
@@ -877,9 +920,9 @@ void mostrarVectorDoc(Docente x[MAX], int dx)
    if(dx>0){
       encabezado3();
       for(i=0;i<dx;i++){
-         printf("%3d\t%-12d%-32s%-18s%-18.2f\n",i+1,x[i].codDoc,x[i].nomDoc,x[i].scal,x[i].peso);
+         printf("%3d\t%-12d%-32s\n",i+1,x[i].codDoc,x[i].nomDoc);
       }
-      raya1();
+      raya1Doc();
       cout <<"\n\n";
       system("pause");
    }
@@ -897,12 +940,12 @@ void encabezado4(Docente doc)
    char cod[]="CODIGO";
    char nom[]="CURSO";
    char escuela[]="ESCUELA";
+
    printf("\t\t\n\n\tREPORTE CURSOS %s\n\n",nombre);
    raya2Doc();
    printf("%-7s\t%-12s%-32s\n",num,cod,nom,escuela);
    raya1Doc();
 }
-
 
 void mostrarCursosxDoc(Docente x,int dx){
    int i;
@@ -920,6 +963,15 @@ void mostrarCursosxDoc(Docente x,int dx){
    }
 }
 
+void raya2Cur()
+{
+   printf("===============================================================\n");
+}
+void raya1Cur()
+{
+   printf("---------------------------------------------------------------\n");
+}
+
 void encabezado5()
 {
    system("cls");
@@ -927,14 +979,12 @@ void encabezado5()
    char num[]="NUMERO";
    char cod[]="CODIGO";
    char nom[]="CURSO";
-   char creditos[]="CREDITOS";
-   char sistema[]="Sistema Calific";
-
+   char escuela[]="ESCUELA";
 
    printf("\t\t%s\n\n",title);
-   raya2();
-   printf("%-7s\t%-12s%-32s%-18s%-18s\n",num,cod,nom,creditos,sistema);
-   raya1();
+   raya2Cur();
+   printf("%-7s\t%-12s%-32s%-18s\n",num,cod,nom,escuela);
+   raya1Cur();
 }
 
 void mostrarVectorCurso(CURSO x[MAX],int dx){
@@ -942,9 +992,9 @@ void mostrarVectorCurso(CURSO x[MAX],int dx){
    if(dx>0){
       encabezado5();
       for(i=0;i<dx;i++){
-         printf("%3d\t%-12d%-32s%-18d%-18c\n",i+1,x[i].codCur,x[i].nomCur,x[i].creditos,x[i].sistema);
+         printf("%3d\t%-12d%-32s%-18s\n",i+1,x[i].codCur,x[i].nomCur,x[i].scal);
       }
-      raya1();
+      raya1Cur();
       cout <<"\n\n";
       system("pause");
    }
@@ -1016,23 +1066,4 @@ void ordenarxCodigoCurDoc(Docente x,int dx){
    else{
       printf("Vector vacioooo...!\n");
    }
-}
-
-void insertarPosPc(PRACTICA p[MAX],int pos,int dx,int pc[10]){
-   int i,n;
-   int suma=0;
-   
-   if(dx>0){
-      for(i=0;i<10;i++){
-         p[pos-1].prac[i] = pc[i];
-         suma +=pc[i];
-      }
-      p[pos-1].promedio=suma/10;
-      printf("%d",p[pos-1].promedio);
-      
-   }
-   else{
-      printf("Vector Vacio...");
-   }
-   mostrarVectorPc(p,dx);
 }
