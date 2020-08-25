@@ -1400,12 +1400,12 @@ void eliminarxValorDoc(Docente x[MAX],int *dx,Docente dato){
          }
          //verifica escuela
          if(bandN==1){
-            for(int j=0;j<strlen(x[i].scal);j++){
-               if(x[i].scal[j]!=dato.scal[j]){
+            for(int j=0;j<strlen(x[i].escuela);j++){
+               if(x[i].escuela[j]!=dato.escuela[j]){
                   bandN=0;
-                  j=strlen(x[i].scal)+1;
+                  j=strlen(x[i].escuela)+1;
                }
-               else if(j==strlen(x[i].scal)-1){
+               else if(j==strlen(x[i].escuela)-1){
                   bandN=1;
                }
             }
@@ -1449,17 +1449,17 @@ void eliminarxValorCur(CURSO x[MAX],int *dx,CURSO dato){
          }
          //verifica escuela
          if(bandN==1){
-            for(int j=0;j<strlen(x[i].scal);j++){
-               if(x[i].scal[j]!=dato.scal[j]){
+            for(int j=0;j<strlen(x[i].escuela);j++){
+               if(x[i].escuela[j]!=dato.escuela[j]){
                   bandN=0;
-                  j=strlen(x[i].scal)+1;
+                  j=strlen(x[i].escuela)+1;
                }
-               else if(j==strlen(x[i].scal)-1){
+               else if(j==strlen(x[i].escuela)-1){
                   bandN=1;
                }
             }
          }
-         if(x[i].codCur==dato.codCur && x[i].creditos==dato.creditos && bandN==1){
+         if(x[i].codCur==dato.codCur && x[i].creditosCur==dato.creditosCur && bandN==1){
             for(int j=i;j<n;j++){
                fflush(stdin);
                x[j]=x[j+1];
