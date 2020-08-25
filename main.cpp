@@ -926,11 +926,13 @@ void encabezado3()
    char num[]="NUMERO";
    char cod[]="CODIGO";
    char nom[]="APELLIDOS, Nombres";
+   char scal[]="ESCUELA";
+   char peso[]="PESO";
 
    printf("\t\t%s\n\n",title);
-   raya2Doc();
-   printf("%-7s\t%-12s%-32s\n",num,cod,nom);
-   raya1Doc();
+   raya2();
+   printf("%-7s\t%-12s%-32s%-18s%-18s\n",num,cod,nom,scal,peso);
+   raya1();
 }
 
 void mostrarVectorDoc(Docente x[MAX], int dx)
@@ -939,9 +941,9 @@ void mostrarVectorDoc(Docente x[MAX], int dx)
    if(dx>0){
       encabezado3();
       for(i=0;i<dx;i++){
-         printf("%3d\t%-12d%-32s\n",i+1,x[i].codDoc,x[i].nomDoc);
+         printf("%3d\t%-12d%-32s%-18s%-18.2f\n",i+1,x[i].codDoc,x[i].nomDoc,x[i].scal,x[i].peso);
       }
-      raya1Doc();
+      raya1();
       cout <<"\n\n";
       system("pause");
    }
@@ -982,15 +984,6 @@ void mostrarCursosxDoc(Docente x,int dx){
    }
 }
 
-void raya2Cur()
-{
-   printf("===============================================================\n");
-}
-void raya1Cur()
-{
-   printf("---------------------------------------------------------------\n");
-}
-
 void encabezado5()
 {
    system("cls");
@@ -998,12 +991,13 @@ void encabezado5()
    char num[]="NUMERO";
    char cod[]="CODIGO";
    char nom[]="CURSO";
-   char escuela[]="ESCUELA";
+   char creditos[]="CREDITOS";
+   char sistema[]="Sistema Calific";
 
    printf("\t\t%s\n\n",title);
-   raya2Cur();
-   printf("%-7s\t%-12s%-32s%-18s\n",num,cod,nom,escuela);
-   raya1Cur();
+   raya2();
+   printf("%-7s\t%-12s%-32s%-18s%-18s\n",num,cod,nom,creditos,sistema);
+   raya1();
 }
 
 void mostrarVectorCurso(CURSO x[MAX],int dx){
@@ -1011,9 +1005,9 @@ void mostrarVectorCurso(CURSO x[MAX],int dx){
    if(dx>0){
       encabezado5();
       for(i=0;i<dx;i++){
-         printf("%3d\t%-12d%-32s%-18s\n",i+1,x[i].codCur,x[i].nomCur,x[i].scal);
+         printf("%3d\t%-12d%-32s%-18d%-18c\n",i+1,x[i].codCur,x[i].nomCur,x[i].creditos,x[i].sistema);
       }
-      raya1Cur();
+      raya1();
       cout <<"\n\n";
       system("pause");
    }
@@ -1021,6 +1015,7 @@ void mostrarVectorCurso(CURSO x[MAX],int dx){
       printf("Vector vaciooo...\n\n");
    }
 }
+
 void ordenarxCodigoDoc(Docente x[MAX],int dx){
    int i, j;
    Docente aux;
