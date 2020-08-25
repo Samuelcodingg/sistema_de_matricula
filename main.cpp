@@ -93,6 +93,21 @@ void mostrarCursosxDoc(Docente x,int dx);
 void ordenarxCodigoDoc(Docente x[MAX],int dx);
 void ordenarxCodigoCur(CURSO x[MAX],int dx);
 void ordenarxCodigoCurDoc(Docente x,int dx);
+void insertarPosPc(PRACTICA p[MAX],int pos,int dx,int pc[10]);
+int buscarPcxCodCurso(PRACTICA p[MAX],int dx,int cod);
+void editarPc(PRACTICA p[MAX],int dx);
+void editarParcial(EXPARCIAL par[MAX],int dx);
+int buscarParcialxCodCurso(EXPARCIAL par[MAX],int dx,int cod);
+void insertarPosParcial(EXPARCIAL par[MAX],int *dx,int pos,int expar);
+void editarFinal(EXPARCIAL fin[MAX],int dx);
+int buscarxCodigoFinal(EXPARCIAL fin[MAX],int dx,int cod);
+void insertarPosFinal(EXPARCIAL fin[MAX],int *dx,int pos,int exfin);
+void editarCurso(CURSO x[MAX],int dx);
+void buscarxCodCur(CURSO x[MAX],int dx,int cod);
+void insertarPosCurso(CURSO x[MAX],int *dx,int pos,CURSO y);
+void editarDocente(Docente x[MAX],int dx);
+void buscarxCodigoDoc(Docente x[MAX],int dx,int cod);
+void insertarPosDocente(Docente x[MAx],int pos,Docente y);
 
 void encabezado1();
 void encabezado2(char title[]);
@@ -1065,5 +1080,262 @@ void ordenarxCodigoCurDoc(Docente x,int dx){
    }
    else{
       printf("Vector vacioooo...!\n");
+   }
+}
+void insertarPosPc(PRACTICA p[MAX],int pos,int dx,int pc[10]){
+   int i,n;
+   int suma=0;
+   
+   if(dx>0){
+      for(i=0;i<10;i++){
+         p[pos-1].prac[i] = pc[i];
+         suma +=pc[i];
+      }
+      p[pos-1].promedio=suma/10;
+      printf("%d",p[pos-1].promedio);
+      
+   }
+   else{
+      printf("Vector Vacio...");
+   }
+   mostrarVectorPc(p,dx);
+}
+int buscarPcxCodCurso(PRACTICA p[MAX],int dx,int cod){
+   int pos = 0,i;
+
+   for(i=0;i<dx;i++){
+      if(p[i].codCurso==cod){
+         pos = i;
+      }
+   }
+   
+   return pos;
+}
+void editarPc(PRACTICA p[MAX],int dx){
+   int cod,edit,i;
+   printf("Digite el codigo del curso:");
+   scanf("%d",&cod);
+
+   edit = buscarxCursoPc(p,dx,cod);
+
+   if(edit == 0){
+      printf("Practica no encontrada");
+   }
+   else{
+      for(i=0;i<10;i++){
+         printf("\n\n\tIngrese las notas de las practicas calificadas: \n");
+         printf("\n\t\tPractica %d: ",i+1);
+         cin>>p[edit].prac[i];
+         cout<<endl;
+         suma=suma+p[edit].prac[i];
+      }
+      p[edit].promedio=suma/10;
+      suma=0;
+      printf("\n\tEl promedio de practicas del alumno %d : es %d\n\n",edit+1,p[edit].promedio);
+      printf("\n**Promedio de practicas guardada con exito...\n");
+   }
+   
+}
+
+
+
+int buscarParcialxCodCurso(EXPARCIAL par[MAX],int dx,int cod){
+   int pos = 0,i;
+
+   for(i=0;i<dx;i++){
+      if(par[i].codCur==cod){
+         pos = i;
+      }
+   }
+   
+   return pos; 
+}
+void editarParcial(EXPARCIAL par[MAX],int dx){
+   int cod,edit,i;
+   printf("Digite el codigo del curso:");
+   scanf("%d",&cod);
+
+   edit = buscarxCursoPc(par,dx,cod);
+
+   if(edit == 0){
+      printf("Parcial no encontrado");
+   }
+   else{  
+      printf("\n\n\tIngrese la nota del examen parcial: ");
+      cin>>par[edit].expar;
+      cout<<endl;
+      printf("\n**Nota del examen parcial guardada con exito...\n");
+   }
+}  
+void insertarPosParcial(EXPARCIAL par[MAX],int *dx,int pos,int expar){
+   int i;
+   if(dx+1>MAX){
+      for(i=dx+1;i>pos+1;i--){
+         par[i-1].expar=par[i].expar;
+      }
+      par[pos-1].expar = expar;
+      dx +=1;
+   }
+   else{
+      printf("Excede Dimension");
+   }
+}
+
+
+
+int buscarxCodigoFinal(EXFINAL fin[MAX],int dx,int cod){
+   int pos = 0,i;
+
+   for(i=0;i<dx;i++){
+      if(fin[i].codCur==cod){
+         pos = i;
+      }
+   }
+   
+   return pos;    
+}
+void editarFinal(EXFINAL fin[MAX],int dx){
+   int cod,edit,i;
+   printf("Digite el codigo del curso:");
+   scanf("%d",&cod);
+
+   edit = buscarxCodigoFinal(fin,dx,cod);
+
+   if(edit == 0){
+      printf("Examen Final no encontrado");
+   }
+   else{  
+      printf("\n\n\tIngrese la nota del examen Final: ");
+      cin>>fin[edit].exfin;
+      cout<<endl;
+      printf("\n**Nota del examen Final guardada con exito...\n");
+   }
+}
+void insertarPosFinal(EXPARCIAL fin[MAX],int *dx,int pos,int exfin){
+   int i;
+   if(dx+1>MAX){
+      for(i=dx+1;i>pos+1;i--){
+         fin[i-1].exfin=fin[i].exfin;
+      }
+      fin[pos-1].exfin = exfin;
+      dx +=1;
+   }
+   else{
+      printf("Excede Dimension");
+   }
+}
+
+
+void buscarxCodCur(CURSO x[MAX],int dx,int cod){
+   int pos = 0,i;
+
+   for(i=0;i<dx;i++){
+      if(x[i].codCur==cod){
+         pos = i;
+      }
+   }
+   
+   return pos;
+}
+void editarCurso(CURSO x[MAX],int dx){
+   int cod,edit,i;
+   printf("Digite el codigo del curso:");
+   scanf("%d",&cod);
+
+   edit = buscarxCodCur(x,dx,cod);
+
+   if(edit == 0){
+      printf("Curso no encontrado");
+   }
+   else{  
+      printf("\n\n\tIngrese datos del Curso: ");
+      printf("Codigo: ");
+      cin>>x[edit].codCur;
+      printf("Nombre: ");
+      cin>>x[edit].nomCur;
+      printf("Sistema de Calificaciones: ");
+      cin>>x[edit].scal;
+      printf("Creditos: ");
+      cin>>x[edit].creditos;
+      cout<<endl;
+      printf("\n**Datos del Curso guardados con exito...\n");
+   }
+}
+void insertarPosCurso(CURSO x[MAX],int *dx,int pos,CURSO y){
+   int i;
+   if(dx+1>MAX){
+      for(i=dx+1;i>pos+1;i--){
+         x[i-1].codCur=x[i].codCur;
+         strcpy(x[i-1].nomCur;x[i].nomCur);
+         x[i-1].scal=x[i].scal;
+         x[i-1].creditos=x[i].creditos;
+      }
+      x[pos-1].codCur = y.codCur;
+      strcpy(x[pos-1].nomCur;y.nomCur);
+      x[pos-1].scal = y.scal;
+      x[pos-1].creditos = y.creditos;
+      dx +=1;
+   }
+   else{
+      printf("Excede Dimension");
+   }
+}
+
+void insertarPosDocente(Docente x[MAX],int *dx,int pos,Docente y){
+   int i;
+   if(dx+1>MAX){
+      for(i=dx+1;i>pos+1;i--){
+         x[i-1].codDoc=x[i].codDoc;
+         strcpy(x[i-1].nomDoc;x[i].nomDoc);
+         x[i-1].c=x[i].c;
+         x[i-1].scal=x[i].scal;
+         x[i-1].peso=x[i].peso;
+      }
+      x[pos-1].codDoc = y.codDoc;
+      strcpy(x[pos-1].nomDoc;y.nomDoc);
+      x[pos-1].c = y.c;
+      x[pos-1].scal = y.scal;
+      x[pos-1].peso = y.peso;
+      dx +=1;
+   }
+   else{
+      printf("Excede Dimension");
+   }
+}
+void buscarxCodigoDoc(Docente x[MAX],int dx,int cod){
+   int pos = 0,i;
+
+   for(i=0;i<dx;i++){
+      if(x[i].codDoc==cod){
+         pos = i;
+      }
+   }
+   
+   return pos;
+}
+void editarDocente(Docente x[MAX],int dx){
+   int cod,edit,i;
+   printf("Digite el codigo del Docente:");
+   scanf("%d",&cod);
+
+   edit = buscarxCodCur(x,dx,cod);
+
+   if(edit == 0){
+      printf("Docente no encontrado");
+   }
+   else{  
+      printf("\n\n\tIngrese datos del Doncente: ");
+      printf("Codigo: ");
+      cin>>x[edit].codDoc;
+      printf("Nombre: ");
+      cin>>x[edit].codDoc;
+      printf("Curso: ");
+      cin>>x[edit].c;
+      printf("Sistema de Calificaciones: ");
+      cin>>x[edit].scal;
+      printf("Peso: ");
+      cin>>x[edit].peso;
+      cout<<endl;
+      printf("\n**Datos del Docente guardados con exito...\n");
    }
 }
