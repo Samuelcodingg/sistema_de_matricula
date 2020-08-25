@@ -131,7 +131,7 @@ void raya1Cur();
 void raya2Cur();
 
 int Menu(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[MAX],CURSO curs[],Docente doc[],int *dx,int *dcursos,int *ddoc);
-void Menu2(int op,ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[MAX],CURSO curs[],Docente doc[],int dx,int *dcursos,int *ddoc);
+void Menu2(int op,ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[MAX],CURSO curs[],Docente doc[],int *dx,int *dcursos,int *ddoc);
 
 int main()
 {
@@ -146,12 +146,11 @@ int main()
    crearVector(&na,&nc,&nd);
    printf("\n\n**Llenado del registro ALUMNOS:\n\n");
    leerVectorAlu(a,&na);
-   mostrarVectorAlu(a,na);
    do{
       op=Menu(a,p,par,fin,curs,doc,&na,&nc,&nd);
       if(op!=0&&op==5||op==2||op==1){
          if(na>0){
-            Menu2(op,a,p,par,fin,curs,doc,na,&nc,&nd);
+            Menu2(op,a,p,par,fin,curs,doc,&na,&nc,&nd);
          }else{
             printf("\nRegistro ALUMNOS vacio...");
          }
@@ -833,7 +832,7 @@ int Menu(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[MAX],CURSO
    }
    return(op);
 }
-void Menu2(int op,ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[MAX],CURSO curs[],Docente doc[],int dx,int *dcursos,int *ddoc){
+void Menu2(int op,ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[MAX],CURSO curs[],Docente doc[],int *dx,int *dcursos,int *ddoc){
    int op2;
    system("cls");
    printf(" \n\nSOBRE QUE VECTOR DESEA REALIZAR LA OPERACION?: \n\n");
@@ -857,13 +856,13 @@ void Menu2(int op,ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[M
                   system("pause");
                   break;
                case 2:
-                  leerVectorPc(x,p,dx);
+                  leerVectorPc(x,p,*dx);
                   break;
                case 3:
-                  leerVectorParcial(x,par,dx);
+                  leerVectorParcial(x,par,*dx);
                   break;
                case 4:
-                  leerVectorFinal(x,fin,dx);
+                  leerVectorFinal(x,fin,*dx);
                   break;
 	       case 5:
                   leerVectorCursos(curs,&*dcursos);
@@ -876,35 +875,35 @@ void Menu2(int op,ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[M
          case 2://mostrar
             switch(op2){
                case 1:
-                  mostrarVectorAlu(x,dx);
+                  mostrarVectorAlu(x,*dx);
                   break;
                case 2:
-                  mostrarVectorPc(p,dx);
+                  mostrarVectorPc(p,*dx);
                   break;
                case 3:
-                  mostrarVectorParcial(par,dx);
+                  mostrarVectorParcial(par,*dx);
                   break;
                case 4:
-                  mostrarVectorFinal(fin,dx);
+                  mostrarVectorFinal(fin,*dx);
                   break;
             }
             break;
          case 5://editar
             switch(op2){
                case 1:
-                  editarporCodigoAlu(x,dx);
+                  editarporCodigoAlu(x,*dx);
                   system("pause");
                   break;
                case 2:
-                  editarporCodigoPc(p,dx);
+                  editarporCodigoPc(p,*dx);
                   system("pause");
                   break;
                case 3:
-                  editarporCodigoParcial(par,dx);
+                  editarporCodigoParcial(par,*dx);
                   system("pause");
                   break;
                case 4:
-                  editarporCodigoFinal(fin,dx);
+                  editarporCodigoFinal(fin,*dx);
                   system("pause");
                   break;
             }
