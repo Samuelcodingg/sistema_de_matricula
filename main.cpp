@@ -999,7 +999,7 @@ void encabezado5()
 
    printf("\t\t%s\n\n",title);
    raya2();
-   printf("%-7s\t%-12s%-32s%-18s%-18s\n",num,cod,nom,creditosCur,sistema);
+   printf("%-7s\t%-12s%-32s%-18s%-18s\n",num,cod,nom,creditos,sistema);
    raya1();
 }
 
