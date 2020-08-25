@@ -222,44 +222,57 @@ void mostrarVectorAlu(ALUMNO x[MAX], int dx)
 void leerVectorPc(ALUMNO x[MAX],PRACTICA p[MAX], int dx,CURSO curs[MAX], int dcursos){
    int i=0,j=0,k=0,comp,suma;
    if(dx>0){
-     for(i=0;i<dx;i++){
-         mostrarVectorAlu(x,dx);
-         printf("\n\tINGRESO DE LAS PRACTICAS CALIFICADAS:\n\n");
-         printf("\nIngrese los codigos de los alumnos: \n\n");
-         comp=0;//cambia de valor si el codigo se encuentra en el registro AlUMNOS
-         do{
-            cout <<"\n\tCodigo "<<i+1<<" ---> ";
-            cin >>p[i].codAlu;
-            for(j=0;j<dx;j++){//compara si el codigo digitado se encuentra en el registro ALUMMNOS
-               if(x[j].codAlu==p[i].codAlu){
-                  comp=1;
+         for(i=0;i<dx;i++){
+            mostrarVectorAlu(x,dx);
+            printf("\n\tINGRESO DE LAS PRACTICAS CALIFICADAS:\n\n");
+            if(i==0){
+               printf("\nIngrese el codigo del curso: \n\n");
+               comp=0;//cambia de valor si el codigo se encuentra en el registro de CURSOS
+               do{
+                  cout <<"\n\tCodigo: ";
+                  cin >>p[i].codCur;
+                  for(j=0;j<dx;j++){//compara si el codigo digitado se encuentra en el de CURSOS
+                     if(curs[j].codCur==p[i].codCur){
+                        comp=1;
+                     }
+                  }
+                  if(comp==0){
+                     printf("\nEl codigo digitado no se encuentra en el registro de CURSOS.");
+                     printf("\nVuelva a digitar el codigo del curso: \n");
+                  }
+               }while(comp!=1);
+            }
+            printf("\nIngrese los codigos de los alumnos: \n\n");
+            comp=0;//cambia de valor si el codigo se encuentra en el registro AlUMNOS
+            do{
+               cout <<"\n\tCodigo "<<i+1<<" ---> ";
+               cin >>p[i].codAlu;
+               for(j=0;j<dx;j++){//compara si el codigo digitado se encuentra en el registro ALUMMNOS
+                  if(x[j].codAlu==p[i].codAlu){
+                     comp=1;
+                  }
                }
+               if(comp==0){
+                  printf("\nEl codigo digitado no se encuentra en el registro ALUMNOS.");
+                  printf("\nVuelva a digitar el codigo: \n");
+               }
+            }while(comp!=1);
+
+            printf("\n\n\tIngrese las notas de las practicas calificadas: \n");
+            for(k=0;k<10;k++){
+               printf("\n\t\tPractica %d: ",k+1);
+               cin>>p[i].prac[k];
+               cout<<endl;
+               suma=suma+p[i].prac[k];
             }
-            if(comp==0){
-               printf("\nEl codigo digitado no se encuentra en el registro ALUMNOS.");
-               printf("\nVuelva a digitar el codigo: \n");
-            }
-         }while(comp!=1);
-         printf("\n\n\tIngrese las notas de las practicas calificadas: \n");
-         for(k=0;k<10;k++){
-            printf("\n\t\tPractica %d: ",k+1);
-            cin>>p[i].prac[k];
-            cout<<endl;
-            suma=suma+p[i].prac[k];
+            p[i].promedio=suma/10;
+            suma=0;
+            printf("\n\tEl promedio de practicas del alumno %d : es %d\n\n",i+1,p[i].promedio);
          }
-         p[i].promedio=suma/10;
-         suma=0;
-         printf("\n\tEl promedio de practicas del alumno %d : es %d\n\n",i+1,p[i].promedio);
-         printf("\n**Promedio de practicas guardada con exito...\n");
-         if(i<dx-1){
-            printf("\n**Continue con el siguiente alumno...\n\n");
-         }
-         system("pause");
-      }
    }else{
-      system("pause");
-      exit(1);
+      printf("\nRegistro de alumnos vaciooo...\n\n");
    }
+   system("pause");
 }
 void mostrarVectorPc(PRACTICA p[MAX],int dx){
    int i=0,j=0,contblanco=0;
@@ -279,9 +292,8 @@ void mostrarVectorPc(PRACTICA p[MAX],int dx){
       printf("\n");
       system("pause");
    }else{
-      printf("\nReporte de practicas vacio.\n");
+      printf("\nRegistro de alumnos vaciooo.\n\n");
       system("pause");
-      exit(1);
    }
 }
 
@@ -291,6 +303,23 @@ void leerVectorParcial(ALUMNO x[MAX],EXPARCIAL par[MAX], int dx,CURSO curs[MAX],
       for(i=0;i<dx;i++){
          mostrarVectorAlu(x,dx);
          printf("\n\tINGRESO DE LOS EXAMENES PARCIALES:\n\n");
+         if(i==0){
+            printf("\nIngrese el codigo del curso: \n\n");
+            comp=0;//cambia de valor si el codigo se encuentra en el registro de CURSOS
+            do{
+               cout <<"\n\tCodigo: ";
+               cin >>par[i].codCur;
+               for(j=0;j<dx;j++){//compara si el codigo digitado se encuentra en el de CURSOS
+                  if(curs[j].codCur==par[i].codCur){
+                     comp=1;
+                  }
+               }
+               if(comp==0){
+                  printf("\nEl codigo digitado no se encuentra en el registro de CURSOS.");
+                  printf("\nVuelva a digitar el codigo del curso: \n");
+               }
+            }while(comp!=1);
+         }
          printf("\nIngrese los codigos de los alumnos: \n\n");
          comp=0;//cambia de valor si el codigo se encuentra en el registro AlUMNOS
          do{
@@ -316,8 +345,8 @@ void leerVectorParcial(ALUMNO x[MAX],EXPARCIAL par[MAX], int dx,CURSO curs[MAX],
          system("pause");
       }
    }else{
+      printf("\nRegistro de alumnos vaciooo...\n\n");
       system("pause");
-      exit(1);
    }
 }
 void mostrarVectorParcial(EXPARCIAL par[MAX],int dx){
@@ -338,8 +367,8 @@ void mostrarVectorParcial(EXPARCIAL par[MAX],int dx){
       printf("\n");
       system("pause");
    }else{
+      printf("\nRegistro de alumnos vaciooo...\n\n");
       system("pause");
-      exit(1);
    }
 }
 
@@ -349,6 +378,23 @@ void leerVectorFinal(ALUMNO x[MAX],EXFINAL fin[MAX], int dx,CURSO curs[MAX], int
       for(i=0;i<dx;i++){
          mostrarVectorAlu(x,dx);
          printf("\n\tINGRESO DE LOS EXAMENES FINALES:\n\n");
+         if(i==0){
+            printf("\nIngrese el codigo del curso: \n\n");
+            comp=0;//cambia de valor si el codigo se encuentra en el registro de CURSOS
+            do{
+               cout <<"\n\tCodigo: ";
+               cin >>fin[i].codCur;
+               for(j=0;j<dx;j++){//compara si el codigo digitado se encuentra en el de CURSOS
+                  if(curs[j].codCur==fin[i].codCur){
+                     comp=1;
+                  }
+               }
+               if(comp==0){
+                  printf("\nEl codigo digitado no se encuentra en el registro de CURSOS.");
+                  printf("\nVuelva a digitar el codigo del curso: \n");
+               }
+            }while(comp!=1);
+         }
          printf("\nIngrese los codigos de los alumnos: \n\n");
          comp=0;//cambia de valor si el codigo se encuentra en el registro AlUMNOS
          do{
@@ -374,8 +420,8 @@ void leerVectorFinal(ALUMNO x[MAX],EXFINAL fin[MAX], int dx,CURSO curs[MAX], int
          system("pause");
       }
    }else{
+      printf("\nRegistro de alumnos vaciooo...\n\n");
       system("pause");
-      exit(1);
    }
 }
 void mostrarVectorFinal(EXFINAL fin[MAX],int dx){
@@ -397,19 +443,20 @@ void mostrarVectorFinal(EXFINAL fin[MAX],int dx){
       printf("\n");
       system("pause");
    }else{
+      printf("\nRegistro de alumnos vaciooo...\n\n");
       system("pause");
-      exit(1);
    }
 }
 void leerVectorCursos(CURSO curs[MAX], int *dcursos){
-   int i=-1, n, val;
+   int i=0, n;
    printf("\n\tINGRESO DE LA LISTA DE CURSOS:\n\n");
+   printf("\n\nNumero de CURSOS---> ");
+   scanf("%d", &n);
    if(n < MAX){
-      do{
-         i++;
+      for(i=0;i<n;i++){
          printf("\n\tCurso:  %d\n", i+1);
-         cout <<" Codigo "<<i+1<<"('0' para terminar) ---> ";
-         cin >>curs[i].codCur;
+         cout <<" Codigo ---> ";
+          cin >>curs[i].codCur;
          if(curs[i].codCur!=0){
             cout <<" Nombre ---> ";
             cin>>curs[i].nomCur;
@@ -420,44 +467,62 @@ void leerVectorCursos(CURSO curs[MAX], int *dcursos){
          }
          cout<<endl;
       }
-      while(curs[i].codCur!=0);
-      *dcursos= i;
+      *dcursos = i;
    }
    else{
       printf(" %d dimension fuera de RANGO es mayor a Max = %d\n\n", n, MAX);
-      system("pause");
       exit(1);
    }
+   system("pause");
 }
 
 void leerVectorDocente(CURSO curs[MAX],Docente doc[MAX],int dcursos, int *ddoc){
-   int i=-1, n, val,comp;
+   int i=0, n,k,j,comp;
    printf("\n\tLLENADO DEl REGISTRO DE DOCENTES:\n\n");
+   printf("\n\nNumero de DOCENTES ---> ");
+   scanf("%d", &n);
    if(n < MAX){
-      do{
-         i++;
+      for(i=0;i<n;i++){
          printf("\n\tDocente:  %d\n", i+1);
-         cout <<" Codigo "<<i+1<<"('0' para terminar)---> ";
+         cout <<" Codigo ---> ";
          cin >>doc[i].codDoc;
-         if(doc[i].codDoc!=0){
-            cout <<" Nombre ---> ";
-            cin>>doc[i].nomDoc;
-            cout <<" Escuela ---> ";
-            cin >>doc[i].escuela;
-            cout <<" Peso(kg.)---> ";
-            cin >>doc[i].peso;
-         }
+         cout <<" Nombre ---> ";
+         cin>>doc[i].nomDoc;
+         cout <<" Escuela ---> ";
+         cin >>doc[i].escuela;
+         cout <<" Peso(kg.)---> ";
+         cin >>doc[i].peso;
+         cout<<" Cursos dictados por el profesor: ";
+         do{
+            k++;
+            cout <<"\n\tCurso "<<k+1<<"('.' para terminar)  ---> ";
+            cin >>doc[i].c[k].nomCur;
+            if(strcmp(doc[i].c[k].nomCur,".")!=0){
+               do{
+                  for(j=0;j<dcursos;j++){//compara si el curso ingresado se encuentra en el registro CURSOS
+                     if(strcmp(curs[j].nomCur,doc[i].c[k].nomCur)==0){
+                        doc[i].c[k]=curs[j];
+                        comp=1;
+                     }
+                  }
+                  if(comp==0){
+                     printf("\nEl curso ingresado no se encuentra en el registro de CURSOS.");
+                     printf("\nVuelva a ingresar el curso: \n");
+                  }
+               }while(comp!=1);
+            }
+         }while(strcmp(doc[i].c[k].nomCur,".")!=0);
          cout<<endl;
       }
-      while(doc[i].codDoc!=0);
-      *ddoc= i;
+      *ddoc = i;
    }
    else{
       printf(" %d dimension fuera de RANGO es mayor a Max = %d\n\n", n, MAX);
-      system("pause");
       exit(1);
    }
+   system("pause");
 }
+
 
 void buscarporCodigo(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[MAX],int dx){
    int cd,i,comp=0;//comp es un valor bandera
