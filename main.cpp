@@ -1266,7 +1266,7 @@ int buscarPcxCodCurso(PRACTICA p[MAX],int dx,int cod){
    int pos = 0,i;
 
    for(i=0;i<dx;i++){
-      if(p[i].codCurso==cod){
+      if(p[i].codCur==cod){
          pos = i;
       }
    }
@@ -1305,7 +1305,7 @@ int buscarParcialxCodCurso(EXPARCIAL par[MAX],int dx,int cod){
    int pos = 0,i;
 
    for(i=0;i<dx;i++){
-      if(par[i].codCurso==cod){
+      if(par[i].codCur==cod){
          pos = i;
       }
    }
