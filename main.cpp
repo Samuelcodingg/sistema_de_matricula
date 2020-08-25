@@ -941,7 +941,7 @@ void mostrarVectorDoc(Docente x[MAX], int dx)
    if(dx>0){
       encabezado3();
       for(i=0;i<dx;i++){
-         printf("%3d\t%-12d%-32s%-18s%-18.2f\n",i+1,x[i].codDoc,x[i].nomDoc,x[i].scal,x[i].peso);
+         printf("%3d\t%-12d%-32s%-18s%-18.2f\n",i+1,x[i].codDoc,x[i].nomDoc,x[i].escuela,x[i].peso);
       }
       raya1();
       cout <<"\n\n";
@@ -996,7 +996,7 @@ void encabezado5()
 
    printf("\t\t%s\n\n",title);
    raya2();
-   printf("%-7s\t%-12s%-32s%-18s%-18s\n",num,cod,nom,creditos,sistema);
+   printf("%-7s\t%-12s%-32s%-18s%-18s\n",num,cod,nom,creditosCur,sistema);
    raya1();
 }
 
@@ -1005,7 +1005,7 @@ void mostrarVectorCurso(CURSO x[MAX],int dx){
    if(dx>0){
       encabezado5();
       for(i=0;i<dx;i++){
-         printf("%3d\t%-12d%-32s%-18d%-18c\n",i+1,x[i].codCur,x[i].nomCur,x[i].creditos,x[i].sistema);
+         printf("%3d\t%-12d%-32s%-18d%-18c\n",i+1,x[i].codCur,x[i].nomCur,x[i].creditosCur,x[i].sistema);
       }
       raya1();
       cout <<"\n\n";
@@ -1444,12 +1444,12 @@ void eliminarxValorCur(CURSO x[MAX],int *dx,CURSO dato){
          }
          //verifica escuela
          if(bandN==1){
-            for(int j=0;j<strlen(x[i].escuela);j++){
-               if(x[i].escuela[j]!=dato.escuela[j]){
+            for(int j=0;j<strlen(x[i].scal);j++){
+               if(x[i].scal[j]!=dato.scal[j]){
                   bandN=0;
-                  j=strlen(x[i].escuela)+1;
+                  j=strlen(x[i].scal)+1;
                }
-               else if(j==strlen(x[i].escuela)-1){
+               else if(j==strlen(x[i].scal)-1){
                   bandN=1;
                }
             }
