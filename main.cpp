@@ -492,7 +492,7 @@ void leerVectorDocente(CURSO curs[MAX],Docente doc[MAX],int dcursos, int *ddoc){
          cin >>doc[i].escuela;
          cout <<" Peso(kg.)---> ";
          cin >>doc[i].peso;
-         cout<<" Cursos dictados por el profesor: ";
+         cout<<" Escriba el(los) curso(s) dictado(s) por el profesor: ";
          do{
             k++;
             cout <<"\n\tCurso "<<k+1<<"('.' para terminar)  ---> ";
