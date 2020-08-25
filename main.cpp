@@ -1114,7 +1114,7 @@ int buscarPcxCodCurso(PRACTICA p[MAX],int dx,int cod){
    return pos;
 }
 void editarPc(PRACTICA p[MAX],int dx){
-   int cod,edit,i;
+   int cod,edit,i,suma=0;
    printf("Digite el codigo del curso:");
    scanf("%d",&cod);
 
