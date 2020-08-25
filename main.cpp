@@ -942,7 +942,7 @@ void Menu2(int op,ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[M
                   break;
                case 4:
                   if(*dcursos>0){
-                     leerVectorParcial(x,par,*dx,curs,*dcursos;
+                     leerVectorParcial(x,par,*dx,curs,*dcursos);
                   }else{
                      printf("\n\nEl registro de CURSOS aun no ha sido llenado.\n\n");
                      system("pause");
