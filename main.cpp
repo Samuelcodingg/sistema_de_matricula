@@ -247,7 +247,7 @@ void leerVectorPc(ALUMNO x[MAX],PRACTICA p[MAX], int dx,CURSO curs[MAX], int dcu
             do{
                cout <<"\n\tCodigo "<<i+1<<" ---> ";
                cin >>p[i].codAlu;
-               for(j=0;j<dx;j++){//compara si el codigo digitado se encuentra en el registro ALUMMNOS
+               for(j=0;j<dcursos;j++){//compara si el codigo digitado se encuentra en el registro ALUMMNOS
                   if(x[j].codAlu==p[i].codAlu){
                      comp=1;
                   }
@@ -309,7 +309,7 @@ void leerVectorParcial(ALUMNO x[MAX],EXPARCIAL par[MAX], int dx,CURSO curs[MAX],
             do{
                cout <<"\n\tCodigo: ";
                cin >>par[i].codCur;
-               for(j=0;j<dx;j++){//compara si el codigo digitado se encuentra en el de CURSOS
+               for(j=0;j<dcursos;j++){//compara si el codigo digitado se encuentra en el de CURSOS
                   if(curs[j].codCur==par[i].codCur){
                      comp=1;
                   }
@@ -384,7 +384,7 @@ void leerVectorFinal(ALUMNO x[MAX],EXFINAL fin[MAX], int dx,CURSO curs[MAX], int
             do{
                cout <<"\n\tCodigo: ";
                cin >>fin[i].codCur;
-               for(j=0;j<dx;j++){//compara si el codigo digitado se encuentra en el de CURSOS
+               for(j=0;j<dcursos;j++){//compara si el codigo digitado se encuentra en el de CURSOS
                   if(curs[j].codCur==fin[i].codCur){
                      comp=1;
                   }
