@@ -161,7 +161,7 @@ int main()
 
    do{
       op=Menu(a,p,par,fin,curs,doc,&na,&nc,&nd);
-      if(op!=0&&op!=4&&op!=6&&op!=7){
+      if(op!=0&&op!=4&&op!=6&&op!=7&&op!=8){
            Menu2(op,a,p,par,fin,curs,doc,&na,&nc,&nd,&ncd);
        }
    }while(op>=1&&op<=8);
@@ -1124,22 +1124,6 @@ void Menu2(int op,ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[M
                 case 6:
                   editarDocente(doc,*ddoc);
                   system("pause");
-                  break;
-            }
-            break;
-	case 8://eliminar por posicion
-            switch(op2){
-               case 1:
-                  break;
-               case 2:
-                  break;
-               case 3:
-                  break;
-               case 4:
-                  break;
-               case 5:
-                  break;
-               case 6:
                   break;
             }
             break;
