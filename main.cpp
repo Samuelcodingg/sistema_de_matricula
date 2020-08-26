@@ -92,7 +92,7 @@ void buscarCursoporCodigo(CURSO curs,int dcurso);
 void buscarPcporCodigo(ALUMNO x[MAX],PRACTICA p[MAX],int dx);
 void buscarParcialporCodigo(ALUMNO x[MAX],EXPARCIAL par[MAX],int dx);
 void buscarFinalporCodigo(ALUMNO x[MAX],EXFINAL fin[MAX],int dx);
-void buscarDocenteporCodigo(CURSO curs[MAX],Docente doc[MAX], int dcursos,int ddoc,int dcursosxdocente[MAX]);
+void buscarDocenteporCodigo(Docente doc[MAX],int ddoc,int dcursosxdocente[MAX]);
 //BUSCAR(AUXILIARES)
 int buscarPcxCodCurso(PRACTICA p[MAX],int dx,int cod);
 int buscarParcialxCodCurso(EXPARCIAL par[MAX],int dx,int cod);
@@ -535,111 +535,136 @@ void leerVectorDocente(CURSO curs[MAX],Docente doc[MAX],int dcursos, int *ddoc,i
 
 void buscarAluporCodigo(ALUMNO x[MAX],int dx){
    int cd,i,comp=0;//comp es un valor bandera
-   printf("\n\nIngrese el codigo del alumno a buscar: ");
-   scanf("%i",&cd);
-   for(i=0;i<dx;i++){
-      if(x[i].codAlu==cd){
-         comp=1;
-         printf("\nAlumno %d\n",i+1);
-         printf("Nombre: %s\n",x[i].nomAlu);
-         printf("Escuela: %s\n",x[i].escuela);
-         printf("Peso: %.1f\n",x[i].peso);
-         printf("Fecha de nacimiento: %d/%d/%d \n",x[i].fnac.dia,x[i].fnac.mes,x[i].fnac.anio);
-      }
-   }
-   if(comp==0){
-      printf("No se encontro alumnos con el codigo ingresado %d\n",cd);
-   }
-}
-void buscarCursoporCodigo(CURSO curs[MAX], int dcurso){
-   int cd,i,comp=0;//comp es un valor bandera
-   printf("\n\nIngrese el codigo del curso a buscar: ");
-   scanf("%i",&cd);
-   for(i=0;i<dcurso;i++){
-      if(curs[i].codCur==cd){
-         comp=1;
-         printf("\nCurso %d\n",i+1);
-         printf("Nombre: %s\n",curs[i].nomCur);
-         printf("Creditos: %d\n",curs[i].creditosCur);
-         printf("Sistema de calificacion: %s\n",curs[i].scal);
-      }
-   }
-   if(comp==0){
-      printf("No se encontraron cursos con el codigo ingresado %d\n",cd);
-   }
-}
-void buscarPcporCodigo(ALUMNO x[MAX],PRACTICA p[MAX],int dx){
-   int cd,i,j,comp=0;//comp es un valor bandera
-   mostrarVectorAlu(x,dx);
-   printf("\n\nIngrese el codigo del alumno a buscar: ");
-   scanf("%i",&cd);
-   for(i=0;i<dx;i++){
-      if(p[i].codAlu==cd){
-         comp=1;
-         printf("\nAlumno %d\n",i+1);
-         printf("\n");
-         for(j=0;j<10;j++){
-            printf("Practica %d: %d\n",j+1,p[i].prac[j]);
+   if(dx>0){
+      printf("\n\nIngrese el codigo del alumno a buscar: ");
+      scanf("%i",&cd);
+      for(i=0;i<dx;i++){
+         if(x[i].codAlu==cd){
+            comp=1;
+            printf("\nAlumno %d\n",i+1);
+            printf("Nombre: %s\n",x[i].nomAlu);
+            printf("Escuela: %s\n",x[i].escuela);
+            printf("Peso: %.1f\n",x[i].peso);
+            printf("Fecha de nacimiento: %d/%d/%d \n",x[i].fnac.dia,x[i].fnac.mes,x[i].fnac.anio);
          }
-         printf("\nPromedio de practicas: %d\n",p[i].promedio);
       }
-   }
-   if(comp==0){
-      printf("No se encontraron practicas de alumnos con el codigo ingresado %d\n",cd);
+      if(comp==0){
+         printf("No se encontro alumnos con el codigo ingresado %d\n",cd);
+      }
+   }else{
+      printf("\nVector vaciooo...\n\n");
    }
 }
 
+void buscarCursoporCodigo(CURSO curs[MAX], int dcurso){
+   int cd,i,comp=0;//comp es un valor bandera
+   if(dcurso>0){
+      printf("\n\nIngrese el codigo del curso a buscar: ");
+      scanf("%i",&cd);
+      for(i=0;i<dcurso;i++){
+         if(curs[i].codCur==cd){
+            comp=1;
+            printf("\nCurso %d\n",i+1);
+            printf("Nombre: %s\n",curs[i].nomCur);
+            printf("Creditos: %d\n",curs[i].creditosCur);
+            printf("Sistema de calificacion: %s\n",curs[i].scal);
+         }
+      }
+      if(comp==0){
+         printf("No se encontraron cursos con el codigo ingresado %d\n",cd);
+      }
+   }else{
+      printf("\nVector vaciooo...\n\n");
+   }
+}
+
+void buscarPcporCodigo(ALUMNO x[MAX],PRACTICA p[MAX],int dx){
+   int cd,i,j,comp=0;//comp es un valor bandera
+   if(dx>0){
+      mostrarVectorAlu(x,dx);
+      printf("\n\nIngrese el codigo del alumno a buscar: ");
+      scanf("%i",&cd);
+      for(i=0;i<dx;i++){
+         if(p[i].codAlu==cd){
+            comp=1;
+            printf("\nAlumno %d\n",i+1);
+            printf("\n");
+            for(j=0;j<10;j++){
+               printf("Practica %d: %d\n",j+1,p[i].prac[j]);
+            }
+            printf("\nPromedio de practicas: %d\n",p[i].promedio);
+         }
+      }
+      if(comp==0){
+         printf("No se encontraron practicas de alumnos con el codigo ingresado %d\n",cd);
+      }
+   }else{
+         printf("\nVector vaciooo...\n\n");
+   }
+}
 void buscarParcialporCodigo(ALUMNO x[MAX],EXPARCIAL par[MAX],int dx){
    int cd,i,comp=0;//comp es un valor bandera
-   mostrarVectorAlu(x,dx);
-   printf("\n\nIngrese el codigo del alumno a buscar: ");
-   scanf("%i",&cd);
-   for(i=0;i<dx;i++){
-	if(par[i].codAlu==cd){
-        comp=1;
-	printf("\nAlumno %d\n",i+1);
-        printf("Nota de parcial: %.1f\n",par[i].expar);
+   if(dx>0){
+      mostrarVectorAlu(x,dx);
+      printf("\n\nIngrese el codigo del alumno a buscar: ");
+      scanf("%i",&cd);
+      for(i=0;i<dx;i++){
+      if(par[i].codAlu==cd){
+           comp=1;
+      printf("\nAlumno %d\n",i+1);
+           printf("Nota de parcial: %.1f\n",par[i].expar);
+         }
       }
+      if(comp==0){
+         printf("No se encontraron examenes parciales de alummnos con el codigo ingresado %d\n",cd);
+      }
+   }else{
+         printf("\nVector vaciooo...\n\n");
    }
-   if(comp==0){
-      printf("No se encontraron examenes parciales de alummnos con el codigo ingresado %d\n",cd);
-}
 }
 void buscarFinalporCodigo(ALUMNO x[MAX],EXFINAL fin[MAX],int dx){
    int cd,i,comp=0;//comp es un valor bandera
-   mostrarVectorAlu(x,dx);
-   printf("\n\nIngrese el codigo del alumno a buscar: ");
-   scanf("%i",&cd);
-   for(i=0;i<dx;i++){
-	if(fin[i].codAlu==cd){
-      comp=1;
-      printf("\nAlumno %d\n",i+1);
-      printf("Nota de final %.1f\n",fin[i].exfin);
-      }
-   }
-   if(comp==0){
-      printf("No se encontraron examenes finales de alumnos con el codigo ingresado %d\n",cd);
-   }
-}
-void buscarDocenteporCodigo(CURSO curs[MAX],Docente doc[MAX],int dcursos,int ddoc,int dcursosxdocente[MAX]){
-   int cd,i,j,comp=0;//comp es un valor bandera
-   printf("\n\nIngrese el codigo del docente a buscar: ");
-   scanf("%i",&cd);
-   for(i=0;i<dcursos;i++){
-      if(doc[i].codDoc==cd){
+   if(dx>0){
+      mostrarVectorAlu(x,dx);
+      printf("\n\nIngrese el codigo del alumno a buscar: ");
+      scanf("%i",&cd);
+      for(i=0;i<dx;i++){
+      if(fin[i].codAlu==cd){
          comp=1;
-         printf("\nDocente %d\n",i+1);
-         printf("Nombre: %s\n",doc[i].nomDoc);
-         printf("Escuela: %s\n",doc[i].escuela);
-         printf("Peso: %.1f\n",doc[i].peso);
-         printf("Cursos dictados por el profesor: \n");
-         for(j=0;j<dcursosxdocente[i];j++){
-            printf("\tCurso %d: %s",j+1, doc[i].c[j].nomCur);
+         printf("\nAlumno %d\n",i+1);
+         printf("Nota de final %.1f\n",fin[i].exfin);
          }
       }
-   }
-   if(comp==0){
-      printf("No se encontraron cursos con el codigo ingresado %d\n",cd);
+      if(comp==0){
+         printf("No se encontraron examenes finales de alumnos con el codigo ingresado %d\n",cd);
+      }
+   }else{
+         printf("\nVector vaciooo...\n\n");
+      }
+}
+void buscarDocenteporCodigo(Docente doc[MAX],int ddoc,int dcursosxdocente[MAX]){
+   int cd,i,j,comp=0;//comp es un valor bandera
+   if(ddoc>0){
+      printf("\n\nIngrese el codigo del docente a buscar: ");
+      scanf("%i",&cd);
+      for(i=0;i<ddoc;i++){
+         if(doc[i].codDoc==cd){
+            comp=1;
+            printf("\nDocente %d\n",i+1);
+            printf("Nombre: %s\n",doc[i].nomDoc);
+            printf("Escuela: %s\n",doc[i].escuela);
+            printf("Peso: %.1f\n",doc[i].peso);
+            printf("Cursos dictados por el profesor: \n");
+            for(j=0;j<dcursosxdocente[i];j++){
+               printf("\tCurso %d: %s",j+1, doc[i].c[j].nomCur);
+            }
+         }
+      }
+      if(comp==0){
+         printf("No se encontraron cursos con el codigo ingresado %d\n",cd);
+      }
+   }else{
+         printf("\nVector vaciooo...\n\n");
    }
 }
 void editarporCodigoAlu(ALUMNO x[MAX], int dx){
@@ -1140,7 +1165,7 @@ void Menu2(int op,ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[M
                   system("pause");
                   break;
                case 6:
-                  buscarDocenteporCodigo(curs,doc,*dcursos,*ddoc,dcursosxdocente);
+                  buscarDocenteporCodigo(doc,*ddoc,dcursosxdocente);
                   cout<<endl;
                   system("pause");
                   break;
