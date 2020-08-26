@@ -465,15 +465,13 @@ void leerVectorCursos(CURSO curs[MAX], int *dcursos){
          printf("\n\tCurso:  %d\n", i+1);
          cout <<" Codigo ---> ";
           cin >>curs[i].codCur;
-         if(curs[i].codCur!=0){
-            cout <<" Nombre ---> ";
-            cin>>curs[i].nomCur;
-            cout <<" Creditos ---> ";
-            cin >>curs[i].creditosCur;
-            cout <<" Sistema de calificacion ---> ";
-            cin >>curs[i].scal;
-         }
-         cout<<endl;
+          cout <<" Nombre ---> ";
+          cin>>curs[i].nomCur;
+          cout <<" Creditos ---> ";
+          cin >>curs[i].creditosCur;
+          cout <<" Sistema de calificacion ---> ";
+          cin >>curs[i].scal;
+          cout<<endl;
       }
       *dcursos = i;
    }
