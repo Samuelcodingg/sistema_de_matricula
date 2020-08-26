@@ -91,6 +91,7 @@ void buscarAluporCodigo(ALUMNO x[MAX],int dx);
 void buscarPcporCodigo(ALUMNO x[MAX],PRACTICA p[MAX],int dx);
 void buscarParcialporCodigo(ALUMNO x[MAX],EXPARCIAL par[MAX],int dx);
 void buscarFinalporCodigo(ALUMNO x[MAX],EXFINAL fin[MAX],int dx);
+//BUSCAR(AUXILIARES)
 int buscarPcxCodCurso(PRACTICA p[MAX],int dx,int cod);
 int buscarParcialxCodCurso(EXPARCIAL par[MAX],int dx,int cod);
 int buscarxCodigoFinal(EXPARCIAL fin[MAX],int dx,int cod);
