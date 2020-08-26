@@ -88,9 +88,11 @@ void mostrarVectorDoc(Docente x[MAX],int dx);
 void mostrarCursosxDoc(Docente x,int dx);
 //BUSCAR
 void buscarAluporCodigo(ALUMNO x[MAX],int dx);
+void buscarCursoporCodigo(CURSO curs,int dcurso);
 void buscarPcporCodigo(ALUMNO x[MAX],PRACTICA p[MAX],int dx);
 void buscarParcialporCodigo(ALUMNO x[MAX],EXPARCIAL par[MAX],int dx);
 void buscarFinalporCodigo(ALUMNO x[MAX],EXFINAL fin[MAX],int dx);
+void buscarDocenteporCodigo(CURSO curs[MAX],Docente doc[MAX], int dcursos,int ddoc);
 //BUSCAR(AUXILIARES)
 int buscarPcxCodCurso(PRACTICA p[MAX],int dx,int cod);
 int buscarParcialxCodCurso(EXPARCIAL par[MAX],int dx,int cod);
