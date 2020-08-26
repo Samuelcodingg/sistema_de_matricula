@@ -77,7 +77,7 @@ void leerVectorPc(ALUMNO x[MAX],PRACTICA p[MAX],int dx,CURSO curs[MAX], int dcur
 void leerVectorParcial(ALUMNO x[MAX],EXPARCIAL par[MAX], int dx,CURSO curs[MAX], int dcursos);
 void leerVectorFinal(ALUMNO x[MAX],EXFINAL fin[MAX], int dx,CURSO curs[MAX], int dcursos);
 void leerVectorCursos(CURSO curs[MAX], int *dcursos);
-void leerVectorDocente(CURSO curs[MAX],Docente doc[MAX], int dcursos,int *ddoc);
+void leerVectorDocente(CURSO curs[MAX],Docente doc[MAX], int dcursos,int *ddoc,int *dcursosxdocente);
 //MOSTRAR
 void mostrarVectorAlu(ALUMNO x[MAX], int dx);
 void mostrarVectorPc(PRACTICA p[MAX],int dx);
@@ -92,7 +92,7 @@ void buscarCursoporCodigo(CURSO curs,int dcurso);
 void buscarPcporCodigo(ALUMNO x[MAX],PRACTICA p[MAX],int dx);
 void buscarParcialporCodigo(ALUMNO x[MAX],EXPARCIAL par[MAX],int dx);
 void buscarFinalporCodigo(ALUMNO x[MAX],EXFINAL fin[MAX],int dx);
-void buscarDocenteporCodigo(CURSO curs[MAX],Docente doc[MAX], int dcursos,int ddoc);
+void buscarDocenteporCodigo(CURSO curs[MAX],Docente doc[MAX], int dcursos,int ddoc,int dcursosxdocente);
 //BUSCAR(AUXILIARES)
 int buscarPcxCodCurso(PRACTICA p[MAX],int dx,int cod);
 int buscarParcialxCodCurso(EXPARCIAL par[MAX],int dx,int cod);
@@ -145,13 +145,13 @@ void raya2Doc();
 void raya1Cur();
 void raya2Cur();
 int Menu(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[MAX],CURSO curs[],Docente doc[],int *dx,int *dcursos,int *ddoc);
-void Menu2(int op,ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[MAX],CURSO curs[],Docente doc[],int *dx,int *dcursos,int *ddoc);
+void Menu2(int op,ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[MAX],CURSO curs[],Docente doc[],int *dx,int *dcursos,int *ddoc,int *dcursosxdocente);
 
 int main()
 {
 
    ALUMNO a[MAX];
-   int na,nc,nd,op;
+   int na,nc,nd,ncd,op;
    PRACTICA p[MAX];
    EXPARCIAL par[MAX];
    EXFINAL fin[MAX];
@@ -162,7 +162,7 @@ int main()
    do{
       op=Menu(a,p,par,fin,curs,doc,&na,&nc,&nd);
       if(op!=0&&op!=4&&op!=6&&op!=7){
-           Menu2(op,a,p,par,fin,curs,doc,&na,&nc,&nd);
+           Menu2(op,a,p,par,fin,curs,doc,&na,&nc,&nd,&ncd);
        }
    }while(op>=1&&op<=8);
    printf("\n\nPrograma finalizado...\n\n");
@@ -233,7 +233,7 @@ void mostrarVectorAlu(ALUMNO x[MAX], int dx)
 void leerVectorPc(ALUMNO x[MAX],PRACTICA p[MAX], int dx,CURSO curs[MAX], int dcursos){
    int i=0,j=0,k=0,comp,suma;
    if(dx>0){
-	 mostrarVectorAlu(x,dx);
+         mostrarVectorAlu(x,dx);
          printf("\n\tINGRESO DE LAS PRACTICAS CALIFICADAS:\n\n");
          for(i=0;i<dx;i++){
             if(i==0){
@@ -253,7 +253,9 @@ void leerVectorPc(ALUMNO x[MAX],PRACTICA p[MAX], int dx,CURSO curs[MAX], int dcu
                   }
                }while(comp!=1);
             }
-            printf("\nIngrese los codigos de los alumnos: \n\n");
+            if(i==0){
+               printf("\nIngrese los codigos de los alumnos: \n\n");
+            }
             comp=0;//cambia de valor si el codigo se encuentra en el registro AlUMNOS
             do{
                cout <<"\n\tCodigo "<<i+1<<" ---> ";
@@ -331,7 +333,9 @@ void leerVectorParcial(ALUMNO x[MAX],EXPARCIAL par[MAX], int dx,CURSO curs[MAX],
                }
             }while(comp!=1);
          }
-         printf("\nIngrese los codigos de los alumnos: \n\n");
+         if(i==0){
+            printf("\nIngrese los codigos de los alumnos: \n\n");
+         }
          comp=0;//cambia de valor si el codigo se encuentra en el registro AlUMNOS
          do{
             cout <<"\n\tCodigo "<<i+1<<" ---> ";
@@ -349,10 +353,6 @@ void leerVectorParcial(ALUMNO x[MAX],EXPARCIAL par[MAX], int dx,CURSO curs[MAX],
          printf("\n\n\tIngrese la nota del examen parcial: ");
          cin>>par[i].expar;
          cout<<endl;
-         printf("\n**Nota del examen parcial guardada con exito...\n");
-         if(i<dx-1){
-            printf("\n**Continue con el siguiente alumno...\n\n");
-         }
          system("pause");
       }
    }else{
@@ -406,7 +406,9 @@ void leerVectorFinal(ALUMNO x[MAX],EXFINAL fin[MAX], int dx,CURSO curs[MAX], int
                }
             }while(comp!=1);
          }
-         printf("\nIngrese los codigos de los alumnos: \n\n");
+         if(i==0){
+            printf("\nIngrese los codigos de los alumnos: \n\n");
+         }
          comp=0;//cambia de valor si el codigo se encuentra en el registro AlUMNOS
          do{
             cout <<"\n\tCodigo "<<i+1<<" ---> ";
@@ -424,10 +426,6 @@ void leerVectorFinal(ALUMNO x[MAX],EXFINAL fin[MAX], int dx,CURSO curs[MAX], int
          printf("\n\n\tIngrese la nota del examen final: ");
          cin>>fin[i].exfin;
          cout<<endl;
-         printf("\n**Nota del examen final guardada con exito...\n");
-         if(i<dx-1){
-            printf("\n**Continue con el siguiente alumno...\n\n");
-         }
          system("pause");
       }
    }else{
@@ -485,7 +483,7 @@ void leerVectorCursos(CURSO curs[MAX], int *dcursos){
    system("pause");
 }
 
-void leerVectorDocente(CURSO curs[MAX],Docente doc[MAX],int dcursos, int *ddoc){
+void leerVectorDocente(CURSO curs[MAX],Docente doc[MAX],int dcursos, int *ddoc,int *dcursosxdocente){
    int i=0, n,k,j,comp;
    printf("\n\tLLENADO DEl REGISTRO DE DOCENTES:\n\n");
    printf("\n\nNumero de DOCENTES ---> ");
@@ -522,6 +520,7 @@ void leerVectorDocente(CURSO curs[MAX],Docente doc[MAX],int dcursos, int *ddoc){
             }
          }while(strcmp(doc[i].c[k].nomCur,".")!=0);
          cout<<endl;
+	 *dcursosxdocente=k;
       }
       *ddoc = i;
    }
@@ -550,7 +549,23 @@ void buscarAluporCodigo(ALUMNO x[MAX],int dx){
       printf("No se encontro alumnos con el codigo ingresado %d\n",cd);
    }
 }
-
+void buscarCursoporCodigo(CURSO curs[MAX], int dcurso){
+   int cd,i,comp=0;//comp es un valor bandera
+   printf("\n\nIngrese el codigo del curso a buscar: ");
+   scanf("%i",&cd);
+   for(i=0;i<dcurso;i++){
+      if(curs[i].codCur==cd){
+         comp=1;
+         printf("\nCurso %d\n",i+1);
+         printf("Nombre: %s\n",curs[i].nomCur);
+         printf("Creditos: %d\n",curs[i].creditosCur);
+         printf("Sistema de calificacion: %s\n",curs[i].scal);
+      }
+   }
+   if(comp==0){
+      printf("No se encontraron cursos con el codigo ingresado %d\n",cd);
+   }
+}
 void buscarPcporCodigo(ALUMNO x[MAX],PRACTICA p[MAX],int dx){
    int cd,i,j,comp=0;//comp es un valor bandera
    mostrarVectorAlu(x,dx);
@@ -602,6 +617,27 @@ void buscarFinalporCodigo(ALUMNO x[MAX],EXFINAL fin[MAX],int dx){
    }
    if(comp==0){
       printf("No se encontraron examenes finales de alumnos con el codigo ingresado %d\n",cd);
+   }
+}
+void buscarDocenteporCodigo(CURSO curs[MAX],Docente doc[MAX],int dcursos,int ddoc,int dcursosxdocente){
+   int cd,i,j,comp=0;//comp es un valor bandera
+   printf("\n\nIngrese el codigo del docente a buscar: ");
+   scanf("%i",&cd);
+   for(i=0;i<dcursos;i++){
+      if(doc[i].codDoc==cd){
+         comp=1;
+         printf("\nDocente %d\n",i+1);
+         printf("Nombre: %s\n",doc[i].nomDoc);
+         printf("Escuela: %s\n",doc[i].escuela);
+         printf("Peso: %.1f\n",doc[i].peso);
+         printf("Cursos dictados por el profesor: \n");
+         for(j=0;j<dcursosxdocente;j++){
+            printf("\tCurso %d: %s",j+1, doc[i].c[j].nomCur);
+         }
+      }
+   }
+   if(comp==0){
+      printf("No se encontraron cursos con el codigo ingresado %d\n",cd);
    }
 }
 void editarporCodigoAlu(ALUMNO x[MAX], int dx){
@@ -938,7 +974,7 @@ int Menu(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[MAX],CURSO
    }
    return(op);
 }
-void Menu2(int op,ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[MAX],CURSO curs[],Docente doc[],int *dx,int *dcursos,int *ddoc){
+void Menu2(int op,ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[MAX],CURSO curs[],Docente doc[],int *dx,int *dcursos,int *ddoc,int *dcursosxdocente){
    int op2;
    system("cls");
    printf(" \n\nSOBRE QUE VECTOR DESEA REALIZAR LA OPERACION?: \n\n");
@@ -999,7 +1035,7 @@ void Menu2(int op,ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[M
                   break;
                case 6:
                   if(*dcursos>0){
-                     leerVectorDocente(curs,doc,*dcursos,&*ddoc);
+                     leerVectorDocente(curs,doc,*dcursos,&*ddoc,&*dcursosxdocente);
                   }else{
                      printf("\n\nEl registro de CURSOS aun no ha sido llenado.\n\n");
                      system("pause");
@@ -1031,31 +1067,33 @@ void Menu2(int op,ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[M
             break;
 	 case 3://buscar por codigo
             switch(op2){
-               case 1:
+              case 1:
                   buscarAluporCodigo(x,*dx);
                   cout<<endl;
                   system("pause");
                   break;
                case 2:
-                  buscarPcporCodigo(x,p,*dx);
+                  buscarCursoporCodigo(curs,*dcursos);
                   cout<<endl;
                   system("pause");
                   break;
                case 3:
-                  buscarParcialporCodigo(x,par,*dx);
+                  buscarPcporCodigo(x,p,*dx);
                   cout<<endl;
                   system("pause");
                   break;
                case 4:
-                  buscarFinalporCodigo(x,fin,*dx);
+                  buscarParcialporCodigo(x,par,*dx);
                   cout<<endl;
                   system("pause");
                   break;
                case 5:
+                  buscarFinalporCodigo(x,fin,*dx);
                   cout<<endl;
                   system("pause");
                   break;
                case 6:
+                  buscarDocenteporCodigo(curs,doc,*dcursos,*ddoc,*dcursosxdocente);
                   cout<<endl;
                   system("pause");
                   break;
