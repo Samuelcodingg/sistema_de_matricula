@@ -129,7 +129,7 @@ void ordenarporCodigo(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL f
 void ordenarxCodigoDoc(Docente x[MAX],int dx);
 void ordenarxCodigoCur(CURSO x[MAX],int dx);
 void ordenarxCodigoCurDoc(Docente x,int dx);
-void ordenarporNombreAlu(ALUMNO x[MAX],int dx);
+void ordenarporNombre(ALUMNO x[MAX],int dx);
 void ordenarPorNombreDoc(Docente x [MAX], int dx);
 void ordenarPorNombreCur(CURSO x [MAX], int dx);
 //MENU
@@ -992,10 +992,11 @@ int Menu(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[MAX],CURSO
    printf("6. Insertar por posicion \n");
    printf("7. Insertar por Valor \n");
    printf("8. Eliminar por posicion \n");
+   printf("9. Ordenar registros por nombre \n");
    do{
    printf("\nDigite su opcion ---> ");
    scanf("%d",&op);
-   }while(op<0 || op>8);
+   }while(op<0 || op>9);
    switch(op){
       case 4://ordenar
          ordenarporCodigo(x,p,par,fin,*dx);
@@ -1010,6 +1011,12 @@ int Menu(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[MAX],CURSO
       case 7://insertar por valor
          ordenarporCodigo(x,p,par,fin,*dx);
          insertarporValor(x,p,par,fin,&*dx,aux);
+         break;
+      case 9://ordenar
+         ordenarporNombre(x,*dx);
+         printf("\nLos nombres de los registros han sido ordenados de forma ascendente...\n\n.");
+         cout<<endl;
+         system("pause");
          break;
    }
    return(op);
@@ -1342,7 +1349,7 @@ void ordenarxCodigoCurDoc(Docente x,int dx){
       printf("Vector vacioooo...!\n");
    }
 }
-void ordenarporNombreAlu(ALUMNO x[MAX],int dx)
+void ordenarporNombre(ALUMNO x[MAX],int dx)
 {
    int i, j;
    ALUMNO aux;
