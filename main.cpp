@@ -71,57 +71,63 @@ struct Docente{
 };
 
 void crearVector(int *dx,int *dcursos, int *ddoc);
+//LEER
 void leerVectorAlu(ALUMNO x[MAX], int *dx);
-void mostrarVectorAlu(ALUMNO x[MAX], int dx);
 void leerVectorPc(ALUMNO x[MAX],PRACTICA p[MAX],int dx,CURSO curs[MAX], int dcursos);
-void mostrarVectorPc(PRACTICA p[MAX],int dx);
 void leerVectorParcial(ALUMNO x[MAX],EXPARCIAL par[MAX], int dx,CURSO curs[MAX], int dcursos);
-void mostrarVectorParcial(EXPARCIAL par[MAX],int dx);
 void leerVectorFinal(ALUMNO x[MAX],EXFINAL fin[MAX], int dx,CURSO curs[MAX], int dcursos);
-void mostrarVectorFinal(EXFINAL fin[MAX],int dx);
 void leerVectorCursos(CURSO curs[MAX], int *dcursos);
 void leerVectorDocente(CURSO curs[MAX],Docente doc[MAX], int dcursos,int *ddoc);
+//MOSTRAR
+void mostrarVectorAlu(ALUMNO x[MAX], int dx);
+void mostrarVectorPc(PRACTICA p[MAX],int dx);
+void mostrarVectorParcial(EXPARCIAL par[MAX],int dx);
+void mostrarVectorFinal(EXFINAL fin[MAX],int dx);
+void mostrarVectorCurso(CURSO x[MAX],int dx);
+void mostrarVectorDoc(Docente x[MAX],int dx);
+void mostrarCursosxDoc(Docente x,int dx);
+//BUSCAR
 void buscarAluporCodigo(ALUMNO x[MAX],int dx);
 void buscarPcporCodigo(ALUMNO x[MAX],PRACTICA p[MAX],int dx);
 void buscarParcialporCodigo(ALUMNO x[MAX],EXPARCIAL par[MAX],int dx);
 void buscarFinalporCodigo(ALUMNO x[MAX],EXFINAL fin[MAX],int dx);
+int buscarPcxCodCurso(PRACTICA p[MAX],int dx,int cod);
+int buscarParcialxCodCurso(EXPARCIAL par[MAX],int dx,int cod);
+int buscarxCodigoFinal(EXPARCIAL fin[MAX],int dx,int cod);
+int buscarxCodCur(CURSO x[MAX],int dx,int cod);
+int buscarxCodigoDoc(Docente x[MAX],int dx,int cod);
+//EDITAR
 void editarporCodigoAlu(ALUMNO x[MAX], int dx);
 void editarporCodigoPc(PRACTICA p[MAX], int dx);
 void editarporCodigoParcial(EXPARCIAL par[MAX], int dx);
 void editarporCodigoFinal(EXFINAL fin[MAX], int dx);
-void insertarporPosicion(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin [MAX],int *dx,int aux, int posi, int cod);
-void eliminaporPosicion(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin [MAX],int *dx);
-void ordenarporCodigo(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin [MAX],int dx);
-void insertarporValor(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin [MAX],int *dx, int aux);
-void mostrarVectorCurso(CURSO x[MAX],int dx);
-void mostrarVectorDoc(Docente x[MAX],int dx);
-void mostrarCursosxDoc(Docente x,int dx);
-void ordenarxCodigoDoc(Docente x[MAX],int dx);
-void ordenarxCodigoCur(CURSO x[MAX],int dx);
-void ordenarxCodigoCurDoc(Docente x,int dx);
-void insertarPosPc(PRACTICA p[MAX],int pos,int dx,int pc[10]);
-int buscarPcxCodCurso(PRACTICA p[MAX],int dx,int cod);
 void editarPc(PRACTICA p[MAX],int dx);
 void editarParcial(EXPARCIAL par[MAX],int dx);
-int buscarParcialxCodCurso(EXPARCIAL par[MAX],int dx,int cod);
-void insertarPosParcial(EXPARCIAL par[MAX],int *dx,int pos,int expar);
 void editarFinal(EXPARCIAL fin[MAX],int dx);
-int buscarxCodigoFinal(EXPARCIAL fin[MAX],int dx,int cod);
-void insertarPosFinal(EXPARCIAL fin[MAX],int *dx,int pos,int exfin);
 void editarCurso(CURSO x[MAX],int dx);
-int buscarxCodCur(CURSO x[MAX],int dx,int cod);
-void insertarPosCurso(CURSO x[MAX],int *dx,int pos,CURSO y);
 void editarDocente(Docente x[MAX],int dx);
-int buscarxCodigoDoc(Docente x[MAX],int dx,int cod);
 void insertarPosDocente(Docente x[MAX],int pos,Docente y);
-void ordenarporNombreAlu(ALUMNO x[MAX],int dx);
-void ordenarPorNombreDoc(Docente x [MAX], int dx);
-void ordenarPorNombreCur(CURSO x [MAX], int dx);
+//INSERTAR
+void insertarporPosicion(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin [MAX],int *dx,int aux, int posi, int cod);
+void insertarporValor(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin [MAX],int *dx, int aux);
+void insertarPosPc(PRACTICA p[MAX],int pos,int dx,int pc[10]);
+void insertarPosParcial(EXPARCIAL par[MAX],int *dx,int pos,int expar);
+void insertarPosFinal(EXPARCIAL fin[MAX],int *dx,int pos,int exfin);
+void insertarPosCurso(CURSO x[MAX],int *dx,int pos,CURSO y);
+//ELIMINAR
+void eliminaporPosicion(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin [MAX],int *dx);
 void eliminarxValorAlu(ALUMNO x[MAX],int *dx,ALUMNO dato,PRACTICA p[MAX], EXPARCIAL par[MAX],EXFINAL fin[MAX]);
 void eliminarxValorDoc(Docente x[MAX],int *dx,Docente dato);
 void eliminarxValorCur(CURSO x[MAX],int *dx,CURSO dato);
-
-//Menu
+//ORDENAR
+void ordenarporCodigo(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin [MAX],int dx);
+void ordenarxCodigoDoc(Docente x[MAX],int dx);
+void ordenarxCodigoCur(CURSO x[MAX],int dx);
+void ordenarxCodigoCurDoc(Docente x,int dx);
+void ordenarporNombreAlu(ALUMNO x[MAX],int dx);
+void ordenarPorNombreDoc(Docente x [MAX], int dx);
+void ordenarPorNombreCur(CURSO x [MAX], int dx);
+//MENU
 void encabezado1();
 void encabezado2(char title[]);
 void encabezado3();
@@ -135,7 +141,6 @@ void raya1Doc();
 void raya2Doc();
 void raya1Cur();
 void raya2Cur();
-
 int Menu(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[MAX],CURSO curs[],Docente doc[],int *dx,int *dcursos,int *ddoc);
 void Menu2(int op,ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[MAX],CURSO curs[],Docente doc[],int *dx,int *dcursos,int *ddoc);
 
