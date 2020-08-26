@@ -1026,18 +1026,22 @@ void Menu2(int op,ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[M
 	 case 3://buscar por codigo
             switch(op2){
                case 1:
+                  buscarAluporCodigo(x,*dx);
                   cout<<endl;
                   system("pause");
                   break;
                case 2:
+                  buscarPcporCodigo(x,p,*dx);
                   cout<<endl;
                   system("pause");
                   break;
                case 3:
+                  buscarParcialporCodigo(x,par,*dx);
                   cout<<endl;
                   system("pause");
                   break;
                case 4:
+                  buscarFinalporCodigo(x,fin,*dx);
                   cout<<endl;
                   system("pause");
                   break;
