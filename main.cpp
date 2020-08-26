@@ -77,7 +77,7 @@ void leerVectorPc(ALUMNO x[MAX],PRACTICA p[MAX],int dx,CURSO curs[MAX], int dcur
 void leerVectorParcial(ALUMNO x[MAX],EXPARCIAL par[MAX], int dx,CURSO curs[MAX], int dcursos);
 void leerVectorFinal(ALUMNO x[MAX],EXFINAL fin[MAX], int dx,CURSO curs[MAX], int dcursos);
 void leerVectorCursos(CURSO curs[MAX], int *dcursos);
-void leerVectorDocente(CURSO curs[MAX],Docente doc[MAX], int dcursos,int *ddoc,int *dcursosxdocente);
+void leerVectorDocente(CURSO curs[MAX],Docente doc[MAX], int dcursos,int *ddoc,int dcursosxdocente[MAX]);
 //MOSTRAR
 void mostrarVectorAlu(ALUMNO x[MAX], int dx);
 void mostrarVectorPc(PRACTICA p[MAX],int dx);
@@ -92,7 +92,7 @@ void buscarCursoporCodigo(CURSO curs,int dcurso);
 void buscarPcporCodigo(ALUMNO x[MAX],PRACTICA p[MAX],int dx);
 void buscarParcialporCodigo(ALUMNO x[MAX],EXPARCIAL par[MAX],int dx);
 void buscarFinalporCodigo(ALUMNO x[MAX],EXFINAL fin[MAX],int dx);
-void buscarDocenteporCodigo(CURSO curs[MAX],Docente doc[MAX], int dcursos,int ddoc,int dcursosxdocente);
+void buscarDocenteporCodigo(CURSO curs[MAX],Docente doc[MAX], int dcursos,int ddoc,int dcursosxdocente[MAX]);
 //BUSCAR(AUXILIARES)
 int buscarPcxCodCurso(PRACTICA p[MAX],int dx,int cod);
 int buscarParcialxCodCurso(EXPARCIAL par[MAX],int dx,int cod);
@@ -118,7 +118,9 @@ void insertarPosParcial(EXPARCIAL par[MAX],int *dx,int pos,int expar);
 void insertarPosFinal(EXPARCIAL fin[MAX],int *dx,int pos,int exfin);
 void insertarPosCurso(CURSO x[MAX],int *dx,int pos,CURSO y);
 //ELIMINAR
-void eliminaporPosicion(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin [MAX],int *dx);
+void eliminaAluporPosicion(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin [MAX],int *dx);
+void eliminaCursoporPosicion(CURSO curs,int *dcurso);
+void eliminarDocenteporPosicion(Docente doc, int *ddoc,int dcursosxdocente[MAX]);
 void eliminarxValorAlu(ALUMNO x[MAX],int *dx,ALUMNO dato,PRACTICA p[MAX], EXPARCIAL par[MAX],EXFINAL fin[MAX]);
 void eliminarxValorDoc(Docente x[MAX],int *dx,Docente dato);
 void eliminarxValorCur(CURSO x[MAX],int *dx,CURSO dato);
@@ -145,13 +147,13 @@ void raya2Doc();
 void raya1Cur();
 void raya2Cur();
 int Menu(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[MAX],CURSO curs[],Docente doc[],int *dx,int *dcursos,int *ddoc);
-void Menu2(int op,ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[MAX],CURSO curs[],Docente doc[],int *dx,int *dcursos,int *ddoc,int *dcursosxdocente);
+void Menu2(int op,ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[MAX],CURSO curs[],Docente doc[],int *dx,int *dcursos,int *ddoc,int dcursosxdocente[MAX]);
 
 int main()
 {
 
    ALUMNO a[MAX];
-   int na,nc,nd,ncd,op;
+   int na,nc,nd,ncd[MAX],op;
    PRACTICA p[MAX];
    EXPARCIAL par[MAX];
    EXFINAL fin[MAX];
@@ -162,7 +164,7 @@ int main()
    do{
       op=Menu(a,p,par,fin,curs,doc,&na,&nc,&nd);
       if(op!=0&&op!=4&&op!=6&&op!=7&&op!=8){
-           Menu2(op,a,p,par,fin,curs,doc,&na,&nc,&nd,&ncd);
+           Menu2(op,a,p,par,fin,curs,doc,&na,&nc,&nd,ncd);
        }
    }while(op>=1&&op<=8);
    printf("\n\nPrograma finalizado...\n\n");
@@ -483,7 +485,7 @@ void leerVectorCursos(CURSO curs[MAX], int *dcursos){
    system("pause");
 }
 
-void leerVectorDocente(CURSO curs[MAX],Docente doc[MAX],int dcursos, int *ddoc,int *dcursosxdocente){
+void leerVectorDocente(CURSO curs[MAX],Docente doc[MAX],int dcursos, int *ddoc,int dcursosxdocente[MAX]){
    int i=0, n,k,j,comp;
    printf("\n\tLLENADO DEl REGISTRO DE DOCENTES:\n\n");
    printf("\n\nNumero de DOCENTES ---> ");
@@ -520,7 +522,7 @@ void leerVectorDocente(CURSO curs[MAX],Docente doc[MAX],int dcursos, int *ddoc,i
             }
          }while(strcmp(doc[i].c[k].nomCur,".")!=0);
          cout<<endl;
-	 *dcursosxdocente=k;
+         dcursosxdocente[i]=k;
       }
       *ddoc = i;
    }
@@ -619,7 +621,7 @@ void buscarFinalporCodigo(ALUMNO x[MAX],EXFINAL fin[MAX],int dx){
       printf("No se encontraron examenes finales de alumnos con el codigo ingresado %d\n",cd);
    }
 }
-void buscarDocenteporCodigo(CURSO curs[MAX],Docente doc[MAX],int dcursos,int ddoc,int dcursosxdocente){
+void buscarDocenteporCodigo(CURSO curs[MAX],Docente doc[MAX],int dcursos,int ddoc,int dcursosxdocente[MAX]){
    int cd,i,j,comp=0;//comp es un valor bandera
    printf("\n\nIngrese el codigo del docente a buscar: ");
    scanf("%i",&cd);
@@ -631,7 +633,7 @@ void buscarDocenteporCodigo(CURSO curs[MAX],Docente doc[MAX],int dcursos,int ddo
          printf("Escuela: %s\n",doc[i].escuela);
          printf("Peso: %.1f\n",doc[i].peso);
          printf("Cursos dictados por el profesor: \n");
-         for(j=0;j<dcursosxdocente;j++){
+         for(j=0;j<dcursosxdocente[i];j++){
             printf("\tCurso %d: %s",j+1, doc[i].c[j].nomCur);
          }
       }
@@ -804,7 +806,7 @@ void insertarporPosicion(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINA
    system("pause");
 }
 
-void eliminaporPosicion(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin [MAX],int *dx){
+void eliminaAluporPosicion(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin [MAX],int *dx){
    int i,n,posi;
    mostrarVectorAlu(x,*dx);
    printf("\n\nIngrese la posicion del alumno en el registro ALUMNOS,cuyos datos desea eliminar de todos los registros: ");
@@ -812,24 +814,62 @@ void eliminaporPosicion(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL
    n=*dx;
    n=n-1;
    i=posi-1;
-   if(n<MAX){
-      if(posi-1>-1 && posi-1<*dx){
-         *dx=n;
-         while(i<n){
-            x[i] = x[i+1];
-            p[i] = p[i+1];
-            par[i] = par[i+1];
-            fin[i] = fin[i+1];
-            i = i+1;
-         }
-      printf("\nDatos del alumno de la posicion %d ELIMINADOS\n\n ",posi);
-   }
-      else{
-         printf("La posicion %d no existe en el vector...\n", posi);
+   if(posi-1>-1 && posi-1<*dx){
+      *dx=n;
+      while(i<n){
+         x[i] = x[i+1];
+         p[i] = p[i+1];
+         par[i] = par[i+1];
+         fin[i] = fin[i+1];
+         i = i+1;
       }
+   printf("\nDatos del alumno de la posicion %d ELIMINADOS\n\n ",posi);
    }
    else{
-      printf("Dimension fuera de rango ...\n");
+      printf("La posicion %d no existe en el vector...\n", posi);
+   }
+   system("pause");
+}
+void eliminaCursoporPosicion(CURSO curs[MAX],int *dcurso){
+   int i,n,posi;
+   mostrarVectorCurso(curs,*dcurso);
+   printf("\n\nIngrese la posicion del curso que desea eliminar del registro: ");
+   scanf("%i",&posi);
+   n=*dcurso;
+   n=n-1;
+   i=posi-1;
+   if(posi-1>-1 && posi-1<*dcurso){
+      *dcurso=n;
+      while(i<n){
+         curs[i] = curs[i+1];
+         i = i+1;
+      }
+   printf("\nDatos del curso de la posicion %d ELIMINADOS\n\n ",posi);
+   }
+   else{
+      printf("La posicion %d no existe en el vector...\n", posi);
+   }
+   system("pause");
+}
+void eliminarDocenteporPosicion(Docente doc[MAX], int *ddoc,int dcursosxdocente[MAX]){
+   int i,n,posi;
+   mostrarVectorDoc(doc,*ddoc);
+   printf("\n\nIngrese la posicion del docente que desea eliminar del registro: ");
+   scanf("%i",&posi);
+   n=*ddoc;
+   n=n-1;
+   i=posi-1;
+   if(posi-1>-1 && posi-1<*ddoc){
+      *ddoc=n;
+      while(i<n){
+         doc[i] = doc[i+1];
+         dcursosxdocente[i]=dcursosxdocente[i+1];
+         i = i+1;
+      }
+   printf("\nDatos del curso de la posicion %d ELIMINADOS\n\n ",posi);
+   }
+   else{
+      printf("La posicion %d no existe en el vector...\n", posi);
    }
    system("pause");
 }
@@ -974,7 +1014,7 @@ int Menu(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[MAX],CURSO
    }
    return(op);
 }
-void Menu2(int op,ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[MAX],CURSO curs[],Docente doc[],int *dx,int *dcursos,int *ddoc,int *dcursosxdocente){
+void Menu2(int op,ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[MAX],CURSO curs[],Docente doc[],int *dx,int *dcursos,int *ddoc,int dcursosxdocente[MAX]){
    int op2;
    system("cls");
    printf(" \n\nSOBRE QUE VECTOR DESEA REALIZAR LA OPERACION?: \n\n");
@@ -1035,7 +1075,7 @@ void Menu2(int op,ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[M
                   break;
                case 6:
                   if(*dcursos>0){
-                     leerVectorDocente(curs,doc,*dcursos,&*ddoc,&*dcursosxdocente);
+                     leerVectorDocente(curs,doc,*dcursos,&*ddoc,dcursosxdocente);
                   }else{
                      printf("\n\nEl registro de CURSOS aun no ha sido llenado.\n\n");
                      system("pause");
@@ -1093,7 +1133,7 @@ void Menu2(int op,ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[M
                   system("pause");
                   break;
                case 6:
-                  buscarDocenteporCodigo(curs,doc,*dcursos,*ddoc,*dcursosxdocente);
+                  buscarDocenteporCodigo(curs,doc,*dcursos,*ddoc,dcursosxdocente);
                   cout<<endl;
                   system("pause");
                   break;
