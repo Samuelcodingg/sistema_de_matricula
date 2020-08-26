@@ -233,9 +233,9 @@ void mostrarVectorAlu(ALUMNO x[MAX], int dx)
 void leerVectorPc(ALUMNO x[MAX],PRACTICA p[MAX], int dx,CURSO curs[MAX], int dcursos){
    int i=0,j=0,k=0,comp,suma;
    if(dx>0){
+	 mostrarVectorAlu(x,dx);
+         printf("\n\tINGRESO DE LAS PRACTICAS CALIFICADAS:\n\n");
          for(i=0;i<dx;i++){
-            mostrarVectorAlu(x,dx);
-            printf("\n\tINGRESO DE LAS PRACTICAS CALIFICADAS:\n\n");
             if(i==0){
                printf("\nIngrese el codigo del curso: \n\n");
                comp=0;//cambia de valor si el codigo se encuentra en el registro de CURSOS
@@ -311,9 +311,9 @@ void mostrarVectorPc(PRACTICA p[MAX],int dx){
 void leerVectorParcial(ALUMNO x[MAX],EXPARCIAL par[MAX], int dx,CURSO curs[MAX], int dcursos){
    int i=0,j=0,comp;
    if(dx>0){
+      mostrarVectorAlu(x,dx);
+      printf("\n\tINGRESO DE LOS EXAMENES PARCIALES:\n\n");
       for(i=0;i<dx;i++){
-         mostrarVectorAlu(x,dx);
-         printf("\n\tINGRESO DE LOS EXAMENES PARCIALES:\n\n");
          if(i==0){
             printf("\nIngrese el codigo del curso: \n\n");
             comp=0;//cambia de valor si el codigo se encuentra en el registro de CURSOS
@@ -386,9 +386,9 @@ void mostrarVectorParcial(EXPARCIAL par[MAX],int dx){
 void leerVectorFinal(ALUMNO x[MAX],EXFINAL fin[MAX], int dx,CURSO curs[MAX], int dcursos){
    int i=0,j=0,comp;
    if(dx>0){
+      mostrarVectorAlu(x,dx);
+      printf("\n\tINGRESO DE LOS EXAMENES FINALES:\n\n");
       for(i=0;i<dx;i++){
-         mostrarVectorAlu(x,dx);
-         printf("\n\tINGRESO DE LOS EXAMENES FINALES:\n\n");
          if(i==0){
             printf("\nIngrese el codigo del curso: \n\n");
             comp=0;//cambia de valor si el codigo se encuentra en el registro de CURSOS
