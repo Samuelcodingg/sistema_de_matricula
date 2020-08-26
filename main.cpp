@@ -562,7 +562,7 @@ void buscarPcporCodigo(ALUMNO x[MAX],PRACTICA p[MAX],int dx){
          printf("\nAlumno %d\n",i+1);
          printf("\n");
          for(j=0;j<10;j++){
-            printf("Practica %d: %d\n",i,p[i].prac[10]);
+            printf("Practica %d: %d\n",j+1,p[i].prac[j]);
          }
          printf("\nPromedio de practicas: %d\n",p[i].promedio);
       }
