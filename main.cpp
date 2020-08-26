@@ -150,7 +150,7 @@ int main()
 
    do{
       op=Menu(a,p,par,fin,curs,doc,&na,&nc,&nd);
-      if(op!=0&&op==5||op==2||op==1){
+      if(op!=0&&op!=4&&op!=6&&op!=7){
            Menu2(op,a,p,par,fin,curs,doc,&na,&nc,&nd);
        }
    }while(op>=1&&op<=8);
