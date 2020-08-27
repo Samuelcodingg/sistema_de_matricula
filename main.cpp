@@ -1,9 +1,9 @@
 /*
- * NombreProg : 
+ * NombreProg : sistemadeMatricula.cpp
  * Descripcion: 
- *             
- *   
- *    
+ * Es un sistema en el cual podemos controlar la base de datos de un listado de estudiantes, profesores, cursos y notas. Todo esto se puede lograr mediante la 
+ * implementación de las operaciones básicas en cada estructura que se muestra en el código.                 
+ * 
  *    
  *
  * Autor:  ROMAN CESPEDES, Samuel Aaron
