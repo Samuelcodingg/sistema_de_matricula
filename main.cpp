@@ -661,7 +661,7 @@ void buscarDocenteporCodigo(Docente doc[MAX],int ddoc,int dcursosxdocente[MAX]){
          }
       }
       if(comp==0){
-         printf("No se encontraron cursos con el codigo ingresado %d\n",cd);
+         printf("No se encontraron docentes con el codigo ingresado %d\n",cd);
       }
    }else{
          printf("\nVector vaciooo...\n\n");
