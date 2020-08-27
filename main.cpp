@@ -1080,52 +1080,28 @@ void Menu2(int op,ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[M
          case 1://ingreso de datos
             switch(op2){
                case 1:
-                  if(*dx<0){
-                     leerVectorAlu(x,&*dx);
-                  }else{
-                     printf("\n\nEl registro ALUMNOS ya ha sido llenado.\n\n");
-                     system("pause");
-                  }
+                  leerVectorAlu(x,&*dx);
+                  system("pause");
                   break;
                case 2:
-                  if(*dcursos<0){
-                     leerVectorCursos(curs,&*dcursos);
-                  }else{
-                     printf("\n\nEl registro de CURSOS ya ha sido llenado.\n\n");
-                     system("pause");
-                  }
+                  leerVectorCursos(curs,&*dcursos);
+                  system("pause");
                   break;
                case 3:
-                  if(*dcursos>0){
-                     leerVectorPc(x,p,*dx,curs,*dcursos);
-                  }else{
-                     printf("\n\nEl registro de CURSOS aun no ha sido llenado.\n\n");
-                     system("pause");
-                  }
+                  leerVectorPc(x,p,*dx,curs,*dcursos);
+                  system("pause");
                   break;
                case 4:
-                  if(*dcursos>0){
-                     leerVectorParcial(x,par,*dx,curs,*dcursos);
-                  }else{
-                     printf("\n\nEl registro de CURSOS aun no ha sido llenado.\n\n");
-                     system("pause");
-                  }
+                  leerVectorParcial(x,par,*dx,curs,*dcursos);
+                  system("pause");
                   break;
                case 5:
-                  if(*dcursos>0){
-                     leerVectorFinal(x,fin,*dx,curs,*dcursos);
-                  }else{
-                     printf("\n\nEl registro de CURSOS aun no ha sido llenado.\n\n");
-                     system("pause");
-                  }
+                  leerVectorFinal(x,fin,*dx,curs,*dcursos);
+                  system("pause");
                   break;
                case 6:
-                  if(*dcursos>0){
-                     leerVectorDocente(curs,doc,*dcursos,&*ddoc,dcursosxdocente);
-                  }else{
-                     printf("\n\nEl registro de CURSOS aun no ha sido llenado.\n\n");
-                     system("pause");
-                  }
+                  leerVectorDocente(curs,doc,*dcursos,&*ddoc,dcursosxdocente);
+                  system("pause");
                   break;
             }
             break;
