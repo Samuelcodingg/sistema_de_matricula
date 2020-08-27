@@ -113,6 +113,8 @@ void insertarPosDocente(Docente x[MAX],int pos,Docente y);
 //INSERTAR
 void insertarporPosicion(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin [MAX],int *dx,int aux, int posi, int cod);
 void insertarporValor(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin [MAX],int *dx, int aux);
+void insertarporValorDoc(Docente x[MAX],int *dx,int pos,Docente y);
+void insertarporValorCur(CURSO x[MAX],int *dx,int pos,CURSO y);
 void insertarPosPc(PRACTICA p[MAX],int pos,int dx,int pc[10]);
 void insertarPosParcial(EXPARCIAL par[MAX],int *dx,int pos,int expar);
 void insertarPosFinal(EXPARCIAL fin[MAX],int *dx,int pos,int exfin);
@@ -661,7 +663,7 @@ void buscarDocenteporCodigo(Docente doc[MAX],int ddoc,int dcursosxdocente[MAX]){
          }
       }
       if(comp==0){
-         printf("No se encontraron docentes con el codigo ingresado %d\n",cd);
+         printf("No se encontraron cursos con el codigo ingresado %d\n",cd);
       }
    }else{
          printf("\nVector vaciooo...\n\n");
@@ -1637,6 +1639,32 @@ void insertarPosCurso(CURSO x[MAX],int *dx,int pos,CURSO y){
       printf("Excede Dimension");
    }
 }
+void insertarporValorCur(CURSO x[MAX],int *dx,int pos,CURSO y){
+   int i,j,n=0;
+   int codigo;
+   mostrarVectorCurso(x,*dx);
+   printf("\n\nLos codigos de los cursos han sido ordenados de forma ascendente...\n");
+   printf("\n\nIngrese el codigo del curso cuyos datos desea insertar en todos los registros: ");
+   scanf("%i",&codigo);
+   printf("\n\nCodigo Leido...");
+   printf("\n\nA continuacion ingrese los datos del curso...\n");
+   system("pause");
+   if(*dx+1<MAX){
+         for(i=0;i<*dx;i++){
+            if(codigo>x[i].codCur){
+            pos=i+1;
+            }else{
+               if(codigo<x[0].codCur){
+                  pos=0;
+               }
+            }
+         }
+         insertarPosCurso(x,&*dx,pos+1,y);
+   }
+   else{
+      printf("Dimension fuera de rango ...\n");
+   }
+}
 
 
 void insertarPosDocente(Docente x[MAX],int *dx,int pos,Docente y){
@@ -1705,6 +1733,32 @@ void editarDocente(Docente x[MAX],int dx){
       cin>>x[edit].peso;
       cout<<endl;
       printf("\n**Datos del Docente guardados con exito...\n");
+   }
+}
+void insertarporValorDoc(Docente x[MAX],int *dx,int pos,Docente y){
+   int i,j,n=0;
+   int codigo;
+   mostrarVectorDoc(x,*dx);
+   printf("\n\nLos codigos de los docentes han sido ordenados de forma ascendente...\n");
+   printf("\n\nIngrese el codigo del docente cuyos datos desea insertar en todos los registros: ");
+   scanf("%i",&codigo);
+   printf("\n\nCodigo Leido...");
+   printf("\n\nA continuacion ingrese los datos del docente...\n");
+   system("pause");
+   if(n<MAX){
+         for(i=0;i<*dx;i++){
+            if(codigo>x[i].codDoc){
+            pos=i+1;
+            }else{
+               if(codigo<x[0].codDoc){
+                  pos=0;
+               }
+            }
+         }
+         insertarPosDocente(x,&*dx,pos+1,y);
+   }
+   else{
+      printf("Dimension fuera de rango ...\n");
    }
 }
 
