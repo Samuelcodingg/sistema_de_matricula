@@ -154,14 +154,51 @@ void Menu2(int op,ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[M
 int main()
 {
 
-   ALUMNO a[MAX];
    int na,nc,nd,ncd[MAX],op;
-   PRACTICA p[MAX];
-   EXPARCIAL par[MAX];
-   EXFINAL fin[MAX];
-   CURSO curs[MAX];
-   Docente doc[MAX];
    crearVector(&na,&nc,&nd);
+   ALUMNO a[]={
+      100, "CONZALES-ALE,Eva","I1",3,2,2002,40.0,
+      101, "ARPASSI-MAMAGNI,Juana","I1",4,12,2000,55.0,
+      103, "ARONES-LOTAS,Felipe","I2",3,3,2001, 65.5,
+      106, "AKATA-MAKO,Marimon-Kobe","I2",12,7,2001,45.6,
+   };
+   na=(sizeof(a))/(sizeof(int)+40*sizeof(char)+15*sizeof(char)+3*sizeof(int)+sizeof(float));
+
+   CURSO curs[]={
+      113, "Matematica-I",4,'F',
+      123, "Matematica-II",4,'G',
+      133, "LENG,PROG.ESTRUCTURADO",4,'F',
+      711, "INVESTIGACION-OPERATIVA-I",3,'F',
+   };
+   nc=(sizeof(curs))/(sizeof(int)+40*sizeof(char)+sizeof(int)+sizeof(char));
+
+   PRACTICA p[]={
+      100, 113, {13,14,15,12,14,12,14,13,14,11},13,
+      101,113, {8,9,11,12,13,16,11,12,14,7},11,
+      103,113, {15,20,11,16,15,14,13,15,15,11},15,
+      106,113, {8,8,8,9,6,14,9,10,11,11},9,
+   };
+
+   EXPARCIAL par[]={
+      100, 113,8,
+      101, 113,11,
+      103, 113,15,
+      106, 113,13,
+   };
+
+   EXFINAL fin[]={
+      100, 113,15,
+      101, 113,10,
+      103, 113,11,
+      106, 113,9,
+   };
+   Docente doc[]={
+      1001,"CONZALES-VIGIL,Luis",  {711, "INVESTIGACION-OPERATIVA-I",3,'F',}, "I1",45.0,
+      1002,"SALVADOR-DATOS,Jorge", {133, "LENG,PROG.ESTRUCTURADO",4,'F',}, "I2",67.0,
+      1004, "MORALES-ARISTO,Juan", {113, "Matematica-I",4,'F',},"I2",45.5,
+      1005, "ROMAN-RAMON,Ulises", {123, "Matematica-II",4,'G',},"I2",45.6,
+   };
+   //nd=
 
    do{
       op=Menu(a,p,par,fin,curs,doc,&na,&nc,&nd);
