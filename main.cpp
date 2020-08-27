@@ -835,68 +835,80 @@ void insertarporPosicion(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINA
 
 void eliminaAluporPosicion(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin [MAX],int *dx){
    int i,n,posi;
-   mostrarVectorAlu(x,*dx);
-   printf("\n\nIngrese la posicion del alumno en el registro ALUMNOS,cuyos datos desea eliminar de todos los registros: ");
-   scanf("%i",&posi);
-   n=*dx;
-   n=n-1;
-   i=posi-1;
-   if(posi-1>-1 && posi-1<*dx){
-      *dx=n;
-      while(i<n){
-         x[i] = x[i+1];
-         p[i] = p[i+1];
-         par[i] = par[i+1];
-         fin[i] = fin[i+1];
-         i = i+1;
+   if(*dx>0){
+      mostrarVectorAlu(x,*dx);
+      printf("\n\nIngrese la posicion del alumno en el registro ALUMNOS,cuyos datos desea eliminar de todos los registros: ");
+      scanf("%i",&posi);
+      n=*dx;
+      n=n-1;
+      i=posi-1;
+      if(posi-1>-1 && posi-1<*dx){
+         *dx=n;
+         while(i<n){
+            x[i] = x[i+1];
+            p[i] = p[i+1];
+            par[i] = par[i+1];
+            fin[i] = fin[i+1];
+            i = i+1;
+         }
+      printf("\nDatos del alumno de la posicion %d ELIMINADOS\n\n ",posi);
       }
-   printf("\nDatos del alumno de la posicion %d ELIMINADOS\n\n ",posi);
-   }
-   else{
-      printf("La posicion %d no existe en el vector...\n", posi);
+      else{
+         printf("La posicion %d no existe en el vector...\n", posi);
+      }
+   }else{
+      printf("\nVectores vacios...\n\n");
    }
    system("pause");
 }
 void eliminaCursoporPosicion(CURSO curs[MAX],int *dcurso){
    int i,n,posi;
-   mostrarVectorCurso(curs,*dcurso);
-   printf("\n\nIngrese la posicion del curso que desea eliminar del registro: ");
-   scanf("%i",&posi);
-   n=*dcurso;
-   n=n-1;
-   i=posi-1;
-   if(posi-1>-1 && posi-1<*dcurso){
-      *dcurso=n;
-      while(i<n){
-         curs[i] = curs[i+1];
-         i = i+1;
+   if(*dcurso>0){
+      mostrarVectorCurso(curs,*dcurso);
+      printf("\n\nIngrese la posicion del curso que desea eliminar del registro: ");
+      scanf("%i",&posi);
+      n=*dcurso;
+      n=n-1;
+      i=posi-1;
+      if(posi-1>-1 && posi-1<*dcurso){
+         *dcurso=n;
+         while(i<n){
+            curs[i] = curs[i+1];
+            i = i+1;
+         }
+      printf("\nDatos del curso de la posicion %d ELIMINADOS\n\n ",posi);
       }
-   printf("\nDatos del curso de la posicion %d ELIMINADOS\n\n ",posi);
-   }
-   else{
-      printf("La posicion %d no existe en el vector...\n", posi);
+      else{
+         printf("La posicion %d no existe en el vector...\n", posi);
+      }
+   }else{
+      printf("\nVector vacio...\n\n");
    }
    system("pause");
 }
 void eliminarDocenteporPosicion(Docente doc[MAX], int *ddoc,int dcursosxdocente[MAX]){
    int i,n,posi;
-   mostrarVectorDoc(doc,*ddoc);
-   printf("\n\nIngrese la posicion del docente que desea eliminar del registro: ");
-   scanf("%i",&posi);
-   n=*ddoc;
-   n=n-1;
-   i=posi-1;
-   if(posi-1>-1 && posi-1<*ddoc){
-      *ddoc=n;
-      while(i<n){
-         doc[i] = doc[i+1];
-         dcursosxdocente[i]=dcursosxdocente[i+1];
-         i = i+1;
+   if(*ddoc>0){
+      mostrarVectorDoc(doc,*ddoc);
+      printf("\n\nIngrese la posicion del docente que desea eliminar del registro: ");
+      scanf("%i",&posi);
+      n=*ddoc;
+      n=n-1;
+      i=posi-1;
+      if(posi-1>-1 && posi-1<*ddoc){
+         *ddoc=n;
+         while(i<n){
+            doc[i] = doc[i+1];
+            dcursosxdocente[i]=dcursosxdocente[i+1];
+            i = i+1;
+         }
+      printf("\nDatos del curso de la posicion %d ELIMINADOS\n\n ",posi);
       }
-   printf("\nDatos del curso de la posicion %d ELIMINADOS\n\n ",posi);
-   }
-   else{
-      printf("La posicion %d no existe en el vector...\n", posi);
+      else{
+         printf("La posicion %d no existe en el vector...\n", posi);
+      }
+   }else{
+      printf("\nVector vacio...\n\n");
    }
    system("pause");
 }
