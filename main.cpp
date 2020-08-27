@@ -198,7 +198,7 @@ int main()
       1004, "MORALES-ARISTO,Juan", {113, "Matematica-I",4,'F',},"I2",45.5,
       1005, "ROMAN-RAMON,Ulises", {123, "Matematica-II",4,'G',},"I2",45.6,
    };
-   //nd=
+      nd=(sizeof(doc))/(sizeof(int)+40*sizeof(char)+10*(sizeof(int)+40*sizeof(char)+sizeof(int)+sizeof(char))+4*sizeof(char)+sizeof(float));
 
    do{
       op=Menu(a,p,par,fin,curs,doc,&na,&nc,&nd);
