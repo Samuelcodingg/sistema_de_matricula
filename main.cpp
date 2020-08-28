@@ -109,7 +109,6 @@ void editarParcial(EXPARCIAL par[MAX],int dx);
 void editarFinal(EXPARCIAL fin[MAX],int dx);
 void editarCurso(CURSO x[MAX],int dx);
 void editarDocente(Docente x[MAX],int dx);
-void insertarPosDocente(Docente x[MAX],int pos,Docente y);
 //INSERTAR
 void insertarporPosicion(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin [MAX],int *dx,int aux, int posi, int cod);
 void insertarporValor(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin [MAX],int *dx, int aux);
@@ -117,6 +116,7 @@ void insertarPosPc(PRACTICA p[MAX],int pos,int dx,int pc[10]);
 void insertarPosParcial(EXPARCIAL par[MAX],int *dx,int pos,int expar);
 void insertarPosFinal(EXPARCIAL fin[MAX],int *dx,int pos,int exfin);
 void insertarPosCurso(CURSO x[MAX],int *dx,int pos,CURSO y);
+void insertarPosDocente(Docente x[MAX],int pos,Docente y);
 //ELIMINAR
 void eliminaAluporPosicion(ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin [MAX],int *dx);
 void eliminaCursoporPosicion(CURSO curs,int *dcurso);
@@ -151,7 +151,6 @@ void Menu2(int op,ALUMNO x[MAX],PRACTICA p[MAX],EXPARCIAL par[MAX],EXFINAL fin[M
 
 int main()
 {
-
    ALUMNO a[MAX];
    int na,nc,nd,ncd[MAX],op;
    PRACTICA p[MAX];
@@ -561,7 +560,7 @@ void buscarCursoporCodigo(CURSO curs[MAX], int dcurso){
          printf("\nCurso %d\n",i+1);
          printf("Nombre: %s\n",curs[i].nomCur);
          printf("Creditos: %d\n",curs[i].creditosCur);
-         printf("Sistema de calificacion: %s\n",curs[i].scal);
+         printf("Sistema de calificacion: %c\n",curs[i].scal);
       }
    }
    if(comp==0){
