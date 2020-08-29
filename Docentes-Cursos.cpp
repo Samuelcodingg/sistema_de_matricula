@@ -53,7 +53,7 @@ int buscarxCodigoDoc(Docente x[MAX],int dx,int cod);
 void editarCurso(CURSO x[MAX],int dx);
 void editarDocente(Docente x[MAX],int dx);     //Modificar por lo de los cursos
 //INSERTAR
-void insertarPosCurso(CURSO x[MAX],int *dx,int pos,CURSO y); //Está mal planteada
+void insertarPosCurso(CURSO x[MAX],int *dx,int pos,CURSO y); 
 void insertarPosDocente(Docente x[MAX],int *dx,int pos,Docente y); //Está mal planteada
 //ELIMINAR
 void eliminarxValorDoc(Docente x[MAX],int *dx,Docente dato);
@@ -585,24 +585,22 @@ void editarCurso(CURSO x[MAX],int dx){
    }
 }
 void insertarPosCurso(CURSO x[MAX],int *dx,int pos,CURSO y){
-   int i, n=*dx+1;
-   if(*dx+1<MAX){
-      for(i=*dx+1;i>pos+1;i--){
-         x[i-1].codCur=x[i].codCur;
-         strcpy(x[i-1].nomCur,x[i].nomCur);
-         x[i-1].scal=x[i].scal;
-         x[i-1].creditosCur=x[i].creditosCur;
+   int i,n=*dx+1;
+   pos--;
+   i=n;
+   if(i<MAX){
+      while(i>pos){
+         x[i]=x[i-1];
+         i=i-1;
       }
-      x[pos-1].codCur = y.codCur;
-      strcpy(x[pos-1].nomCur,y.nomCur);
-      x[pos-1].scal = y.scal;
-      x[pos-1].creditosCur = y.creditosCur;
+      x[pos]=y;
+      printf("\n INSERTADO en posicion %d\n",pos+1);
+      fflush(stdin);
       *dx=n;
-
-      mostrarVectorCurso(x,*dx);
+      mostrarVectorCurso(x,*dx); //Muestra el resultado
    }
    else{
-      printf("Excede Dimension");
+      printf("Dimension fuera de Rango\n");
    }
 }
 
