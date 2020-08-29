@@ -54,7 +54,7 @@ void editarCurso(CURSO x[MAX],int dx);
 void editarDocente(Docente x[MAX],int dx);     //Modificar por lo de los cursos
 //INSERTAR
 void insertarPosCurso(CURSO x[MAX],int *dx,int pos,CURSO y); 
-void insertarPosDocente(Docente x[MAX],int *dx,int pos,Docente y); //Está mal planteada
+void insertarPosDocente(Docente x[MAX],int *dx,int pos,Docente y); //Mal planteado, tener en cuenta lo de los cursos
 //ELIMINAR
 void eliminarxValorDoc(Docente x[MAX],int *dx,Docente dato);
 void eliminarxValorCur(CURSO x[MAX],int *dx,CURSO dato);
