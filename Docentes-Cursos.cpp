@@ -1,5 +1,5 @@
 /*
- * NombreProg : Docentes-Cursos.cpp
+ * NombreProg : 
  * Descripcion: 
  *             
  *   
@@ -34,35 +34,36 @@ struct Docente{
 	char nomDoc[40];
 	CURSO c[10];
 	char escuela[4];
-	float peso=0;
+	float peso;
 };
 
 //CREAR
 void crearVector(int *dcursos, int *ddoc);
+//LEER
 void leerVectorCursos(CURSO curs[MAX], int *dcursos);
-void leerVectorDocente(CURSO curs[MAX],Docente doc[MAX], int dcursos,int *ddoc,int dcursosxdocente[MAX]);
+void leerVectorDocente(CURSO curs[MAX],Docente doc[MAX], int dcursos,int *ddoc,int dcursosxdocente[MAX]); //Observar
 //MOSTRAR
 void mostrarVectorCurso(CURSO x[MAX],int dx);
 void mostrarVectorDoc(Docente x[MAX],int dx);
-void mostrarCursosxDoc(Docente x,int dx);
+void mostrarCursosxDoc(Docente x,int dx); //Modificar por la relación curso-docente
 //BUSCAR
 int buscarxCodCur(CURSO x[MAX],int dx,int cod);
 int buscarxCodigoDoc(Docente x[MAX],int dx,int cod);
 //EDITAR
 void editarCurso(CURSO x[MAX],int dx);
-void editarDocente(Docente x[MAX],int dx);
+void editarDocente(Docente x[MAX],int dx);     //Modificar por lo de los cursos
 //INSERTAR
-void insertarPosCurso(CURSO x[MAX],int *dx,int pos,CURSO y);
-void insertarPosDocente(Docente x[MAX],int pos,Docente y);
+void insertarPosCurso(CURSO x[MAX],int *dx,int pos,CURSO y); //Está mal planteada
+void insertarPosDocente(Docente x[MAX],int *dx,int pos,Docente y); //Está mal planteada
 //ELIMINAR
 void eliminarxValorDoc(Docente x[MAX],int *dx,Docente dato);
 void eliminarxValorCur(CURSO x[MAX],int *dx,CURSO dato);
-void eliminaCursoporPosicion(CURSO curs,int *dcurso);
-void eliminarDocenteporPosicion(Docente doc, int *ddoc,int dcursosxdocente[MAX]);
+void eliminaCursoporPosicion(CURSO curs[MAX],int *dcurso);
+void eliminarDocenteporPosicion(Docente doc[MAX], int *ddoc,int dcursosxdocente[MAX]); //Modificar por lo de los cursos
 //ORDENAR
 void ordenarxCodigoDoc(Docente x[MAX],int dx);
 void ordenarxCodigoCur(CURSO x[MAX],int dx);
-void ordenarxCodigoCurDoc(Docente x,int dx);
+void ordenarxCodigoCurDoc(Docente x,int dx); //Modificar por la relación
 void ordenarPorNombreDoc(Docente x [MAX], int dx);
 void ordenarPorNombreCur(CURSO x [MAX], int dx);
 //MENU
@@ -101,7 +102,30 @@ int main(){
     };
     nc=sizeof(c)/(sizeof(int)*2+sizeof(char)*41);
     nd=sizeof(d)/(sizeof(int)+sizeof(char)*44+sizeof(CURSO)*10+sizeof(float));
-	
+
+    // mostrarVectorCurso(c,nc);
+    // mostrarVectorDoc(d,nd);
+    // int i = buscarxCodCur(c,nc,189);
+    // printf("%d",i);
+    // int j = buscarxCodigoDoc(d,nd,1002);
+    // printf("%d",j);
+    // editarCurso(c,nc);
+    // editarDocente(d,nd);
+    // printf("%d",nc);
+    // insertarPosCurso(c,&nc,3,c[0]);
+    // insertarPosDocente(d,&nd,2,d[5]);
+    // fflush(stdin);
+    // mostrarVectorDoc(d,nd);
+    // eliminarxValorCur(c,&nc,c[1]);
+    // eliminarxValorDoc(d,&nd,d[2]);
+    // eliminaCursoporPosicion(c,&nc);
+    // mostrarVectorCurso(c,nc);
+    // eliminarDocenteporPosicion(d,&nd);
+    // mostrarVectorDoc(d,nd);
+    // ordenarxCodigoCur(c,nc);
+    // ordenarxCodigoDoc(d,nd);
+    // ordenarPorNombreCur(c,nc);
+    // ordenarPorNombreDoc(d,nd);
 
     system("pause");
     return 0;
@@ -373,10 +397,10 @@ void encabezado4(Docente doc)
 }
 
 void mostrarCursosxDoc(Docente x,int dx){
-   int i;
+
    if(dx>0){
       encabezado4(x);
-      for(i=0;i<dx;i++){
+      for(int i=0;i<dx;i++){
          printf("%3d\t%-12d%-32s\n",i+1,x.c[i].codCur,x.c[i].nomCur,x.c[i].scal);
       }
       raya1Doc();
@@ -497,9 +521,7 @@ void ordenarPorNombreDoc(Docente x [MAX], int dx)
                x[j]=x[i];
                x[i]=aux;
             }
-            j=j+1;
          }
-         i=i+1;
       }
       mostrarVectorDoc (x,dx); //muestra el resultado
    }
@@ -519,9 +541,7 @@ void ordenarPorNombreCur(CURSO x [MAX], int dx)
                x[j]=x[i];
                x[i]=aux;
             }
-            j=j+1;
          }
-         i=i+1;
       }
       mostrarVectorCurso(x,dx); //muestra el resultado
    }
@@ -530,7 +550,7 @@ void ordenarPorNombreCur(CURSO x [MAX], int dx)
    }
 }
 int buscarxCodCur(CURSO x[MAX],int dx,int cod){
-   int pos = 0,i;
+   int pos = -1,i;
 
    for(i=0;i<dx;i++){
       if(x[i].codCur==cod){
@@ -538,7 +558,7 @@ int buscarxCodCur(CURSO x[MAX],int dx,int cod){
       }
    }
    
-   return pos;
+   return pos+1;
 }
 void editarCurso(CURSO x[MAX],int dx){
    int cod,edit,i;
@@ -551,7 +571,7 @@ void editarCurso(CURSO x[MAX],int dx){
       printf("Curso no encontrado");
    }
    else{  
-      printf("\n\n\tIngrese datos del Curso: ");
+      printf("\n\n\tIngrese datos del Curso: \n");
       printf("Codigo: ");
       cin>>x[edit].codCur;
       printf("Nombre: ");
@@ -565,8 +585,8 @@ void editarCurso(CURSO x[MAX],int dx){
    }
 }
 void insertarPosCurso(CURSO x[MAX],int *dx,int pos,CURSO y){
-   int i;
-   if(*dx+1>MAX){
+   int i, n=*dx+1;
+   if(*dx+1<MAX){
       for(i=*dx+1;i>pos+1;i--){
          x[i-1].codCur=x[i].codCur;
          strcpy(x[i-1].nomCur,x[i].nomCur);
@@ -577,7 +597,9 @@ void insertarPosCurso(CURSO x[MAX],int *dx,int pos,CURSO y){
       strcpy(x[pos-1].nomCur,y.nomCur);
       x[pos-1].scal = y.scal;
       x[pos-1].creditosCur = y.creditosCur;
-      dx +=1;
+      *dx=n;
+
+      mostrarVectorCurso(x,*dx);
    }
    else{
       printf("Excede Dimension");
@@ -586,8 +608,8 @@ void insertarPosCurso(CURSO x[MAX],int *dx,int pos,CURSO y){
 
 
 void insertarPosDocente(Docente x[MAX],int *dx,int pos,Docente y){
-   int i,j;
-   if(*dx+1>MAX){
+   int i,j, n=*dx+1;
+   if(*dx+1<MAX){
       for(i=*dx+1;i>pos+1;i--){
          x[i-1].codDoc=x[i].codDoc;
          strcpy(x[i-1].nomDoc,x[i].nomDoc);
@@ -613,14 +635,16 @@ void insertarPosDocente(Docente x[MAX],int *dx,int pos,Docente y){
 
       strcpy(x[pos-1].escuela,y.escuela);
       x[pos-1].peso = y.peso;
-      dx +=1;
+      *dx=n;
+    //   mostrarVectorDoc(x,*dx);
+      system("pause");
    }
    else{
       printf("Excede Dimension");
    }
 }
 int buscarxCodigoDoc(Docente x[MAX],int dx,int cod){
-   int pos = 0,i;
+   int pos = -1,i;
 
    for(i=0;i<dx;i++){
       if(x[i].codDoc==cod){
@@ -628,7 +652,7 @@ int buscarxCodigoDoc(Docente x[MAX],int dx,int cod){
       }
    }
    
-   return pos;
+   return pos+1;
 }
 void editarDocente(Docente x[MAX],int dx){
    int cod,edit,i;
@@ -641,12 +665,14 @@ void editarDocente(Docente x[MAX],int dx){
       printf("Docente no encontrado");
    }
    else{  
-      printf("\n\n\tIngrese datos del Doncente: ");
+      printf("\n\n\tIngrese datos del Docente: \n");
       printf("Codigo: ");
       cin>>x[edit].codDoc;
+      fflush(stdin);
       printf("Nombre: ");
-      cin>>x[edit].codDoc;
-      editarCurso(x[edit].c,10);
+      gets(x[edit].nomDoc);
+    //   editarCurso(x[edit].c,10);
+      fflush(stdin);  
       printf("Peso: ");
       cin>>x[edit].peso;
       cout<<endl;
