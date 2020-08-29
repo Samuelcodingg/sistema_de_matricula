@@ -81,7 +81,27 @@ void raya1Cur();
 void raya2Cur();
 
 int main(){
-
+    int nd, nc;
+    CURSO c[]={
+        202,"ALGORITMICA I",4,'F',
+        188,"INTR. DESARR. SOFTWARE",3,'F',
+        184,"MATEMATICA BASICA",4,'F',
+        190,"FISICA ELECTRONICA",3,'F',
+        192,"ESTADISTICA",3,'F',
+        189,"ORG. Y ADMINIST.",3,'G',
+        200,"ING. ECONOMICA",3,'G',
+    };
+    Docente d[]={
+        1001,"PEREZ LOPEZ, Juan",{c[0],c[3],c[6]},"I2",60.2,
+        1005,"ROMAN HUAMAN, Eugenio",{c[1],c[2],c[5]},"I1",70.6,
+        1002,"RUIZ MARTINEZ, Maria",{c[4],c[1],c[2]},"I2",52.6,
+        1004,"GAVILAN CESPEDES, Julio",{c[2],c[5],c[6]},"I1",63.8,
+        1003,"MORILLO HUAYANAI, Paula",{c[2],c[0],c[1]},"I1",54.2,
+        1006,"SANSONI HURTADO, Jose",{c[2],c[0],c[6]},"I2",80.1,
+    };
+    nc=sizeof(c)/(sizeof(int)*2+sizeof(char)*41);
+    nd=sizeof(d)/(sizeof(int)+sizeof(char)*44+sizeof(CURSO)*10+sizeof(float));
+	
 
     system("pause");
     return 0;
