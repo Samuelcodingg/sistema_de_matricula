@@ -1,10 +1,10 @@
 /*
  * NombreProg : Alumnos.cpp
  * Descripcion:  Registro de vector Alumnos 
-*                con operaciones basicas             
- *   
- *    
- *    
+ *                con operaciones basicas             
+ *      
+ *      Pendiente Eliminar variables sin uso
+ *      Implementar salvar y guardar
  *
  * Autor:  ROMAN CESPEDES, Samuel Aaron
  *         TORRE ARTEAGA, Alexander
@@ -67,13 +67,15 @@ void raya2();
 
 
 int main(){
-    ALUMNO A[MAX]={
+    ALUMNO A[MAX]={ //Vector de Prueba
         100,"Jorge","edu",{1,1,1},12,
         102,"Eva","fis",{1,1,1},18,
         104,"Luis","med",{1,1,1},5,
         108,"Alina","let",{1,1,1},16,
         109,"Karenina","ing",{1,1,1},17,
     };
+    
+    
     int nA,opc;
     crearVectorAlu(A,&nA);
     nA = 5;
@@ -210,7 +212,7 @@ void editarporCodigoAlu(ALUMNO x[MAX], int dx){
 }
 
 void insertarporPosicion(ALUMNO x[MAX],int *dx){
-   int i,j,n,suma=0,comp=0;//comp es un valor bandera
+   int i,n;
    int posi,cod;
 
    mostrarVectorAlu(x,*dx);
@@ -547,4 +549,3 @@ void menu2(ALUMNO x[MAX],int *dx,int mod,int aux){
         break;
     }   
 }
-
