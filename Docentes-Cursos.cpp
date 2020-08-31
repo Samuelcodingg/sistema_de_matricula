@@ -97,7 +97,7 @@ void fileFiltrarDocentes(FILE *F);
 void fileFiltrarCursos(FILE *F);
 //Eliminar
 void fileEliminarDocente(FILE *F);
-
+void fileEliminarCurso(FILE *FF);
 //Editar
 void fileEditarDocente(FILE *FF);
 void fileEditarCurso(FILE *FF);
@@ -182,6 +182,9 @@ int main(){
    // fileLeerCursos(FC);
    // fileCopiarCursos(FC);
    // fileCopiarDocentes(FD);
+   // fileEliminarCurso(FC);
+   // FC = fopen("Cursos.dat","a+");
+   // fileLeerCursos(FC);
 
     system("pause");
     return 0;
@@ -997,6 +1000,47 @@ void fileEliminarDocente(FILE *FF){
     remo=remove("Docentes.dat"); // Elimina
     printf("remove = %d\n", remo);
     rena=rename("Temporal.dat", "Docentes.dat"); //renombre
+    printf("rename = %d\n", rena);
+    //avisando
+    if(Hallado == 0){
+        printf("No existe ese CODIGO ...\n\n");
+    }
+    else{
+        printf("Registro eliminado\n\n");
+    }
+}
+
+void fileEliminarCurso(FILE *FF){
+    FILE *GG;
+    CURSO A;
+    int Hallado=0, Codigo, remo, rena;
+    printf("Codigo a Eliminar ---> ");
+    //scanf("%d",&Codigo);getchar();
+    cin>>Codigo;
+    //abriendo, leyendo,cargando estructura
+    GG = fopen("Temporal.dat","a+");
+    if (GG == NULL){
+        printf("No se puede abrir el archivo\n");
+        exit(1);
+    }
+    fread(&A, sizeof(A), 1, FF);
+    while(!feof(FF)){ // Registro Buscado
+        if(Codigo != A.codCur){
+            fwrite(&A, sizeof(A), 1, GG);
+        }
+        if(Codigo == A.codCur){
+            Hallado = 1;
+        }
+        fread(&A, sizeof(A), 1, FF);
+    }
+    // no olvidar cerrar archivo y siempre fuera de while
+    fclose(FF);
+    fclose(GG);
+    //Recordar que los nombres Directorios/carpetas y Archivos de datos no
+    // pueden tener mas de 8.3 caracteres
+    remo=remove("Cursos.dat"); // Elimina
+    printf("remove = %d\n", remo);
+    rena=rename("Temporal.dat", "Cursos.dat"); //renombre
     printf("rename = %d\n", rena);
     //avisando
     if(Hallado == 0){
