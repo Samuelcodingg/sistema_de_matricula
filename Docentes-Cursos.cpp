@@ -81,7 +81,39 @@ void raya2Doc();
 void raya1Cur();
 void raya2Cur();
 
+//ARCHIVOS
+
+//Escribir
+void fileEscribirDocentes(FILE *F,Docente x);
+void fileEscribirCursos(FILE *F,CURSO x);
+//Leer
+void fileLeerDocentes(FILE *F);
+void fileLeerCursos(FILE *F);
+//Buscar
+void fileBuscarDocente(FILE *F);
+void fileBuscarCurso(FILE *F);
+//Filtrar
+void fileFiltrarDocentes(FILE *F);
+void fileFiltrarCursos(FILE *F);
+//Eliminar
+void fileEliminarDocente(FILE *F);
+
+//Editar
+void fileEditarDocente(FILE *FF);
+void fileEditarCurso(FILE *FF);
+//Copiar
+void fileCopiarDocentes(FILE *F);
+void fileCopiarCursos(FILE *F);
+
 int main(){
+    FILE *FD, *FC;
+    FD = fopen("Docentes.dat","a+");
+    FC = fopen("Cursos.dat","a+");
+    if(FC == NULL && FD == NULL){
+        printf("Error en la apertura de archivos...!\n");
+        system("pause");
+        exit(0);
+    }
     int nd, nc;
     CURSO c[]={
         202,"ALGORITMICA I",4,'F',
@@ -126,6 +158,30 @@ int main(){
     // ordenarxCodigoDoc(d,nd);
     // ordenarPorNombreCur(c,nc);
     // ordenarPorNombreDoc(d,nd);
+    //  for(int i=0;i<nd;i++){
+   //     FD = fopen("Docentes.dat","a+");
+   //    fileEscribirDocentes(FD,d[i]);
+   //  }
+   // fileLeerDocentes(FD);
+   // for(int i=0;i<nc;i++){
+   //     FC = fopen("Cursos.dat","a+");
+   //    fileEscribirCursos(FC,c[i]);
+   //  }
+   // FC = fopen("Cursos.dat","a+");
+   // fileLeerCursos(FC);
+   // fileBuscarDocente(FD);
+   // fileBuscarCurso(FC);
+   // fileFiltrarDocentes(FD);
+   // fileFiltrarCursos(FC);
+   // fileEliminarDocente(FD);
+   // fileEditarDocente(FD);
+   // FD = fopen("Docentes.dat","a+");
+   // fileLeerDocentes(FD);
+   // fileEditarCurso(FC);
+   // FC = fopen("Cursos.dat","a+");
+   // fileLeerCursos(FC);
+   // fileCopiarCursos(FC);
+   // fileCopiarDocentes(FD);
 
     system("pause");
     return 0;
@@ -764,4 +820,406 @@ void eliminarxValorCur(CURSO x[MAX],int *dx,CURSO dato){
    else{
       printf("Vacio...!\n");
    }
+}
+
+void fileEscribirDocentes(FILE *F,Docente x){
+    fwrite(&x,sizeof(x),1,F);
+    fclose(F);
+}
+void fileEscribirCursos(FILE *F,CURSO x){
+   fwrite(&x,sizeof(x),1,F);
+   fclose(F);
+}
+
+void fileLeerDocentes(FILE *F){
+   int i=0;
+   Docente x;
+   encabezado3();
+   fread(&x,sizeof(x),1,F);
+   while(!feof(F)){
+      printf("%3d\t%-12d%-32s%-18s%-18.2f\n",i+1,x.codDoc,x.nomDoc,x.escuela,x.peso);
+      fread(&x,sizeof(x),1,F);
+      i++;
+   }
+   raya1();
+   fclose(F);
+}
+
+void fileLeerCursos(FILE *F){
+   int i=0;
+   CURSO x;
+   encabezado5();
+   fread(&x,sizeof(x),1,F);
+   while(!feof(F)){
+      printf("%3d\t%-12d%-32s%-18d%-18c\n",i+1,x.codCur,x.nomCur,x.creditosCur,x.scal);
+      fread(&x,sizeof(x),1,F);
+      i++;
+   }
+   raya1();
+   cout <<"\n\n";
+   system("pause");
+   fclose(F);
+}
+
+void fileBuscarDocente(FILE *H){
+   Docente A;
+   int Codigo, i=0;
+   // cargando clave a buscar
+   printf("Codigo a buscar ---> ");
+   scanf("%d",&Codigo);
+   // aqui siempre debe empezar el ciclo de lectura
+   // y fread() regresa siempre cuantas estructuras leyo
+
+   encabezado3();
+   fread(&A,sizeof(A),1,H);
+   while(!feof(H))
+   { // desplegando Registro Buscado
+      if(A.codDoc == Codigo)
+      {
+         printf("%3d\t%-12d%-32s%-18s%-18.2f\n",i+1,A.codDoc,A.nomDoc,A.escuela,A.peso);
+      }
+      fread(&A, sizeof(A), 1, H);
+   }; // aqui termina while
+   // no olvidar cerrar archivo y siempre fuera de while
+   raya1();
+   fclose(H);
+}
+void fileBuscarCurso(FILE *H){
+   CURSO A;
+   int Codigo, i=0;
+   // cargando clave a buscar
+   printf("Codigo a buscar ---> ");
+   scanf("%d",&Codigo);
+   // aqui siempre debe empezar el ciclo de lectura
+   // y fread() regresa siempre cuantas estructuras leyo
+
+   encabezado5();
+   fread(&A,sizeof(A),1,H);
+   while(!feof(H))
+   { // desplegando Registro Buscado
+      if(A.codCur == Codigo)
+      {
+         printf("%3d\t%-12d%-32s%-18d%-18c\n",i+1,A.codCur,A.nomCur,A.creditosCur,A.scal);
+      }
+      fread(&A, sizeof(A), 1, H);
+   }; // aqui termina while
+   // no olvidar cerrar archivo y siempre fuera de while
+   raya1();
+   fclose(H);
+}
+
+void fileFiltrarDocentes(FILE *H){
+   Docente A;
+    int Hallado=0, Codigo, i=0;
+    // cargando clave a buscar
+    printf("Codigo >= que ---> ");
+    scanf("%d",&Codigo);
+    // aqui siempre debe empezar el ciclo de lectura
+    // y fread() regresa siempre cuantas estructuras leyo
+    encabezado3();
+    fread(&A,sizeof(A),1,H);
+    while(!feof(H))
+    { // desplegando Registro Buscado
+        if(A.codDoc >= Codigo)
+        {
+            printf("%3d\t%-12d%-32s%-18s%-18.2f\n",i+1,A.codDoc,A.nomDoc,A.escuela,A.peso);
+            Hallado = 1;
+            i++;
+        }
+        fread(&A, sizeof(A), 1, H);
+    }; // aqui termina while
+    raya1();
+    if(Hallado == 0)
+    {
+    printf("Ninguno cumple con esa Condicion\n\n");
+    }
+    // no olvidar cerrar archivo y siempre fuera de while
+    fclose(H);
+}
+
+void fileFiltrarCursos(FILE *H){
+   CURSO A;
+    int Hallado=0, Codigo, i=0;
+    // cargando clave a buscar
+    printf("Codigo >= que ---> ");
+    scanf("%d",&Codigo);
+    // aqui siempre debe empezar el ciclo de lectura
+    // y fread() regresa siempre cuantas estructuras leyo
+    encabezado5();
+    fread(&A,sizeof(A),1,H);
+    while(!feof(H))
+    { // desplegando Registro Buscado
+        if(A.codCur >= Codigo)
+        {
+         printf("%3d\t%-12d%-32s%-18d%-18c\n",i+1,A.codCur,A.nomCur,A.creditosCur,A.scal);
+            Hallado = 1;
+            i++;
+        }
+        fread(&A, sizeof(A), 1, H);
+    }; // aqui termina while
+    raya1();
+    if(Hallado == 0)
+    {
+    printf("Ninguno cumple con esa Condicion\n\n");
+    }
+    // no olvidar cerrar archivo y siempre fuera de while
+    fclose(H);
+}
+
+void fileEliminarDocente(FILE *FF){
+    FILE *GG;
+    Docente A;
+    int Hallado=0, Codigo, remo, rena;
+    printf("Codigo a Eliminar ---> ");
+    //scanf("%d",&Codigo);getchar();
+    cin>>Codigo;
+    //abriendo, leyendo,cargando estructura
+    GG = fopen("Temporal.dat","a+");
+    if (GG == NULL){
+        printf("No se puede abrir el archivo\n");
+        exit(1);
+    }
+    fread(&A, sizeof(A), 1, FF);
+    while(!feof(FF)){ // Registro Buscado
+        if(Codigo != A.codDoc){
+            fwrite(&A, sizeof(A), 1, GG);
+        }
+        if(Codigo == A.codDoc){
+            Hallado = 1;
+        }
+        fread(&A, sizeof(A), 1, FF);
+    }
+    // no olvidar cerrar archivo y siempre fuera de while
+    fclose(FF);
+    fclose(GG);
+    //Recordar que los nombres Directorios/carpetas y Archivos de datos no
+    // pueden tener mas de 8.3 caracteres
+    remo=remove("Docentes.dat"); // Elimina
+    printf("remove = %d\n", remo);
+    rena=rename("Temporal.dat", "Docentes.dat"); //renombre
+    printf("rename = %d\n", rena);
+    //avisando
+    if(Hallado == 0){
+        printf("No existe ese CODIGO ...\n\n");
+    }
+    else{
+        printf("Registro eliminado\n\n");
+    }
+}
+
+void fileEditarDocente(FILE *FF)
+{
+    FILE *GG;
+    Docente A;
+    int Hallado=0, Codigo, Rem, Ren;
+    // cargando clave a buscar
+    printf("Codigo a Editar ---> ");
+    scanf("%d",&Codigo);
+
+    GG = fopen("Temporal.dat","a+");
+    if (GG == NULL)
+    {
+        printf("No se puede abrir el archivo\n");
+        exit(1);
+    }
+    // aqui siempre debe empezar el ciclo de lectura
+    // y fread() regresa siempre cuantas estructuras leyo
+
+    fread(&A, sizeof(A), 1, FF);
+    while(!feof(FF))
+    { // Registro Buscado
+        if(A.codDoc == Codigo)
+        {
+            int aux=0;
+            char desea='n';
+            Docente B;
+            Hallado=1;
+            B=A;
+            while(aux==0){
+                int opc1;
+                fflush(stdin);
+                system("cls");
+                printf("RUTINA DE EDICION\n0SALIR\n1.Codigo\n2.Nombre\n3.Peso\nDigite su opcion--->");
+                scanf("%d",&opc1);
+                fflush(stdin);
+                switch(opc1){
+                    case 0:
+                        printf("Desea guardar los cambios? S/N--->");
+                        scanf("%c",&desea);
+                        aux=1;
+                        break;
+                    case 1:
+                        printf("Nuevo codigo --->");
+                        scanf("%d",&B.codDoc);
+                        break;
+                    case 2:
+                        fflush(stdin);
+                        printf("Nuevo Nombre ---> ");
+                        gets(B.nomDoc);
+                        break;
+                    case 3:
+                        printf("Nuevo Peso -----> ");
+                        scanf("%d",&B.peso);
+                        break;
+                    default:
+                        printf("Opcion incorrecta!\n");
+                }
+                
+            }
+            if(desea=='S' || desea=='s'){
+                fwrite(&B,sizeof(B),1,GG);
+            }
+            else{
+                fwrite(&A, sizeof(A), 1, GG);
+            }
+            
+        }
+        else
+        {
+            fwrite(&A, sizeof(A), 1, GG);
+        }
+        fread(&A, sizeof(A), 1, FF);
+    }; // aqui termina while
+    // no olvidar cerrar archivo y siempre fuera de while
+    fclose(FF);
+    fclose(GG);
+    //Removiendo y eliminando
+    //Recordar que los nombres Directorios/carpetas y Archivos de datos no
+    // pueden tener mas de 8.3 caracteres
+    Rem=remove("Docentes.dat");
+    printf("remove %d", Rem);
+    Ren=rename("Temporal.dat","Docentes.dat ");
+    printf("rename %d", Ren);
+    //avisando
+    if(Hallado == 0){
+        printf("No existe ese CODIGO...\n\n");
+    }
+    else{
+        printf("Registro Actualizado");
+    }
+}
+
+void fileEditarCurso(FILE *FF)
+{
+    FILE *GG;
+    CURSO A;
+    int Hallado=0, Codigo, Rem, Ren;
+    // cargando clave a buscar
+    printf("Codigo a Editar ---> ");
+    scanf("%d",&Codigo);
+
+    GG = fopen("Temporal.dat","a+");
+    if (GG == NULL)
+    {
+        printf("No se puede abrir el archivo\n");
+        exit(1);
+    }
+    // aqui siempre debe empezar el ciclo de lectura
+    // y fread() regresa siempre cuantas estructuras leyo
+
+    fread(&A, sizeof(A), 1, FF);
+    while(!feof(FF))
+    { // Registro Buscado
+        if(A.codCur == Codigo)
+        {
+            int aux=0;
+            char desea='n';
+            CURSO B;
+            Hallado=1;
+            B=A;
+            while(aux==0){
+                int opc1;
+                fflush(stdin);
+                system("cls");
+                printf("RUTINA DE EDICION\n0SALIR\n1.Codigo\n2.Nombre\n3.Sistema Calif\n4.Creditos\nDigite su opcion--->");
+                scanf("%d",&opc1);
+                fflush(stdin);
+                switch(opc1){
+                    case 0:
+                        printf("Desea guardar los cambios? S/N--->");
+                        scanf("%c",&desea);
+                        aux=1;
+                        break;
+                    case 1:
+                        printf("Nuevo codigo --->");
+                        scanf("%d",&B.codCur);
+                        break;
+                    case 2:
+                        fflush(stdin);
+                        printf("Nuevo Nombre ---> ");
+                        gets(B.nomCur);
+                        break;
+                    case 3:
+                        printf("Nuevo Sistema Calif -----> ");
+                        scanf("%c",&B.scal);
+                        break;
+                     case 4:
+                        printf("Nuevo Numero Creditos--->");
+                        scanf("%d",&B.creditosCur);
+                    default:
+                        printf("Opcion incorrecta!\n");
+                }
+                
+            }
+            if(desea=='S' || desea=='s'){
+                fwrite(&B,sizeof(B),1,GG);
+            }
+            else{
+                fwrite(&A, sizeof(A), 1, GG);
+            }
+            
+        }
+        else
+        {
+            fwrite(&A, sizeof(A), 1, GG);
+        }
+        fread(&A, sizeof(A), 1, FF);
+    }; // aqui termina while
+    // no olvidar cerrar archivo y siempre fuera de while
+    fclose(FF);
+    fclose(GG);
+    //Removiendo y eliminando
+    //Recordar que los nombres Directorios/carpetas y Archivos de datos no
+    // pueden tener mas de 8.3 caracteres
+    Rem=remove("Cursos.dat");
+    printf("remove %d", Rem);
+    Ren=rename("Temporal.dat","Cursos.dat ");
+    printf("rename %d", Ren);
+    //avisando
+    if(Hallado == 0){
+        printf("No existe ese CODIGO...\n\n");
+    }
+    else{
+        printf("Registro Actualizado");
+    }
+}
+
+void fileCopiarDocentes(FILE *F){
+    FILE *G;
+    Docente A;
+    G = fopen("CopiaDocentes.dat","a+");
+
+    fread(&A,sizeof(A),1,F);
+
+    while(!feof(F)){
+        fwrite(&A,sizeof(A),1,G);
+        fread(&A,sizeof(A),1,F);
+    }
+    fclose(G);
+    fclose(F);
+}
+
+void fileCopiarCursos(FILE *F){
+    FILE *G;
+    CURSO A;
+    G = fopen("CopiaCursos.dat","a+");
+
+    fread(&A,sizeof(A),1,F);
+
+    while(!feof(F)){
+        fwrite(&A,sizeof(A),1,G);
+        fread(&A,sizeof(A),1,F);
+    }
+    fclose(G);
+    fclose(F);
 }
