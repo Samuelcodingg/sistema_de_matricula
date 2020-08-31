@@ -95,6 +95,8 @@ void fileBuscarCurso(FILE *F);
 //Filtrar
 void fileFiltrarDocentes(FILE *F);
 void fileFiltrarCursos(FILE *F);
+//Eliminar
+void fileEliminarDocente(FILE *F);
 
 int main(){
     FILE *FD, *FC;
@@ -149,6 +151,22 @@ int main(){
     // ordenarxCodigoDoc(d,nd);
     // ordenarPorNombreCur(c,nc);
     // ordenarPorNombreDoc(d,nd);
+    //  for(int i=0;i<nd;i++){
+   //     FD = fopen("Docentes.dat","a+");
+   //    fileEscribirDocentes(FD,d[i]);
+   //  }
+   // fileLeerDocentes(FD);
+   // for(int i=0;i<nc;i++){
+   //     FC = fopen("Cursos.dat","a+");
+   //    fileEscribirCursos(FC,c[i]);
+   //  }
+   // FC = fopen("Cursos.dat","a+");
+   // fileLeerCursos(FC);
+   // fileBuscarDocente(FD);
+   // fileBuscarCurso(FC);
+   // fileFiltrarDocentes(FD);
+   // fileFiltrarCursos(FC);
+   // fileEliminarDocente(FD);
 
     system("pause");
     return 0;
@@ -929,4 +947,45 @@ void fileFiltrarCursos(FILE *H){
     }
     // no olvidar cerrar archivo y siempre fuera de while
     fclose(H);
+}
+
+void fileEliminarDocente(FILE *FF){
+    FILE *GG;
+    Docente A;
+    int Hallado=0, Codigo, remo, rena;
+    printf("Codigo a Eliminar ---> ");
+    //scanf("%d",&Codigo);getchar();
+    cin>>Codigo;
+    //abriendo, leyendo,cargando estructura
+    GG = fopen("Temporal.dat","a+");
+    if (GG == NULL){
+        printf("No se puede abrir el archivo\n");
+        exit(1);
+    }
+    fread(&A, sizeof(A), 1, FF);
+    while(!feof(FF)){ // Registro Buscado
+        if(Codigo != A.codDoc){
+            fwrite(&A, sizeof(A), 1, GG);
+        }
+        if(Codigo == A.codDoc){
+            Hallado = 1;
+        }
+        fread(&A, sizeof(A), 1, FF);
+    }
+    // no olvidar cerrar archivo y siempre fuera de while
+    fclose(FF);
+    fclose(GG);
+    //Recordar que los nombres Directorios/carpetas y Archivos de datos no
+    // pueden tener mas de 8.3 caracteres
+    remo=remove("Docentes.dat"); // Elimina
+    printf("remove = %d\n", remo);
+    rena=rename("Temporal.dat", "Docentes.dat"); //renombre
+    printf("rename = %d\n", rena);
+    //avisando
+    if(Hallado == 0){
+        printf("No existe ese CODIGO ...\n\n");
+    }
+    else{
+        printf("Registro eliminado\n\n");
+    }
 }
