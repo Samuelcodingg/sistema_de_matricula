@@ -606,7 +606,9 @@ void insertarPosCurso(CURSO x[MAX],int *dx,int pos,CURSO y){
 
 
 void insertarPosDocente(Docente x[MAX],int *dx,int pos,Docente y){
-   int i,j, n=*dx+1;
+   int i,j, 
+   n=*dx+1;
+   
    if(*dx+1<MAX){
       for(i=*dx+1;i>pos+1;i--){
          x[i-1].codDoc=x[i].codDoc;
