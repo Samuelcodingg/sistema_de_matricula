@@ -48,6 +48,9 @@ void mostrarVectorCurso(CURSO x[MAX],int dx);
 void mostrarVectorDoc(Docente x[MAX],int dx);
 void mostrarCursosxDoc(Docente x,int dx); //Modificar por la relación curso-docente
 //BUSCAR
+void buscarCursoporCodigo(CURSO curs[MAX], int dcurso);
+void buscarDocenteporCodigo(CURSO curs[MAX],Docente doc[MAX],int dcursos,int ddoc);
+//BUSCAR(AUXILIARES)
 int buscarxCodCur(CURSO x[MAX],int dx,int cod);
 int buscarxCodigoDoc(Docente x[MAX],int dx,int cod);
 //EDITAR
@@ -210,33 +213,34 @@ void buscarCursoporCodigo(CURSO curs[MAX], int dcurso){
    int cd,i,comp=0;//comp es un valor bandera
    printf("\n\nIngrese el codigo del curso a buscar: ");
    scanf("%i",&cd);
+   cout <<"\n\n";
+   system("pause");
    for(i=0;i<dcurso;i++){
-      if(curs[i].codCur==cd){
-         comp=1;
-         printf("\nCurso %d\n",i+1);
-         printf("Nombre: %s\n",curs[i].nomCur);
-         printf("Creditos: %d\n",curs[i].creditosCur);
-         printf("Sistema de calificacion: %c\n",curs[i].scal);
-      }
+      encabezado5();
+      printf("%3d\t%-12d%-32s%-3c\n",i+1,curs[i].codCur,curs[i].nomCur,curs[i].scal);
+      raya1Doc();
+      cout <<"\n\n";
    }
    if(comp==0){
       printf("No se encontraron cursos con el codigo ingresado %d\n",cd);
    }
 }
 
-void buscarDocenteporCodigo(CURSO curs[MAX],Docente doc[MAX],int dcursos,int ddoc,int dcursosxdocente[MAX]){
+void buscarDocenteporCodigo(CURSO curs[MAX],Docente doc[MAX],int dcursos,int ddoc){
    int cd,i,j,comp=0;//comp es un valor bandera
    printf("\n\nIngrese el codigo del docente a buscar: ");
    scanf("%i",&cd);
-   for(i=0;i<dcursos;i++){
+   cout <<"\n\n";
+   system("pause");
+   for(i=0;i<ddoc;i++){
       if(doc[i].codDoc==cd){
          comp=1;
-         printf("\nDocente %d\n",i+1);
-         printf("Nombre: %s\n",doc[i].nomDoc);
-         printf("Escuela: %s\n",doc[i].escuela);
-         printf("Peso: %.1f\n",doc[i].peso);
+         encabezado3();
+         printf("%3d\t%-12d%-32s%-18s%-18.2f\n",i+1,doc[i].codDoc,doc[i].nomDoc,doc[i].escuela,doc[i].peso);
+         raya1();
+         cout <<"\n\n";
          printf("Cursos dictados por el profesor: \n");
-         for(j=0;j<dcursosxdocente[i];j++){
+         for(j=0;j<doc[i].cantCur;j++){
             printf("\tCurso %d: %s",j+1, doc[i].c[j].nomCur);
          }
       }
