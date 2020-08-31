@@ -89,6 +89,9 @@ void fileEscribirCursos(FILE *F,CURSO x);
 //Leer
 void fileLeerDocentes(FILE *F);
 void fileLeerCursos(FILE *F);
+//Buscar
+void fileBuscarDocente(FILE *F);
+void fileBuscarCurso(FILE *F);
 
 int main(){
     FILE *FD, *FC;
@@ -819,3 +822,51 @@ void fileLeerCursos(FILE *F){
    system("pause");
    fclose(F);
 }
+
+void fileBuscarDocente(FILE *H){
+   Docente A;
+   int Codigo, i=0;
+   // cargando clave a buscar
+   printf("Codigo a buscar ---> ");
+   scanf("%d",&Codigo);
+   // aqui siempre debe empezar el ciclo de lectura
+   // y fread() regresa siempre cuantas estructuras leyo
+
+   encabezado3();
+   fread(&A,sizeof(A),1,H);
+   while(!feof(H))
+   { // desplegando Registro Buscado
+      if(A.codDoc == Codigo)
+      {
+         printf("%3d\t%-12d%-32s%-18s%-18.2f\n",i+1,A.codDoc,A.nomDoc,A.escuela,A.peso);
+      }
+      fread(&A, sizeof(A), 1, H);
+   }; // aqui termina while
+   // no olvidar cerrar archivo y siempre fuera de while
+   raya1();
+   fclose(H);
+}
+void fileBuscarCurso(FILE *H){
+   CURSO A;
+   int Codigo, i=0;
+   // cargando clave a buscar
+   printf("Codigo a buscar ---> ");
+   scanf("%d",&Codigo);
+   // aqui siempre debe empezar el ciclo de lectura
+   // y fread() regresa siempre cuantas estructuras leyo
+
+   encabezado5();
+   fread(&A,sizeof(A),1,H);
+   while(!feof(H))
+   { // desplegando Registro Buscado
+      if(A.codCur == Codigo)
+      {
+         printf("%3d\t%-12d%-32s%-18d%-18c\n",i+1,A.codCur,A.nomCur,A.creditosCur,A.scal);
+      }
+      fread(&A, sizeof(A), 1, H);
+   }; // aqui termina while
+   // no olvidar cerrar archivo y siempre fuera de while
+   raya1();
+   fclose(H);
+}
+
