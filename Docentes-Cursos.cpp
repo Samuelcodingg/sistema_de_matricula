@@ -42,7 +42,7 @@ struct Docente{
 void crearVector(int *dcursos, int *ddoc);
 //LEER
 void leerVectorCursos(CURSO curs[MAX], int *dcursos);
-void leerVectorDocente(CURSO curs[MAX],Docente doc[MAX], int dcursos,int *ddoc,int dcursosxdocente[MAX]); //Observar
+void leerVectorDocente(CURSO curs[MAX],Docente doc[MAX], int dcursos,int *ddoc); //Observar(modificado)
 //MOSTRAR
 void mostrarVectorCurso(CURSO x[MAX],int dx);
 void mostrarVectorDoc(Docente x[MAX],int dx);
@@ -158,7 +158,7 @@ void leerVectorCursos(CURSO curs[MAX], int *dcursos){
    system("pause");
 }
 
-void leerVectorDocente(CURSO curs[MAX],Docente doc[MAX],int dcursos, int *ddoc,int dcursosxdocente[MAX]){
+void leerVectorDocente(CURSO curs[MAX],Docente doc[MAX],int dcursos, int *ddoc){
    int i=0, n,k,j,comp;
    printf("\n\tLLENADO DEl REGISTRO DE DOCENTES:\n\n");
    printf("\n\nNumero de DOCENTES ---> ");
@@ -195,7 +195,7 @@ void leerVectorDocente(CURSO curs[MAX],Docente doc[MAX],int dcursos, int *ddoc,i
             }
          }while(strcmp(doc[i].c[k].nomCur,".")!=0);
          cout<<endl;
-         dcursosxdocente[i]=k;
+         doc[i].cantCur=k;
       }
       *ddoc = i;
    }
