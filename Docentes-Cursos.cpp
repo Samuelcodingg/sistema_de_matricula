@@ -101,6 +101,9 @@ void fileEliminarDocente(FILE *F);
 //Editar
 void fileEditarDocente(FILE *FF);
 void fileEditarCurso(FILE *FF);
+//Copiar
+void fileCopiarDocentes(FILE *F);
+void fileCopiarCursos(FILE *F);
 
 int main(){
     FILE *FD, *FC;
@@ -177,6 +180,8 @@ int main(){
    // fileEditarCurso(FC);
    // FC = fopen("Cursos.dat","a+");
    // fileLeerCursos(FC);
+   // fileCopiarCursos(FC);
+   // fileCopiarDocentes(FD);
 
     system("pause");
     return 0;
@@ -1185,4 +1190,34 @@ void fileEditarCurso(FILE *FF)
     else{
         printf("Registro Actualizado");
     }
+}
+
+void fileCopiarDocentes(FILE *F){
+    FILE *G;
+    Docente A;
+    G = fopen("CopiaDocentes.dat","a+");
+
+    fread(&A,sizeof(A),1,F);
+
+    while(!feof(F)){
+        fwrite(&A,sizeof(A),1,G);
+        fread(&A,sizeof(A),1,F);
+    }
+    fclose(G);
+    fclose(F);
+}
+
+void fileCopiarCursos(FILE *F){
+    FILE *G;
+    CURSO A;
+    G = fopen("CopiaCursos.dat","a+");
+
+    fread(&A,sizeof(A),1,F);
+
+    while(!feof(F)){
+        fwrite(&A,sizeof(A),1,G);
+        fread(&A,sizeof(A),1,F);
+    }
+    fclose(G);
+    fclose(F);
 }
