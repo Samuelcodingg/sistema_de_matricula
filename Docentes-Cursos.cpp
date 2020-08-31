@@ -35,6 +35,7 @@ struct Docente{
 	CURSO c[10];
 	char escuela[4];
 	float peso;
+	int cantCur;
 };
 
 //CREAR
@@ -57,8 +58,8 @@ void insertarPosCurso(CURSO x[MAX],int *dx,int pos,CURSO y);
 void insertarPosDocente(Docente x[MAX],int *dx,int pos,Docente y); //Mal planteado, tener en cuenta lo de los cursos
 //ELIMINAR
 void eliminarxValorDoc(Docente x[MAX],int *dx,Docente dato);
-void eliminarxValorCur(CURSO x[MAX],int *dx,CURSO dato);
-void eliminaCursoporPosicion(CURSO curs[MAX],int *dcurso);
+void eliminarxValorCur(CURSO x[MAX],int *dx,CURSO dato); // Modificar por la relación
+void eliminaCursoporPosicion(CURSO curs[MAX],int *dcurso); //Modificar por la relación
 void eliminarDocenteporPosicion(Docente doc[MAX], int *ddoc,int dcursosxdocente[MAX]); //Modificar por lo de los cursos
 //ORDENAR
 void ordenarxCodigoDoc(Docente x[MAX],int dx);
