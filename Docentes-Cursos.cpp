@@ -81,7 +81,24 @@ void raya2Doc();
 void raya1Cur();
 void raya2Cur();
 
+//ARCHIVOS
+
+//Escribir
+void fileEscribirDocentes(FILE *F,Docente x);
+void fileEscribirCursos(FILE *F,CURSO x);
+//Leer
+void fileLeerDocentes(FILE *F);
+void fileLeerCursos(FILE *F);
+
 int main(){
+    FILE *FD, *FC;
+    FD = fopen("Docentes.dat","a+");
+    FC = fopen("Cursos.dat","a+");
+    if(FC == NULL && FD == NULL){
+        printf("Error en la apertura de archivos...!\n");
+        system("pause");
+        exit(0);
+    }
     int nd, nc;
     CURSO c[]={
         202,"ALGORITMICA I",4,'F',
@@ -762,4 +779,43 @@ void eliminarxValorCur(CURSO x[MAX],int *dx,CURSO dato){
    else{
       printf("Vacio...!\n");
    }
+}
+
+void fileEscribirDocentes(FILE *F,Docente x){
+    fwrite(&x,sizeof(x),1,F);
+    fclose(F);
+}
+void fileEscribirCursos(FILE *F,CURSO x){
+   fwrite(&x,sizeof(x),1,F);
+   fclose(F);
+}
+
+void fileLeerDocentes(FILE *F){
+   int i=0;
+   Docente x;
+   encabezado3();
+   fread(&x,sizeof(x),1,F);
+   while(!feof(F)){
+      printf("%3d\t%-12d%-32s%-18s%-18.2f\n",i+1,x.codDoc,x.nomDoc,x.escuela,x.peso);
+      fread(&x,sizeof(x),1,F);
+      i++;
+   }
+   raya1();
+   fclose(F);
+}
+
+void fileLeerCursos(FILE *F){
+   int i=0;
+   CURSO x;
+   encabezado5();
+   fread(&x,sizeof(x),1,F);
+   while(!feof(F)){
+      printf("%3d\t%-12d%-32s%-18d%-18c\n",i+1,x.codCur,x.nomCur,x.creditosCur,x.scal);
+      fread(&x,sizeof(x),1,F);
+      i++;
+   }
+   raya1();
+   cout <<"\n\n";
+   system("pause");
+   fclose(F);
 }
