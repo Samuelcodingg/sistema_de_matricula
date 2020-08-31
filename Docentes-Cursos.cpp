@@ -92,6 +92,9 @@ void fileLeerCursos(FILE *F);
 //Buscar
 void fileBuscarDocente(FILE *F);
 void fileBuscarCurso(FILE *F);
+//Filtrar
+void fileFiltrarDocentes(FILE *F);
+void fileFiltrarCursos(FILE *F);
 
 int main(){
     FILE *FD, *FC;
@@ -870,3 +873,60 @@ void fileBuscarCurso(FILE *H){
    fclose(H);
 }
 
+void fileFiltrarDocentes(FILE *H){
+   Docente A;
+    int Hallado=0, Codigo, i=0;
+    // cargando clave a buscar
+    printf("Codigo >= que ---> ");
+    scanf("%d",&Codigo);
+    // aqui siempre debe empezar el ciclo de lectura
+    // y fread() regresa siempre cuantas estructuras leyo
+    encabezado3();
+    fread(&A,sizeof(A),1,H);
+    while(!feof(H))
+    { // desplegando Registro Buscado
+        if(A.codDoc >= Codigo)
+        {
+            printf("%3d\t%-12d%-32s%-18s%-18.2f\n",i+1,A.codDoc,A.nomDoc,A.escuela,A.peso);
+            Hallado = 1;
+            i++;
+        }
+        fread(&A, sizeof(A), 1, H);
+    }; // aqui termina while
+    raya1();
+    if(Hallado == 0)
+    {
+    printf("Ninguno cumple con esa Condicion\n\n");
+    }
+    // no olvidar cerrar archivo y siempre fuera de while
+    fclose(H);
+}
+
+void fileFiltrarCursos(FILE *H){
+   CURSO A;
+    int Hallado=0, Codigo, i=0;
+    // cargando clave a buscar
+    printf("Codigo >= que ---> ");
+    scanf("%d",&Codigo);
+    // aqui siempre debe empezar el ciclo de lectura
+    // y fread() regresa siempre cuantas estructuras leyo
+    encabezado5();
+    fread(&A,sizeof(A),1,H);
+    while(!feof(H))
+    { // desplegando Registro Buscado
+        if(A.codCur >= Codigo)
+        {
+         printf("%3d\t%-12d%-32s%-18d%-18c\n",i+1,A.codCur,A.nomCur,A.creditosCur,A.scal);
+            Hallado = 1;
+            i++;
+        }
+        fread(&A, sizeof(A), 1, H);
+    }; // aqui termina while
+    raya1();
+    if(Hallado == 0)
+    {
+    printf("Ninguno cumple con esa Condicion\n\n");
+    }
+    // no olvidar cerrar archivo y siempre fuera de while
+    fclose(H);
+}
