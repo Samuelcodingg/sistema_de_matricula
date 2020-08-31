@@ -104,6 +104,9 @@ void fileEditarCurso(FILE *FF);
 //Copiar
 void fileCopiarDocentes(FILE *F);
 void fileCopiarCursos(FILE *F);
+//Ordenar
+void fileOrdenarDocentes(FILE *F);
+void fileOrdenarCursos(FILE *F);
 
 int main(){
     FILE *FD, *FC;
@@ -183,6 +186,14 @@ int main(){
    // fileCopiarCursos(FC);
    // fileCopiarDocentes(FD);
    // fileEliminarCurso(FC);
+   // FC = fopen("Cursos.dat","a+");
+   // fileLeerCursos(FC);
+   // FC = fopen("Cursos.dat","a+");
+   // fileLeerCursos(FC);
+   // fileOrdenarDocentes(FD);
+   // FD = fopen("Docentes.dat","a+");
+   // fileLeerDocentes(FD);
+   // fileOrdenarCursos(FC);
    // FC = fopen("Cursos.dat","a+");
    // fileLeerCursos(FC);
 
@@ -1266,4 +1277,84 @@ void fileCopiarCursos(FILE *F){
     }
     fclose(G);
     fclose(F);
+}
+
+void fileOrdenarDocentes(FILE *F){
+   Docente A[MAX];
+    Docente t;
+    FILE *G;
+    G=fopen("Temporal.dat","a+");
+    int i=0,aux=0,j=0,n;
+
+    fread(&A[i],sizeof(Docente),1,F);
+    i++;
+    while(!feof(F)){
+        fread(&A[i],sizeof(Docente),1,F);
+        i++;
+    }
+    n=i-1;
+    fclose(F);
+
+    for(i=0;i<n-1;i++){
+         aux=i;
+         for(j=i+1;j<n;j++){
+            if(A[aux].codDoc>A[j].codDoc){
+               aux=j;
+            }
+         }
+         //Intercambiando
+         t=A[i];
+         A[i]=A[aux];
+         A[aux]=t;
+    }
+    printf("%d\n",n);
+    for(i=0;i<n;i++){
+        fwrite(&A[i],sizeof(Docente),1,G);
+    }
+    fclose(G);
+
+    int rem=remove("Docentes.dat");
+    printf("rem=%d\n",rem);
+    int ren=rename("Temporal.dat","Docentes.dat");
+    printf("ren=%d\n",ren);
+
+}
+void fileOrdenarCursos(FILE *F){
+   CURSO A[MAX];
+    CURSO t;
+    FILE *G;
+    G=fopen("Temporal.dat","a+");
+    int i=0,aux=0,j=0,n;
+
+    fread(&A[i],sizeof(CURSO),1,F);
+    i++;
+    while(!feof(F)){
+        fread(&A[i],sizeof(CURSO),1,F);
+        i++;
+    }
+    n=i-1;
+    fclose(F);
+
+    for(i=0;i<n-1;i++){
+         aux=i;
+         for(j=i+1;j<n;j++){
+            if(A[aux].codCur>A[j].codCur){
+               aux=j;
+            }
+         }
+         //Intercambiando
+         t=A[i];
+         A[i]=A[aux];
+         A[aux]=t;
+    }
+    printf("%d\n",n);
+    for(i=0;i<n;i++){
+        fwrite(&A[i],sizeof(CURSO),1,G);
+    }
+    fclose(G);
+
+    int rem=remove("Cursos.dat");
+    printf("rem=%d\n",rem);
+    int ren=rename("Temporal.dat","Cursos.dat");
+    printf("ren=%d\n",ren);
 }
