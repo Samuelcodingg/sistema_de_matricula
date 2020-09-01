@@ -3,8 +3,8 @@
  * Descripcion:  Registro de vector Alumnos 
  *                con operaciones basicas             
  *      
- *      Pendiente Eliminar variables sin uso
- *      Implementar salvar y guardar
+ *      
+ *      Recuperar solo imprime la primera linea
  *
  * Autor:  ROMAN CESPEDES, Samuel Aaron
  *         TORRE ARTEAGA, Alexander
@@ -46,6 +46,9 @@ void mostrarVectorAlu(ALUMNO x[MAX], int dx);
 void buscarAluporCodigo(ALUMNO x[MAX],int dx);
 void buscaAluporNom(ALUMNO x[MAX],int dx);
 
+void ordenarporCodigo(ALUMNO x[MAX],int dx);
+void ordenarporNombre(ALUMNO x[MAX],int dx);
+
 void editarporCodigoAlu(ALUMNO x[MAX], int dx);
 
 void insertarporPosicion(ALUMNO x[MAX],int *dx);
@@ -54,19 +57,19 @@ void insertarporValor(ALUMNO x[MAX],int *dx);
 void eliminaAluporPosicion(ALUMNO x[MAX],int *dx);
 void eliminarxValorAlu(ALUMNO x[MAX],int *dx);
 
-void ordenarporCodigo(ALUMNO x[MAX],int dx);
-void ordenarporNombre(ALUMNO x[MAX],int dx);
+//ARCHIVOS
+void FileWriteAlu(ALUMNO x[MAX],FILE *y,int dx);
+void FileReadAlu(ALUMNO x[MAX],FILE *y);
 
 //MENU
-void menu(ALUMNO x[MAX],int *dx,int &opc);
-void menu2(ALUMNO x[MAX],int *dx,int mod,int aux);
+void menu(ALUMNO x[MAX],FILE *y,int *dx,int &opc);
+void menu2(ALUMNO x[MAX],int *dx,int mod);
 void encabezado1();
 void raya1();
 void raya2();
 
-
-
 int main(){
+    int nA,opc;
     ALUMNO A[MAX]={ //Vector de Prueba
         100,"Jorge","edu",{1,1,1},12,
         102,"Eva","fis",{1,1,1},18,
@@ -74,17 +77,188 @@ int main(){
         108,"Alina","let",{1,1,1},16,
         109,"Karenina","ing",{1,1,1},17,
     };
-    
-    
-    int nA,opc;
+
+    FILE *F;
     crearVectorAlu(A,&nA);
     nA = 5;
-
+    //nA = sizeof(int)+sizeof(char [40])+sizeof(char [4])+sizeof(FECHA)+sizeof(float);
+    //printf("\n%d",nA);
+    
     do{
-        menu(A,&nA,opc);
+        menu(A,F,&nA,opc);
     }while(opc!=0);
     system("pause");
     return 0;
+    
+}
+
+void menu(ALUMNO x[MAX],FILE *y,int *dx,int &opc){
+    system("cls");
+    printf(" \n\nREGISTRO DE ALUMNOS\n\n");
+    printf("0. TERMINAR \n\n");
+    printf("1. Ingreso de datos\n");
+    printf("2. Mostrar Alumnos\n");
+    printf("3. Buscar Alumno\n");
+    printf("4. Ordenar Registro de Alumnos\n");
+    printf("5. Editar Alumno por codigo\n");
+    printf("6. Insertar Alumno\n");
+    printf("7. Eliminar Alumno\n");
+    printf("8. Guardar datos\n");
+    printf("9. Leer datos guardados\n");
+    do{
+        printf("\nDigite su opcion ---> ");
+        scanf("%d",&opc);
+    }while(opc<0 || opc>9);
+
+    switch(opc){
+        case 1://LEER
+            leerVectorAlu(x,dx);
+            system("pause");
+            break;
+        case 2://MOSTRAR
+            mostrarVectorAlu(x,*dx);
+            system("pause");
+            break;
+        case 3://BUSCAR
+            menu2(x,dx,opc);
+            system("pause");
+            break;
+        case 4://ORDENAR
+            menu2(x,dx,opc); 
+            system("pause");
+            break;
+        case 5://EDITAR
+            editarporCodigoAlu(x,*dx);
+            system("pause");
+            break;
+        case 6://INSERTAR
+            menu2(x,dx,opc);
+            system("pause");
+            break;
+        case 7://ELIMINAR
+            menu2(x,dx,opc);
+            system("pause");
+            break;
+        case 8:
+            FileWriteAlu(x,y,*dx);
+            system("pause");
+            break;
+        case 9:
+            FileReadAlu(x,y);
+            system("pause");
+            break;
+    }
+}
+
+void menu2(ALUMNO x[MAX],int *dx,int mod){
+    int opc;
+    system("cls");
+    if(mod==3){
+        printf("BUSCAR ALUMNO\n");
+    }else if(mod==4){
+        printf("ORDENAR REGISTRO ALUMNO\n");
+    }else if(mod==6){
+        printf("INSERTAR ALUMNO\n");
+    }else{
+        printf("ELIMINAR ALUMNO");
+    }
+    
+    printf("0. TERMINAR\n\n");
+    
+    if(mod==3 || mod==4){
+        printf("1. Por Codigo\n");
+        printf("2. Por Nombre\n");
+    }else{
+        printf("1. Por Posicion\n");
+        printf("2. Por Valor\n");
+    } 
+    
+    do{
+        printf("\nDigite su opcion ---> ");
+        scanf("%d",&opc);
+    }while(opc<0 || opc>2);
+    switch (opc)
+    {
+    case 1:
+        if(mod==3){
+            buscarAluporCodigo(x,*dx);    
+        }else if(mod==4){
+            ordenarporCodigo(x,*dx);
+            printf("\nLos codigos de los registros han sido ordenados de forma ascendente...\n\n");
+            cout<<endl;
+        }else if(mod==6){
+            insertarporPosicion(x,dx);
+        }else{
+            eliminaAluporPosicion(x,dx);
+        }
+
+        system("pause");
+        break;
+    
+    case 2:
+        if(mod==3){
+            buscaAluporNom(x,*dx);
+        }else if(mod==4){
+            ordenarporNombre(x,*dx);
+            printf("\nLos nombres de los registros han sido ordenados de forma ascendente...\n\n");
+            cout<<endl;
+        }else if(mod==6){
+            insertarporValor(x,dx);
+        }else{
+            eliminarxValorAlu(x,dx);
+        }
+        system("pause");
+        break;
+    }   
+}
+
+void FileWriteAlu(ALUMNO x[MAX],FILE *y,int dx){
+    int i;
+    system("cls");
+    
+    //Abre el archivo " "
+    //a++ = abrir para lectura y escritura
+    y = fopen("Alumnos.dat","a++");
+    
+    //Consistencia
+    if(y != NULL){
+        //Grabado en disco
+        for(i=0;i<dx;i++){
+            fwrite(&x[i],sizeof(x[i]),1,y);    
+        }        
+        //mostrarVectorAlu(x,dx);
+        printf("Registro Guardado\n\n");
+        //Cerrando archivo
+        fclose(y);
+    }
+    else{
+        printf("\nNo se puede abrir el archivo...\n\n");
+    }   
+}
+
+void FileReadAlu(ALUMNO x[MAX],FILE *y){
+    int i;
+    system("cls");
+    i = 0;
+    
+    //Abre el archivo
+    //r = abre un archivo para leer
+    y = fopen("Alumnos.dat","r");
+    if(y!=NULL){
+        encabezado1();
+        while(i<5){//desplegando estructuras
+            fread(&x[i],sizeof(x[i]),5,y);
+            printf("%3d\t%-12d%-32s%-18s%-d/%-d/%-18d%-.1fkg\n",i+1,x->codAlu,x->nomAlu,x->escuela,x->fnac.dia,x->fnac.mes,x->fnac.anio,x->peso);
+            i++;
+        }
+        //Cerrando archivo
+        fclose(y);
+        raya1();
+        cout <<"\n\n";
+    }
+    else{
+        printf("\nNo se puede abrir el archivo...\n\n");
+    }
 }
 
 void crearVectorAlu(ALUMNO x[MAX],int *dx){
@@ -92,7 +266,7 @@ void crearVectorAlu(ALUMNO x[MAX],int *dx){
 }
 
 void leerVectorAlu(ALUMNO x[MAX], int *dx){
-    int i=0, n, val;
+    int n, i=0;
     system("cls");
     printf("****Llenando Registro de Alumnos****\n");
     printf("\n\nNumero de ALUMNOS ---> ");
@@ -141,20 +315,23 @@ void mostrarVectorAlu(ALUMNO x[MAX], int dx){
 }
 
 void buscarAluporCodigo(ALUMNO x[MAX],int dx){
-    int cd,i,comp=0;//comp es un valor bandera
+    int cd,i;
+    bool comp=false;//comp es un valor bandera
     printf("\n\nIngrese el codigo del alumno a buscar: ");
     scanf("%i",&cd);
+
     for(i=0;i<dx;i++){
         if(x[i].codAlu==cd){
-            comp=1;
             printf("\nAlumno %d\n",i+1);
             printf("Nombre: %s\n",x[i].nomAlu);
             printf("Escuela: %s\n",x[i].escuela);
             printf("Peso: %.1f\n",x[i].peso);
             printf("Fecha de nacimiento: %d/%d/%d \n",x[i].fnac.dia,x[i].fnac.mes,x[i].fnac.anio);
+            comp=true;
         }
     }
-    if(comp==0){
+    
+    if(comp){
         printf("No se encontro alumnos con el codigo ingresado %d\n",cd);
     }
 }
@@ -163,11 +340,11 @@ void buscaAluporNom(ALUMNO x[MAX],int dx){
     int i=0;
     char band = false;
     char buscar[40];
-    printf("\n\nIngrese el nombre del alumno a buscar: ");  //Se corta y no imprime el resto
+    printf("\n\nIngrese el nombre del alumno a buscar: ");  
     fflush(stdin);
     cin.getline(buscar,40,'\n');
     while(!band && i<dx){
-        if(strcmp(x[i].nomAlu,buscar)==0){ //Compara cadenas retorna 0 si son iguales
+        if(strcmp(x[i].nomAlu,buscar)==0){
             system("cls");
             printf("\nAlumno encontrado mostrando datos...");
             printf("\nAlumno %d\n",i+1);
@@ -182,44 +359,45 @@ void buscaAluporNom(ALUMNO x[MAX],int dx){
 }
 
 void editarporCodigoAlu(ALUMNO x[MAX], int dx){
-   int cod,i,comp=0;//comp es un valor bandera
-   mostrarVectorAlu(x,dx);
-   printf("\n\nIngrese el codigo del alumno cuyos datos desea editar: ");
-   scanf("%i",&cod);
-   for(i=0;i<dx;i++){
-      if(x[i].codAlu==cod){
-         comp=1;
-         printf("\n\tAlumno:  %d\n", i+1);
-         cout <<" Nombre ---> ";
-         cin>>x[i].nomAlu;
-         cout <<" Escuela ---> ";
-         cin >>x[i].escuela;
-         cout <<" Fecha de nacimiento(dd/mm/aaaa):"<<endl;
-         cout<<"\tdd--->";
-         cin >>x[i].fnac.dia;
-         cout<<"\tmm--->";
-         cin >>x[i].fnac.mes;
-         cout<<"\taaaa--->";
-         cin >>x[i].fnac.anio;
-         cout <<" Peso(kg.)---> ";
-         cin >>x[i].peso;
-         cout<<endl;
-      }
-   }
-   if(comp==0){
+    int cod,i;
+    bool comp=false;//comp es un valor bandera
+    mostrarVectorAlu(x,dx);
+    printf("\n\nIngrese el codigo del alumno cuyos datos desea editar: ");
+    scanf("%i",&cod);
+    for(i=0;i<dx;i++){
+        if(x[i].codAlu==cod){
+            printf("\n\tAlumno:  %d\n", i+1);
+            cout <<" Nombre ---> ";
+            cin>>x[i].nomAlu;
+            cout <<" Escuela ---> ";
+            cin >>x[i].escuela;
+            cout <<" Fecha de nacimiento(dd/mm/aaaa):"<<endl;
+            cout<<"\tdd--->";
+            cin >>x[i].fnac.dia;
+            cout<<"\tmm--->";
+            cin >>x[i].fnac.mes;
+            cout<<"\taaaa--->";
+            cin >>x[i].fnac.anio;
+            cout <<" Peso(kg.)---> ";
+            cin >>x[i].peso;
+            cout<<endl;
+            comp=true;
+        }
+    }
+   if(comp){
       printf("No se encontro alumnos con el codigo ingresado %d\n",cod);
    }
 }
 
 void insertarporPosicion(ALUMNO x[MAX],int *dx){
-   int i,n;
-   int posi,cod;
+    int i,n;
+    int posi,cod;
 
-   mostrarVectorAlu(x,*dx);
+    mostrarVectorAlu(x,*dx);
    
-   n = *dx;
-   n = n + 1;
-   i = *dx;
+    n = *dx;
+    n = n + 1;
+    i = *dx;
    
     printf("\n\nIngrese la posicion del alumno en el registro ALUMNOS,cuyos datos desea insertar en todos los registros: ");
     scanf("%i",&posi);
@@ -254,17 +432,17 @@ void insertarporPosicion(ALUMNO x[MAX],int *dx){
             cout<<endl;
             printf("\nDatos INSERTADOS en posicion %d \n\n ",posi);
         }
-      else{
-        printf("La posicion %d no existe en el vector...\n", posi);
-      }
+        else{
+            printf("La posicion %d no existe en el vector...\n", posi);
+        }
     }
-   else{
-      printf("Dimension fuera de rango ...\n");
-   }
+    else{
+        printf("Dimension fuera de rango ...\n");
+    }
 }
 
 void insertarporValor(ALUMNO x[MAX],int *dx){
-   int posi,i,j,n,suma=0;
+   int posi,i,j,n;
    int codigo;
    n=*dx;
    posi = 1;
@@ -440,112 +618,4 @@ void raya2()
 {
    printf("====================================================================");
    printf("=========================================\n");
-}
-
-void menu(ALUMNO x[MAX],int *dx,int &opc){
-    int aux=0;
-    system("cls");
-    printf(" \n\nREGISTRO DE ALUMNOS\n\n");
-    printf("0. TERMINAR \n\n");
-    printf("1. Ingreso de datos\n");
-    printf("2. Mostrar Alumnos\n");
-    printf("3. Buscar Alumno\n");
-    printf("4. Ordenar Registro de Alumnos\n");
-    printf("5. Editar Alumno por codigo\n");
-    printf("6. Insertar Alumno\n");
-    printf("7. Eliminar Alumno\n");
-    do{
-        printf("\nDigite su opcion ---> ");
-        scanf("%d",&opc);
-    }while(opc<0 || opc>9);
-
-    switch(opc){
-        case 1://LEER
-            leerVectorAlu(x,dx);
-            system("pause");
-            break;
-        case 2://MOSTRAR
-            mostrarVectorAlu(x,*dx);
-            system("pause");
-            break;
-        case 3://BUSCAR
-            menu2(x,dx,opc,aux);
-            break;
-        case 4://ORDENAR
-            menu2(x,dx,opc,aux); 
-            break;
-        case 5://EDITAR
-            editarporCodigoAlu(x,*dx);
-            break;
-        case 6://INSERTAR
-            menu2(x,dx,opc,aux);
-            break;
-        case 7://ELIMINAR
-            menu2(x,dx,opc,aux);
-            break;
-    }
-}
-
-void menu2(ALUMNO x[MAX],int *dx,int mod,int aux){
-    ALUMNO dato;
-    int opc,ndato,pos;
-    
-    system("cls");
-    if(mod==3){
-        printf("BUSCAR ALUMNO\n");
-    }else if(mod==4){
-        printf("ORDENAR REGISTRO ALUMNO\n");
-    }else if(mod==6){
-        printf("INSERTAR ALUMNO\n");
-    }else{
-        printf("ELIMINAR ALUMNO");
-    }
-    
-    printf("0. TERMINAR\n\n");
-    
-    if(mod==3 || mod==4){
-        printf("1. Por Codigo\n");
-        printf("2. Por Nombre\n");
-    }else{
-        printf("1. Por Posicion\n");
-        printf("2. Por Valor\n");
-    } 
-    
-    do{
-        printf("\nDigite su opcion ---> ");
-        scanf("%d",&opc);
-    }while(opc<0 || opc>2);
-    switch (opc)
-    {
-    case 1:
-        if(mod==3){
-            buscarAluporCodigo(x,*dx);    
-        }else if(mod==4){
-            ordenarporCodigo(x,*dx);
-            printf("\nLos codigos de los registros han sido ordenados de forma ascendente...\n\n");
-            cout<<endl;
-        }else if(mod==6){
-            insertarporPosicion(x,dx);
-        }else{
-            eliminaAluporPosicion(x,dx);
-        }
-
-        system("pause");
-        break;
-    
-    case 2:
-        if(mod==3){
-            buscaAluporNom(x,*dx);
-        }else if(mod==4){
-            ordenarporNombre(x,*dx);
-            printf("\nLos nombres de los registros han sido ordenados de forma ascendente...\n\n");
-            cout<<endl;
-        }else if(mod==6){
-            insertarporValor(x,dx);
-        }else{
-            eliminarxValorAlu(x,dx);
-        }
-        system("pause");
-        break;
-    }   
 }
