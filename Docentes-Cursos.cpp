@@ -162,7 +162,7 @@ void leerVectorCursos(CURSO curs[MAX], int *dcursos){
 }
 
 void leerVectorDocente(CURSO curs[MAX],Docente doc[MAX],int dcursos, int *ddoc){
-   int i=0, n,k,j,comp;
+   int i=0, n,k=-1,j,comp;
    printf("\n\tLLENADO DEl REGISTRO DE DOCENTES:\n\n");
    printf("\n\nNumero de DOCENTES ---> ");
    scanf("%d", &n);
