@@ -81,8 +81,6 @@ int main(){
    FILE *F;
    crearVectorAlu(A,&nA);
    nA = 5;
-   //nA = sizeof(int)+sizeof(char [40])+sizeof(char [4])+sizeof(FECHA)+sizeof(float);
-   //printf("\n%d",nA);
 
    do{
       menu(A,F,&nA,opc);
@@ -92,6 +90,7 @@ int main(){
 }
 
 void menu(ALUMNO x[MAX],FILE *y,int *dx,int &opc){
+   // y = fopen("xd.dat","a+");
    system("cls");
    printf(" \n\nREGISTRO DE ALUMNOS\n\n");
    printf("0. TERMINAR \n\n");
@@ -217,13 +216,13 @@ void FileWriteAlu(ALUMNO x[MAX],FILE *y,int dx){
 
    //Abre el archivo " "
    //a++ = abrir para lectura y escritura
-   y = fopen("Alumnos.dat","a++");
+   y = fopen("Alumnos.dat","a+");
 
    //Consistencia
    if(y != NULL){
       //Grabado en disco
       for(i=0;i<dx;i++){
-         fwrite(&x[i],sizeof(x[i]),1,y);
+         fwrite(&x[i],sizeof(ALUMNO),1,y);
       }
       //mostrarVectorAlu(x,dx);
       printf("Registro Guardado\n\n");
@@ -237,17 +236,20 @@ void FileWriteAlu(ALUMNO x[MAX],FILE *y,int dx){
 
 void FileReadAlu(ALUMNO x[MAX],FILE *y){
    int i;
+   ALUMNO a;
    system("cls");
    i = 0;
 
    //Abre el archivo
    //r = abre un archivo para leer
-   y = fopen("Alumnos.dat","r");
+   y = fopen("Alumnos.dat","a+");
    if(y!=NULL){
       encabezado1();
+      fread(&a,sizeof(ALUMNO),1,y);
+      i++;
       while(!feof(y)){//desplegando estructuras
-         fread(&x[i],sizeof(x[i]),5,y);
-         printf("%3d\t%-12d%-32s%-18s%-d/%-d/%-18d%-.1fkg\n",i+1,x->codAlu,x->nomAlu,x->escuela,x->fnac.dia,x->fnac.mes,x->fnac.anio,x->peso);
+         printf("%3d\t%-12d%-32s%-18s%-d/%-d/%-18d%-.1fkg\n",i,a.codAlu,a.nomAlu,a.escuela,a.fnac.dia,a.fnac.mes,a.fnac.anio,a.peso);
+         fread(&a,sizeof(ALUMNO),1,y);
          i++;
       }
       //Cerrando archivo
@@ -267,7 +269,7 @@ void crearVectorAlu(ALUMNO x[MAX],int *dx){
 void leerVectorAlu(ALUMNO x[MAX], int *dx){
    int n, i=0;
    system("cls");
-   printf("****Llenando Registro de Alumnos****\n");
+   printf("*Llenando Registro de Alumnos*\n");
    printf("\n\nNumero de ALUMNOS ---> ");
    scanf("%d", &n);
    if(n < MAX){
