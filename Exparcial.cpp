@@ -45,7 +45,7 @@ void raya4();
 
 int main(){
     FILE *FP;
-    int np;
+    int np, menu=0,opc;
     EXPARCIAL par[]={
         101,112,15,
         112,154,12,
@@ -55,14 +55,72 @@ int main(){
     };
     np = sizeof(par)/(sizeof(int)*2 + sizeof(float));
     
-    // crearVector(&np);
-    // leerVectorParcial(par,&np);
-    // mostrarVectorParcial(par,np);
-    // cout<<buscarParcialxCodAlu(par,np,113)<<endl;
-    // cout<<buscarParcialxCodCurso(par,np,151)<<endl;
-    // editarParcial(par,np);
-    fileSalvarParcial(FP,par,np);
-    fileRecuperarParcial(FP);
+    while(menu==0){
+        system("cls");
+        printf("SISTEMA DE NOTAS EXPARCIAL\n");
+        printf("0.SALIR\n1.CREAR\n2.LEER\n3.MOSTRAR\n4.BUSCAR XCodCur\n5BUSCAR xCodAlu.\n6.EDITAR\n7.INSERTAR\n8.SALVAR\n9.RECUPERAR\n");
+        printf("Digite su opcion---> ");
+        scanf("%d",&opc);
+
+        system("cls");
+        switch(opc){
+            case 0:
+                system("cls");
+                printf("GRACIAS POR USAR EL SISTEMA!\n");
+                system("pause");
+                exit(0);
+            case 1:
+                crearVector(&np);
+                break;
+            case 2:
+                leerVectorParcial(par,&np);
+                break;
+            case 3:
+                mostrarVectorParcial(par,np);
+                break;
+            case 4:
+            {
+                int cod;
+                printf("Digita el codigo a buscar: ");
+                scanf("%d",&cod);
+                buscarParcialxCodCurso(par,np,cod);
+            }
+            break;
+            case 5:
+            {
+                int cod;
+                printf("Digita el codigo a buscar: ");
+                scanf("%d",&cod);
+                buscarParcialxCodAlu(par,np,cod);
+            }
+            break;
+            case 6:
+                editarParcial(par,np);
+                break;
+            case 7:
+            {
+                int pos, nota;
+                printf("Indica la nueva nota a insertar: ");
+                scanf("%d",&nota);
+                printf("Indica la posicion: ");
+                scanf("%d",&pos);
+                insertarPosParcial(par,&np,pos,nota);
+            }
+            break;
+            case 8:
+                fileSalvarParcial(FP,par,np);
+                break;
+            case 9:
+                fileRecuperarParcial(FP);
+                break;
+            default:
+                printf("Opcion invalida....!\n");
+        }
+        system("pause");
+    }
+
+    system("pause");
+    return 0;
 
     system("pause");
     return 0;
