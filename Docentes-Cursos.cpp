@@ -49,7 +49,7 @@ void mostrarVectorDoc(Docente x[MAX],int dx);
 void mostrarCursosxDoc(Docente x,int dx); //Modificar por la relación curso-docente
 //BUSCAR
 void buscarCursoporCodigo(CURSO curs[MAX], int dcurso);
-void buscarDocenteporCodigo(CURSO curs[MAX],Docente doc[MAX],int dcursos,int ddoc);
+void buscarDocenteporCodigo(Docente doc[MAX],int ddoc);
 //BUSCAR(AUXILIARES)
 int buscarxCodCur(CURSO x[MAX],int dx,int cod);
 int buscarxCodigoDoc(Docente x[MAX],int dx,int cod);
@@ -62,8 +62,8 @@ void insertarPosDocente(Docente x[MAX],int *dx,int pos,Docente y); //Mal plantea
 //ELIMINAR
 void eliminarxValorDoc(Docente x[MAX],int *dx,Docente dato);
 void eliminarxValorCur(CURSO x[MAX],int *dx,CURSO dato); // Modificar por la relación
-void eliminaCursoporPosicion(CURSO curs[MAX],int *dcurso); //Modificar por la relación
-void eliminarDocenteporPosicion(Docente doc[MAX], int *ddoc,int dcursosxdocente[MAX]); //Modificar por lo de los cursos
+void eliminaCursoporPosicion(CURSO curs[MAX],int *dcurso,Docente doc[MAX], int ddoc); //Modificar por la relación(modificado)
+void eliminarDocenteporPosicion(Docente doc[MAX], int *ddoc); //Modificar por lo de los cursos(modificado)
 //ORDENAR
 void ordenarxCodigoDoc(Docente x[MAX],int dx);
 void ordenarxCodigoCur(CURSO x[MAX],int dx);
@@ -162,7 +162,7 @@ void leerVectorCursos(CURSO curs[MAX], int *dcursos){
 }
 
 void leerVectorDocente(CURSO curs[MAX],Docente doc[MAX],int dcursos, int *ddoc){
-   int i=0, n,k=-1,j,comp;
+   int i=0, n,k=0,j,comp=0,nc=0;
    printf("\n\tLLENADO DEl REGISTRO DE DOCENTES:\n\n");
    printf("\n\nNumero de DOCENTES ---> ");
    scanf("%d", &n);
@@ -177,26 +177,25 @@ void leerVectorDocente(CURSO curs[MAX],Docente doc[MAX],int dcursos, int *ddoc){
          cin >>doc[i].escuela;
          cout <<" Peso(kg.)---> ";
          cin >>doc[i].peso;
-         cout<<" Escriba el(los) curso(s) dictado(s) por el profesor: ";
-         do{
-            k++;
-            cout <<"\n\tCurso "<<k+1<<"('.' para terminar)  ---> ";
-            cin >>doc[i].c[k].nomCur;
-            if(strcmp(doc[i].c[k].nomCur,".")!=0){
-               do{
-                  for(j=0;j<dcursos;j++){//compara si el curso ingresado se encuentra en el registro CURSOS
-                     if(strcmp(curs[j].nomCur,doc[i].c[k].nomCur)==0){
-                        doc[i].c[k]=curs[j];
-                        comp=1;
-                     }
+         printf("\nCursos llevados por el profesor: ");
+         scanf("%d",&nc);
+         cout<<" Escriba los codigo de los cursos dictados por el profesor: ";
+         for(k=0;k<nc;k++){
+            do{
+               cout <<"\n\tCodigo de Curso "<<k+1<<" ---> ";
+               cin >>doc[i].c[k].codCur;
+               for(j=0;j<dcursos;j++){//compara si el curso ingresado se encuentra en el registro CURSOS
+                  if(curs[j].codCur==doc[i].c[k].codCur){
+                     doc[i].c[k]=curs[j];
+                     comp=1;
                   }
-                  if(comp==0){
-                     printf("\nEl curso ingresado no se encuentra en el registro de CURSOS.");
-                     printf("\nVuelva a ingresar el curso: \n");
-                  }
-               }while(comp!=1);
-            }
-         }while(strcmp(doc[i].c[k].nomCur,".")!=0);
+               }
+               if(comp==0){
+                  printf("\nEl curso ingresado no se encuentra en el registro de CURSOS.");
+                  printf("\nVuelva a ingresar el curso: \n");
+               }
+            }while(comp!=1);
+         }
          cout<<endl;
          doc[i].cantCur=k;
       }
@@ -226,7 +225,7 @@ void buscarCursoporCodigo(CURSO curs[MAX], int dcurso){
    }
 }
 
-void buscarDocenteporCodigo(CURSO curs[MAX],Docente doc[MAX],int dcursos,int ddoc){
+void buscarDocenteporCodigo(Docente doc[MAX],int ddoc){
    int cd,i,j,comp=0;//comp es un valor bandera
    printf("\n\nIngrese el codigo del docente a buscar: ");
    scanf("%i",&cd);
@@ -239,9 +238,13 @@ void buscarDocenteporCodigo(CURSO curs[MAX],Docente doc[MAX],int dcursos,int ddo
          printf("%3d\t%-12d%-32s%-18s%-18.2f\n",i+1,doc[i].codDoc,doc[i].nomDoc,doc[i].escuela,doc[i].peso);
          raya1();
          cout <<"\n\n";
-         printf("Cursos dictados por el profesor: \n");
-         for(j=0;j<doc[i].cantCur;j++){
-            printf("\tCurso %d: %s",j+1, doc[i].c[j].nomCur);
+         if(doc[i].cantCur!=0){
+            printf("Cursos dictados por el profesor: \n");
+            for(j=0;j<doc[i].cantCur;j++){
+               printf("\tCurso %d: %s\n",j+1, doc[i].c[j].nomCur);
+            }
+         }else{
+            printf("El docente no dicta cursos actualmente.\n");
          }
       }
    }
@@ -250,8 +253,8 @@ void buscarDocenteporCodigo(CURSO curs[MAX],Docente doc[MAX],int dcursos,int ddo
    }
 }
 
-void eliminaCursoporPosicion(CURSO curs[MAX],int *dcurso){
-   int i,n,posi;
+void eliminaCursoporPosicion(CURSO curs[MAX],int *dcurso,Docente doc[MAX], int ddoc){
+   int i,n,posi,j,k,posiDoc,comp=0;// comp es un valor bandera que ayuda a cerrar el bucle do-while
    mostrarVectorCurso(curs,*dcurso);
    printf("\n\nIngrese la posicion del curso que desea eliminar del registro: ");
    scanf("%i",&posi);
@@ -260,6 +263,20 @@ void eliminaCursoporPosicion(CURSO curs[MAX],int *dcurso){
    i=posi-1;
    if(posi-1>-1 && posi-1<*dcurso){
       *dcurso=n;
+      for(j=0;j<ddoc;j++){
+         k=-1;
+         do{
+            k++;
+            if(curs[i].codCur==doc[j].c[k].codCur){
+               doc[j].cantCur=doc[j].cantCur-1;
+               while(k<doc[j].cantCur){//elimina cursos dentro del registros de docentes
+                  doc[j].c[k]=doc[j].c[k+1];
+                  k++;
+               }
+               comp=1;
+            }
+         }while(k<doc[j].cantCur||comp!=1);
+      }
       while(i<n){
          curs[i] = curs[i+1];
          i = i+1;
@@ -271,7 +288,7 @@ void eliminaCursoporPosicion(CURSO curs[MAX],int *dcurso){
    }
    system("pause");
 }
-void eliminarDocenteporPosicion(Docente doc[MAX], int *ddoc,int dcursosxdocente[MAX]){
+void eliminarDocenteporPosicion(Docente doc[MAX], int *ddoc){
    int i,n,posi;
    mostrarVectorDoc(doc,*ddoc);
    printf("\n\nIngrese la posicion del docente que desea eliminar del registro: ");
@@ -283,7 +300,6 @@ void eliminarDocenteporPosicion(Docente doc[MAX], int *ddoc,int dcursosxdocente[
       *ddoc=n;
       while(i<n){
          doc[i] = doc[i+1];
-         dcursosxdocente[i]=dcursosxdocente[i+1];
          i = i+1;
       }
    printf("\nDatos del curso de la posicion %d ELIMINADOS\n\n ",posi);
