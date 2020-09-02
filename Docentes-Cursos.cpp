@@ -990,7 +990,7 @@ void menu(){
              switch(op2){
             case 1:
                fileRecuperarCursos(FC,c,&nc);
-               printf("\n\nRegistro de Cursos recuperado");
+               printf("\n\nRegistro de Cursos recuperado...\n\n");
                system("pause");
                break;
             case 2:
