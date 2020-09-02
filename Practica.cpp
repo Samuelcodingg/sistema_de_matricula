@@ -31,7 +31,7 @@ int buscarPcxCodAlu(PRACTICA p[MAX],int dx,int cod);
 int buscarPcxCodCurso(PRACTICA p[MAX],int dx,int cod);
 void editarporCodigoPc(PRACTICA p[MAX], int dx);
 void editarPc(PRACTICA p[MAX],int dx);
-void insertarPosPc(PRACTICA p[MAX],int pos,int dx,int pc[10]);
+void insertarporPosPc(PRACTICA p[MAX],int dx,int aux,int pos);
 void fileSalvarPractica(FILE *F,PRACTICA p[MAX],int dx);
 void fileRecuperarPractica(FILE *F);
 void menu(PRACTICA p[MAX],FILE *FPC,int *dx,int &opc);
@@ -112,7 +112,13 @@ void menu(PRACTICA p[MAX],FILE *FPC,int *dx,int &opc){
             case 6:
                 editarPc(p,*dx);
                 break;
+            case 7:
+            {
 
+               int aux=0,pos=0;
+               insertarporPosPc(p,*dx,aux,pos);
+            }
+            break;
             case 8:
                 fileSalvarPractica(FPC,p,*dx);
                 break;
@@ -219,25 +225,45 @@ int buscarPcxCodAlu(PRACTICA p[MAX],int dx,int cod){
 
    return pos+1;
 }
-void insertarPosPc(PRACTICA p[MAX],int pos,int dx,int pc[10]){
-   int i,n;
-   int suma=0;
+void insertarporPosPc(PRACTICA p[MAX],int dx,int aux,int pos){
+   int i,j,n,suma=0,comp=0;//comp es un valor bandera
+   mostrarVectorPc(p,dx);
+   if(aux==0){
+   printf("Ingrese la posicion cuyas notas desea insertar: ");
+   scanf("%i",&pos);
+   }
+   n = dx;
+   n = n + 1;//
+   i = dx;
+   if(n<MAX){
+      if(pos-1>-1 && pos-1<dx+1){
+         dx=n;
+         while(i>pos-1){
+            p[i] = p[i-1];
+            i = i-1;
+         }
+         printf("\n\n**Registro de PRACTICAS:\n");
+         for(j=0;j<10;j++){
+            printf("\n\tPractica %d: ",j+1);
+            cin>>p[i].prac[j];
+            cout<<endl;
+            suma=suma+p[i].prac[j];
+         }
+         p[i].promedio=suma/10;
+         suma=0;
+         printf("\n\tEl promedio de practicas del alumno %d : es %d\n\n",i+1,p[i].promedio);
 
-   if(dx>0){
-      for(i=0;i<10;i++){
-         p[pos-1].prac[i] = pc[i];
-         suma +=pc[i];
+      printf("\nDatos INSERTADOS en posicion %d \n\n ",pos);
       }
-      p[pos-1].promedio=suma/10;
-      printf("%d",p[pos-1].promedio);
-
+      else{
+         printf("La posicion %d no existe en el vector...\n", pos);
+      }
    }
    else{
-      printf("Vector Vacio...");
+      printf("Dimension fuera de rango ...\n");
    }
-   mostrarVectorPc(p,dx);
+   system("pause");
 }
-
 
 void editarporCodigoPc(PRACTICA p[MAX], int dx){
    int cod,i,j,comp=0,suma=0;//comp es un valor bandera
@@ -328,6 +354,3 @@ void fileRecuperarPractica(FILE *F){
     fclose(F);
     system("pause");
 }
-
-
-
