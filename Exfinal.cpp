@@ -51,6 +51,7 @@ int main (){
         124,118,15,
         123,156,11,
     };
+   nfin = sizeof(fin)/(sizeof(int)*2 + sizeof(float));
 
    do{
       menu(fin,FFIN,&nfin,opc);
