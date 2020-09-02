@@ -35,7 +35,7 @@ void insertarPosFinal(EXFINAL fin[MAX],int *dx,int pos,int exfin);
 void fileSalvarFinal(FILE *F,EXFINAL fin[MAX],int dx);
 void fileRecuperarFinal(FILE *F);
 
-void menu(EXFINAL fin[MAX],FILE *y,int *dx,int &opc);
+void menu(EXFINAL fin[MAX],FILE *FFIN,int *dx,int &opc);
 void encabezado2(char title[]);
 void raya3();
 void raya4();
