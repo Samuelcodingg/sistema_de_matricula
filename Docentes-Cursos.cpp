@@ -71,6 +71,7 @@ void ordenarxCodigoCurDoc(Docente x,int dx); //Modificar por la relación
 void ordenarPorNombreDoc(Docente x [MAX], int dx);
 void ordenarPorNombreCur(CURSO x [MAX], int dx);
 //MENU
+void menu();
 void encabezado1();
 void encabezado2(char title[]);
 void encabezado3();
@@ -88,42 +89,14 @@ void raya2Cur();
 //ARCHIVOS
 
 //Escribir
-void fileSalvarDocentes(FILE *F,Docente x);
-void fileSalvarCursos(FILE *F,CURSO x);
+void fileSalvarDocentes(FILE *F,Docente x[],int dx);
+void fileSalvarCursos(FILE *F,CURSO x[],int dx);
 //Leer
-void fileRecuperarDocentes(FILE *F);
-void fileRecuperarCursos(FILE *F);
+void fileRecuperarDocentes(FILE *F,Docente x[],int *dx);
+void fileRecuperarCursos(FILE *F,CURSO x[],int *dx);
 
 int main(){
-    FILE *FD, *FC;
-    FD = fopen("Docentes.dat","a+");
-    FC = fopen("Cursos.dat","a+");
-    if(FC == NULL && FD == NULL){
-        printf("Error en la apertura de archivos...!\n");
-        system("pause");
-        exit(0);
-    }
-    int nd, nc;
-    CURSO c[]={
-        202,"ALGORITMICA I",4,'F',
-        188,"INTR. DESARR. SOFTWARE",3,'F',
-        184,"MATEMATICA BASICA",4,'F',
-        190,"FISICA ELECTRONICA",3,'F',
-        192,"ESTADISTICA",3,'F',
-        189,"ORG. Y ADMINIST.",3,'G',
-        200,"ING. ECONOMICA",3,'G',
-    };
-    Docente d[]={
-        1001,"PEREZ LOPEZ, Juan",{c[0],c[3],c[6]},"I2",60.2,
-        1005,"ROMAN HUAMAN, Eugenio",{c[1],c[2],c[5]},"I1",70.6,
-        1002,"RUIZ MARTINEZ, Maria",{c[4],c[1],c[2]},"I2",52.6,
-        1004,"GAVILAN CESPEDES, Julio",{c[2],c[5],c[6]},"I1",63.8,
-        1003,"MORILLO HUAYANAI, Paula",{c[2],c[0],c[1]},"I1",54.2,
-        1006,"SANSONI HURTADO, Jose",{c[2],c[0],c[6]},"I2",80.1,
-    };
-    nc=sizeof(c)/(sizeof(int)*2+sizeof(char)*41);
-    nd=sizeof(d)/(sizeof(int)+sizeof(char)*44+sizeof(CURSO)*10+sizeof(float));
-
+    menu();
     system("pause");
     return 0;
 }
@@ -780,41 +753,250 @@ void eliminarxValorCur(CURSO x[MAX],int *dx,CURSO dato){
    }
 }
 
-void fileSalvarDocentes(FILE *F,Docente x){
-    fwrite(&x,sizeof(x),1,F);
-    fclose(F);
+void fileSalvarDocentes(FILE *F,Docente x[],int dx){
+   int i=0;
+   F = fopen("Docentes.dat","w");
+   if(F == NULL){
+      printf("Error en la apertura de archivos...!\n");
+      system("pause");
+      exit(0);
+   for(i=0;i<dx;i++){
+      fwrite(&x[i],sizeof(Docente),1,F);
+   }
+   fclose(F);
+   }
 }
-void fileSalvarCursos(FILE *F,CURSO x){
-   fwrite(&x,sizeof(x),1,F);
+void fileSalvarCursos(FILE *F,CURSO x[],int dx){
+   int i=0;
+   F = fopen("Cursos.dat","w");
+      if(F == NULL){
+        printf("Error en la apertura de archivos...!\n");
+        system("pause");
+        exit(0);
+      }
+   for(i=0;i<dx;i++){
+      fwrite(&x[i],sizeof(CURSO),1,F);
+    }
    fclose(F);
 }
 
-void fileRecuperarDocentes(FILE *F){
+void fileRecuperarDocentes(FILE *F,Docente x[],int *dx){
    int i=0;
-   Docente x;
-   encabezado3();
-   fread(&x,sizeof(x),1,F);
+   Docente d;
+   F = fopen("Docentes.dat","r");
+   if(F == NULL){
+      printf("Error en la apertura de archivos...!\n");
+      system("pause");
+      exit(0);
+   }
+   fread(&d,sizeof(Docente),1,F);
    while(!feof(F)){
-      printf("%3d\t%-12d%-32s%-18s%-18.2f\n",i+1,x.codDoc,x.nomDoc,x.escuela,x.peso);
-      fread(&x,sizeof(x),1,F);
+      x[i]=d;
+      fread(&d,sizeof(Docente),1,F);
       i++;
    }
-   raya1();
+   *dx=i;
    fclose(F);
 }
 
-void fileRecuperarCursos(FILE *F){
+void fileRecuperarCursos(FILE *F,CURSO x[],int *dx){
    int i=0;
-   CURSO x;
-   encabezado5();
-   fread(&x,sizeof(x),1,F);
+   CURSO c;
+   F = fopen("Cursos.dat","r");
+   if(F == NULL){
+      printf("Error en la apertura de archivos...!\n");
+      system("pause");
+      exit(0);
+   }
+   fread(&c,sizeof(CURSO),1,F);
    while(!feof(F)){
-      printf("%3d\t%-12d%-32s%-18d%-18c\n",i+1,x.codCur,x.nomCur,x.creditosCur,x.scal);
-      fread(&x,sizeof(x),1,F);
+      x[i]=c;
+      fread(&c,sizeof(CURSO),1,F);
       i++;
    }
-   raya1();
-   cout <<"\n\n";
-   system("pause");
+   *dx=i;
    fclose(F);
+}
+
+void menu(){
+   FILE *FD, *FC;
+    int nd, nc,pos;
+    CURSO c[]={
+        202,"ALGORITMICA I",4,'F',
+        188,"INTR. DESARR. SOFTWARE",3,'F',
+        184,"MATEMATICA BASICA",4,'F',
+        190,"FISICA ELECTRONICA",3,'F',
+        192,"ESTADISTICA",3,'F',
+        189,"ORG. Y ADMINIST.",3,'G',
+        200,"ING. ECONOMICA",3,'G',
+    };
+   Docente d[]={
+        1001,"PEREZ LOPEZ, Juan",{c[0],c[3],c[6]},"I2",60.2,3,
+        1005,"ROMAN HUAMAN, Eugenio",{c[1],c[2],c[5]},"I1",70.6,3,
+        1002,"RUIZ MARTINEZ, Maria",{c[4],c[1],c[2]},"I2",52.6,3,
+        1004,"GAVILAN CESPEDES, Julio",{c[2],c[5],c[6]},"I1",63.8,3,
+        1003,"MORILLO HUAYANAI, Paula",{c[2],c[0],c[1]},"I1",54.2,3,
+        1006,"SANSONI HURTADO, Jose",{c[2],c[0],c[6]},"I2",80.1,3,
+    };
+    nc=sizeof(c)/(sizeof(int)*2+sizeof(char)*41);
+    nd=sizeof(d)/(sizeof(int)+sizeof(char)*44+sizeof(CURSO)*10+sizeof(float));
+
+    int op,op2;
+   char var;
+   do{
+      system("cls");
+      printf(" \n\nOPERACIONES CON REGISTROS \n\n");
+      printf("0. TERMINAR \n\n");
+      printf("1. Ingreso de datos \n");
+      printf("2. Mostrar \n");
+      printf("3. Buscar por Codigo \n");
+      printf("4. Editar por codigo \n");
+      printf("5. Insertar por posicion \n");
+      printf("6. Eliminar por posicion \n");
+      printf("7. Eliminar por valor \n");
+      printf("8. Ordenar por codigo \n");
+      printf("9. Ordenar por nombre \n");
+      printf("10. Salvar \n");
+      printf("11. Recuperar \n\n");
+      do{
+         printf("Digite su opcion ---> ");
+         scanf("%d",&op);
+      }while(op<0 || op>11);
+      if(op!=0){
+         printf("\n\n");
+         system("cls");
+         printf(" \n\nSobre que Registro desea realizar la operacion? \n\n");
+         printf("0. ATRAS \n\n");
+         printf("1. CURSOS \n");
+         printf("2. DOCENTES \n\n");
+         do{
+            printf("Digite su opcion ---> ");
+            scanf("%d",&op2);
+         }while(op2<0 || op2>2);
+      }
+      switch(op){
+         case 1://leer
+            switch(op2){
+            case 1:
+               leerVectorCursos(c,&nc);
+               break;
+            case 2:
+               leerVectorDocente(c,d,nc,&nd);
+               break;
+            }
+         break;
+         case 2://mostrar
+             switch(op2){
+            case 1:
+               mostrarVectorCurso(c,nc);
+               break;
+            case 2:
+               mostrarVectorDoc(d,nd);
+               break;
+            }
+         break;
+         case 3://buscar
+             switch(op2){
+            case 1:
+               buscarCursoporCodigo(c,nc);
+               break;
+            case 2:
+               buscarDocenteporCodigo(d,nd);
+               break;
+            }
+         break;
+         case 4://editar
+             switch(op2){
+            case 1:
+               editarCurso(c,nc);
+               break;
+            case 2:
+               editarDocente(d,nd);
+               break;
+            }
+         break;
+         case 5://insertarxpos
+             switch(op2){
+            case 1:
+               break;
+            case 2:
+               break;
+            }
+         break;
+         case 6://eliminarxpos
+             switch(op2){
+            case 1:
+               eliminaCursoporPosicion(c,&nc,d,nd);
+               break;
+            case 2:
+               eliminarDocenteporPosicion(d,&nd);
+               break;
+            }
+         break;
+         case 7://eliminarxvalor
+             switch(op2){
+            case 1:
+               break;
+            case 2:
+               break;
+            }
+         break;
+         case 8: //ordenarxcodigo
+             switch(op2){
+            case 1:
+               ordenarxCodigoCur(c,nc);
+               break;
+            case 2:
+               ordenarxCodigoDoc(d,nd);
+               break;
+            }
+         break;
+         case 9://ordenarxnombre
+             switch(op2){
+            case 1:
+               ordenarPorNombreCur(c,nc);
+               break;
+            case 2:
+               ordenarPorNombreDoc(d,nd);
+               break;
+            }
+         break;
+         case 10://salvar
+             switch(op2){
+            case 1:
+               printf("\n\nDesea sobreescribir los datos de Cursos en el archivo si(s)/no(n): ");
+               cin>>var;
+               if(var=='s'||var=='S'){
+                  fileSalvarCursos(FC,c,nc);
+                  printf("\n\nRegistro de Cursos archivado...\n\n");
+               }
+               system("pause");
+               break;
+            case 2:
+               printf("\n\nDesea sobreescribir los datos de Docentes en el archivo(si(s)/no(n): ");
+               cin>>var;
+               if(var=='s'||var=='S'){
+                  fileSalvarDocentes(FD,d,nd);
+                  printf("\n\nRegistro de Cursos archivado...\n\n");
+               }
+               system("pause");
+               break;
+            }
+         break;
+         case 11://recuperar
+             switch(op2){
+            case 1:
+               fileRecuperarCursos(FC,c,&nc);
+               printf("\n\nRegistro de Cursos recuperado");
+               system("pause");
+               break;
+            case 2:
+               fileRecuperarDocentes(FD,d,&nd);
+               printf("\n\nRegistro de Docentes recuperado...\n\n");
+               system("pause");
+               break;
+            }
+         break;
+      }
+   }while(op!=0);
 }
