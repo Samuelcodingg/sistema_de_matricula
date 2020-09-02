@@ -848,7 +848,7 @@ void menu(){
    char var;
    do{
       system("cls");
-      printf(" \n\nOPERACIONES CON REGISTROS \n\n");
+      printf(" \n\nSISTEMA DE CURSOS-DOCENTES \n\n");
       printf("0. TERMINAR \n\n");
       printf("1. Ingreso de datos \n");
       printf("2. Mostrar \n");
