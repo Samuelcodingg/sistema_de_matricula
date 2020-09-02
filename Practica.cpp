@@ -48,7 +48,7 @@ int main (){
       103,113, {15,20,11,16,15,14,13,15,15,11},15,
       106,113, {8,8,8,9,6,14,9,10,11,11},9,
    };
-   np = sizeof(p)/(sizeof(int)*4 );
+  np = sizeof(p)/(sizeof(int)*13 );
     do{
       menu(p,FPC,&np,opc);
 
