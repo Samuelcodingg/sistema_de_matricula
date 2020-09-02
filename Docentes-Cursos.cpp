@@ -976,7 +976,7 @@ void menu(){
                system("pause");
                break;
             case 2:
-               printf("\n\nDesea sobreescribir los datos de Docentes en el archivo(si(s)/no(n): ");
+               printf("\n\nDesea sobreescribir los datos de Docentes en el archivo si(s)/no(n): ");
                cin>>var;
                if(var=='s'||var=='S'){
                   fileSalvarDocentes(FD,d,nd);
