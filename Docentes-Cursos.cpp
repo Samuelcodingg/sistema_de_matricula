@@ -792,12 +792,15 @@ void fileRecuperarDocentes(FILE *F,Docente x[],int *dx){
       system("pause");
       exit(0);
    }
+   encabezado3();
    fread(&d,sizeof(Docente),1,F);
    while(!feof(F)){
+      printf("%3d\t%-12d%-32s%-18s%-18.2f\n",i+1,d.codDoc,d.nomDoc,d.escuela,d.peso);
       x[i]=d;
       fread(&d,sizeof(Docente),1,F);
       i++;
    }
+   raya1();
    *dx=i;
    fclose(F);
 }
@@ -811,12 +814,15 @@ void fileRecuperarCursos(FILE *F,CURSO x[],int *dx){
       system("pause");
       exit(0);
    }
+   encabezado5();
    fread(&c,sizeof(CURSO),1,F);
    while(!feof(F)){
+      printf("%3d\t%-12d%-32s%-18d%-18c\n",i+1,c.codCur,c.nomCur,c.creditosCur,c.scal);
       x[i]=c;
       fread(&c,sizeof(CURSO),1,F);
       i++;
    }
+   raya1();
    *dx=i;
    fclose(F);
 }
