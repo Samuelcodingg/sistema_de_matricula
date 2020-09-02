@@ -186,16 +186,19 @@ void buscarCursoporCodigo(CURSO curs[MAX], int dcurso){
    printf("\n\nIngrese el codigo del curso a buscar: ");
    scanf("%i",&cd);
    cout <<"\n\n";
-   system("pause");
    for(i=0;i<dcurso;i++){
-      encabezado5();
-      printf("%3d\t%-12d%-32s%-3c\n",i+1,curs[i].codCur,curs[i].nomCur,curs[i].scal);
-      raya1Doc();
-      cout <<"\n\n";
+      if(curs[i].codCur==cd){
+         encabezado5();
+         printf("%3d\t%-12d%-32s%-18d%-18c\n",i+1,curs[i].codCur,curs[i].nomCur,curs[i].creditosCur,curs[i].scal);
+         raya1();
+         comp=1;
+      }
    }
+   cout <<"\n\n";
    if(comp==0){
       printf("No se encontraron cursos con el codigo ingresado %d\n",cd);
    }
+   system("pause");
 }
 
 void buscarDocenteporCodigo(Docente doc[MAX],int ddoc){
