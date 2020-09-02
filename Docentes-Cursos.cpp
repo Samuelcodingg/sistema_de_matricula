@@ -763,11 +763,11 @@ void fileSalvarDocentes(FILE *F,Docente x[],int dx){
       printf("Error en la apertura de archivos...!\n");
       system("pause");
       exit(0);
+   }
    for(i=0;i<dx;i++){
       fwrite(&x[i],sizeof(Docente),1,F);
    }
    fclose(F);
-   }
 }
 void fileSalvarCursos(FILE *F,CURSO x[],int dx){
    int i=0;
