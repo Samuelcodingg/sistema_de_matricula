@@ -980,7 +980,7 @@ void menu(){
                cin>>var;
                if(var=='s'||var=='S'){
                   fileSalvarDocentes(FD,d,nd);
-                  printf("\n\nRegistro de Cursos archivado...\n\n");
+                  printf("\n\nRegistro de Docentes archivado...\n\n");
                }
                system("pause");
                break;
