@@ -73,7 +73,7 @@ void menu(EXFINAL fin[MAX],FILE *FFIN,int *dx,int &opc){
    printf("2. LEER\n");
    printf("3. MOSTRAR\n");
    printf("4. BUSCARxCodCur\n");
-   printf("5. BUSCARxCodCur\n");
+   printf("5. BUSCARxCodAlu\n");
    printf("6. EDITAR\n");
    printf("7. INSERTAR\n");
    printf("8. SALVAR\n");
@@ -238,7 +238,7 @@ int buscarFinalxCodAlu(EXFINAL fin[MAX],int dx,int cod){
    int pos = 0,i;
 
    for(i=0;i<dx;i++){
-      if(fin[i].codCur==cod){
+      if(fin[i].codAlu==cod){
          pos = i;
       }
    }
