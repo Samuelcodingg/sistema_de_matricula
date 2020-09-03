@@ -206,7 +206,6 @@ void buscarDocenteporCodigo(Docente doc[MAX],int ddoc){
    printf("\n\nIngrese el codigo del docente a buscar: ");
    scanf("%i",&cd);
    cout <<"\n\n";
-   system("pause");
    for(i=0;i<ddoc;i++){
       if(doc[i].codDoc==cd){
          comp=1;
@@ -227,6 +226,7 @@ void buscarDocenteporCodigo(Docente doc[MAX],int ddoc){
    if(comp==0){
       printf("No se encontraron cursos con el codigo ingresado %d\n",cd);
    }
+system("pause");
 }
 
 void eliminaCursoporPosicion(CURSO curs[MAX],int *dcurso,Docente doc[MAX], int ddoc){
