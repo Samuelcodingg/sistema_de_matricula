@@ -28,7 +28,7 @@ struct EXPARCIAL{
 	float expar;
 };
 
-void crearVector(int *dx);
+void crearVectorParc(int *dx);
 void leerVectorParcial(EXPARCIAL par[MAX],int *dx);
 void mostrarVectorParcial(EXPARCIAL par[MAX],int dx);
 int buscarParcialxCodCurso(EXPARCIAL par[MAX],int dx,int cod);
@@ -58,7 +58,7 @@ int main(){
     while(menu==0){
         system("cls");
         printf("SISTEMA DE NOTAS EXPARCIAL\n");
-        printf("0.SALIR\n1.CREAR\n2.LEER\n3.MOSTRAR\n4.BUSCAR XCodCur\n5BUSCAR xCodAlu.\n6.EDITAR\n7.INSERTAR\n8.SALVAR\n9.RECUPERAR\n");
+        printf("0.SALIR\n1.CREAR\n2.LEER\n3.MOSTRAR\n4.BUSCAR XCodCur\n5.BUSCAR xCodAlu.\n6.EDITAR\n7.INSERTAR\n8.SALVAR\n9.RECUPERAR\n");
         printf("Digite su opcion---> ");
         scanf("%d",&opc);
 
@@ -70,7 +70,7 @@ int main(){
                 system("pause");
                 exit(0);
             case 1:
-                crearVector(&np);
+                crearVectorParc(&np);
                 break;
             case 2:
                 leerVectorParcial(par,&np);
@@ -126,7 +126,7 @@ int main(){
     return 0;
 }
 
-void crearVector(int *dx){
+void crearVectorParc(int *dx){
     *dx=-1;
 }
 
