@@ -268,7 +268,7 @@ void editarFinal(EXFINAL fin[MAX],int dx){
    printf("Digite el codigo del curso:");
    scanf("%d",&cod);
 
-   edit = buscarFinalxCodAlu(fin,dx,cod);
+   edit = buscarFinalxCodCurso(fin,dx,cod);
 
    if(edit == 0){
       printf("Examen Final no encontrado");
