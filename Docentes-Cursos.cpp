@@ -927,6 +927,24 @@ void menu(){
          case 5://insertarxpos
              switch(op2){
             case 1:
+	    {
+               system("cls");
+               int pos;
+               CURSO dato;
+               printf("Indica Codigo Del Curso: ");
+               scanf("%d",&dato.codCur);
+               fflush(stdin);
+               printf("Indica Sistema de Calif: ");
+               scanf("%c",&dato.scal);
+               fflush(stdin);
+               printf("Indica Nombre del Curso: ");
+               gets(dato.nomCur);
+               printf("Indica Cantidad de Creditos: ");
+               scanf("%d",&dato.creditosCur);
+               printf("Indica la posicion donde insertas dato: ");
+               scanf("%d",&pos);
+               insertarPosCurso(c,&nc,pos,dato);
+            }
                break;
             case 2:
                break;
