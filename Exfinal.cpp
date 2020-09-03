@@ -23,7 +23,7 @@ struct EXFINAL{
 	float exfin=0;
 };
 
-void crearVectorFin(int *dx);
+void crearVectorFinal(int *dx);
 void leerVectorFinal(EXFINAL fin[MAX],int *dx);
 void mostrarVectorFinal(EXFINAL fin[MAX],int dx);
 int buscarFinalxCodCurso(EXFINAL fin[MAX],int dx,int cod);
@@ -89,7 +89,7 @@ void menu(EXFINAL fin[MAX],FILE *FFIN,int *dx,int &opc){
          break;
       case 1:
          system("cls");
-         crearVectorFin(dx);
+         crearVectorFinal(dx);
          break;
 
       case 2:
@@ -155,7 +155,7 @@ void menu(EXFINAL fin[MAX],FILE *FFIN,int *dx,int &opc){
     }
 
 
-void crearVectorFin(int *dx){
+void crearVectorFinal(int *dx){
     *dx=-1;
 }
 
