@@ -28,7 +28,7 @@ struct EXPARCIAL{
 	float expar;
 };
 
-void crearVectorParc(int *dx);
+void crearVectorParcial(int *dx);
 void leerVectorParcial(EXPARCIAL par[MAX],int *dx);
 void mostrarVectorParcial(EXPARCIAL par[MAX],int dx);
 int buscarParcialxCodCurso(EXPARCIAL par[MAX],int dx,int cod);
@@ -70,7 +70,7 @@ int main(){
                 system("pause");
                 exit(0);
             case 1:
-                crearVectorParc(&np);
+                crearVectorParcial(&np);
                 break;
             case 2:
                 leerVectorParcial(par,&np);
@@ -126,7 +126,7 @@ int main(){
     return 0;
 }
 
-void crearVectorParc(int *dx){
+void crearVectorParcial(int *dx){
     *dx=-1;
 }
 
