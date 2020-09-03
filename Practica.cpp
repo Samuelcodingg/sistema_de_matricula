@@ -24,14 +24,14 @@ struct PRACTICA{
    int prac[10];
    int promedio;
 };
-void crearVector(int *dx);
+void crearVectorPc(int *dx);
 void leerVectorPc(PRACTICA p[MAX],int *dx);
 void mostrarVectorPc(PRACTICA p[MAX],int dx);
 int buscarPcxCodAlu(PRACTICA p[MAX],int dx,int cod);
 int buscarPcxCodCurso(PRACTICA p[MAX],int dx,int cod);
 void editarporCodigoPc(PRACTICA p[MAX], int dx);
 void editarPc(PRACTICA p[MAX],int dx);
-void insertarporPosPc(PRACTICA p[MAX],int dx,int aux,int pos);
+void insertarPosPc(PRACTICA p[MAX],int dx,int aux,int pos);
 void fileSalvarPractica(FILE *F,PRACTICA p[MAX],int dx);
 void fileRecuperarPractica(FILE *F);
 void menu(PRACTICA p[MAX],FILE *FPC,int *dx,int &opc);
@@ -62,13 +62,13 @@ void menu(PRACTICA p[MAX],FILE *FPC,int *dx,int &opc){
 
 
    system("cls");
-   printf(" \n\nSISTEMA DE NOTAS DE EXAMEN FINAL\n\n");
+   printf(" \n\nSISTEMA DE NOTAS DE PRACTICA\n\n");
    printf("0. TERMINAR \n\n");
    printf("1. CREAR\n");
    printf("2. LEER\n");
    printf("3. MOSTRAR\n");
    printf("4. BUSCARxCodCur\n");
-   printf("5. BUSCARxCodCur\n");
+   printf("5. BUSCARxCodAlu\n");
    printf("6. EDITAR\n");
    printf("7. INSERTAR\n");
    printf("8. SALVAR\n");
@@ -85,7 +85,7 @@ void menu(PRACTICA p[MAX],FILE *FPC,int *dx,int &opc){
                 system("pause");
                 exit(0);
             case 1:
-                crearVector(dx);
+                crearVectorPc(dx);
                 break;
             case 2:
                 leerVectorPc(p,dx);
@@ -116,7 +116,7 @@ void menu(PRACTICA p[MAX],FILE *FPC,int *dx,int &opc){
             {
 
                int aux=0,pos=0;
-               insertarporPosPc(p,*dx,aux,pos);
+               insertarPosPc(p,*dx,aux,pos);
             }
             break;
             case 8:
@@ -132,7 +132,7 @@ void menu(PRACTICA p[MAX],FILE *FPC,int *dx,int &opc){
     }
 
 
-void crearVector(int *dx){
+void crearVectorPc(int *dx){
     *dx=-1;
 }
 void leerVectorPc (PRACTICA p[MAX],int *dx)
@@ -225,7 +225,7 @@ int buscarPcxCodAlu(PRACTICA p[MAX],int dx,int cod){
 
    return pos+1;
 }
-void insertarporPosPc(PRACTICA p[MAX],int dx,int aux,int pos){
+void insertarPosPc(PRACTICA p[MAX],int dx,int aux,int pos){
    int i,j,n,suma=0,comp=0;//comp es un valor bandera
    mostrarVectorPc(p,dx);
    if(aux==0){
