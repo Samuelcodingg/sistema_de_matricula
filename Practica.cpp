@@ -62,17 +62,17 @@ void menu(PRACTICA p[MAX],FILE *FPC,int *dx,int &opc){
 
 
    system("cls");
-   printf(" \n\nSISTEMA DE NOTAS DE PRACTICA\n\n");
-   printf("0. TERMINAR \n\n");
-   printf("1. CREAR\n");
-   printf("2. LEER\n");
-   printf("3. MOSTRAR\n");
-   printf("4. BUSCARxCodCur\n");
-   printf("5. BUSCARxCodAlu\n");
-   printf("6. EDITAR\n");
-   printf("7. INSERTAR\n");
-   printf("8. SALVAR\n");
-   printf("9. RECUPERAR\n");
+   printf(" \n\n\t\tSISTEMA DE NOTAS DE PRACTICA\n\n");
+   printf("\t0. TERMINAR \n\n");
+   printf("\t1. CREAR\n");
+   printf("\t2. LEER\n");
+   printf("\t3. MOSTRAR\n");
+   printf("\t4. BUSCARxCodCur\n");
+   printf("\t5. BUSCARxCodAlu\n");
+   printf("\t6. EDITAR\n");
+   printf("\t7. INSERTAR\n");
+   printf("\t8. SALVAR\n");
+   printf("\t9. RECUPERAR\n");
    do{
       printf("\nDigite su opcion ---> ");
       scanf("%d",&opc);
@@ -96,7 +96,7 @@ void menu(PRACTICA p[MAX],FILE *FPC,int *dx,int &opc){
             case 4:
             {
                 int cod;
-                printf("Digita el codigo a buscar: ");
+                printf("CODIGO: ");
                 scanf("%d",&cod);
                 buscarPcxCodCurso(p,*dx,cod);
             }
@@ -104,7 +104,7 @@ void menu(PRACTICA p[MAX],FILE *FPC,int *dx,int &opc){
             case 5:
             {
                 int cod;
-                printf("Digita el codigo a buscar: ");
+                printf("CODIGO: ");
                 scanf("%d",&cod);
                 buscarPcxCodAlu(p,*dx,cod);
             }
@@ -229,7 +229,7 @@ void insertarPosPc(PRACTICA p[MAX],int dx,int aux,int pos){
    int i,j,n,suma=0,comp=0;//comp es un valor bandera
    mostrarVectorPc(p,dx);
    if(aux==0){
-   printf("Ingrese la posicion cuyas notas desea insertar: ");
+   printf("POSICION: ");
    scanf("%i",&pos);
    }
    n = dx;
@@ -268,7 +268,7 @@ void insertarPosPc(PRACTICA p[MAX],int dx,int aux,int pos){
 void editarporCodigoPc(PRACTICA p[MAX], int dx){
    int cod,i,j,comp=0,suma=0;//comp es un valor bandera
    mostrarVectorPc(p,dx);
-   printf("\n\nIngrese el codigo del alumno cuya nota desea editar: ");
+   printf("\n\nCODIGO: ");
    scanf("%i",&cod);
    for(i=0;i<dx;i++){
       if(p[i].codAlu==cod){
@@ -292,7 +292,7 @@ void editarporCodigoPc(PRACTICA p[MAX], int dx){
 
 void editarPc(PRACTICA p[MAX],int dx){
    int cod,edit,i,suma=0;
-   printf("Digite el codigo del curso:");
+   printf("CODIGO:");
    scanf("%d",&cod);
 
    edit = buscarPcxCodCurso(p,dx,cod);
