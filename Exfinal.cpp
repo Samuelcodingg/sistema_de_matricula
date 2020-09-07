@@ -67,17 +67,17 @@ void menu(EXFINAL fin[MAX],FILE *FFIN,int *dx,int &opc){
 
 
    system("cls");
-   printf(" \n\nSISTEMA DE NOTAS DE EXAMEN FINAL\n\n");
-   printf("0. TERMINAR \n\n");
-   printf("1. CREAR\n");
-   printf("2. LEER\n");
-   printf("3. MOSTRAR\n");
-   printf("4. BUSCARxCodCur\n");
-   printf("5. BUSCARxCodAlu\n");
-   printf("6. EDITAR\n");
-   printf("7. INSERTAR\n");
-   printf("8. SALVAR\n");
-   printf("9. RECUPERAR\n");
+   printf(" \n\n\t\tSISTEMA DE NOTAS DE EXAMEN FINAL\n\n");
+   printf("\t0. TERMINAR \n\n");
+   printf("\t1. CREAR\n");
+   printf("\t2. LEER\n");
+   printf("\t3. MOSTRAR\n");
+   printf("\t4. BUSCARxCodCur\n");
+   printf("\t5. BUSCARxCodAlu\n");
+   printf("\t6. EDITAR\n");
+   printf("\t7. INSERTAR\n");
+   printf("\t8. SALVAR\n");
+   printf("\t9. RECUPERAR\n");
    do{
       printf("\nDigite su opcion ---> ");
       scanf("%d",&opc);
@@ -106,7 +106,7 @@ void menu(EXFINAL fin[MAX],FILE *FFIN,int *dx,int &opc){
          {
          system("cls");
          int cod;
-         printf("Digita el codigo a buscar: ");
+         printf("CODIGO: ");
          scanf("%d",&cod);
          buscarFinalxCodCurso(fin,*dx,cod);
          system("pause");
@@ -116,7 +116,7 @@ void menu(EXFINAL fin[MAX],FILE *FFIN,int *dx,int &opc){
          {
          system("cls");
          int cod;
-         printf("Digita el codigo a buscar: ");
+         printf("CODIGO: ");
          scanf("%d",&cod);
          buscarFinalxCodAlu(fin,*dx,cod);
          system("pause");
@@ -131,9 +131,9 @@ void menu(EXFINAL fin[MAX],FILE *FFIN,int *dx,int &opc){
          {
          system("cls");
          int pos, nota;
-         printf("Indica la nueva nota a insertar: ");
+         printf("NUEVA NOTA: ");
          scanf("%d",&nota);
-         printf("Indica la posicion: ");
+         printf("POSICION: ");
          scanf("%d",&pos);
          insertarPosFinal(fin,dx,pos,nota);
          system("pause");
@@ -282,7 +282,7 @@ void editarFinal(EXFINAL fin[MAX],int dx){
 }
 void insertarPosFinal(EXFINAL fin[MAX],int *dx,int pos,int exfin){
    int i;
-   if(*dx+1>MAX){
+   if(*dx+1<MAX){
       for(i=*dx+1;i>pos+1;i--){
          fin[i-1].exfin=fin[i].exfin;
       }
