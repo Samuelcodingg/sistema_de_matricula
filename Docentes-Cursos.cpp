@@ -183,7 +183,7 @@ void leerVectorDocente(CURSO curs[MAX],Docente doc[MAX],int dcursos, int *ddoc){
 
 void buscarCursoporCodigo(CURSO curs[MAX], int dcurso){
    int cd,i,comp=0;//comp es un valor bandera
-   printf("\n\nIngrese el codigo del curso a buscar: ");
+   printf("\n\nCODIGO : ");
    scanf("%i",&cd);
    cout <<"\n\n";
    for(i=0;i<dcurso;i++){
@@ -203,7 +203,7 @@ void buscarCursoporCodigo(CURSO curs[MAX], int dcurso){
 
 void buscarDocenteporCodigo(Docente doc[MAX],int ddoc){
    int cd,i,j,comp=0;//comp es un valor bandera
-   printf("\n\nIngrese el codigo del docente a buscar: ");
+   printf("\n\nCODIGO: ");
    scanf("%i",&cd);
    cout <<"\n\n";
    for(i=0;i<ddoc;i++){
@@ -232,7 +232,7 @@ system("pause");
 void eliminaCursoporPosicion(CURSO curs[MAX],int *dcurso,Docente doc[MAX], int ddoc){
    int i,n,posi,j,k,posiDoc,comp=0;// comp es un valor bandera que ayuda a cerrar el bucle do-while
    mostrarVectorCurso(curs,*dcurso);
-   printf("\n\nIngrese la posicion del curso que desea eliminar del registro: ");
+   printf("\n\nPOSICION: ");
    scanf("%i",&posi);
    n=*dcurso;
    n=n-1;
@@ -267,7 +267,7 @@ void eliminaCursoporPosicion(CURSO curs[MAX],int *dcurso,Docente doc[MAX], int d
 void eliminarDocenteporPosicion(Docente doc[MAX], int *ddoc){
    int i,n,posi;
    mostrarVectorDoc(doc,*ddoc);
-   printf("\n\nIngrese la posicion del docente que desea eliminar del registro: ");
+   printf("\n\nPOSICION: ");
    scanf("%i",&posi);
    n=*ddoc;
    n=n-1;
@@ -314,13 +314,11 @@ void encabezado2(char title[]){
 }
 void raya2()
 {
-   printf("====================================================================");
-   printf("=========================================\n");
+   printf("=============================================================================================================\n");
 }
 void raya1()
 {
-   printf("--------------------------------------------------------------------");
-   printf("-----------------------------------------\n");
+   printf("-------------------------------------------------------------------------------------------------------------\n");
 }
 void raya3(){
    printf("===============================\n");
@@ -551,8 +549,9 @@ int buscarxCodCur(CURSO x[MAX],int dx,int cod){
    return pos+1;
 }
 void editarCurso(CURSO x[MAX],int dx){
-   int cod,edit,i;
-   printf("Digite el codigo del curso:");
+   int cod,edit,i, men=0;
+   CURSO B;
+   printf("CODIGO:");
    scanf("%d",&cod);
 
    edit = buscarxCodCur(x,dx,cod);
@@ -561,17 +560,51 @@ void editarCurso(CURSO x[MAX],int dx){
       printf("Curso no encontrado");
    }
    else{  
-      printf("\n\n\tIngrese datos del Curso: \n");
-      printf("Codigo: ");
-      cin>>x[edit].codCur;
-      printf("Nombre: ");
-      cin>>x[edit].nomCur;
-      printf("Sistema de Calificaciones: ");
-      cin>>x[edit].scal;
-      printf("Creditos: ");
-      cin>>x[edit].creditosCur;
-      cout<<endl;
-      printf("\n**Datos del Curso guardados con exito...\n");
+      system("pause");
+       B = x[edit-1];
+       while(men==0){
+           int opc;
+           char desea='n';
+           system("cls");
+           printf("\t\tCurso %d, EDICION",edit);
+           printf("\n0.TERMINAR: \n");
+           printf("1.NOMBRE: \n");
+           printf("2.SISTEMA CALIF: \n");
+           printf("3.CODIGO: \n");
+           printf("Digite su opcion ---> ");
+           scanf("%d",&opc);
+           switch (opc)
+           {
+           case 0:
+               fflush(stdin);
+               printf("Desea guardar? (s/n): ");
+               scanf("%c",&desea);
+               if(desea == 'S' || desea=='s'){
+                   x[edit-1] = B;
+               }
+               men=1;
+               break;
+            case 1:
+                system("cls");
+                fflush(stdin);
+                printf("NUEVO NOMBRE: ");
+                gets(B.nomCur);
+                break;
+            case 2:
+                system("cls");
+                fflush(stdin);
+                printf("NUEVA SISTEMA CAL: ");
+                scanf("%c",&B.scal);
+            case 3:
+                system("cls");
+                printf("NUEVO CODIGO: ");
+                scanf("%d",&B.codCur);
+                break;
+           default:
+                system("Opcion invalida...!\n");
+               break;
+           }
+       }
    }
 }
 void insertarPosCurso(CURSO x[MAX],int *dx,int pos,CURSO y){
@@ -645,8 +678,9 @@ int buscarxCodigoDoc(Docente x[MAX],int dx,int cod){
    return pos+1;
 }
 void editarDocente(Docente x[MAX],int dx){
-   int cod,edit,i;
-   printf("Digite el codigo del Docente:");
+   int cod,edit,i, men=0;
+   Docente B;
+   printf("CODIGO:");
    scanf("%d",&cod);
 
    edit = buscarxCodigoDoc(x,dx,cod);
@@ -655,18 +689,57 @@ void editarDocente(Docente x[MAX],int dx){
       printf("Docente no encontrado");
    }
    else{  
-      printf("\n\n\tIngrese datos del Docente: \n");
-      printf("Codigo: ");
-      cin>>x[edit].codDoc;
-      fflush(stdin);
-      printf("Nombre: ");
-      gets(x[edit].nomDoc);
-    //   editarCurso(x[edit].c,10);
-      fflush(stdin);  
-      printf("Peso: ");
-      cin>>x[edit].peso;
-      cout<<endl;
-      printf("\n**Datos del Docente guardados con exito...\n");
+      system("pause");
+       B = x[edit-1];
+       while(men==0){
+           int opc;
+           char desea='n';
+           system("cls");
+           printf("\t\tDocente %d, EDICION",edit);
+           printf("\n\t0.TERMINAR: \n");
+           printf("\t1.NOMBRE: \n");
+           printf("\t2.ESCUELA: \n");
+           printf("\t3.CODIGO: \n");
+           printf("\t4.PESO: \n");
+           printf("Digite su opcion ---> ");
+           scanf("%d",&opc);
+           switch (opc)
+           {
+           case 0:
+               fflush(stdin);
+               printf("Desea guardar? (s/n): ");
+               scanf("%c",&desea);
+               if(desea == 'S' || desea=='s'){
+                   x[edit-1] = B;
+               }
+               men=1;
+               break;
+            case 1:
+                system("cls");
+                fflush(stdin);
+                printf("NUEVO NOMBRE: ");
+                gets(B.nomDoc);
+                break;
+            case 2:
+                system("cls");
+                fflush(stdin);
+                printf("NUEVA ESCUELA: ");
+                gets(B.escuela);
+            case 3:
+                system("cls");
+                printf("NUEVO CODIGO: ");
+                scanf("%d",&B.codDoc);
+                break;
+            case 4:
+                system("cls");
+                printf("NUEVO PESO: ");
+                scanf("%f",&B.peso);
+                break;
+           default:
+                system("Opcion invalida...!\n");
+               break;
+           }
+       }
    }
 }
 void eliminarxValorDoc(Docente x[MAX],int *dx,Docente dato){
@@ -854,19 +927,18 @@ void menu(){
    char var;
    do{
       system("cls");
-      printf(" \n\nSISTEMA DE CURSOS-DOCENTES \n\n");
-      printf("0. TERMINAR \n\n");
-      printf("1. Ingreso de datos \n");
-      printf("2. Mostrar \n");
-      printf("3. Buscar por Codigo \n");
-      printf("4. Editar por codigo \n");
-      printf("5. Insertar por posicion \n");
-      printf("6. Eliminar por posicion \n");
-      printf("7. Eliminar por valor \n");
-      printf("8. Ordenar por codigo \n");
-      printf("9. Ordenar por nombre \n");
-      printf("10. Salvar \n");
-      printf("11. Recuperar \n\n");
+      printf(" \n\n\t\tSISTEMA DE CURSOS-DOCENTES \n\n");
+      printf("\t0. TERMINAR \n\n");
+      printf("\t1. Ingreso de datos \n");
+      printf("\t2. Mostrar \n");
+      printf("\t3. Buscar por Codigo \n");
+      printf("\t4. Editar por codigo \n");
+      printf("\t5. Insertar por posicion \n");
+      printf("\t6. Eliminar por posicion \n");
+      printf("\t7. Ordenar por codigo \n");
+      printf("\t8. Ordenar por nombre \n");
+      printf("\t9. Salvar \n");
+      printf("\t10. Recuperar \n\n");
       do{
          printf("Digite su opcion ---> ");
          scanf("%d",&op);
@@ -960,15 +1032,7 @@ void menu(){
                break;
             }
          break;
-         case 7://eliminarxvalor
-             switch(op2){
-            case 1:
-               break;
-            case 2:
-               break;
-            }
-         break;
-         case 8: //ordenarxcodigo
+         case 7: //ordenarxcodigo
              switch(op2){
             case 1:
                ordenarxCodigoCur(c,nc);
@@ -978,7 +1042,7 @@ void menu(){
                break;
             }
          break;
-         case 9://ordenarxnombre
+         case 8://ordenarxnombre
              switch(op2){
             case 1:
                ordenarPorNombreCur(c,nc);
@@ -988,7 +1052,7 @@ void menu(){
                break;
             }
          break;
-         case 10://salvar
+         case 9://salvar
              switch(op2){
             case 1:
                printf("\n\nDesea sobreescribir los datos de Cursos en el archivo si(s)/no(n): ");
@@ -1010,7 +1074,7 @@ void menu(){
                break;
             }
          break;
-         case 11://recuperar
+         case 10://recuperar
              switch(op2){
             case 1:
                fileRecuperarCursos(FC,c,&nc);
