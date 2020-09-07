@@ -378,10 +378,10 @@ void editarAluporCodigo(ALUMNO x[MAX], int dx){
            char desea='n';
            system("cls");
            printf("\t\tAlumno %d, EDICION",pos+1);
-           printf("\n0.TERMINAR: \n");
-           printf("1.NOMBRE: \n");
-           printf("2.ESCUELA: \n");
-           printf("3.PESO: \n");
+           printf("\n\t0.TERMINAR: \n");
+           printf("\t1.NOMBRE: \n");
+           printf("\t2.ESCUELA: \n");
+           printf("\t3.PESO: \n");
            printf("Digite su opcion ---> ");
            scanf("%d",&opc);
            switch (opc)
@@ -397,11 +397,13 @@ void editarAluporCodigo(ALUMNO x[MAX], int dx){
                break;
             case 1:
                 system("cls");
+		fflush(stdin);
                 printf("NUEVO NOMBRE: ");
                 gets(B.nomAlu);
                 break;
             case 2:
                 system("cls");
+		fflush(stdin);
                 printf("NUEVA ESCUELA: ");
                 gets(B.escuela);
             case 3:
