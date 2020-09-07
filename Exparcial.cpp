@@ -57,9 +57,9 @@ int main(){
     
     while(menu==0){
         system("cls");
-        printf("SISTEMA DE NOTAS EXPARCIAL\n");
-        printf("0.SALIR\n1.CREAR\n2.LEER\n3.MOSTRAR\n4.BUSCAR XCodCur\n5.BUSCAR xCodAlu.\n6.EDITAR\n7.INSERTAR\n8.SALVAR\n9.RECUPERAR\n");
-        printf("Digite su opcion---> ");
+        printf("\n\n\t\tSISTEMA DE NOTAS EXPARCIAL\n\n");
+        printf("\t0.SALIR\n\t1.CREAR\n\t2.LEER\n\t3.MOSTRAR\n\t4.BUSCAR XCodCur\n\t5.BUSCAR xCodAlu.\n\t6.EDITAR\n\t7.INSERTAR\n\t8.SALVAR\n\t9.RECUPERAR\n");
+        printf("\n\nDigite su opcion---> ");
         scanf("%d",&opc);
 
         system("cls");
@@ -81,7 +81,7 @@ int main(){
             case 4:
             {
                 int cod;
-                printf("Digita el codigo a buscar: ");
+                printf("CODIGO: ");
                 scanf("%d",&cod);
                 buscarParcialxCodCurso(par,np,cod);
             }
@@ -89,7 +89,7 @@ int main(){
             case 5:
             {
                 int cod;
-                printf("Digita el codigo a buscar: ");
+                printf("CODIGO: ");
                 scanf("%d",&cod);
                 buscarParcialxCodAlu(par,np,cod);
             }
@@ -132,7 +132,7 @@ void crearVectorParcial(int *dx){
 
 void leerVectorParcial(EXPARCIAL par[MAX],int *dx)
 {
-   int i=0, n;
+   int i=0, n, cant = *dx;
    printf("\n\tINGRESO DE LA LISTA DE PARCIALES:\n\n");
    printf("\n\nNumero de PARCIALES---> ");
    scanf("%d", &n);
@@ -147,7 +147,7 @@ void leerVectorParcial(EXPARCIAL par[MAX],int *dx)
           cin >>par[i].expar;
           cout<<endl;
       }
-      *dx = i;
+      *dx = i + cant;
    }
    else{
       printf(" %d dimension fuera de RANGO es mayor a Max = %d\n\n", n, MAX);
@@ -236,7 +236,7 @@ void insertarPosParcial(EXPARCIAL par[MAX],int *dx,int pos,int expar){
 
 void editarParcial(EXPARCIAL par[MAX],int dx){
    int cod,edit,i;
-   printf("Digite el codigo del curso:");
+   printf("CODIGO:");
    scanf("%d",&cod);
 
    edit = buscarParcialxCodCurso(par,dx,cod);
