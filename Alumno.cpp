@@ -8,7 +8,7 @@
  *
  * Autor:  ROMAN CESPEDES, Samuel Aaron
  *         TORRE ARTEAGA, Alexander
- *         CARMEN CRUZATTI, Angelo Gerardo
+ *         CARMEN CRUZATTI, Angel Gerardo
  *         GIL JAUREGUI, Jesús Orlando
  * Fecha:
  *
