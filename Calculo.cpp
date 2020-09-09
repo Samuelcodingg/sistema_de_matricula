@@ -63,7 +63,7 @@ void RecuperarNotas(PRACTICA x[], EXPARCIAL y[], EXFINAL z[], int *dx, int *dy, 
    A= fopen("Practica.dat","r");
    B= fopen("Parcial.dat","r");
    C= fopen("Final.dat","r");
-   D= fopen("PromedioFinal.dat","w");
+   //D= fopen("PromedioFinal.dat","w");
 
    PRACTICA p;
    EXPARCIAL par;
