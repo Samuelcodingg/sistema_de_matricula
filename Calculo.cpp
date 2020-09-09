@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <conio.h>
+#include <string.h>
 int const MAX=100;
 using namespace std;
 
@@ -24,36 +25,36 @@ struct CALCULO{
 };
 
 struct FECHA{
-   int dia;
+	int dia;
    int mes;
-   int anio;
+	int anio;
 };
 
 struct ALUMNO{
    int  codAlu;
-   char nomAlu[40];
-   char escuela[4];
-   FECHA fnac;
-   float peso;
+	char nomAlu[40];
+	char escuela[4];
+	FECHA fnac;
+	float peso;
 };
 
 struct PRACTICA{
-   int codAlu=0;
-   int codCur=0;
+ 	int codAlu=0;
+	int codCur=0;
    int prac[10];
    int promedio;
 };
 
 struct EXPARCIAL{
-   int codAlu=0;
-   int codCur=0;
-   float expar=0;
+	int codAlu=0;
+	int codCur=0;
+	float expar=0;
 };
 
 struct EXFINAL{
-   int  codAlu=0;
-   int codCur=0;
-   float exfin=0;
+	int  codAlu=0;
+	int codCur=0;
+	float exfin=0;
 };
 
 void crearVector(int *dp);
@@ -61,6 +62,7 @@ void RecuperarNotas(PRACTICA x[], EXPARCIAL y[], EXFINAL z[], int *dx, int *dy, 
 void RecuperarNombreyEscuela(CALCULO prom[]);
 void CalculoPromedio(PRACTICA x[], EXPARCIAL y[], EXFINAL z[],CALCULO prom[], int dx, int dy, int dz,int *dp);
 void mostrarPromedios(CALCULO [],int);
+int menu();
 
 void encabezado();
 void raya1();
@@ -72,15 +74,56 @@ int main()
    EXPARCIAL par[MAX];
    EXFINAL fin[MAX];
    CALCULO prom[MAX];
-   int np,npar,nfin,nprom;
-   RecuperarNotas(p,par,fin,&np,&npar,&nfin);
-   CalculoPromedio(p,par,fin,prom,np,npar,nfin,&nprom);
+   ALUMNO a[MAX];
+   int np,npar,nfin,nprom=0, opc=0;
+   while(true){
+      opc = menu();
+      system("cls");
+      switch (opc)
+      {
+      case 0:
+         printf("\n\n\t\tGRACIAS POR USAR EL SISTEMA..!\n");
+         system("pause");
+         exit(0);
+      case 1:
+         RecuperarNotas(p,par,fin,&np,&npar,&nfin);
+         break;
+      case 2:
+         RecuperarNombreyEscuela(prom);
+         break;
+      case 3:
+         CalculoPromedio(p,par,fin,prom,np,npar,nfin,&nprom);
+         break;
+      case 4:
+         mostrarPromedios(prom,nprom);   
+      default:
+         break;
+      }
+      system("pause");
+   }
    system("pause");
    return(0);
 }
 void crearVector(int *dp){
    *dp=-1;
 }
+
+int menu(){
+   system("cls");
+   int opc;
+
+   printf("\n\n\t\tPROMEDIOS FINALES\n\n");
+   printf("\t0.TERMINAR\n\n");
+   printf("\t1.RECUPERAR NOTAS\n");
+   printf("\t2.RECUPERAR NOMBRE Y ESCUELA\n");
+   printf("\t3.CALCULAR PROMEDIO\n");
+   printf("\t4.MOSTRAR\n");
+   printf("Digite su opcion--->");
+   scanf("%d",&opc);
+
+   return opc;
+}
+
 void RecuperarNotas(PRACTICA x[], EXPARCIAL y[], EXFINAL z[], int *dx, int *dy, int *dz){
    FILE *A,*B,*C,*D;
    int i;
@@ -123,6 +166,7 @@ void RecuperarNotas(PRACTICA x[], EXPARCIAL y[], EXFINAL z[], int *dx, int *dy, 
    }
    *dz=i;
    fclose(C);
+   printf("NOTAS RECUPERADAS...!\n");
 }
 
 void CalculoPromedio(PRACTICA x[], EXPARCIAL y[], EXFINAL z[],CALCULO prom[], int dx, int dy, int dz,int *dp){//falta modificar
@@ -133,13 +177,14 @@ void CalculoPromedio(PRACTICA x[], EXPARCIAL y[], EXFINAL z[],CALCULO prom[], in
    if(dx==dy&&dx==dz){
       for(i=0;i<dx;i++){
          suma=x[i].promedio+y[i].expar + z[i].exfin;// registros previamente ordenados
-         suma=suma/4;
+         suma=suma/3;
          prom[i].codAlu=x[i].codAlu;
          prom[i].promFinal=suma;
          suma=0;
       }
-
+      *dp = dx;
    }
+   printf("CALCULO HECHO...!\n");
 }
 
 void mostrarPromedios(CALCULO prom[], int dp){
@@ -202,4 +247,5 @@ void RecuperarNombreyEscuela(CALCULO prom[]){
         fread(&a,sizeof(ALUMNO),1,F);
         i++;
    }
+   printf("DATOS DE ALUMNOS RECUPERADOS...!\n");
 }
