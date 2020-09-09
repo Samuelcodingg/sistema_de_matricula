@@ -2,7 +2,7 @@
  * nomPrograma:
  * descripcion:
  *
- * *//**Todavia falta completar o modificar*//*
+ * 
  * autor: ROMAN CESPEDES, Samuel Aaron
  *        TORRE ARTEAGA, Alexander
  *        CARMEN CRUZATTI, Angel Gerardo
@@ -169,7 +169,7 @@ void RecuperarNotas(PRACTICA x[], EXPARCIAL y[], EXFINAL z[], int *dx, int *dy, 
    printf("NOTAS RECUPERADAS...!\n");
 }
 
-void CalculoPromedio(PRACTICA x[], EXPARCIAL y[], EXFINAL z[],CALCULO prom[], int dx, int dy, int dz,int *dp){//falta modificar
+void CalculoPromedio(PRACTICA x[], EXPARCIAL y[], EXFINAL z[],CALCULO prom[], int dx, int dy, int dz,int *dp){
    int i=0;
    float suma=0;
    int codigo;
