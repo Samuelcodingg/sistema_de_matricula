@@ -47,11 +47,10 @@ int main(){
     FILE *FP;
     int np, menu=0,opc;
     EXPARCIAL par[]={
-        100,202,15,
-        102,188,12,
-        104,188,13,
-        108,202,15,
-        109,202,13,     
+        108,112,15,
+        109,154,12,
+        110,142,13,
+        111,122,15,   
     };
     np = sizeof(par)/(sizeof(int)*2 + sizeof(float));
     
