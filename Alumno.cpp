@@ -71,16 +71,15 @@ void raya2();
 int main(){
    int nA,opc;
    ALUMNO A[MAX]={ //Vector de Prueba
-      100,"Jorge","edu",{12,10,1990},50,
-      102,"Eva","fis",{10,11,1999},60,
-      104,"Luis","med",{20,10,2000},45,
-      108,"Alina","let",{17,11,2001},46,
-      109,"Karenina","ing",{23,12,2002},57,
+      108,"Jorge","edu",{1,1,1},12,
+      109,"Eva","fis",{1,1,1},18,
+      110,"Luis","med",{1,1,1},5,
+      111,"Alina","let",{1,1,1},16,
    };
 
    FILE *F;
    crearVectorAlu(A,&nA);
-    nA = 5;
+    nA = 4;
 
    do{
       menu(A,F,&nA,opc);
