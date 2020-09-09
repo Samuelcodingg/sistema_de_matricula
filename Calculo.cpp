@@ -197,7 +197,6 @@ void mostrarPromedios(CALCULO prom[], int dp){
    }else{
       printf("\nVector vacioooo...!\n");
    }
-   system("pause");
 }
 
 void encabezado(){
