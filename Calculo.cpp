@@ -23,28 +23,44 @@ struct CALCULO{
    float promFinal;
 };
 
+struct FECHA{
+   int dia;
+   int mes;
+   int anio;
+};
+
+struct ALUMNO{
+   int  codAlu;
+   char nomAlu[40];
+   char escuela[4];
+   FECHA fnac;
+   float peso;
+};
+
 struct PRACTICA{
- 	int codAlu=0;
-	int codCur=0;
+   int codAlu=0;
+   int codCur=0;
    int prac[10];
    int promedio;
 };
 
 struct EXPARCIAL{
-	int codAlu=0;
-	int codCur=0;
-	float expar=0;
+   int codAlu=0;
+   int codCur=0;
+   float expar=0;
 };
 
 struct EXFINAL{
-	int  codAlu=0;
-	int codCur=0;
-	float exfin=0;
+   int  codAlu=0;
+   int codCur=0;
+   float exfin=0;
 };
 
 void crearVector(int *dp);
 void RecuperarNotas(PRACTICA x[], EXPARCIAL y[], EXFINAL z[], int *dx, int *dy, int *dz);
+void RecuperarNombreyEscuela(CALCULO prom[]);
 void CalculoPromedio(PRACTICA x[], EXPARCIAL y[], EXFINAL z[],CALCULO prom[], int dx, int dy, int dz,int *dp);
+void mostrarPromedios(CALCULO [],int);
 
 void encabezado();
 void raya1();
@@ -129,10 +145,9 @@ void CalculoPromedio(PRACTICA x[], EXPARCIAL y[], EXFINAL z[],CALCULO prom[], in
 void mostrarPromedios(CALCULO prom[], int dp){
    int i;
    if(dp>0){
+      encabezado();
       for(i=0;i<dp;i++){
-         encabezado();
          printf("%3d\t%-12d%-30s%-10s%-10.1f\n",i+1,prom[i].codAlu,prom[i].nomAlu,prom[i].escuela,prom[i].promFinal);
-
       }
    }else{
       printf("\nVector vacioooo...!\n");
@@ -162,4 +177,29 @@ void raya2()
 void raya1()
 {
    printf("=============================================================================================================\n");
+}
+
+void RecuperarNombreyEscuela(CALCULO prom[]){
+   int i;
+   FILE *F;
+   ALUMNO a;
+   F = fopen("Alumnos.dat","r");
+
+   if(F == NULL){
+      printf("No se pudo abrir el archivo...!\n");
+      system("pause");
+      exit(0);
+   }
+
+   i=0;
+   fread(&a,sizeof(ALUMNO),1,F);
+   while(!feof(F)){
+         //Capturamos los nombres y la escuela
+         fflush(stdin);
+         strcpy(prom[i].nomAlu,a.nomAlu);
+         fflush(stdin); 
+         strcpy(prom[i].escuela,a.escuela);
+        fread(&a,sizeof(ALUMNO),1,F);
+        i++;
+   }
 }
