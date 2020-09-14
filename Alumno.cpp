@@ -4,7 +4,6 @@
  *                con operaciones basicas
  *
  *
- *      Recuperar solo imprime la primera linea
  *
  * Autor:  ROMAN CESPEDES, Samuel Aaron
  *         TORRE ARTEAGA, Alexander
