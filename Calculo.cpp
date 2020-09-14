@@ -94,7 +94,7 @@ int main()
       case 3:
          CalculoPromedio(p,par,fin,prom,np,npar,nfin,&nprom);
          break;
-      case 4:
+      case 4:;
          mostrarPromedios(prom,nprom);   
       default:
          break;
@@ -170,12 +170,23 @@ void RecuperarNotas(PRACTICA x[], EXPARCIAL y[], EXFINAL z[], int *dx, int *dy, 
 }
 
 void CalculoPromedio(PRACTICA x[], EXPARCIAL y[], EXFINAL z[],CALCULO prom[], int dx, int dy, int dz,int *dp){
-   int i=0;
+   int i,j,k;
    float suma=0;
    int codigo;
-
+   /*
+   printf("N de Practicas %d\n",dx);
+   printf("N de ExParcial %d\n",dy);
+   printf("N de ExFinal %d\n",dz);
+   */
    if(dx==dy&&dx==dz){
+      printf("Ingreso");
       for(i=0;i<dx;i++){
+         //Consistencia    Verificamos que todos tengan el mismo codigo de alumno
+         codigo = prom[i].codAlu;
+         for(j=0;j<dx;j++){
+            
+         }
+         
          suma=x[i].promedio+y[i].expar + z[i].exfin;// registros previamente ordenados
          suma=suma/3;
          prom[i].codAlu=x[i].codAlu;
@@ -183,8 +194,11 @@ void CalculoPromedio(PRACTICA x[], EXPARCIAL y[], EXFINAL z[],CALCULO prom[], in
          suma=0;
       }
       *dp = dx;
+      printf("CALCULO HECHO...!\n");
    }
-   printf("CALCULO HECHO...!\n");
+   else{
+      printf("NO ES POSIBLE REALIZAR EL CALCULO...!\n");
+   }
 }
 
 void mostrarPromedios(CALCULO prom[], int dp){
@@ -239,7 +253,7 @@ void RecuperarNombreyEscuela(CALCULO prom[]){
    fread(&a,sizeof(ALUMNO),1,F);
    while(!feof(F)){
          //Capturamos los nombres y la escuela
-         fflush(stdin);
+         prom[i].codAlu = a.codAlu;
          strcpy(prom[i].nomAlu,a.nomAlu);
          fflush(stdin); 
          strcpy(prom[i].escuela,a.escuela);
