@@ -170,34 +170,59 @@ void RecuperarNotas(PRACTICA x[], EXPARCIAL y[], EXFINAL z[], int *dx, int *dy, 
 }
 
 void CalculoPromedio(PRACTICA x[], EXPARCIAL y[], EXFINAL z[],CALCULO prom[], int dx, int dy, int dz,int *dp){
-   int i,j,k;
+   int i,j,k,l;
    float suma=0;
-   int codigo;
-   /*
-   printf("N de Practicas %d\n",dx);
-   printf("N de ExParcial %d\n",dy);
-   printf("N de ExFinal %d\n",dz);
-   */
+   int codigo,cont;
+
+   //Verificamos que exista en mismo numero de practicas expar y exfinal
    if(dx==dy&&dx==dz){
-      printf("Ingreso");
+
       for(i=0;i<dx;i++){
          //Consistencia    Verificamos que todos tengan el mismo codigo de alumno
          codigo = prom[i].codAlu;
-         for(j=0;j<dx;j++){
-            
-         }
-         
-         suma=x[i].promedio+y[i].expar + z[i].exfin;// registros previamente ordenados
-         suma=suma/3;
-         prom[i].codAlu=x[i].codAlu;
-         prom[i].promFinal=suma;
          suma=0;
+         cont=0;
+         //Busca que la nota coincida con el codigo
+         j = 0;
+         do{
+            if(x[j].codAlu==codigo){
+               suma += x[j].promedio;
+               cont++;
+            }
+            j++;
+         }while(x[i].codAlu!=codigo && j<dx);
+
+         k = 0;
+         do{
+            if(y[k].codAlu==codigo){
+               suma += y[k].expar;
+               cont++;
+            }
+            k++;
+         }while(y[k].codAlu!=codigo && k<dy);
+         
+         l = 0;
+         do{
+            if(z[l].codAlu==codigo){
+               suma += z[l].exfin;
+               cont++;
+            }
+            l++;
+         }while(z[l].codAlu!=codigo && l<dz);
+
+         //Avisa al usuario en caso falten notas
+         if(cont!=3){
+            printf("Alumno %s le flata(n) nota(s)\n",prom[i].nomAlu);
+         }
+         suma=suma/3;
+         prom[i].promFinal=suma;
+         
       }
       *dp = dx;
-      printf("CALCULO HECHO...!\n");
+      printf("Calculo Finalizado...!\n");
    }
    else{
-      printf("NO ES POSIBLE REALIZAR EL CALCULO...!\n");
+      printf("No es posible realizar el calculo,revise los registros...!\n");
    }
 }
 
