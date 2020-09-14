@@ -955,12 +955,19 @@ void menu(){
       printf("\t6. Eliminar por posicion \n");
       printf("\t7. Ordenar por codigo \n");
       printf("\t8. Ordenar por nombre \n");
+      printf("\t\tARCHIVOS\n");
       printf("\t9. Salvar \n");
-      printf("\t10. Recuperar \n\n");
+      printf("\t10. Recuperar \n");
+      printf("\t11. Buscar\n");
+      printf("\t12. Filtrar\n");
+      printf("\t13. Eliminar\n");
+      printf("\t14. Editar\n");
+      printf("\t15. Copiar\n");
+      printf("\t16. Ordenar\n");
       do{
          printf("Digite su opcion ---> ");
          scanf("%d",&op);
-      }while(op<0 || op>11);
+      }while(op<0 || op>16);
       if(op!=0){
          printf("\n\n");
          system("cls");
@@ -1106,11 +1113,73 @@ void menu(){
                break;
             }
          break;
+         case 11:
+            switch(op2){
+               case 1:
+                  fileBuscarCurso(FC);
+                  break;
+               case 2:
+                  fileBuscarDocente(FD);
+                  break;
+            }
+            break;
+         case 12:
+            switch(op2){
+               case 1:
+                  fileFiltrarCursos(FC);
+                  break;
+               case 2:
+                  fileFiltrarDocentes(FD);
+                  break;
+            }
+            break;
+         case 13:
+            switch(op2){
+               case 1:
+                  fileEliminarCurso(FC);
+                  break;
+               case 2:
+                  fileEliminarDocente(FC);
+                  break;
+            }
+            break;
+         case 14:
+            switch(op2){
+               case 1:
+                  fileEditarCurso(FC);
+                  break;
+               case 2:
+                  fileEditarDocente(FD);
+                  break;
+            }
+            break;
+         case 15:
+            switch(op2){
+               case 1:
+                  fileCopiarCursos(FC);
+                  break;
+               case 2:
+                  fileCopiarDocentes(FD);
+                  break;
+            }
+            break;
+         case 16:
+            switch(op2){
+               case 1:
+                  fileOrdenarCursos(FC);
+                  break;
+               case 2:
+                  fileOrdenarDocentes(FD);
+                  break;
+            }
+            break;
       }
+      system("pause");
    }while(op!=0);
 }
 
 void fileBuscarDocente(FILE *H){
+   H = fopen("Docentes.dat","a+");
    Docente A;
    int Codigo, i=0;
    // cargando clave a buscar
@@ -1134,6 +1203,7 @@ void fileBuscarDocente(FILE *H){
    fclose(H);
 }
 void fileBuscarCurso(FILE *H){
+   H = fopen("Cursos.dat","a+");
    CURSO A;
    int Codigo, i=0;
    // cargando clave a buscar
@@ -1158,6 +1228,7 @@ void fileBuscarCurso(FILE *H){
 }
 
 void fileFiltrarDocentes(FILE *H){
+   H = fopen("Docentes.dat","a+");
    Docente A;
     int Hallado=0, Codigo, i=0;
     // cargando clave a buscar
@@ -1187,6 +1258,7 @@ void fileFiltrarDocentes(FILE *H){
 }
 
 void fileFiltrarCursos(FILE *H){
+   H = fopen("Cursos.dat","a+");
    CURSO A;
     int Hallado=0, Codigo, i=0;
     // cargando clave a buscar
@@ -1216,6 +1288,7 @@ void fileFiltrarCursos(FILE *H){
 }
 
 void fileEliminarDocente(FILE *FF){
+    FF = fopen("Docentes.dat","a+");
     FILE *GG;
     Docente A;
     int Hallado=0, Codigo, remo, rena;
@@ -1257,6 +1330,7 @@ void fileEliminarDocente(FILE *FF){
 }
 
 void fileEliminarCurso(FILE *FF){
+   FF = fopen("Cursos.dat","a+");
     FILE *GG;
     CURSO A;
     int Hallado=0, Codigo, remo, rena;
@@ -1299,6 +1373,7 @@ void fileEliminarCurso(FILE *FF){
 
 void fileEditarDocente(FILE *FF)
 {
+    FF = fopen("Docentes.dat","a+");
     FILE *GG;
     Docente A;
     int Hallado=0, Codigo, Rem, Ren;
@@ -1391,6 +1466,7 @@ void fileEditarDocente(FILE *FF)
 
 void fileEditarCurso(FILE *FF)
 {
+   FF = fopen("Cursos.dat","a+");
     FILE *GG;
     CURSO A;
     int Hallado=0, Codigo, Rem, Ren;
@@ -1485,6 +1561,7 @@ void fileEditarCurso(FILE *FF)
 }
 
 void fileCopiarDocentes(FILE *F){
+    F = fopen("Docentes.dat","a+");
     FILE *G;
     Docente A;
     G = fopen("CopiaDocentes.dat","a+");
@@ -1500,6 +1577,7 @@ void fileCopiarDocentes(FILE *F){
 }
 
 void fileCopiarCursos(FILE *F){
+    F = fopen("Cursos.dat","a+");
     FILE *G;
     CURSO A;
     G = fopen("CopiaCursos.dat","a+");
@@ -1515,6 +1593,7 @@ void fileCopiarCursos(FILE *F){
 }
 
 void fileOrdenarDocentes(FILE *F){
+    F = fopen("Docentes.dat","a+");
    Docente A[MAX];
     Docente t;
     FILE *G;
@@ -1555,6 +1634,7 @@ void fileOrdenarDocentes(FILE *F){
 
 }
 void fileOrdenarCursos(FILE *F){
+    F = fopen("Cursos.dat","a+");
    CURSO A[MAX];
     CURSO t;
     FILE *G;
