@@ -45,10 +45,10 @@ int main (){
    FILE *FFIN;
    int nfin=2,opc;
    EXFINAL fin[]={
-        108,130,18,
-        109,152,14,
-        110,134,12,
-        111,118,15,
+        108,202,18,
+        109,188,14,
+        110,184,12,
+        111,190,15,
     };
    nfin = sizeof(fin)/(sizeof(int)*2 + sizeof(float));
 

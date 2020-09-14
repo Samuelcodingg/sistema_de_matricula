@@ -70,7 +70,7 @@ void raya2();
 
 int main(){
    int nA,opc;
-   ALUMNO A[MAX]={ //Vector de Prueba
+   ALUMNO A[]={ //Vector de Prueba
       108,"Jorge","edu",{1,1,1},12,
       109,"Eva","fis",{1,1,1},18,
       110,"Luis","med",{1,1,1},5,
@@ -79,13 +79,13 @@ int main(){
 
    FILE *F;
    crearVectorAlu(A,&nA);
-    nA = 4;
-
+   nA = sizeof(A)/(sizeof(int)*4+sizeof(char)*44+sizeof(float));
    do{
       menu(A,F,&nA,opc);
    }while(opc!=0);
    system("pause");
    return 0;
+   
 }
 
 void menu(ALUMNO x[MAX],FILE *y,int *dx,int &opc){

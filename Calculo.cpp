@@ -117,7 +117,7 @@ int menu(){
    printf("\t1.RECUPERAR NOTAS\n");
    printf("\t2.RECUPERAR NOMBRE Y ESCUELA\n");
    printf("\t3.CALCULAR PROMEDIO\n");
-   printf("\t4.MOSTRAR\n");
+   printf("\t4.MOSTRAR PROMEDIOS\n");
    printf("  Digite su opcion--->");
    scanf("%d",&opc);
 
