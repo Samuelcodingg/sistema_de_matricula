@@ -1125,6 +1125,7 @@ void menu(){
                   fileBuscarDocente(FD);
                   break;
             }
+	    system("pause");
             break;
          case 12:
             switch(op2){
@@ -1135,6 +1136,7 @@ void menu(){
                   fileFiltrarDocentes(FD);
                   break;
             }
+	    system("pause");
             break;
          case 13:
             switch(op2){
@@ -1145,6 +1147,7 @@ void menu(){
                   fileEliminarDocente(FC);
                   break;
             }
+	    system("pause");
             break;
          case 14:
             switch(op2){
@@ -1155,6 +1158,7 @@ void menu(){
                   fileEditarDocente(FD);
                   break;
             }
+	    system("pause");
             break;
          case 15:
             switch(op2){
@@ -1165,6 +1169,7 @@ void menu(){
                   fileCopiarDocentes(FD);
                   break;
             }
+            system("pause");
             break;
          case 16:
             switch(op2){
@@ -1175,6 +1180,7 @@ void menu(){
                   fileOrdenarDocentes(FD);
                   break;
             }
+	    system("pause");
             break;
       }
    }while(op!=0);
