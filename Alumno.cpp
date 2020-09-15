@@ -3,9 +3,6 @@
  * Descripcion:  Registro de vector Alumnos
  *                con operaciones basicas
  *
- *
- * 
- *
  * Autor:  ROMAN CESPEDES, Samuel Aaron
  *         TORRE ARTEAGA, Alexander
  *         CARMEN CRUZATTI, Angel Gerardo
@@ -89,7 +86,6 @@ int main(){
 }
 
 void menu(ALUMNO x[MAX],FILE *y,int *dx,int &opc){
-   // y = fopen("xd.dat","a+");
    system("cls");
    printf(" \n\n\t\tREGISTRO DE ALUMNOS\n\n");
    printf("\t0. TERMINAR \n\n");
@@ -102,6 +98,7 @@ void menu(ALUMNO x[MAX],FILE *y,int *dx,int &opc){
    printf("\t7. Eliminar Alumno\n");
    printf("\t8. Guardar datos\n");
    printf("\t9. Leer datos guardados\n");
+
    do{
       printf("\nDigite su opcion ---> ");
       scanf("%d",&opc);
@@ -144,7 +141,7 @@ void menu(ALUMNO x[MAX],FILE *y,int *dx,int &opc){
          FileReadAlu(x,y);
          system("pause");
          break;
-    }
+   }
 }
 
 void menu2(ALUMNO x[MAX],int *dx,int mod){
@@ -212,9 +209,7 @@ void menu2(ALUMNO x[MAX],int *dx,int mod){
 void FileWriteAlu(ALUMNO x[MAX],FILE *y,int dx){
    int i;
    system("cls");
-
-   //Abre el archivo " "
-   //a++ = abrir para lectura y escritura
+   //Abre el archivo ,a+ -> abrir para lectura y escritura
    y = fopen("Alumnos.dat","a+");
 
    //Consistencia
@@ -223,7 +218,7 @@ void FileWriteAlu(ALUMNO x[MAX],FILE *y,int dx){
       for(i=0;i<dx;i++){
          fwrite(&x[i],sizeof(ALUMNO),1,y);
       }
-      //mostrarVectorAlu(x,dx);
+      //Confirmacion para el usuario
       printf("Registro Guardado\n\n");
       //Cerrando archivo
       fclose(y);
@@ -239,9 +234,10 @@ void FileReadAlu(ALUMNO x[MAX],FILE *y){
    system("cls");
    i = 0;
 
-   //Abre el archivo
-   //r = abre un archivo para leer
+   //Abre el archivo -> r = abre un archivo para leer
    y = fopen("Alumnos.dat","a+");
+   
+   //Consistencia
    if(y!=NULL){
       encabezado1();
       fread(&a,sizeof(ALUMNO),1,y);
@@ -281,6 +277,9 @@ void leerVectorAlu(ALUMNO x[MAX], int *dx){
       cin.getline(x[i].nomAlu,40,'\n');
       cout <<" Escuela ---> ";
       cin >>x[i].escuela;
+      
+      //Consistencia fecha de nacimiento
+      do{
       cout <<" Fecha de nacimiento(dd/mm/aaaa):"<<endl;
       cout<<"\tdd--->";
       cin >>x[i].fnac.dia;
@@ -288,6 +287,8 @@ void leerVectorAlu(ALUMNO x[MAX], int *dx){
       cin >>x[i].fnac.mes;
       cout<<"\taa--->";
       cin >>x[i].fnac.anio;
+      }while(x[i].fnac.dia>31 || x[i].fnac.mes>12 || x[i].fnac.anio<1900);
+      
       cout <<" Peso(kg.)---> ";
       cin >>x[i].peso;
       cout<<endl;
@@ -301,13 +302,14 @@ void leerVectorAlu(ALUMNO x[MAX], int *dx){
 
 void mostrarVectorAlu(ALUMNO x[MAX], int dx){
    int i;
+   //Consistencia
    if(dx>0){
-   encabezado1();
-      for(i=0;i<dx;i++){
-         printf("%3d\t%-12d%-32s%-18s%-d/%-d/%-18d%-.1fkg\n",i+1,x[i].codAlu,x[i].nomAlu,x[i].escuela,x[i].fnac.dia,x[i].fnac.mes,x[i].fnac.anio,x[i].peso);
-      }
-   raya1();
-   cout <<"\n\n";
+      encabezado1();
+         for(i=0;i<dx;i++){
+            printf("%3d\t%-12d%-32s%-18s%-d/%-d/%-18d%-.1fkg\n",i+1,x[i].codAlu,x[i].nomAlu,x[i].escuela,x[i].fnac.dia,x[i].fnac.mes,x[i].fnac.anio,x[i].peso);
+         }
+      raya1();
+      cout <<"\n\n";
    }
    else{
       printf("Vector vaciooo...\n\n");
@@ -317,8 +319,10 @@ void mostrarVectorAlu(ALUMNO x[MAX], int dx){
 int buscarAluporCodigo(ALUMNO x[MAX],int dx){
    int cd,i,pos=-1;
    bool comp=false;//comp es un valor bandera
+   
    printf("\n\nCODIGO: ");
    scanf("%d",&cd);
+   //Busca el alumno y muestra sus datos
    for(i=0;i<dx;i++){
       if(x[i].codAlu==cd){
          printf("\nAlumno %d\n",i+1);
@@ -330,7 +334,7 @@ int buscarAluporCodigo(ALUMNO x[MAX],int dx){
          pos = i;
       }
    }
-
+   //Muestra en caso no se encuentre el alumno
    if(!comp){
       printf("No se encontro alumnos con el codigo ingresado %d\n",cd);
    }
@@ -342,6 +346,7 @@ void buscaAluporNom(ALUMNO x[MAX],int dx){
    int i=0;
    char band = false;
    char buscar[40];
+   
    printf("\n\nNOMBRE: ");
    fflush(stdin);
    cin.getline(buscar,40,'\n');
