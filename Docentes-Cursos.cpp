@@ -1568,6 +1568,7 @@ void fileEditarCurso(FILE *FF)
                      case 4:
                         printf("Nuevo Numero Creditos--->");
                         scanf("%d",&B.creditosCur);
+			break;
                     default:
                         printf("Opcion incorrecta!\n");
                 }
