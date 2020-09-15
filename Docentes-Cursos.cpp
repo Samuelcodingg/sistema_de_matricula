@@ -1047,6 +1047,44 @@ void menu(){
             }
                break;
             case 2:
+		 {
+               system("cls");
+               int pos,j,k,comp,n;
+               Docente dato;
+               printf("Indica Codigo Del Docente: ");
+               scanf("%d",&dato.codDoc);
+               fflush(stdin);
+               printf("Indica Nombre del Docente: ");
+               gets(dato.nomDoc);
+               fflush(stdin);
+               printf("Indica La escuela del Docente: ");
+               gets(dato.escuela);
+               printf("Indica el Peso del Docente: ");
+               scanf("%f",&dato.peso);
+               printf("\nCursos llevados por el profesor: ");
+               scanf("%d",&n);
+               cout<<" Escriba los codigo de los cursos dictados por el profesor: ";
+               for(k=0;k<n;k++){
+                  do{
+                     cout <<"\n\tCodigo de Curso "<<k+1<<" ---> ";
+                     cin >>dato.c[k].codCur;
+                     for(j=0;j<nc;j++){//compara si el curso ingresado se encuentra en el registro CURSOS
+                        if(c[j].codCur==dato.c[k].codCur){
+                           dato.c[k]=c[j];
+                           comp=1;
+                        }
+                     }
+                     if(comp==0){
+                        printf("\nEl curso ingresado no se encuentra en el registro de CURSOS.");
+                        printf("\nVuelva a ingresar el curso: \n");
+                     }
+                  }while(comp!=1);
+               }
+               dato.cantCur=n;
+               printf("\nIndica la posicion donde insertas dato: ");
+               scanf("%d",&pos);
+               insertarPosDocente(d,&nd,pos,dato);
+               }
                break;
             }
          break;
