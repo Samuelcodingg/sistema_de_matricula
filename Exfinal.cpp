@@ -27,7 +27,9 @@ void crearVectorFinal(int *dx);
 void leerVectorFinal(EXFINAL fin[MAX],int *dx);
 void mostrarVectorFinal(EXFINAL fin[MAX],int dx);
 int buscarFinalxCodCurso(EXFINAL fin[MAX],int dx,int cod);
+void buscarFinalporCodigoCurso(EXFINAL fin[MAX], int dx);
 int buscarFinalxCodAlu(EXFINAL fin[MAX],int dx,int cod);
+void buscarFinalporCodigoAlumno(EXFINAL fin[MAX], int dx);
 void editarporCodigoFinal(EXFINAL fin[MAX], int dx);
 void editarFinal(EXFINAL fin[MAX],int dx);
 void insertarPosFinal(EXFINAL fin[MAX],int *dx,int pos,int exfin);
@@ -35,36 +37,30 @@ void insertarPosFinal(EXFINAL fin[MAX],int *dx,int pos,int exfin);
 void fileSalvarFinal(FILE *F,EXFINAL fin[MAX],int dx);
 void fileRecuperarFinal(FILE *F);
 
-void menu(EXFINAL fin[MAX],FILE *FFIN,int *dx,int &opc);
+void menu();
 void encabezado2(char title[]);
 void raya3();
 void raya4();
 
 
 int main (){
+    menu();
+    system("pause");
+    return 0;
+
+
+}
+void menu(){
    FILE *FFIN;
-   int nfin=2,opc;
+   int nf,opc,pos;
    EXFINAL fin[]={
         108,202,18,
         109,188,14,
         110,184,12,
         111,190,15,
     };
-   nfin = sizeof(fin)/(sizeof(int)*2 + sizeof(float));
-
+   nf = sizeof(fin)/(sizeof(int)*2 + sizeof(float));
    do{
-      menu(fin,FFIN,&nfin,opc);
-
-   }while(opc!=0);
-
-    system("pause");
-    return 0;
-
-
-}
-void menu(EXFINAL fin[MAX],FILE *FFIN,int *dx,int &opc){
-
-
    system("cls");
    printf(" \n\n\t\tSISTEMA DE NOTAS DE EXAMEN FINAL\n\n");
    printf("\t0. TERMINAR \n\n");
@@ -83,67 +79,53 @@ void menu(EXFINAL fin[MAX],FILE *FFIN,int *dx,int &opc){
    }while(opc<0 || opc>9);
    switch(opc){
       case 0:
-         system("cls");
          printf("Salio del programa\n");
          break;
       case 1:
-         system("cls");
-         crearVectorFinal(dx);
+
+         crearVectorFinal(&nf);
          break;
 
       case 2:
-         system("cls");
-         leerVectorFinal(fin,dx);
-         system("pause");
+
+         leerVectorFinal(fin,&nf);
          break;
       case 3:
-         system("cls");
-         mostrarVectorFinal(fin,*dx);
-         system("pause");
+
+         mostrarVectorFinal(fin,nf);
          break;
       case 4:
-         {
-         system("cls");
-         int cod;
-         printf("CODIGO: ");
-         scanf("%d",&cod);
-         buscarFinalxCodCurso(fin,*dx,cod);
-         system("pause");
-         }
+
+         buscarFinalporCodigoCurso(fin, nf);
+
          break;
+
       case 5:
-         {
-         system("cls");
-         int cod;
-         printf("CODIGO: ");
-         scanf("%d",&cod);
-         buscarFinalxCodAlu(fin,*dx,cod);
-         system("pause");
-         }
+
+         buscarFinalporCodigoAlumno(fin, nf);
          break;
       case 6:
-         system("cls");
-         editarFinal(fin,*dx);
-         system("pause");
+
+         editarFinal(fin,nf);
+
          break;
       case 7:
          {
-         system("cls");
-         int pos, nota;
+         int pos,nota;
          printf("NUEVA NOTA: ");
          scanf("%d",&nota);
          printf("POSICION: ");
          scanf("%d",&pos);
-         insertarPosFinal(fin,dx,pos,nota);
-         system("pause");
+         insertarPosFinal(fin,&nf,pos,nota);
+
          }
          break;
       case 8:
-         system("cls");
-         fileSalvarFinal(FFIN,fin,*dx);
+
+         fileSalvarFinal(FFIN,fin,nf);
          break;
       case 9:
-         system("cls");
+
          fileRecuperarFinal(FFIN);
          break;
       default:
@@ -151,8 +133,8 @@ void menu(EXFINAL fin[MAX],FILE *FFIN,int *dx,int &opc){
 
         }
         system("pause");
-    }
-
+    }while(opc!=0);
+}
 
 void crearVectorFinal(int *dx){
     *dx=-1;
@@ -233,8 +215,28 @@ int buscarFinalxCodCurso(EXFINAL fin[MAX],int dx,int cod){
    return pos+1;
 }
 
+void buscarFinalporCodigoCurso(EXFINAL fin[MAX], int dx){
+   int cd,i,comp=0;//comp es un valor bandera
+   char titulo[]="\n\nREPORTE DE EXAMENES FINALES";
+   printf("\n\nCODIGO : ");
+   scanf("%i",&cd);
+   cout <<"\n\n";
+   for(i=0;i<dx;i++){
+      if(fin[i].codCur==cd){
+         encabezado2(titulo);
+         printf("%3d\t%-12d%-10.1f\n",i+1,fin[i].codCur,fin[i].exfin);
+         comp=1;
+      }
+   }
+   cout <<"\n\n";
+   if(comp==0){
+      printf("No se encontraron cursos con el codigo ingresado %d\n",cd);
+   }
+   system("pause");
+}
+
 int buscarFinalxCodAlu(EXFINAL fin[MAX],int dx,int cod){
-   int pos = 0,i;
+   int pos = -1,i;
 
    for(i=0;i<dx;i++){
       if(fin[i].codAlu==cod){
@@ -242,7 +244,26 @@ int buscarFinalxCodAlu(EXFINAL fin[MAX],int dx,int cod){
       }
    }
 
-   return pos;
+   return pos+1;
+}
+void buscarFinalporCodigoAlumno(EXFINAL fin[MAX], int dx){
+   int cd,i,comp=0;//comp es un valor bandera
+   char titulo[]="\n\nREPORTE DE EXAMENES FINALES";
+   printf("\n\nCODIGO : ");
+   scanf("%i",&cd);
+   cout <<"\n\n";
+   for(i=0;i<dx;i++){
+      if(fin[i].codAlu==cd){
+         encabezado2(titulo);
+         printf("%3d\t%-12d%-10.1f\n",i+1,fin[i].codAlu,fin[i].exfin);
+         comp=1;
+      }
+   }
+   cout <<"\n\n";
+   if(comp==0){
+      printf("No se encontraron cursos con el codigo ingresado %d\n",cd);
+   }
+   system("pause");
 }
 void editarporCodigoFinal(EXFINAL fin[MAX], int dx){
    int cod,i,comp=0;//comp es un valor bandera
