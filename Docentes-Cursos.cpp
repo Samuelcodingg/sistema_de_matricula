@@ -188,7 +188,7 @@ void leerVectorDocente(CURSO curs[MAX],Docente doc[MAX],int dcursos, int *ddoc){
             }while(comp!=1);
          }
          cout<<endl;
-         doc[i].cantCur=k;
+         doc[i].cantCur=nc;
       }
       *ddoc = i;
    }
