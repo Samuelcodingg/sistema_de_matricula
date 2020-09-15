@@ -248,7 +248,7 @@ system("pause");
 }
 
 void eliminaCursoporPosicion(CURSO curs[MAX],int *dcurso,Docente doc[MAX], int ddoc){
-   int i,n,posi,j,k,posiDoc,comp=0;// comp es un valor bandera que ayuda a cerrar el bucle do-while
+   int i,n,posi,j,k,posiDoc,aux,comp=0;// comp es un valor bandera que ayuda a cerrar el bucle do-while
    mostrarVectorCurso(curs,*dcurso);
    printf("\n\nPOSICION: ");
    scanf("%i",&posi);
@@ -263,13 +263,14 @@ void eliminaCursoporPosicion(CURSO curs[MAX],int *dcurso,Docente doc[MAX], int d
             k++;
             if(curs[i].codCur==doc[j].c[k].codCur){
                doc[j].cantCur=doc[j].cantCur-1;
-               while(k<doc[j].cantCur){//elimina cursos dentro del registros de docentes
-                  doc[j].c[k]=doc[j].c[k+1];
-                  k++;
+               aux=k;
+               while(aux<doc[j].cantCur){//elimina cursos dentro del registros de docentes
+                  doc[j].c[aux]=doc[j].c[aux+1];
+                  aux++;
                }
                comp=1;
             }
-         }while(k<doc[j].cantCur||comp!=1);
+         }while(k<doc[j].cantCur&&comp!=1);
       }
       while(i<n){
          curs[i] = curs[i+1];
