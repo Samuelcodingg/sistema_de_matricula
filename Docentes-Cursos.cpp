@@ -613,6 +613,7 @@ void editarCurso(CURSO x[MAX],int dx){
                 fflush(stdin);
                 printf("NUEVA SISTEMA CAL: ");
                 scanf("%c",&B.scal);
+		break;
             case 3:
                 system("cls");
                 printf("NUEVO CODIGO: ");
@@ -1174,7 +1175,6 @@ void menu(){
             }
             break;
       }
-      system("pause");
    }while(op!=0);
 }
 
