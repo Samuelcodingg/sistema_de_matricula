@@ -744,6 +744,7 @@ void editarDocente(Docente x[MAX],int dx){
                 fflush(stdin);
                 printf("NUEVA ESCUELA: ");
                 gets(B.escuela);
+		break;
             case 3:
                 system("cls");
                 printf("NUEVO CODIGO: ");
