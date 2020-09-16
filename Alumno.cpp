@@ -185,8 +185,6 @@ void menu2(ALUMNO x[MAX],int *dx,int mod){
       }else{
          eliminaAluporPosicion(x,dx);
       }
-
-      system("pause");
       break;
 
    case 2:
@@ -201,7 +199,6 @@ void menu2(ALUMNO x[MAX],int *dx,int mod){
       }else{
          eliminarAluporValor(x,dx);
       }
-      system("pause");
       break;
    }
 }
