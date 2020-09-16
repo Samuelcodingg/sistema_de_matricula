@@ -1049,7 +1049,7 @@ void menu(){
             case 2:
 		 {
                system("cls");
-               int pos,j,k,comp,n;
+               int pos,j,k,comp=0,n;
                Docente dato;
                printf("Indica Codigo Del Docente: ");
                scanf("%d",&dato.codDoc);
@@ -1065,6 +1065,7 @@ void menu(){
                scanf("%d",&n);
                cout<<" Escriba los codigo de los cursos dictados por el profesor: ";
                for(k=0;k<n;k++){
+		  comp=0;
                   do{
                      cout <<"\n\tCodigo de Curso "<<k+1<<" ---> ";
                      cin >>dato.c[k].codCur;
