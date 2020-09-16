@@ -380,11 +380,11 @@ void mostrarVectorDoc(Docente x[MAX], int dx)
       }
       raya1();
       cout <<"\n\n";
-      system("pause");
    }
    else{
       printf("Vector vaciooo...\n\n");
    }
+system("pause");
 }
 
 void encabezado4(Docente doc)
@@ -412,11 +412,11 @@ void mostrarCursosxDoc(Docente x,int dx){
       }
       raya1Doc();
       cout <<"\n\n";
-      system("pause");
    }
    else{
       printf("Vector vaciooo...\n\n");
    }
+	system("pause");
 }
 
 void encabezado5()
@@ -444,11 +444,11 @@ void mostrarVectorCurso(CURSO x[MAX],int dx){
       }
       raya1();
       cout <<"\n\n";
-      system("pause");
    }
    else{
       printf("Vector vaciooo...\n\n");
    }
+system("pause");
 }
 
 void ordenarxCodigoDoc(Docente x[MAX],int dx){
@@ -470,6 +470,7 @@ void ordenarxCodigoDoc(Docente x[MAX],int dx){
    }
    else{
       printf("Vector vacioooo...!\n");
+	system("pause");
    }
 }
 
@@ -492,6 +493,7 @@ void ordenarxCodigoCur(CURSO x[MAX],int dx){
    }
    else{
       printf("Vector vacioooo...!\n");
+	system("pause");
    }
 }
 
@@ -514,6 +516,7 @@ void ordenarxCodigoCurDoc(Docente x,int dx){
    }
    else{
       printf("Vector vacioooo...!\n");
+	system("pause");
    }
 }
 void ordenarPorNombreDoc(Docente x [MAX], int dx)
@@ -534,6 +537,7 @@ void ordenarPorNombreDoc(Docente x [MAX], int dx)
    }
    else{
       printf("Vector vacioooo...!\n");
+	 system("pause");
    }
 }
 void ordenarPorNombreCur(CURSO x [MAX], int dx)
@@ -554,6 +558,7 @@ void ordenarPorNombreCur(CURSO x [MAX], int dx)
    }
    else{
       printf("Vector vacioooo...!\n");
+	   system("pause");
    }
 }
 int buscarxCodCur(CURSO x[MAX],int dx,int cod){
@@ -644,6 +649,7 @@ void insertarPosCurso(CURSO x[MAX],int *dx,int pos,CURSO y){
    }
    else{
       printf("Dimension fuera de Rango\n");
+	  system("pause");
    }
 }
 
@@ -679,11 +685,11 @@ void insertarPosDocente(Docente x[MAX],int *dx,int pos,Docente y){
       strcpy(x[pos-1].escuela,y.escuela);
       x[pos-1].peso = y.peso;
       *dx=n;
-    //   mostrarVectorDoc(x,*dx);
-      system("pause");
+      mostrarVectorDoc(x,*dx);
    }
    else{
       printf("Excede Dimension");
+	   system("pause");
    }
 }
 int buscarxCodigoDoc(Docente x[MAX],int dx,int cod){
@@ -805,10 +811,12 @@ void eliminarxValorDoc(Docente x[MAX],int *dx,Docente dato){
       }
       else{
          printf("No existe ese dato...!\n");
+	      system("pause");
       }
    }
    else{
       printf("Vacio...!\n");
+	   system("pause");
    }
 }
 
@@ -843,10 +851,12 @@ void eliminarxValorCur(CURSO x[MAX],int *dx,CURSO dato){
       }
       else{
          printf("No existe ese dato...!\n");
+	      system("pause");
       }
    }
    else{
       printf("Vacio...!\n");
+	   system("pause");
    }
 }
 
