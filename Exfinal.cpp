@@ -585,10 +585,9 @@ void fileRecuperarFinal(FILE *F){
     encabezado(titulo);
     fread(&f,sizeof(EXFINAL),1,F);
     while(!feof(F)){
-
-        fread(&f,sizeof(EXFINAL),1,F);
-        printf("%3d\t%-12d%-10.1f\n",i+1,f.codAlu,f.exfin);
-        i++;
+      printf("%3d\t%-12d%-10.1f\n",i+1,f.codAlu,f.exfin);
+      fread(&f,sizeof(EXFINAL),1,F);
+      i++;
     }
 
     fclose(F);
