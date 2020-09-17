@@ -681,4 +681,61 @@ void FileFindAlu(FILE *y){
 
    fclose(y);
 }
-void 
+void FileFilAlu(FILE *y){
+   //Abre el archivo
+   y = fopen("Alumnos.dat","r");
+   ALUMNO x;
+   int codigo,i=0;
+   float peso;
+   bool band = false;
+   
+   printf("Peso >= que --> ");
+   printf("%f",&peso);
+
+   fread(&x,sizeof(x),1,y);
+   while(!feof(y)){
+      if(x.peso>=peso){
+         //Muestra Registro cuando se cumpla la condicion
+         encabezado1();
+         printf("%3d\t%-12d%-32s%-18s%-2d/%-2d/%-16d%-.1fkg\n",i+1,x.codAlu,x.nomAlu,x.escuela,x.fnac.dia,x.fnac.mes,x.fnac.anio,x.peso);
+         band = true;
+         i++;
+      }
+      fread(&x,sizeof(x),1,y);
+   }
+   raya1();
+   if(!band){
+      printf("Ningun Alumno cumple con la condicion\n\n")
+   }
+   //cierra el archivo
+   fclose(y);
+}
+
+void FileDelAlu(FILE *y){
+   //Abre el archivo
+   y = fopen("Alumnos.dat","r");
+   FILE *z;
+   ALUMNO x;
+   int codigo,i=0;
+   bool band = false;
+
+   printf("Codigo a Eliminar --->");
+   cin>>codigo;
+
+   z = fopen("Temp.dat","a+");
+   if(z == NULL){
+      printf("Nose puede abrir el archivo\n");
+      exit(1);
+   }
+   fread(&x,sizeof(x),1,y);
+
+   while(!feof(y)){
+      if(codigo!=x.codAlu){
+         fwrite(&x,sizeof(x),1,z);
+      }
+      if(codigo==x.codAlu){
+         band=true;
+      }
+   }
+
+}
