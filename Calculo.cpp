@@ -1,8 +1,8 @@
 /*
- * nomPrograma:
+ * nomPrograma:Calculo.cpp
  * descripcion:
- *
- * 
+ *Registro y archivo de promedios finales de los alumnos.
+ * Con operaciones basicas.
  * autor: ROMAN CESPEDES, Samuel Aaron
  *        TORRE ARTEAGA, Alexander
  *        CARMEN CRUZATTI, Angel Gerardo
