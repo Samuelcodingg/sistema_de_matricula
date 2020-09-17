@@ -31,7 +31,7 @@ int buscarPcxCodAlu(PRACTICA p[MAX],int dx,int cod);
 int buscarPcxCodCurso(PRACTICA p[MAX],int dx,int cod);
 void editarporCodigoPc(PRACTICA p[MAX], int dx);
 void editarPc(PRACTICA p[MAX],int dx);
-void insertarPosPc(PRACTICA p[MAX],int dx,int aux,int pos);
+void insertarPosPc(PRACTICA p[MAX],int *dx,int pos);
 void fileSalvarPractica(FILE *F,PRACTICA p[MAX],int dx);
 void fileRecuperarPractica(FILE *F);
 void menu(PRACTICA p[MAX],FILE *FPC,int *dx,int &opc);
@@ -115,8 +115,8 @@ void menu(PRACTICA p[MAX],FILE *FPC,int *dx,int &opc){
             case 7:
             {
 
-               int aux=0,pos=0;
-               insertarPosPc(p,*dx,aux,pos);
+               int pos=0;
+               insertarPosPc(p,*dx,pos);
             }
             break;
             case 8:
@@ -227,10 +227,8 @@ int buscarPcxCodAlu(PRACTICA p[MAX],int dx,int cod){
 void insertarPosPc(PRACTICA p[MAX],int *dx,int aux,int pos){
    int i,j,n,suma=0;
    mostrarVectorPc(p,*dx);
-   if(aux==0){
    printf("POSICION: ");
    scanf("%i",&pos);
-   }
    n = *dx;
    n = n + 1;
    i = *dx;
