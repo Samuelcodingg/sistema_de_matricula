@@ -82,10 +82,10 @@ void raya2();
 int main(){
    int nA,opc;
    ALUMNO A[]={ //Vector de Prueba
-      108,"Jorge","edu",{1,1,1},12,
-      109,"Eva","fis",{1,1,1},18,
-      110,"Luis","med",{1,1,1},5,
-      111,"Alina","let",{1,1,1},16,
+      108,"Jorge, Gonzales Perez","edu",{11,12,1999},70,
+      109,"Eva, Quispe Huaman","fis",{10,10,2000},60,
+      110,"Luis ,Manani Reyna","med",{15,11,1998},59,
+      111,"Alina, Valdiviezo Silva","let",{10,2,2001},46,
    };
 
    FILE *F;
@@ -177,7 +177,7 @@ void menu(ALUMNO x[MAX],FILE *y,int *dx,int &opc){
          FileCopyAlu(y);
          system("pause");
          break;
-      case 13:
+      case 14:
          FileOrderAlu(y);
          system("pause");
          break;
@@ -699,7 +699,7 @@ void FileFindAlu(FILE *y){
          raya1();
          band = true;
       }
-      fread(%x,sizeof(x),1,y);
+      fread(&x,sizeof(x),1,y);
    }
    if(!band){
       printf("No se encontro el codigo del alumno");
@@ -731,7 +731,7 @@ void FileFilAlu(FILE *y){
    }
    raya1();
    if(!band){
-      printf("Ningun Alumno cumple con la condicion\n\n")
+      printf("Ningun Alumno cumple con la condicion\n\n");
    }
    //cierra el archivo
    fclose(y);
@@ -742,7 +742,7 @@ void FileDelAlu(FILE *y){
    y = fopen("Alumnos.dat","r");
    FILE *z;
    ALUMNO x;
-   int codigo,remove,rename,i=0;
+   int codigo,remo,rena,i=0;
    bool band = false;
 
    printf("Codigo a Eliminar --->");
@@ -766,9 +766,9 @@ void FileDelAlu(FILE *y){
    fclose(y);
    fclose(z);
 
-   remove = remove("Alumnos.dat");
+   remo = remove("Alumnos.dat");
    printf("Remove = %d\n",remove);
-   rename = rename("Temp.dat,","Alumnos.dat");
+   rena = rename("Temp.dat,","Alumnos.dat");
    printf("Rename = %d\n",rename);
    //aviso para el usuario
    if(!band){
@@ -785,7 +785,7 @@ void FileEditAlu(FILE *y){
    y = fopen("Alumnos.dat","r");
    FILE *z;
    ALUMNO x;
-   int codigo,remove,rename,i=0;
+   int codigo,remo,rena,i=0;
    bool band = false;
    //Codigo del alumno a eliminar
    printf("Codigo a editar --> ");
@@ -801,10 +801,10 @@ void FileEditAlu(FILE *y){
       if(x.codAlu==codigo){
          band = true;
          system("cls");
+         int opc;
+         ALUMNO edit;
+         char desea='n';
          while(opc!=0){
-            ALUMNO edit;
-            int opc;
-            char desea='n';
             system("cls");
             printf("\t\tAlumno EDICION");
             printf("\n\t0.TERMINAR: \n");
@@ -824,7 +824,7 @@ void FileEditAlu(FILE *y){
                system("cls");
                fflush(stdin);
                printf("NUEVO CODIGO: ");
-               cin("%d",&edit.codAlu)
+               scanf("%d",&edit.codAlu);
                break;
             case 2:
                system("cls");
@@ -859,9 +859,9 @@ void FileEditAlu(FILE *y){
       }
       fread(&x,sizeof(x),1,y);
    }
-   remove = remove("Alumnos.dat");
+   remo = remove("Alumnos.dat");
    printf("Remove = %d\n",remove);
-   rename = rename("Temp.dat,","Alumnos.dat");
+   rena = rename("Temp.dat,","Alumnos.dat");
    printf("Rename = %d\n",rename);
    //aviso para el usuario
    if(!band){
@@ -892,8 +892,8 @@ void FileOrderAlu(FILE *y){
    //Abriendo el archivo
    y = fopen("Alumnos.dat","r");
    FILE *z;
-   ALUMNO x,a;
-   int i,aux,j,n;
+   ALUMNO x[MAX],a;
+   int i,aux,j,n,remo,rena;
    //abriendo archivo temporal
    z = fopen("Temp.dat","a+");
    i = 0;
@@ -923,8 +923,8 @@ void FileOrderAlu(FILE *y){
    }
    fclose(z);
 
-   remove = remove("Alumnos.dat");
+   remo = remove("Alumnos.dat");
    printf("Remove = %d\n",remove);
-   rename = rename("Temp.dat,","Alumnos.dat");
+   rena = rename("Temp.dat,","Alumnos.dat");
    printf("Rename = %d\n",rename);
 }
