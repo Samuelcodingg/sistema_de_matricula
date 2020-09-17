@@ -383,11 +383,11 @@ void insertarParcialporPosicion(EXPARCIAL par[MAX],int *dx){
 
    if(n<MAX){
       if(posi-1>-1 && posi-1<*dx+1){
-         *dx=n;
          while(i>posi-1){
                par[i] = par[i-1];
                i--;
             }
+	      *dx=n;
          printf("\n**Registro de EXAMENES PARCIALES: \n");
          printf("\n\tAlumno:  %d\n", posi);
 
