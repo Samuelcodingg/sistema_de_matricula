@@ -1,8 +1,8 @@
 /*
- * nomPrograma
+ * nomPrograma: Practica.cpp
  * descripcion:
- *
- *
+ * Registro y archivo de practicas de los alumnos,
+ * Con operaciones basicas
  * autor:  ROMAN CESPEDES, Samuel Aaron
  *         TORRE ARTEAGA, Alexander
  *         CARMEN CRUZATTI, Angel Gerardo
