@@ -293,6 +293,7 @@ void editarporCodigoPc(PRACTICA p[MAX], int dx){
    if(comp==0){
       printf("No se encontro alumnos con el codigo ingresado %d\n",cod);
    }
+	system("pause");
 }
 
 void editarPc(PRACTICA p[MAX],int dx){
@@ -318,6 +319,7 @@ void editarPc(PRACTICA p[MAX],int dx){
       printf("\n\tEl promedio de practicas del alumno %d : es %d\n\n",edit+1,p[edit].promedio);
       printf("\n**Promedio de practicas guardada con exito...\n");
    }
+	system("pause");
 
 }
 void fileSalvarPractica(FILE *F,PRACTICA p[MAX],int dx){
