@@ -1,10 +1,8 @@
 /*
- * NombreProg :
+ * NombreProg :Exparcial.cpp
  * Descripcion:
- *
- *
- *
- *
+ *Registro y archivo de examenes parciales de los alumnos, 
+ *con operaciones basicas
  *
  * Autor:  ROMAN CESPEDES, Samuel Aaron
  *         TORRE ARTEAGA, Alexander
