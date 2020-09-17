@@ -110,8 +110,14 @@ void menu(ALUMNO x[MAX],FILE *y,int *dx,int &opc){
    printf("\t5. Editar Alumno por codigo\n");
    printf("\t6. Insertar Alumno\n");
    printf("\t7. Eliminar Alumno\n");
+   printf("\tOPERACIONES CON ARCHIVO\n");
    printf("\t8. Guardar datos\n");
    printf("\t9. Leer datos guardados\n");
+   printf("\t10. Buscar en archivo guardado\n");
+   printf("\t11. Filtrar en archivo\n");
+   printf("\t12. Elimnar elemento del archivo\n");
+   printf("\t13. Crear copia del archivo\n");
+   printf("\t13. Ordenar archivo\n");
 
    do{
       printf("\nDigite su opcion ---> ");
@@ -844,5 +850,61 @@ void FileEditAlu(FILE *y){
    else{
       printf("Registro de alumno eliminado\n\n");
    }
+}
 
+void FileCopyAlu(FILE *y){
+   //Abriendo el archivo
+   y = fopen("Alumnos.dat","r");
+   FILE *z;
+   ALUMNO x;
+   z = fopen("CopiaAlumnos.dat","a+");
+
+   fread(&x,sizeof(x),1,y);
+   while(!feof(y)){
+      fwrite(&x,sizeof(x),1,z);
+      fread(&x,sizeof(x),1,y);
+   }
+   fclose(y);
+   fclose(z);
+}
+
+void FileOrderAlu(FILE *y){
+   //Abriendo el archivo
+   y = fopen("Alumnos.dat","r");
+   FILE *z;
+   ALUMNO x,a;
+   int i,aux,j,n;
+   //abriendo archivo temporal
+   z = fopen("Temp.dat","a+");
+   i = 0;
+   fread(&x[i],sizeof(ALUMNO),1,y);
+   while(!feof(y)){
+      i++;
+      fread(&x[i],sizeof(ALUMNO),1,y);
+   }
+   n = i-1;
+   fclose(y);
+
+   for(i=0;i<n;i++){
+      aux = i;
+      for(j=i+1;j<n;j++){
+         if(x[aux].codAlu>x[j].codAlu){
+            aux = j;
+         }
+      }
+      //Intercambiando
+      a = x[i];
+      x[i] = x[aux];
+      x[aux] = a;
+   }
+   printf("%d\n",n);
+   for(i=0;i<0;i++){
+      fwrite(&x[i],sizeof(ALUMNO),1,z);
+   }
+   fclose(z);
+
+   remove = remove("Alumnos.dat");
+   printf("Remove = %d\n",remove);
+   rename = rename("Temp.dat,","Alumnos.dat");
+   printf("Rename = %d\n",rename);
 }
