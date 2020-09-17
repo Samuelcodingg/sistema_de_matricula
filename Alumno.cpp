@@ -240,7 +240,7 @@ void FileReadAlu(ALUMNO x[MAX],FILE *y){
       fread(&a,sizeof(ALUMNO),1,y);
       i++;
       while(!feof(y)){//desplegando estructuras
-         printf("%3d\t%-12d%-32s%-18s%-d/%-d/%-18d%-.1fkg\n",i,a.codAlu,a.nomAlu,a.escuela,a.fnac.dia,a.fnac.mes,a.fnac.anio,a.peso);
+         printf("%3d\t%-12d%-32s%-18s%-2d/%-2d/%-16d%-.1fkg\n",i,a.codAlu,a.nomAlu,a.escuela,a.fnac.dia,a.fnac.mes,a.fnac.anio,a.peso);
          fread(&a,sizeof(ALUMNO),1,y);
          i++;
       }
@@ -303,7 +303,7 @@ void mostrarVectorAlu(ALUMNO x[MAX], int dx){
    if(dx>0){
       encabezado1();
          for(i=0;i<dx;i++){
-            printf("%3d\t%-12d%-32s%-18s%-d/%-d/%-18d%-.1fkg\n",i+1,x[i].codAlu,x[i].nomAlu,x[i].escuela,x[i].fnac.dia,x[i].fnac.mes,x[i].fnac.anio,x[i].peso);
+            printf("%3d\t%-12d%-32s%-18s%-2d/%-2d/%-16d%-.1fkg\n",i+1,x[i].codAlu,x[i].nomAlu,x[i].escuela,x[i].fnac.dia,x[i].fnac.mes,x[i].fnac.anio,x[i].peso);
          }
       raya1();
       cout <<"\n\n";
