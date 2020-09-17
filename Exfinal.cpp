@@ -1,8 +1,8 @@
 /*
- * nomPrograma: Exfinal.cpp
+ * nomPrograma
  * descripcion:
- * Registro y archivo de los examenes finales de los alumnos,
- * Con operaciones basicas.
+ *
+ *
  * autor: ROMAN CESPEDES, Samuel Aaron
  *        TORRE ARTEAGA, Alexander
  *        CARMEN CRUZATTI, Angel Gerardo
@@ -98,8 +98,8 @@ void menu(){
    printf("\t6. ORDENAR POR CODIGO \n");
    printf("\t7. ORDENAR POR NOTA\n");
    printf("\t8. ELIMINAR\n");
-   printf("\t\tARCHIVOS\n");
-   printf("\t9. SALVAR\n");
+   printf("\t\tOPERACIONES CON ARCHIVOS\n");
+   printf("\t9.  SALVAR\n");
    printf("\t10. RECUPERAR\n");
    printf("\t11. Buscar\n");
    printf("\t12. Filtrar\n");
@@ -113,12 +113,11 @@ void menu(){
    }while(opc<0 || opc>16);
    switch(opc){
       case 0:
-
          system("cls");
          printf("Salio del programa\n");
          break;
-
       case 1://LEER
+         system("cls");
          leerVectorFinal(fin,&nf);
          break;
       case 2://MOSTRAR
@@ -139,7 +138,6 @@ void menu(){
       case 7://ORDENARXNOTA
          ordenarnotaFinal(fin,nf);
          break;
-
       case 8://ELIMINAR
          menu2(fin,&nf,opc);
          break;
@@ -172,7 +170,7 @@ void menu(){
          fileOrdenarFinal(FFIN);
          break;
     }
-   system("pause");
+
     }while(opc!=0);
 
 }
@@ -585,9 +583,10 @@ void fileRecuperarFinal(FILE *F){
     encabezado(titulo);
     fread(&f,sizeof(EXFINAL),1,F);
     while(!feof(F)){
-      printf("%3d\t%-12d%-10.1f\n",i+1,f.codAlu,f.exfin);
-      fread(&f,sizeof(EXFINAL),1,F);
-      i++;
+
+        fread(&f,sizeof(EXFINAL),1,F);
+        printf("%3d\t%-12d%-10.1f\n",i+1,f.codAlu,f.exfin);
+        i++;
     }
 
     fclose(F);
@@ -655,11 +654,11 @@ void fileEliminarFinal(FILE *FF){
     FILE *HH;
     EXFINAL f;
     int Hallado=0, Codigo, remo, rena;
-    printf("Codigo de alumno a Eliminar ---> ");
+    printf("Codigo de alumno para eliminar su nota ---> ");
     //scanf("%d",&Codigo);getchar();
     cin>>Codigo;
     //abriendo, leyendo,cargando estructura
-    HH = fopen("Temporal.dat","a+");
+    HH = fopen("Temporal.dat","w");
     if (HH == NULL){
         printf("No se puede abrir el archivo\n");
         exit(1);
