@@ -259,7 +259,7 @@ void crearVectorAlu(ALUMNO x[MAX],int *dx){
 }
 
 void leerVectorAlu(ALUMNO x[MAX], int *dx){
-   int n, i=0,cant = *dx;
+   int n, i=0;
    system("cls");
    printf("*Llenando Registro de Alumnos*\n");
    printf("\n\nNumero de ALUMNOS ---> ");
@@ -282,7 +282,7 @@ void leerVectorAlu(ALUMNO x[MAX], int *dx){
       cin >>x[i].fnac.dia;
       cout<<"\tmm--->";
       cin >>x[i].fnac.mes;
-      cout<<"\taa--->";
+      cout<<"\taaaa--->";
       cin >>x[i].fnac.anio;
       }while(x[i].fnac.dia>31 || x[i].fnac.mes>12 || x[i].fnac.anio<1900);
       
@@ -290,7 +290,7 @@ void leerVectorAlu(ALUMNO x[MAX], int *dx){
       cin >>x[i].peso;
       cout<<endl;
    }
-    *dx = cant + i;
+    *dx = i;
    }
    else{
       printf(" %d dimension fuera de RANGO es mayor a Max = %d\n\n", n, MAX);
