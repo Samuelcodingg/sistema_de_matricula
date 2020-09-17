@@ -740,9 +740,9 @@ void FileDelAlu(FILE *y){
    fclose(y);
    fclose(z);
 
-   remove = remove("Docentes.dat");
+   remove = remove("Alumnos.dat");
    printf("Remove = %d\n",remove);
-   rename = rename("Temp.dat,","Docentes.dat");
+   rename = rename("Temp.dat,","Alumnos.dat");
    printf("Rename = %d\n",rename);
    //aviso para el usuario
    if(!band){
@@ -758,7 +758,7 @@ void FileEditAlu(FILE *y){
    FileReadAlu(y);
    y = fopen("Alumnos.dat","r");
    FILE *z;
-   ALUMNO x,A;
+   ALUMNO x;
    int codigo,remove,rename,i=0;
    bool band = false;
    //Codigo del alumno a eliminar
@@ -770,11 +770,79 @@ void FileEditAlu(FILE *y){
       printf("No se puede abrir el archivo\n");
       exit(1);
    }
-   fread(&y,sizeof(y),1,z);
+   fread(&x,sizeof(x),1,z);
    while(!feof(y)){
       if(x.codAlu==codigo){
-         
+         band = true;
+         system("cls");
+         while(opc!=0){
+            ALUMNO edit;
+            int opc;
+            char desea='n';
+            system("cls");
+            printf("\t\tAlumno EDICION");
+            printf("\n\t0.TERMINAR: \n");
+            printf("\t1.CODIGO: \n");
+            printf("\t2.NOMBRE: \n");
+            printf("\t3.ESCUELA: \n");
+            printf("\t4.PESO: \n");
+            printf("Digite su opcion ---> ");
+            scanf("%d",&opc);
+            switch (opc){
+            case 0:
+               fflush(stdin);
+               printf("Desea guardar? (s/n): ");
+               scanf("%c",&desea);
+               break;
+            case 1:
+               system("cls");
+               fflush(stdin);
+               printf("NUEVO CODIGO: ");
+               cin("%d",&edit.codAlu)
+               break;
+            case 2:
+               system("cls");
+               fflush(stdin);
+               printf("NUEVO NOMBRE: ");
+               gets(edit.nomAlu);
+               break;
+            case 3:
+               system("cls");
+		         fflush(stdin);
+               printf("NUEVA ESCUELA: ");
+               gets(edit.escuela);
+            case 4:
+               system("cls");
+               printf("NUEVO PESO: ");
+               scanf("%f",&edit.peso);
+               break;
+            default:
+               system("Opcion invalida...!\n");
+               break;
+            }
+         }
+         if(desea=='S' || desea=='s'){
+            fwrite(&edit,sizeof(edit),1,z);
+         }
+         else{
+            fwrite(&x,sizeof(x),1,z);
+         }
       }
+      else{
+         fwrite(&x,sizeof(x),1,z);
+      }
+      fread(&x,sizeof(x),1,y);
+   }
+   remove = remove("Alumnos.dat");
+   printf("Remove = %d\n",remove);
+   rename = rename("Temp.dat,","Alumnos.dat");
+   printf("Rename = %d\n",rename);
+   //aviso para el usuario
+   if(!band){
+      printf("No se encontro Alumno ...\n\n");
+   }
+   else{
+      printf("Registro de alumno eliminado\n\n");
    }
 
 }
