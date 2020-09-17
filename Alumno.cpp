@@ -55,8 +55,22 @@ void eliminaAluporPosicion(ALUMNO x[MAX],int *dx);
 void eliminarAluporValor(ALUMNO x[MAX],int *dx);
 
 //ARCHIVOS
+//Escribir
 void FileWriteAlu(ALUMNO x[MAX],FILE *y,int dx);
-void FileReadAlu(ALUMNO x[MAX],FILE *y);
+//Leer
+void FileReadAlu(FILE *y);
+//Buscar
+void FileFindAlu(FILE *y);
+//Filtrar
+void FileFilAlu(FILE *y);
+//Eliminar
+void FileDelAlu(FILE *y);
+//Editar
+void FileEditAlu(FILE *y);
+//Copiar
+void FileCopyAlu(FILE *y);
+//Ordenar
+void FileOrderAlu(FILE *y);
 
 //MENU
 void menu(ALUMNO x[MAX],FILE *y,int *dx,int &opc);
@@ -138,7 +152,7 @@ void menu(ALUMNO x[MAX],FILE *y,int *dx,int &opc){
          system("pause");
          break;
       case 9:
-         FileReadAlu(x,y);
+         FileReadAlu(y);
          system("pause");
          break;
    }
@@ -225,7 +239,7 @@ void FileWriteAlu(ALUMNO x[MAX],FILE *y,int dx){
    }
 }
 
-void FileReadAlu(ALUMNO x[MAX],FILE *y){
+void FileReadAlu(FILE *y){
    int i;
    ALUMNO a;
    system("cls");
@@ -640,3 +654,31 @@ void raya2()
 {
    printf("=============================================================================================================\n");
 }
+
+void FileFindAlu(FILE *y){
+   y = fopen("Alumnos.dat","r");
+   ALUMNO x;
+   int codigo;
+   bool band = false;
+   //Digita el codigo del alumno que quiere buscar
+   printf("Codigo a buscar --> ");
+   printf("%d",&codigo);
+
+   fread(&x,sizeof(x),1,y);
+   while(!feof(y))
+   {
+      if(x.codAlu==codigo){//Desplega registro cuando encuentre al alumno
+         encabezado1();
+         printf("1\t%-12d%-32s%-18s%-2d/%-2d/%-16d%-.1fkg\n",x.codAlu,x.nomAlu,x.escuela,x.fnac.dia,x.fnac.mes,x.fnac.anio,x.peso);
+         raya1();
+         band = true;
+      }
+      fread(%x,sizeof(x),1,y);
+   }
+   if(!band){
+      printf("No se encontro el codigo del alumno");
+   }
+
+   fclose(y);
+}
+void 
