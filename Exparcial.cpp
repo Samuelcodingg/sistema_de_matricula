@@ -300,6 +300,7 @@ void insertarPosParcial(EXPARCIAL par[MAX],int *dx,int pos,int expar){
    else{
       printf("Excede Dimension");
    }
+system("pause");
 }
 
 void editarParcial(EXPARCIAL par[MAX],int dx){
@@ -318,6 +319,7 @@ void editarParcial(EXPARCIAL par[MAX],int dx){
       cout<<endl;
       printf("\n**Nota del examen parcial guardada con exito...\n");
    }
+system("pause");
 }
 
 void fileSalvarParcial(FILE *F,EXPARCIAL par[MAX],int dx){
