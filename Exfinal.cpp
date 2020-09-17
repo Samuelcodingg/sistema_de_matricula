@@ -110,7 +110,7 @@ void menu(){
    do{
       printf("\nDigite su opcion ---> ");
       scanf("%d",&opc);
-   }while(opc<0 || opc>14);
+   }while(opc<0 || opc>16);
    switch(opc){
       case 0:
 
