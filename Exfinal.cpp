@@ -1,8 +1,8 @@
 /*
- * nomPrograma
+ * nomPrograma: Exfinal.cpp
  * descripcion:
- *
- *
+ * Registro y archivo de los examenes finales de los alumnos,
+ * con operaciones basicas.
  * autor: ROMAN CESPEDES, Samuel Aaron
  *        TORRE ARTEAGA, Alexander
  *        CARMEN CRUZATTI, Angel Gerardo
