@@ -258,7 +258,7 @@ void buscarParcialporCodigoCurso(EXPARCIAL par[MAX], int dx){
 }
 
 int buscarParcialxCodAlu(EXPARCIAL par[MAX],int dx,int cod){
-   int pos = 0,i;
+   int pos = -1,i;
 
    for(i=0;i<dx;i++){
       if(par[i].codAlu==cod){
@@ -266,7 +266,7 @@ int buscarParcialxCodAlu(EXPARCIAL par[MAX],int dx,int cod){
       }
    }
 
-   return pos+1;
+   return pos;
 }
 void buscarParcialporCodigoAlumno(EXPARCIAL par[MAX], int dx){
    int cd,i,comp=0;//comp es un valor bandera
@@ -307,9 +307,9 @@ void editarParcial(EXPARCIAL par[MAX],int dx){
    printf("CODIGO:");
    scanf("%d",&cod);
 
-   edit = buscarParcialxCodCurso(par,dx,cod);
+   eedit = buscarParcialxCodAlu(par,dx,cod);
 
-   if(edit == 0){
+   if(edit ==-1 ){
       printf("Parcial no encontrado");
    }
    else{
