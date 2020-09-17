@@ -34,7 +34,7 @@ void buscarParcialporCodigoCurso(EXPARCIAL par[MAX], int dx);
 int buscarParcialxCodAlu(EXPARCIAL par[MAX],int dx,int cod);
 void buscarParcialporCodigoAlumno(EXPARCIAL par[MAX], int dx);
 void editarParcial(EXPARCIAL par[MAX],int dx);
-void insertarPosParcial(EXPARCIAL par[MAX],int *dx,int pos,int expar);
+void insertarPosParcial(EXPARCIAL par[MAX],int *dx,int pos,float expar);
 //ARCHIVOS
 void fileSalvarParcial(FILE *F,EXPARCIAL par[MAX],int dx);
 void fileRecuperarParcial(FILE *F);
@@ -126,7 +126,8 @@ void menu(){
 
          {
          system("cls");
-         int pos,nota;
+         int pos;
+         float nota;
          printf("NUEVA NOTA: ");
          scanf("%d",&nota);
          printf("POSICION: ");
@@ -288,7 +289,7 @@ void buscarParcialporCodigoAlumno(EXPARCIAL par[MAX], int dx){
    system("pause");
 }
 
-void insertarPosParcial(EXPARCIAL par[MAX],int *dx,int pos,int expar){
+void insertarPosParcial(EXPARCIAL par[MAX],int *dx,int pos,float expar){
    int i, n=*dx+1;
    if(*dx+1>MAX){
       for(i=*dx+1;i>pos+1;i--){
