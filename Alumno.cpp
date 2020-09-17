@@ -154,30 +154,37 @@ void menu(ALUMNO x[MAX],FILE *y,int *dx,int &opc){
          system("pause");
          break;
       case 8:
+         //CREAR ARCHIVO
          FileWriteAlu(x,y,*dx);
          system("pause");
          break;
       case 9:
+         //LEER ARCHIVO
          FileReadAlu(y);
          system("pause");
          break;
       case 10:
+         //BUSCAR EN ARCHIVO
          FileFindAlu(y);
          system("pause");
          break;
       case 11:
+         //FILTRAR EN ARCHIVO
          FileFilAlu(y);
          system("pause");
          break;
       case 12:
+         //ELIMINAR ALUMNO DE ARCHIVO
          FileDelAlu(y);
          system("pause");
          break;
       case 13:
+         //CREAR COPIA DEL ARCHIVO
          FileCopyAlu(y);
          system("pause");
          break;
       case 14:
+         //ORDENAR EL ARCHIVO
          FileOrderAlu(y);
          system("pause");
          break;
@@ -187,6 +194,7 @@ void menu(ALUMNO x[MAX],FILE *y,int *dx,int &opc){
 void menu2(ALUMNO x[MAX],int *dx,int mod){
    int opc;
    system("cls");
+   //Imprime segun la opcion
    if(mod==3){
       printf("\tBUSCAR ALUMNO\n");
    }else if(mod==4){
@@ -271,7 +279,7 @@ void FileReadAlu(FILE *y){
    system("cls");
    i = 0;
 
-   //Abre el archivo -> r = abre un archivo para leer
+   //Abre el archivo -> a+ = abre un archivo para leer
    y = fopen("Alumnos.dat","a+");
    
    //Consistencia
@@ -302,35 +310,36 @@ void leerVectorAlu(ALUMNO x[MAX], int *dx){
    int n, i=0;
    system("cls");
    printf("*Llenando Registro de Alumnos*\n");
+   //Nmr de elementos a insertar
    printf("\n\nNumero de ALUMNOS ---> ");
    scanf("%d", &n);
    if(n < MAX){
-   for(i=0;i<n;i++){
-      printf("\n\tAlumno:  %d\n", i+1);
-      cout <<" Codigo ---> ";
-      cin >>x[i].codAlu;
-      cout <<" Nombre ---> ";
-      fflush(stdin);
-      cin.getline(x[i].nomAlu,40,'\n');
-      cout <<" Escuela ---> ";
-      cin >>x[i].escuela;
+      for(i=0;i<n;i++){
+         printf("\n\tAlumno:  %d\n", i+1);
+         cout <<" Codigo ---> ";
+         cin >>x[i].codAlu;
+         cout <<" Nombre ---> ";
+         fflush(stdin);
+         cin.getline(x[i].nomAlu,40,'\n');
+         cout <<" Escuela ---> ";
+         cin >>x[i].escuela;
       
-      //Consistencia fecha de nacimiento
-      do{
-      cout <<" Fecha de nacimiento(dd/mm/aaaa):"<<endl;
-      cout<<"\tdd--->";
-      cin >>x[i].fnac.dia;
-      cout<<"\tmm--->";
-      cin >>x[i].fnac.mes;
-      cout<<"\taaaa--->";
-      cin >>x[i].fnac.anio;
-      }while(x[i].fnac.dia>31 || x[i].fnac.mes>12 || x[i].fnac.anio<1900);
+         //Consistencia fecha de nacimiento
+         do{
+            cout <<" Fecha de nacimiento(dd/mm/aaaa):"<<endl;
+            cout<<"\tdd--->";
+            cin >>x[i].fnac.dia;
+            cout<<"\tmm--->";
+            cin >>x[i].fnac.mes;
+            cout<<"\taaaa--->";
+            cin >>x[i].fnac.anio;
+         }while(x[i].fnac.dia>31 || x[i].fnac.mes>12 || x[i].fnac.anio<1900);
       
-      cout <<" Peso(kg.)---> ";
-      cin >>x[i].peso;
-      cout<<endl;
-   }
-    *dx = i;
+         cout <<" Peso(kg.)---> ";
+         cin >>x[i].peso;
+         cout<<endl;
+      }
+      *dx = i;
    }
    else{
       printf(" %d dimension fuera de RANGO es mayor a Max = %d\n\n", n, MAX);
@@ -375,7 +384,7 @@ int buscarAluporCodigo(ALUMNO x[MAX],int dx){
    if(!comp){
       printf("No se encontro alumnos con el codigo ingresado %d\n",cd);
    }
-
+   //retorna la posicion 
    return pos;
 }
 
@@ -404,54 +413,55 @@ void buscaAluporNom(ALUMNO x[MAX],int dx){
 
 void editarAluporCodigo(ALUMNO x[MAX], int dx){
    int cod,i,pos, men=0;
-    ALUMNO B;
+   ALUMNO B;
    mostrarVectorAlu(x,dx);
    fflush(stdin);
+   //Usa la funcion de buscar para obtener la posicion
    pos = buscarAluporCodigo(x,dx);
    if(pos!=-1){
-       B = x[pos];
-       while(men==0){
-           int opc;
-           char desea='n';
-           system("cls");
-           printf("\t\tAlumno %d, EDICION",pos+1);
-           printf("\n\t0.TERMINAR: \n");
-           printf("\t1.NOMBRE: \n");
-           printf("\t2.ESCUELA: \n");
-           printf("\t3.PESO: \n");
-           printf("Digite su opcion ---> ");
-           scanf("%d",&opc);
-           switch (opc)
-           {
-           case 0:
-               fflush(stdin);
-               printf("Desea guardar? (s/n): ");
-               scanf("%c",&desea);
-               if(desea == 'S' || desea=='s'){
-                   x[pos] = B;
-               }
-               men=1;
-               break;
-            case 1:
-                system("cls");
-		fflush(stdin);
-                printf("NUEVO NOMBRE: ");
-                gets(B.nomAlu);
-                break;
-            case 2:
-                system("cls");
-		fflush(stdin);
-                printf("NUEVA ESCUELA: ");
-                gets(B.escuela);
-            case 3:
-                system("cls");
-                printf("NUEVO PESO: ");
-                scanf("%f",&B.peso);
-                break;
-           default:
-                system("Opcion invalida...!\n");
-               break;
-           }
+      B = x[pos];
+      while(men==0){
+         int opc;
+         char desea='n';
+         system("cls");
+         printf("\t\tAlumno %d, EDICION",pos+1);
+         printf("\n\t0.TERMINAR: \n");
+         printf("\t1.NOMBRE: \n");
+         printf("\t2.ESCUELA: \n");
+         printf("\t3.PESO: \n");
+         printf("Digite su opcion ---> ");
+         scanf("%d",&opc);
+         switch (opc)
+         {
+         case 0:
+            fflush(stdin);
+            printf("Desea guardar? (s/n): ");
+            scanf("%c",&desea);
+            if(desea == 'S' || desea=='s'){
+                  x[pos] = B;
+            }
+            men=1;
+            break;
+         case 1:
+            system("cls");
+            fflush(stdin);
+            printf("NUEVO NOMBRE: ");
+            gets(B.nomAlu);
+            break;
+         case 2:
+            system("cls");
+            fflush(stdin);
+            printf("NUEVA ESCUELA: ");
+            gets(B.escuela);
+         case 3:
+            system("cls");
+            printf("NUEVO PESO: ");
+            scanf("%f",&B.peso);
+            break;
+         default:
+            system("Opcion invalida...!\n");
+            break;
+         }
        }
    }
 }
@@ -470,15 +480,14 @@ void insertarAluporPosicion(ALUMNO x[MAX],int *dx){
       if(posi-1>-1 && posi-1<*dx+1){
          *dx=n;
          while(i>posi-1){
-               x[i] = x[i-1];
-               i--;
-            }
+            x[i] = x[i-1];
+            i--;
+         }
          printf("\n**Registro de ALUMNOS: \n");
          printf("\n\tAlumno:  %d\n", posi);
 
          cout <<" Codigo ---> ";
          cin >>cod;
-
          x[i].codAlu=cod;
          cout <<" Nombre ---> ";
          cin>>x[i].nomAlu;
@@ -486,11 +495,16 @@ void insertarAluporPosicion(ALUMNO x[MAX],int *dx){
          cin >>x[i].escuela;
          cout <<" Fecha de nacimiento(dd/mm/aaaa):"<<endl;
          cout<<"\tdd--->";
-         cin >>x[i].fnac.dia;
-         cout<<"\tmm--->";
-         cin >>x[i].fnac.mes;
-         cout<<"\taaaa--->";
-         cin >>x[i].fnac.anio;
+         //Consistencia fecha de nacimiento
+         do{
+            cout <<" Fecha de nacimiento(dd/mm/aaaa):"<<endl;
+            cout<<"\tdd--->";
+            cin >>x[i].fnac.dia;
+            cout<<"\tmm--->";
+            cin >>x[i].fnac.mes;
+            cout<<"\taaaa--->";
+            cin >>x[i].fnac.anio;
+         }while(x[i].fnac.dia>31 || x[i].fnac.mes>12 || x[i].fnac.anio<1900);
          cout <<" Peso(kg.)---> ";
          cin >>x[i].peso;
          cout<<endl;
@@ -518,7 +532,7 @@ void insertarAluporValor(ALUMNO x[MAX],int *dx){
 
       for(i=0;i<*dx;i++){
          if(codigo>x[i].codAlu){
-               posi+=1;
+            posi+=1;
          }
       }
 
@@ -532,13 +546,17 @@ void insertarAluporValor(ALUMNO x[MAX],int *dx){
       cin>>x[posi-1].nomAlu;
       cout <<" Escuela ---> ";
       cin >>x[posi-1].escuela;
-      cout <<" Fecha de nacimiento(dd/mm/aaaa):"<<endl;
-      cout<<"\tdd--->";
-      cin >>x[posi-1].fnac.dia;
-      cout<<"\tmm--->";
-      cin >>x[posi-1].fnac.mes;
-      cout<<"\taaaa--->";
-      cin >>x[posi-1].fnac.anio;
+      //Consistencia fecha de nacimiento
+        do{
+         cout <<" Fecha de nacimiento(dd/mm/aaaa):"<<endl;
+         cout<<"\tdd--->";
+         cin >>x[posi-1].fnac.dia;
+         cout<<"\tmm--->";
+         cin >>x[posi-1].fnac.mes;
+         cout<<"\taaaa--->";
+         cin >>x[posi-1].fnac.anio;
+      }while(x[posi-1].fnac.dia>31 || x[posi-1].fnac.mes>12 || x[posi-1].fnac.anio<1900);
+
       cout <<" Peso(kg.)---> ";
       cin >>x[posi-1].peso;
       cout<<endl;
@@ -553,11 +571,13 @@ void insertarAluporValor(ALUMNO x[MAX],int *dx){
 void eliminaAluporPosicion(ALUMNO x[MAX],int *dx){
    int i,n,posi;
    mostrarVectorAlu(x,*dx);
+   //Digita la posicion a eliminar
    printf("\n\nPOSICION: ");
    scanf("%i",&posi);
    n=*dx;
    n=n-1;
    i=posi-1;
+   //Reeacomoda el registro
    if(posi-1>-1 && posi-1<*dx){
       *dx=n;
       while(i<n){
@@ -859,6 +879,7 @@ void FileEditAlu(FILE *y){
       }
       fread(&x,sizeof(x),1,y);
    }
+   
    remo = remove("Alumnos.dat");
    printf("Remove = %d\n",remove);
    rena = rename("Temp.dat,","Alumnos.dat");
