@@ -291,7 +291,7 @@ void buscarParcialporCodigoAlumno(EXPARCIAL par[MAX], int dx){
 
 void insertarPosParcial(EXPARCIAL par[MAX],int *dx,int pos,float expar){
    int i, n=*dx+1;
-   if(*dx+1>MAX){
+   if(*dx+1<MAX){
       for(i=*dx+1;i>pos+1;i--){
          par[i-1].expar=par[i].expar;
       }
