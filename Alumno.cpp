@@ -716,25 +716,64 @@ void FileDelAlu(FILE *y){
    y = fopen("Alumnos.dat","r");
    FILE *z;
    ALUMNO x;
-   int codigo,i=0;
+   int codigo,remove,rename,i=0;
    bool band = false;
 
    printf("Codigo a Eliminar --->");
    cin>>codigo;
-
+   //abriendo archivo temporal
    z = fopen("Temp.dat","a+");
    if(z == NULL){
       printf("Nose puede abrir el archivo\n");
       exit(1);
    }
    fread(&x,sizeof(x),1,y);
-
-   while(!feof(y)){
+   while(!feof(y)){//Registro a buscar
       if(codigo!=x.codAlu){
          fwrite(&x,sizeof(x),1,z);
       }
       if(codigo==x.codAlu){
          band=true;
+      }
+      fread(&x,sizeof(x),1,y);
+   }
+   fclose(y);
+   fclose(z);
+
+   remove = remove("Docentes.dat");
+   printf("Remove = %d\n",remove);
+   rename = rename("Temp.dat,","Docentes.dat");
+   printf("Rename = %d\n",rename);
+   //aviso para el usuario
+   if(!band){
+      printf("No se encontro Alumno ...\n\n");
+   }
+   else{
+      printf("Registro de alumno eliminado\n\n");
+   }
+}
+
+void FileEditAlu(FILE *y){
+   //Abre el archivo
+   FileReadAlu(y);
+   y = fopen("Alumnos.dat","r");
+   FILE *z;
+   ALUMNO x,A;
+   int codigo,remove,rename,i=0;
+   bool band = false;
+   //Codigo del alumno a eliminar
+   printf("Codigo a editar --> ");
+   scanf("%d",&codigo);
+
+   z = fopen("Temp.dat","a+");
+   if(z == NULL){
+      printf("No se puede abrir el archivo\n");
+      exit(1);
+   }
+   fread(&y,sizeof(y),1,z);
+   while(!feof(y)){
+      if(x.codAlu==codigo){
+         
       }
    }
 
