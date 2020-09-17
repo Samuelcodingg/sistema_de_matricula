@@ -116,7 +116,7 @@ void menu(PRACTICA p[MAX],FILE *FPC,int *dx,int &opc){
             {
 
                int pos=0;
-               insertarPosPc(p,*dx,pos);
+               insertarPosPc(p,dx,pos);
             }
             break;
             case 8:
@@ -224,7 +224,7 @@ int buscarPcxCodAlu(PRACTICA p[MAX],int dx,int cod){
 
    return pos+1;
 }
-void insertarPosPc(PRACTICA p[MAX],int *dx,int aux,int pos){
+void insertarPosPc(PRACTICA p[MAX],int *dx,int pos){
    int i,j,n,suma=0;
    mostrarVectorPc(p,*dx);
    printf("POSICION: ");
