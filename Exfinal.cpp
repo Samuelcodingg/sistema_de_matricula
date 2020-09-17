@@ -120,36 +120,28 @@ void menu(){
 
       case 1://LEER
          leerVectorFinal(fin,&nf);
-         system("pause");
          break;
       case 2://MOSTRAR
          mostrarVectorFinal(fin,nf);
-         system("pause");
          break;
       case 3://BUSCAR
          menu2(fin,&nf,opc);
-         system("pause");
          break;
       case 4://EDITAR
          editarFinal(fin, nf);
-         system("pause");
          break;
       case 5://INSERTAR
          menu2(fin,&nf,opc);
-         system("pause");
          break;
       case 6://ORDENARXCOD
          ordenarcodigoAluFinal(fin,nf);
-         system("pause");
          break;
       case 7://ORDENARXNOTA
          ordenarnotaFinal(fin,nf);
-         system("pause");
          break;
 
       case 8://ELIMINAR
          menu2(fin,&nf,opc);
-         system("pause");
          break;
       case 9:
          system("cls");
@@ -180,7 +172,7 @@ void menu(){
          fileOrdenarFinal(FFIN);
          break;
     }
-
+   system("pause");
     }while(opc!=0);
 
 }
