@@ -1,8 +1,8 @@
 /*
- * NombreProg : 
+ * NombreProg : Docentes- Cursos.cpp
  * Descripcion: 
- *             
- *   
+ *   Registro y archivos de vectores de Docentes y cursos, con 
+ *   operaciones basicas 
  *    
  *    
  *
