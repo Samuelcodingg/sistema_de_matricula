@@ -117,12 +117,12 @@ void menu(ALUMNO x[MAX],FILE *y,int *dx,int &opc){
    printf("\t11. Filtrar en archivo\n");
    printf("\t12. Elimnar elemento del archivo\n");
    printf("\t13. Crear copia del archivo\n");
-   printf("\t13. Ordenar archivo\n");
+   printf("\t14. Ordenar archivo\n");
 
    do{
       printf("\nDigite su opcion ---> ");
       scanf("%d",&opc);
-   }while(opc<0 || opc>9);
+   }while(opc<0 || opc>14);
 
    switch(opc){
       case 1://LEER
@@ -159,6 +159,26 @@ void menu(ALUMNO x[MAX],FILE *y,int *dx,int &opc){
          break;
       case 9:
          FileReadAlu(y);
+         system("pause");
+         break;
+      case 10:
+         FileFindAlu(y);
+         system("pause");
+         break;
+      case 11:
+         FileFilAlu(y);
+         system("pause");
+         break;
+      case 12:
+         FileDelAlu(y);
+         system("pause");
+         break;
+      case 13:
+         FileCopyAlu(y);
+         system("pause");
+         break;
+      case 13:
+         FileOrderAlu(y);
          system("pause");
          break;
    }
