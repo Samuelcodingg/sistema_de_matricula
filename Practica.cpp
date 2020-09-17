@@ -128,7 +128,6 @@ void menu(PRACTICA p[MAX],FILE *FPC,int *dx,int &opc){
             default:
                 printf("Opcion invalida....!\n");
         }
-        system("pause");
     }
 
 
@@ -225,24 +224,27 @@ int buscarPcxCodAlu(PRACTICA p[MAX],int dx,int cod){
 
    return pos+1;
 }
-void insertarPosPc(PRACTICA p[MAX],int dx,int aux,int pos){
-   int i,j,n,suma=0,comp=0;//comp es un valor bandera
-   mostrarVectorPc(p,dx);
+void insertarPosPc(PRACTICA p[MAX],int *dx,int aux,int pos){
+   int i,j,n,suma=0;
+   mostrarVectorPc(p,*dx);
    if(aux==0){
    printf("POSICION: ");
    scanf("%i",&pos);
    }
-   n = dx;
-   n = n + 1;//
-   i = dx;
+   n = *dx;
+   n = n + 1;
+   i = *dx;
    if(n<MAX){
-      if(pos-1>-1 && pos-1<dx+1){
-         dx=n;
+      if(pos-1>-1 && pos-1<*dx+1){
          while(i>pos-1){
             p[i] = p[i-1];
             i = i-1;
          }
-         printf("\n\n**Registro de PRACTICAS:\n");
+         fflush(stdin);
+         printf("\n Codigo de Alumno : ");
+         cin>>p[i].codAlu;
+         cout <<"\n Codigo de Curso ---> ";
+         cin>>p[i].codCur;
          for(j=0;j<10;j++){
             printf("\n\tPractica %d: ",j+1);
             cin>>p[i].prac[j];
@@ -252,6 +254,8 @@ void insertarPosPc(PRACTICA p[MAX],int dx,int aux,int pos){
          p[i].promedio=suma/10;
          suma=0;
          printf("\n\tEl promedio de practicas del alumno %d : es %d\n\n",i+1,p[i].promedio);
+         fflush(stdin);
+         *dx=n;
 
       printf("\nDatos INSERTADOS en posicion %d \n\n ",pos);
       }
@@ -264,6 +268,7 @@ void insertarPosPc(PRACTICA p[MAX],int dx,int aux,int pos){
    }
    system("pause");
 }
+
 
 void editarporCodigoPc(PRACTICA p[MAX], int dx){
    int cod,i,j,comp=0,suma=0;//comp es un valor bandera
@@ -288,6 +293,7 @@ void editarporCodigoPc(PRACTICA p[MAX], int dx){
    if(comp==0){
       printf("No se encontro alumnos con el codigo ingresado %d\n",cod);
    }
+	system("pause");
 }
 
 void editarPc(PRACTICA p[MAX],int dx){
@@ -313,6 +319,7 @@ void editarPc(PRACTICA p[MAX],int dx){
       printf("\n\tEl promedio de practicas del alumno %d : es %d\n\n",edit+1,p[edit].promedio);
       printf("\n**Promedio de practicas guardada con exito...\n");
    }
+	system("pause");
 
 }
 void fileSalvarPractica(FILE *F,PRACTICA p[MAX],int dx){
