@@ -1,10 +1,10 @@
 /*
- * NombreProg : 
- * Descripcion: 
- *             
- *   
- *    
- *    
+ * NombreProg :
+ * Descripcion:
+ *
+ *
+ *
+ *
  *
  * Autor:  ROMAN CESPEDES, Samuel Aaron
  *         TORRE ARTEAGA, Alexander
@@ -27,103 +27,136 @@ struct EXPARCIAL{
 	int codCur;
 	float expar;
 };
-
+//OPERACIONES BASICAS
 void crearVectorParcial(int *dx);
 void leerVectorParcial(EXPARCIAL par[MAX],int *dx);
 void mostrarVectorParcial(EXPARCIAL par[MAX],int dx);
 int buscarParcialxCodCurso(EXPARCIAL par[MAX],int dx,int cod);
+void buscarParcialporCodigoCurso(EXPARCIAL par[MAX], int dx);
 int buscarParcialxCodAlu(EXPARCIAL par[MAX],int dx,int cod);
+void buscarParcialporCodigoAlumno(EXPARCIAL par[MAX], int dx);
 void editarParcial(EXPARCIAL par[MAX],int dx);
 void insertarPosParcial(EXPARCIAL par[MAX],int *dx,int pos,int expar);
+//ARCHIVOS
 void fileSalvarParcial(FILE *F,EXPARCIAL par[MAX],int dx);
 void fileRecuperarParcial(FILE *F);
+//MENU
+void menu();
+void encabezado(char title[]);
+void raya1();
+void raya2();
+
+int main (){
+    menu();
+    system("pause");
+    return 0;
 
 
-void encabezado2(char title[]);
-void raya3();
-void raya4();
-
-int main(){
-    FILE *FP;
-    int np, menu=0,opc;
-    EXPARCIAL par[]={
+}
+void menu(){
+   FILE *FP;
+   int np,opc,pos;
+   EXPARCIAL par[]={
         108,202,15,
         109,188,12,
         110,190,13,
-        111,200,15,   
+        111,200,15,
     };
-    np = sizeof(par)/(sizeof(int)*2 + sizeof(float));
-    
-    while(menu==0){
-        system("cls");
-        printf("\n\n\t\tSISTEMA DE NOTAS EXPARCIAL\n\n");
-        printf("\t0.SALIR\n\t1.CREAR\n\t2.LEER\n\t3.MOSTRAR\n\t4.BUSCAR XCodCur\n\t5.BUSCAR xCodAlu.\n\t6.EDITAR\n\t7.INSERTAR\n\t8.SALVAR\n\t9.RECUPERAR\n");
-        printf("\n\nDigite su opcion---> ");
-        scanf("%d",&opc);
+   np = sizeof(par)/(sizeof(int)*2 + sizeof(float));
 
-        system("cls");
-        switch(opc){
-            case 0:
-                system("cls");
-                printf("GRACIAS POR USAR EL SISTEMA!\n");
-                system("pause");
-                exit(0);
-            case 1:
-                crearVectorParcial(&np);
-                break;
-            case 2:
-                leerVectorParcial(par,&np);
-                break;
-            case 3:
-                mostrarVectorParcial(par,np);
-                break;
-            case 4:
-            {
-                int cod;
-                printf("CODIGO: ");
-                scanf("%d",&cod);
-                buscarParcialxCodCurso(par,np,cod);
-            }
-            break;
-            case 5:
-            {
-                int cod;
-                printf("CODIGO: ");
-                scanf("%d",&cod);
-                buscarParcialxCodAlu(par,np,cod);
-            }
-            break;
-            case 6:
-                editarParcial(par,np);
-                break;
-            case 7:
-            {
-                int pos, nota;
-                printf("Indica la nueva nota a insertar: ");
-                scanf("%d",&nota);
-                printf("Indica la posicion: ");
-                scanf("%d",&pos);
-                insertarPosParcial(par,&np,pos,nota);
-            }
-            break;
-            case 8:
-                fileSalvarParcial(FP,par,np);
-                break;
-            case 9:
-                fileRecuperarParcial(FP);
-                break;
-            default:
-                printf("Opcion invalida....!\n");
+   do{
+   system("cls");
+   printf(" \n\n\t\tSISTEMA DE NOTAS DE EXAMEN PARCIAL\n\n");
+   printf("\t0. TERMINAR \n\n");
+   printf("\t1. CREAR\n");
+   printf("\t2. LEER\n");
+   printf("\t3. MOSTRAR\n");
+   printf("\t4. BUSCARxCodCur\n");
+   printf("\t5. BUSCARxCodAlu\n");
+   printf("\t6. EDITAR\n");
+   printf("\t7. INSERTAR\n");
+   printf("\t8. SALVAR\n");
+   printf("\t9. RECUPERAR\n");
+   do{
+      printf("\nDigite su opcion ---> ");
+      scanf("%d",&opc);
+   }while(opc<0 || opc>9);
+   switch(opc){
+      case 0:
+
+         system("cls");
+         printf("Salio del programa\n");
+         break;
+
+      case 1:
+
+         system("cls");
+         crearVectorParcial(&np);
+         break;
+
+      case 2:
+
+         system("cls");
+         leerVectorParcial(par,&np);
+         break;
+
+      case 3:
+
+         system("cls");
+         mostrarVectorParcial(par,np);
+         break;
+
+      case 4:
+
+         system("cls");
+         buscarParcialporCodigoCurso(par, np);
+         break;
+
+      case 5:
+
+         system("cls");
+         buscarParcialporCodigoAlumno(par, np);
+         break;
+
+      case 6:
+
+         system("cls");
+         editarParcial(par,np);
+         break;
+
+      case 7:
+
+         {
+         system("cls");
+         int pos,nota;
+         printf("NUEVA NOTA: ");
+         scanf("%d",&nota);
+         printf("POSICION: ");
+         scanf("%d",&pos);
+         insertarPosParcial(par,&np,pos,nota);
+
+         }
+         break;
+
+      case 8:
+
+         system("cls");
+         fileSalvarParcial(FP,par,np);
+         break;
+
+      case 9:
+
+         system("cls");
+         fileRecuperarParcial(FP);
+         break;
+         default:
+         printf("Opcion invalida....!\n");
+
         }
-        system("pause");
-    }
 
-    system("pause");
-    return 0;
-
-    system("pause");
-    return 0;
+    }while(opc!=0);
 }
+
 
 void crearVectorParcial(int *dx){
     *dx=-1;
@@ -166,7 +199,7 @@ void mostrarVectorParcial(EXPARCIAL par[MAX],int dx){
             contblanco=contblanco+1;
          }
       }
-      encabezado2(titulo);
+      encabezado(titulo);
       for(i=0;i<dx-contblanco;i++){
          printf("%3d\t%-12d%-10.1f\n",i+1,par[i].codAlu,par[i].expar);
       }
@@ -178,20 +211,20 @@ void mostrarVectorParcial(EXPARCIAL par[MAX],int dx){
    }
 }
 
-void encabezado2(char title[]){
+void encabezado(char title[]){
    system("cls");
    char num[]="NUMERO";
    char cod[]="CODIGO";
    char nota[]="NOTA";
    printf("\t\t%s\n\n",title);
-   raya3();
+   raya1();
    printf("%-6s\t%-12s%-5s\n",num,cod,nota);
-   raya4();
+   raya2();
 }
-void raya3(){
+void raya1(){
    printf("===============================\n");
 }
-void raya4(){
+void raya2(){
    printf("-------------------------------\n");
 }
 
@@ -203,8 +236,27 @@ int buscarParcialxCodCurso(EXPARCIAL par[MAX],int dx,int cod){
          pos = i;
       }
    }
-   
-   return pos+1; 
+
+   return pos+1;
+}
+void buscarParcialporCodigoCurso(EXPARCIAL par[MAX], int dx){
+   int cd,i,comp=0;//comp es un valor bandera
+   char titulo[]="\n\nREPORTE DE EXAMENES PARCIALES";
+   printf("\n\nCODIGO : ");
+   scanf("%i",&cd);
+   cout <<"\n\n";
+   for(i=0;i<dx;i++){
+      if(par[i].codCur==cd){
+         encabezado(titulo);
+         printf("%3d\t%-12d%-10.1f\n",i+1,par[i].codCur,par[i].expar);
+         comp=1;
+      }
+   }
+   cout <<"\n\n";
+   if(comp==0){
+      printf("No se encontraron cursos con el codigo ingresado %d\n",cd);
+   }
+   system("pause");
 }
 
 int buscarParcialxCodAlu(EXPARCIAL par[MAX],int dx,int cod){
@@ -215,8 +267,27 @@ int buscarParcialxCodAlu(EXPARCIAL par[MAX],int dx,int cod){
          pos = i;
       }
    }
-   
-   return pos+1; 
+
+   return pos+1;
+}
+void buscarParcialporCodigoAlumno(EXPARCIAL par[MAX], int dx){
+   int cd,i,comp=0;//comp es un valor bandera
+   char titulo[]="\n\nREPORTE DE EXAMENES PARCIALES";
+   printf("\n\nCODIGO : ");
+   scanf("%i",&cd);
+   cout <<"\n\n";
+   for(i=0;i<dx;i++){
+      if(par[i].codAlu==cd){
+         encabezado(titulo);
+         printf("%3d\t%-12d%-10.1f\n",i+1,par[i].codAlu,par[i].expar);
+         comp=1;
+      }
+   }
+   cout <<"\n\n";
+   if(comp==0){
+      printf("No se encontraron cursos con el codigo ingresado %d\n",cd);
+   }
+   system("pause");
 }
 
 void insertarPosParcial(EXPARCIAL par[MAX],int *dx,int pos,int expar){
@@ -243,7 +314,7 @@ void editarParcial(EXPARCIAL par[MAX],int dx){
    if(edit == 0){
       printf("Parcial no encontrado");
    }
-   else{  
+   else{
       printf("\n\n\tIngrese la nota del examen parcial: ");
       cin>>par[edit].expar;
       cout<<endl;
@@ -279,9 +350,9 @@ void fileRecuperarParcial(FILE *F){
         exit(0);
     }
 
-    encabezado2(titulo);
+    encabezado(titulo);
     fread(&p,sizeof(EXPARCIAL),1,F);
-    while(!feof(F)){    
+    while(!feof(F)){
         printf("%3d\t%-12d%-10.1f\n",i+1,p.codAlu,p.expar);
         fread(&p,sizeof(EXPARCIAL),1,F);
         i++;
