@@ -368,11 +368,7 @@ void editarAluporCodigo(ALUMNO x[MAX], int dx){
    mostrarVectorAlu(x,dx);
    fflush(stdin);
    pos = buscarAluporCodigo(x,dx);
-   if(pos==-1){
-      printf("No se encontro alumnos con ese codigo%d\n",cod);
-   }
-   else{
-      system("pause");
+   if(pos!=-1){
        B = x[pos];
        while(men==0){
            int opc;
@@ -418,7 +414,6 @@ void editarAluporCodigo(ALUMNO x[MAX], int dx){
            }
        }
    }
-   system("pause");
 }
 
 void insertarAluporPosicion(ALUMNO x[MAX],int *dx){
