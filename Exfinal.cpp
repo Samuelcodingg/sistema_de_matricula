@@ -37,7 +37,8 @@ void insertarFinalporPosicion(EXFINAL fin[MAX],int *dx);
 void insertarFinalporValor(EXFINAL fin[MAX],int *dx);
 void eliminaFinalporPosicion(EXFINAL fin[MAX],int *dx);
 void eliminarFinalporValor(EXFINAL fin[MAX],int *dx);
-void ordenarFinal(EXFINAL fin[MAX],int dx);
+void ordenarcodigoAluFinal(EXFINAL fin[MAX],int dx);
+void ordenarnotaFinal(EXFINAL fin[MAX],int dx);
 
 ///MENU
 void menu();
@@ -94,17 +95,18 @@ void menu(){
    printf("\t3. BUSCAR\n");
    printf("\t4. EDITAR\n");
    printf("\t5. INSERTAR\n");
-   printf("\t6. ORDENAR \n");
-   printf("\t7. ELIMINAR\n");
+   printf("\t6. ORDENAR POR CODIGO \n");
+   printf("\t7. ORDENAR POR NOTA\n");
+   printf("\t8. ELIMINAR\n");
    printf("\t\tARCHIVOS\n");
-   printf("\t8. SALVAR\n");
-   printf("\t9. RECUPERAR\n");
-   printf("\t10. Buscar\n");
-   printf("\t11. Filtrar\n");
-   printf("\t12. Eliminar\n");
-   printf("\t13. Editar\n");
-   printf("\t14. Copiar\n");
-   printf("\t15. Ordenar\n");
+   printf("\t9. SALVAR\n");
+   printf("\t10. RECUPERAR\n");
+   printf("\t11. Buscar\n");
+   printf("\t12. Filtrar\n");
+   printf("\t13. Eliminar\n");
+   printf("\t14. Editar\n");
+   printf("\t15. Copiar\n");
+   printf("\t16. Ordenar\n");
    do{
       printf("\nDigite su opcion ---> ");
       scanf("%d",&opc);
@@ -136,40 +138,45 @@ void menu(){
          menu2(fin,&nf,opc);
          system("pause");
          break;
-      case 6://ORDENAR
-         ordenarFinal(fin,nf);
+      case 6://ORDENARXCOD
+         ordenarcodigoAluFinal(fin,nf);
          system("pause");
          break;
-      case 7://ELIMINAR
+      case 7://ORDENARXNOTA
+         ordenarnotaFinal(fin,nf);
+         system("pause");
+         break;
+
+      case 8://ELIMINAR
          menu2(fin,&nf,opc);
          system("pause");
          break;
-      case 8:
+      case 9:
          system("cls");
          fileSalvarFinal(FFIN,fin,nf);
          break;
-      case 9:
+      case 10:
          system("cls");
          fileRecuperarFinal(FFIN);
          break;
          default:
          printf("Opcion invalida....!\n");
-      case 10:
+      case 11:
          fileBuscarFinal(FFIN);
          break;
-      case 11:
+      case 12:
          fileFiltrarFinal(FFIN);
          break;
-      case 12:
+      case 13:
          fileEliminarFinal(FFIN);
          break;
-      case 13:
+      case 14:
          fileEditarFinal(FFIN);
          break;
-      case 14:
+      case 15:
          fileCopiarFinal(FFIN);
          break;
-      case 15:
+      case 16:
          fileOrdenarFinal(FFIN);
          break;
     }
@@ -509,7 +516,7 @@ void eliminarFinalporValor(EXFINAL fin[MAX],int *dx){
       printf("Vacio...!\n");
    }
 }
-void ordenarFinal(EXFINAL fin[MAX],int dx){
+void ordenarcodigoAluFinal(EXFINAL fin[MAX],int dx){
    int i,j,min;
    EXFINAL aux;
    if(dx>-1){
@@ -517,6 +524,28 @@ void ordenarFinal(EXFINAL fin[MAX],int dx){
          min = i;
          for(j=i+1;j<dx;j++){
             if(fin[j].codAlu < fin[min].codAlu){
+               min = j;
+            }
+         }
+         aux = fin[i];
+         fin[i] = fin[min];
+         fin[min] = aux;
+      }
+
+      mostrarVectorFinal(fin,dx);
+   }
+   else{
+      printf("Vector vacioooo...!\n");
+   }
+}
+void ordenarnotaFinal(EXFINAL fin[MAX],int dx){
+   int i,j,min;
+   EXFINAL aux;
+   if(dx>-1){
+      for(i=0;i<dx;i++){
+         min = i;
+         for(j=i+1;j<dx;j++){
+            if(fin[j].exfin < fin[min].exfin){
                min = j;
             }
          }
