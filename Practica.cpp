@@ -34,33 +34,28 @@ void editarPc(PRACTICA p[MAX],int dx);
 void insertarPosPc(PRACTICA p[MAX],int *dx,int pos);
 void fileSalvarPractica(FILE *F,PRACTICA p[MAX],int dx);
 void fileRecuperarPractica(FILE *F);
-void menu(PRACTICA p[MAX],FILE *FPC,int *dx,int &opc);
+void menu();
 void encabezado2(char title[]);
 void raya3();
 void raya4();
 
 int main (){
-    FILE *FPC;
-    int np=2,opc;
-    PRACTICA p[]={
+   menu();
+   system("pause");
+   return 0;
+
+}
+void menu(){
+   FILE *FPC;
+   int np=0,opc;
+   PRACTICA p[]={
       108,202, {13,14,15,12,14,12,14,13,14,11},13,
       109,188, {8,9,11,12,13,16,11,12,14,7},11,
       110,192, {15,20,11,16,15,14,13,15,15,11},15,
       111,202, {8,8,8,9,6,14,9,10,11,11},9,
    };
    np = sizeof(p)/(sizeof(int)*13);
-    do{
-      menu(p,FPC,&np,opc);
-
-   }while(opc!=0);
-
-    system("pause");
-    return 0;
-
-}
-void menu(PRACTICA p[MAX],FILE *FPC,int *dx,int &opc){
-
-
+   do{
    system("cls");
    printf(" \n\n\t\tSISTEMA DE NOTAS DE PRACTICA\n\n");
    printf("\t0. TERMINAR \n\n");
@@ -85,20 +80,20 @@ void menu(PRACTICA p[MAX],FILE *FPC,int *dx,int &opc){
                 system("pause");
                 exit(0);
             case 1:
-                crearVectorPc(dx);
+                crearVectorPc(&np);
                 break;
             case 2:
-                leerVectorPc(p,dx);
+                leerVectorPc(p,&np);
                 break;
             case 3:
-                mostrarVectorPc(p,*dx);
+                mostrarVectorPc(p,np);
                 break;
             case 4:
             {
                 int cod;
                 printf("CODIGO: ");
                 scanf("%d",&cod);
-                buscarPcxCodCurso(p,*dx,cod);
+                buscarPcxCodCurso(p,np,cod);
             }
             break;
             case 5:
@@ -106,21 +101,21 @@ void menu(PRACTICA p[MAX],FILE *FPC,int *dx,int &opc){
                 int cod;
                 printf("CODIGO: ");
                 scanf("%d",&cod);
-                buscarPcxCodAlu(p,*dx,cod);
+                buscarPcxCodAlu(p,np,cod);
             }
             break;
             case 6:
-                editarPc(p,*dx);
+                editarPc(p,np);
                 break;
             case 7:
             {
 
                int pos=0;
-               insertarPosPc(p,dx,pos);
+               insertarPosPc(p,&np,pos);
             }
             break;
             case 8:
-                fileSalvarPractica(FPC,p,*dx);
+                fileSalvarPractica(FPC,p,np);
                 break;
             case 9:
                 fileRecuperarPractica(FPC);
@@ -128,8 +123,8 @@ void menu(PRACTICA p[MAX],FILE *FPC,int *dx,int &opc){
             default:
                 printf("Opcion invalida....!\n");
         }
-    }
-
+   }while(opc!=0);
+}
 
 void crearVectorPc(int *dx){
     *dx=-1;
