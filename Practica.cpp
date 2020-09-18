@@ -315,7 +315,10 @@ void editarPc(PRACTICA p[MAX],int dx){
 	system("pause");
 
 }
-void fileSalvarPractica(FILE *F,PRACTICA p[MAX],int dx){
+
+//IMPLEMENTAR
+
+/*void fileSalvarPractica(FILE *F,PRACTICA p[MAX],int dx){
     F = fopen("Practica.dat","a+");
     if(F == NULL){
         printf("Ha ocurrido un error...!\n");
@@ -330,12 +333,12 @@ void fileSalvarPractica(FILE *F,PRACTICA p[MAX],int dx){
     printf("Datos guardados...!\n");
     fclose(F);
     system("pause");
-}
-void fileRecuperarPractica(FILE *F){
+}*/
+/*void fileRecuperarPractica(FILE *F){
     int i=0;
     PRACTICA pp;
     F = fopen("Practica.dat","r+");
-    char titulo[]="\n\nREPORTE DE Practicas";
+    char titulo[]="\n\nREPORTE DE PRACTICAS";
 
     if(F==NULL){
         printf("Ha ocurrido un error...!\n");
@@ -353,4 +356,248 @@ void fileRecuperarPractica(FILE *F){
 
     fclose(F);
     system("pause");
-}
+}*/
+/*void fileBuscarPromPractica(FILE *F){
+   F = fopen("Practica.dat","a+");
+   char titulo[]="\n\nREPORTE DE PROMEDIO DE PRACTICAS";
+   PRACTICA k ;
+   int Codigo, i=0;
+   // Digita el codigo del alumno
+   printf("Ingrese codigo de alumno ---> ");
+   scanf("%d",&Codigo);
+   // aqui siempre debe empezar el ciclo de lectura
+   // y fread() regresa siempre cuantas estructuras leyo
+
+   encabezado(titulo);
+   fread(&k,sizeof(k),1,F);
+   while(!feof(F))
+   { // desplegando Registro Buscado
+      if(k.codAlu == Codigo)
+      {
+         printf("%3d\t%-12d%-10.1f\n",i+1,k.codAlu,k.promedio);
+      }
+      fread(&k, sizeof(k), 1, F);
+   }; // aqui termina while
+   // no olvidar cerrar archivo y siempre fuera de while
+   raya1();
+   fclose(F);
+}*/
+/*void fileFiltrarPromPractica(FILE *F){
+   F = fopen("Practica.dat","a+");
+   char titulo[]="\n\nREPORTE DE PROMEDIO PRACTICAS";
+   PRACTICA k;
+    int Hallado=0, Codigo, i=0;
+    // Digitando codigo
+    printf("Codigo >= que ---> ");
+    scanf("%d",&Codigo);
+    // aqui siempre debe empezar el ciclo de lectura
+    // y fread() regresa siempre cuantas estructuras leyo
+    encabezado(titulo);
+    fread(&k,sizeof(k),1,F);
+    while(!feof(F))
+    {
+        if(k.codAlu >= Codigo)
+        {
+           //Muestra Registro cuando se cumpla la condicion
+            printf("%3d\t%-12d%-10.1f\n",i+1,k.codAlu,k.promedio);
+            Hallado = 1;
+            i++;
+        }
+        fread(&k, sizeof(k), 1, F);
+    }; // aqui termina while
+    raya1();
+    if(Hallado == 0)
+    {
+    printf("Ninguno cumple con esa Condicion\n\n");
+    }
+    // no olvidar cerrar archivo y siempre fuera de while
+    fclose(F);
+}*/
+/*void fileEliminarPromPractica(FILE *FF){
+    FF = fopen("Practica.dat","a+");
+    FILE *HH;
+    PRACTICA k;
+    int Hallado=0, Codigo, remo, rena;
+    printf("Codigo de alumno para eliminar su promedio ---> ");
+    //scanf("%d",&Codigo);getchar();
+    cin>>Codigo;
+    //abriendo, leyendo,cargando estructura
+    HH = fopen("Temporal.dat","w");
+    if (HH == NULL){
+        printf("No se puede abrir el archivo\n");
+        exit(1);
+    }
+    fread(&k, sizeof(k), 1, FF);
+    while(!feof(FF)){ // Registro Buscado
+        if(Codigo != k.codAlu){
+            fwrite(&k, sizeof(k), 1, HH);
+        }
+        if(Codigo == k.codAlu){
+            Hallado = 1;
+        }
+        fread(&k, sizeof(k), 1, FF);
+    }
+    // no olvidar cerrar archivo y siempre fuera de while
+    fclose(FF);
+    fclose(HH);
+    remo=remove("Practica.dat"); // Elimina
+    printf("remove = %d\n", remo);
+    rena=rename("Temporal.dat", "Practica.dat"); //renombre
+    printf("rename = %d\n", rena);
+    //avisando
+    if(Hallado == 0){
+        printf("No existe ese CODIGO ...\n\n");
+    }
+    else{
+        printf("Registro eliminado\n\n");
+    }
+}*/
+
+/*void fileEditarPractica(FILE *FF)
+{
+    FF = fopen("Practica.dat","a+");
+    FILE *HH;
+    PRACTICA k;
+    int Hallado=0, Codigo, Rem, Ren,i,j,suma=0;
+    // cargando codigo a buscar
+    printf("Codigo de alumno a Editar ---> ");
+    scanf("%d",&Codigo);
+
+   HH = fopen("Temporal.dat","a+");
+    if (HH == NULL)
+    {
+        printf("No se puede abrir el archivo\n");
+        exit(1);
+    }
+    // aqui siempre debe empezar el ciclo de lectura
+    fread(&k, sizeof(k), 1, FF);
+    while(!feof(FF))
+    { // Registro Buscado
+        if(k.codAlu == Codigo)
+        {
+            int aux=0;
+            char desea='n';
+            PRACTICA m;
+            Hallado=1;
+            m=k;
+            while(aux==0){
+                int opc1;
+                fflush(stdin);
+                system("cls");
+                printf("RUTINA DE EDICION\n0SALIR\n1.Codigo\n2.Nota\nDigite su opcion--->");
+                scanf("%d",&opc1);
+                fflush(stdin);
+                switch(opc1){
+                    case 0:
+                        printf("Desea guardar los cambios? S/N--->");
+                        scanf("%c",&desea);
+                        aux=1;
+                        break;
+                    case 1:
+                        printf("Nuevo codigo --->");
+                        scanf("%d",&m.codAlu);
+                        break;
+                    case 2:
+
+                        for(j=0;j<10;j++){
+                        printf("\n\t\tPractica %d: ",j+1);
+                        cin>>k[i].prac[j];
+                        cout<<endl;
+                        suma=suma+k[i].prac[j];
+                        }
+                        k[i].promedio=suma/10;
+                        suma=0;
+                        printf("\n\tEl promedio de practicas del alumno %d : es %d\n\n",i+1,k[i].promedio);
+                        break;
+                        default:
+                        printf("Opcion incorrecta!\n");
+                }
+
+            }
+            if(desea=='S' || desea=='s'){
+                fwrite(&m,sizeof(m),1,HH);
+            }
+            else{
+                fwrite(&k, sizeof(k), 1, HH);
+            }
+
+        }
+        else
+        {
+            fwrite(&k, sizeof(k), 1, HH);
+        }
+        fread(&k, sizeof(k), 1, FF);
+    };
+    // no olvidar cerrar archivo y siempre fuera de while
+    fclose(FF);
+    fclose(HH);
+    //Removiendo y eliminando
+    Rem=remove("Practica.dat");
+    printf("remove %d", Rem);
+    Ren=rename("Temporal.dat","Practica.dat ");
+    printf("rename %d", Ren);
+    //avisando
+    if(Hallado == 0){
+        printf("No existe ese CODIGO...\n\n");
+    }
+    else{
+        printf("Registro Actualizado");
+    }
+}*/
+/*void fileCopiarPractica(FILE *F){
+    F = fopen("Practica.dat","a+");
+    FILE *H;
+    PRACTICA k;
+    H = fopen("CopiaPractica.dat","a+");
+
+    fread(&k,sizeof(k),1,F);
+
+    while(!feof(F)){
+        fwrite(&k,sizeof(k),1,H);
+        fread(&k,sizeof(k),1,F);
+    }
+    fclose(H);
+    fclose(F);
+}*/
+/*void fileOrdenarPractica(FILE *F){
+    F = fopen("Final.dat","a+");
+    PRACTICA k[MAX];
+    PRACTICA t;
+    FILE *H;
+    H=fopen("Temporal.dat","a+");
+    int i=0,aux=0,j=0,n;
+
+    fread(&k[i],sizeof(PRACTICA),1,F);
+    i++;
+    while(!feof(F)){
+        fread(&k[i],sizeof(PRACTICA),1,F);
+        i++;
+    }
+    n=i-1;
+    fclose(F);
+
+    for(i=0;i<n-1;i++){
+         aux=i;
+         for(j=i+1;j<n;j++){
+            if(k[aux].codAlu>k[j].codAlu){
+               aux=j;
+            }
+         }
+         //Intercambiando
+         t=k[i];
+         k[i]=k[aux];
+         k[aux]=t;
+    }
+    printf("%d\n",n);
+    for(i=0;i<n;i++){
+        fwrite(&k[i],sizeof(PRACTICA),1,H);
+    }
+    //Cierra el archivo
+    fclose(H);
+
+    int rem=remove("Practica.dat");
+    printf("rem=%d\n",rem);
+    int ren=rename("Temporal.dat","Practica.dat");
+    printf("ren=%d\n",ren);
+
+}*/
