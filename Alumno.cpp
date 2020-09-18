@@ -6,7 +6,7 @@
  * Autor:  ROMAN CESPEDES, Samuel Aaron
  *         TORRE ARTEAGA, Alexander
  *         CARMEN CRUZATTI, Angel Gerardo
- *         GIL JAUREGUI, Jesús Orlando
+ *         GIL JAUREGUI, Jes�s Orlando
  * Fecha:
  *
  */
@@ -96,7 +96,7 @@ int main(){
    }while(opc!=0);
    system("pause");
    return 0;
-   
+
 }
 
 void menu(ALUMNO x[MAX],FILE *y,int *dx,int &opc){
@@ -110,7 +110,7 @@ void menu(ALUMNO x[MAX],FILE *y,int *dx,int &opc){
    printf("\t5. Editar Alumno por codigo\n");
    printf("\t6. Insertar Alumno\n");
    printf("\t7. Eliminar Alumno\n");
-   printf("\tOPERACIONES CON ARCHIVO\n");
+   printf("\t\tOPERACIONES CON ARCHIVO\n");
    printf("\t8. Guardar datos\n");
    printf("\t9. Leer datos guardados\n");
    printf("\t10. Buscar en archivo guardado\n");
@@ -226,7 +226,8 @@ void menu2(ALUMNO x[MAX],int *dx,int mod){
          buscarAluporCodigo(x,*dx);
       }else if(mod==4){
          ordenarAluporCodigo(x,*dx);
-         printf("\nLos codigos de los registros han sido ordenados de forma ascendente...\n\n");
+         printf("\nLos codigos de los registros han ");
+         printf("sido ordenados de forma ascendente...\n\n");
          cout<<endl;
       }else if(mod==6){
          insertarAluporPosicion(x,dx);
@@ -240,7 +241,8 @@ void menu2(ALUMNO x[MAX],int *dx,int mod){
          buscaAluporNom(x,*dx);
       }else if(mod==4){
          ordenarAluporNombre(x,*dx);
-         printf("\nLos nombres de los registros han sido ordenados de forma ascendente...\n\n");
+         printf("\nLos nombres de los registros han ");
+         printf("sido ordenados de forma ascendente...\n\n");
          cout<<endl;
       }else if(mod==6){
          insertarAluporValor(x,dx);
@@ -281,14 +283,16 @@ void FileReadAlu(FILE *y){
 
    //Abre el archivo -> a+ = abre un archivo para leer
    y = fopen("Alumnos.dat","a+");
-   
+
    //Consistencia
    if(y!=NULL){
       encabezado1();
       fread(&a,sizeof(ALUMNO),1,y);
       i++;
       while(!feof(y)){//desplegando estructuras
-         printf("%3d\t%-12d%-32s%-18s%-2d/%-2d/%-16d%-.1fkg\n",i,a.codAlu,a.nomAlu,a.escuela,a.fnac.dia,a.fnac.mes,a.fnac.anio,a.peso);
+         printf("%3d\t%-12d%-32s",i,a.codAlu,a.nomAlu);
+         printf("%-18s%-2d/%-2d/",a.escuela,a.fnac.dia,a.fnac.mes);
+         printf("%-16d%-.1fkg\n",a.fnac.anio,a.peso);
          fread(&a,sizeof(ALUMNO),1,y);
          i++;
       }
@@ -323,7 +327,7 @@ void leerVectorAlu(ALUMNO x[MAX], int *dx){
          cin.getline(x[i].nomAlu,40,'\n');
          cout <<" Escuela ---> ";
          cin >>x[i].escuela;
-      
+
          //Consistencia fecha de nacimiento
          do{
             cout <<" Fecha de nacimiento(dd/mm/aaaa):"<<endl;
@@ -334,7 +338,7 @@ void leerVectorAlu(ALUMNO x[MAX], int *dx){
             cout<<"\taaaa--->";
             cin >>x[i].fnac.anio;
          }while(x[i].fnac.dia>31 || x[i].fnac.mes>12 || x[i].fnac.anio<1900);
-      
+
          cout <<" Peso(kg.)---> ";
          cin >>x[i].peso;
          cout<<endl;
@@ -365,7 +369,7 @@ void mostrarVectorAlu(ALUMNO x[MAX], int dx){
 int buscarAluporCodigo(ALUMNO x[MAX],int dx){
    int cd,i,pos=-1;
    bool comp=false;//comp es un valor bandera
-   
+
    printf("\n\nCODIGO: ");
    scanf("%d",&cd);
    //Busca el alumno y muestra sus datos
@@ -384,7 +388,7 @@ int buscarAluporCodigo(ALUMNO x[MAX],int dx){
    if(!comp){
       printf("No se encontro alumnos con el codigo ingresado %d\n",cd);
    }
-   //retorna la posicion 
+   //retorna la posicion
    return pos;
 }
 
@@ -392,7 +396,7 @@ void buscaAluporNom(ALUMNO x[MAX],int dx){
    int i=0;
    char band = false;
    char buscar[40];
-   
+
    printf("\n\nNOMBRE: ");
    fflush(stdin);
    cin.getline(buscar,40,'\n');
@@ -702,13 +706,13 @@ void raya2()
 }
 
 void FileFindAlu(FILE *y){
-   y = fopen("Alumnos.dat","r");
+   y = fopen("Alumnos.dat","a+");
    ALUMNO x;
    int codigo;
    bool band = false;
    //Digita el codigo del alumno que quiere buscar
    printf("Codigo a buscar --> ");
-   printf("%d",&codigo);
+   cin>>codigo;
 
    fread(&x,sizeof(x),1,y);
    while(!feof(y))
@@ -729,20 +733,20 @@ void FileFindAlu(FILE *y){
 }
 void FileFilAlu(FILE *y){
    //Abre el archivo
-   y = fopen("Alumnos.dat","r");
+   y = fopen("Alumnos.dat","a+");
    ALUMNO x;
    int codigo,i=0;
    float peso;
    bool band = false;
-   
+
    printf("Peso >= que --> ");
-   printf("%f",&peso);
+   cin>>peso;
 
    fread(&x,sizeof(x),1,y);
+   encabezado1();
    while(!feof(y)){
       if(x.peso>=peso){
          //Muestra Registro cuando se cumpla la condicion
-         encabezado1();
          printf("%3d\t%-12d%-32s%-18s%-2d/%-2d/%-16d%-.1fkg\n",i+1,x.codAlu,x.nomAlu,x.escuela,x.fnac.dia,x.fnac.mes,x.fnac.anio,x.peso);
          band = true;
          i++;
@@ -759,7 +763,7 @@ void FileFilAlu(FILE *y){
 
 void FileDelAlu(FILE *y){
    //Abre el archivo
-   y = fopen("Alumnos.dat","r");
+   y = fopen("Alumnos.dat","a+");
    FILE *z;
    ALUMNO x;
    int codigo,remo,rena,i=0;
@@ -787,9 +791,9 @@ void FileDelAlu(FILE *y){
    fclose(z);
 
    remo = remove("Alumnos.dat");
-   printf("Remove = %d\n",remove);
-   rena = rename("Temp.dat,","Alumnos.dat");
-   printf("Rename = %d\n",rename);
+   printf("Remove = %d\n",remo);
+   rena = rename("Temp.dat","Alumnos.dat");
+   printf("Rename = %d\n",rena);
    //aviso para el usuario
    if(!band){
       printf("No se encontro Alumno ...\n\n");
@@ -879,7 +883,7 @@ void FileEditAlu(FILE *y){
       }
       fread(&x,sizeof(x),1,y);
    }
-   
+
    remo = remove("Alumnos.dat");
    printf("Remove = %d\n",remove);
    rena = rename("Temp.dat,","Alumnos.dat");
@@ -899,7 +903,6 @@ void FileCopyAlu(FILE *y){
    FILE *z;
    ALUMNO x;
    z = fopen("CopiaAlumnos.dat","a+");
-
    fread(&x,sizeof(x),1,y);
    while(!feof(y)){
       fwrite(&x,sizeof(x),1,z);
@@ -907,11 +910,12 @@ void FileCopyAlu(FILE *y){
    }
    fclose(y);
    fclose(z);
+   printf("Copia Realizada con Exito..\n");
 }
 
 void FileOrderAlu(FILE *y){
    //Abriendo el archivo
-   y = fopen("Alumnos.dat","r");
+   y = fopen("Alumnos.dat","a+");
    FILE *z;
    ALUMNO x[MAX],a;
    int i,aux,j,n,remo,rena;
@@ -919,6 +923,7 @@ void FileOrderAlu(FILE *y){
    z = fopen("Temp.dat","a+");
    i = 0;
    fread(&x[i],sizeof(ALUMNO),1,y);
+   i++;
    while(!feof(y)){
       i++;
       fread(&x[i],sizeof(ALUMNO),1,y);
@@ -945,7 +950,8 @@ void FileOrderAlu(FILE *y){
    fclose(z);
 
    remo = remove("Alumnos.dat");
-   printf("Remove = %d\n",remove);
-   rena = rename("Temp.dat,","Alumnos.dat");
-   printf("Rename = %d\n",rename);
+   //printf("Remove = %d\n",remo);
+   rena = rename("Temp.dat","Alumnos.dat");
+   //printf("Rename = %d\n",rena);
+   printf("Archivo Ordenado...\n");
 }
