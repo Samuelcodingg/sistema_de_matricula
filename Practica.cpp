@@ -53,11 +53,11 @@ void fileSalvarPractica(FILE *F,PRACTICA p[MAX],int dx);
 //Leer
 void fileRecuperarPractica(FILE *F);
 //Buscar
-void fileBuscarPractica(FILE *F);
+void fileBuscarPromPractica(FILE *F);
 //Filtrar
-void fileFiltrarPractica(FILE *F);
+void fileFiltrarPromPractica(FILE *F);
 //Eliminar
-void fileEliminarPractica(FILE *F);
+void fileEliminarPromPractica(FILE *F);
 //Editar
 void fileEditarPractica(FILE *FF);
 //Copiar
@@ -142,13 +142,13 @@ void menu(){
                 fileRecuperarPractica(FPC);
                 break;
             case 11:
-               fileBuscarPractica(FPC);
+               fileBuscarPromPractica(FPC);
                break;
             case 12:
-               fileFiltrarPractica(FPC);
+               fileFiltrarPromPractica(FPC);
                break;
             case 13:
-               fileEliminarPractica(FPC);
+               fileEliminarPromPractica(FPC);
                break;
             case 14:
                fileEditarPractica(FPC);
@@ -430,6 +430,7 @@ void insertarPracticasporValor(PRACTICA p[MAX],int *dx){
    else{
       printf("Dimension fuera de rango ...\n");
    }
+   system("pause");
 }
 
 void eliminarPracticasporPosicion(PRACTICA p[MAX],int *dx){
@@ -451,6 +452,7 @@ void eliminarPracticasporPosicion(PRACTICA p[MAX],int *dx){
    else{
       printf("La posicion %d no existe en el vector...\n", posi);
    }
+   system("pause");
 }
 
 void eliminarPracticasporValor(PRACTICA p[MAX],int *dx){
@@ -489,6 +491,7 @@ void eliminarPracticasporValor(PRACTICA p[MAX],int *dx){
    else{
       printf("Vacio...!\n");
    }
+   system("pause");
 }
 
 void editarPc(PRACTICA p[MAX],int dx){
@@ -697,13 +700,13 @@ void fileEditarPractica(FILE *FF)
                     case 2:
                         for(j=0;j<10;j++){
                         printf("\n\t\tPractica %d: ",j+1);
-                        cin>>k[i].prac[j];
+                        cin>>k.prac[j];
                         cout<<endl;
-                        suma=suma+k[i].prac[j];
+                        suma=suma+k.prac[j];
                         }
-                        k[i].promedio=suma/10;
+                        k.promedio=suma/10;
                         suma=0;
-                        printf("\n\tEl promedio de practicas del alumno %d : es %d\n\n",i+1,k[i].promedio);
+                        printf("\n\tEl promedio de practicas del alumno %d : es %d\n\n",i+1,k.promedio);
                         break;
                         default:
                         printf("Opcion incorrecta!\n");
