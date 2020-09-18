@@ -38,6 +38,8 @@ void insertarPracticasporPosicion(PRACTICA p[MAX],int *dx);
 void insertarPracticasporValor(PRACTICA p[MAX],int *dx);
 void eliminarPracticasporPosicion(PRACTICA p[MAX],int *dx);
 void eliminarPracticasporValor(PRACTICA p[MAX],int *dx);
+void ordenarcodigoAluPC(PRACTICA par[MAX],int dx);
+void ordenarPromPC(PRACTICA par[MAX],int dx);
 
 //MENU
 void menu();
@@ -91,7 +93,7 @@ void menu(){
    printf("\t4. EDITAR\n");
    printf("\t5. INSERTAR\n");
    printf("\t6. ORDENAR POR CODIGO\n");
-   printf("\t7. ORDENAR POR NOTA\n");
+   printf("\t7. ORDENAR POR PROMEDIO\n");
    printf("\t8. ELIMINAR\n");
    printf("\t\tOPERACIONES CON ARCHIVOS\n");
    printf("\t9.  SALVAR\n");
@@ -128,9 +130,11 @@ void menu(){
             case 5://INSERTAR
                menu2(p,&np,opc);
                break;
-            case 6:
+            case 6://ORDENARXCOD
+               ordenarcodigoAluPC(p,np);
                break;
-            case 7:
+            case 7://ORDENARXPROMEDIO
+               ordenarPromPC(p,np);
                break;
             case 8:
                menu2(p,&np,opc);
@@ -520,6 +524,51 @@ void editarPc(PRACTICA p[MAX],int dx){
 	system("pause");
 
 }
+void ordenarcodigoAluPC(PRACTICA p[MAX],int dx){
+   int i,j,min;
+   PRACTICA aux;
+   if(dx>-1){
+      for(i=0;i<dx;i++){
+         min = i;
+         for(j=i+1;j<dx;j++){
+            if(p[j].codAlu < p[min].codAlu){
+               min = j;
+            }
+         }
+         aux = p[i];
+         p[i] = p[min];
+         p[min] = aux;
+      }
+
+      mostrarVectorPc(p,dx);
+   }
+   else{
+      printf("Vector vacioooo...!\n");
+   }
+}
+void ordenarPromPC(PRACTICA p[MAX],int dx){
+   int i,j,min;
+   PRACTICA aux;
+   if(dx>-1){
+      for(i=0;i<dx;i++){
+         min = i;
+         for(j=i+1;j<dx;j++){
+            if(p[j].promedio < p[min].promedio){
+               min = j;
+            }
+         }
+         aux = p[i];
+         p[i] = p[min];
+         p[min] = aux;
+      }
+
+      mostrarVectorPc(p,dx);
+   }
+   else{
+      printf("Vector vacioooo...!\n");
+   }
+}
+
 void fileSalvarPractica(FILE *F,PRACTICA p[MAX],int dx){
     F = fopen("Practica.dat","a+");
     if(F == NULL){
