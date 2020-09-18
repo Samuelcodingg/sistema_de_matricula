@@ -190,7 +190,7 @@ void CalculoPromedio(PRACTICA x[], EXPARCIAL y[], EXFINAL z[],CALCULO prom[], in
                cont++;
             }
             j++;
-         }while(x[i].codAlu!=codigo && j<dx);
+         }while(j<dx);
 
          k = 0;
          do{
@@ -199,7 +199,7 @@ void CalculoPromedio(PRACTICA x[], EXPARCIAL y[], EXFINAL z[],CALCULO prom[], in
                cont++;
             }
             k++;
-         }while(y[k].codAlu!=codigo && k<dy);
+         }while(k<dy);
          
          l = 0;
          do{
@@ -208,7 +208,7 @@ void CalculoPromedio(PRACTICA x[], EXPARCIAL y[], EXFINAL z[],CALCULO prom[], in
                cont++;
             }
             l++;
-         }while(z[l].codAlu!=codigo && l<dz);
+         }while(l<dz);
 
          //Avisa al usuario en caso falten notas
          if(cont!=3){
