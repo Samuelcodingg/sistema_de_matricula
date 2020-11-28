@@ -2,7 +2,7 @@
  * NombreProg : Alumnos.cpp
  * Descripcion:  Registro de vector Alumnos
  *                con operaciones basicas
- *
+ **
  * Autor:  ROMAN CESPEDES, Samuel Aaron
  *         TORRE ARTEAGA, Alexander
  *         CARMEN CRUZATTI, Angel Gerardo
